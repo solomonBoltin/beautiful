@@ -225,21 +225,6 @@
   }
  },
  {
-  "site": "canva.com",
-  "ui": 73,
-  "web": 94,
-  "factors": {
-   "composition": 0.68,
-   "local": 0.925,
-   "alignment": 0.257,
-   "simplicity": 0.771,
-   "whitespace": 0.66,
-   "colorfulness": 0.912,
-   "contrast": 0.745,
-   "harmony": 0.799
-  }
- },
- {
   "site": "duckduckgo.com",
   "ui": 72,
   "web": 92,

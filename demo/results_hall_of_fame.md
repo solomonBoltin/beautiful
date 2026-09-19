@@ -1,4 +1,4 @@
-Rendered 2026-09-19 with headless Chromium at 1280×800 (`beautiful.render`), 72 of 79 candidates loaded. Sorted by the `ui` formula; `web` is the calibrated model.
+Rendered 2026-09-19 with headless Chromium at 1280×800 (`beautiful.render`), 71 of 79 candidates loaded. Sorted by the `ui` formula; `web` is the calibrated model.
 
 | ui | web | site | composition | alignment | simplicity | whitespace | harmony | colorfulness | contrast |
 |---:|---:|---|---:|---:|---:|---:|---:|---:|---:|
@@ -17,7 +17,6 @@ Rendered 2026-09-19 with headless Chromium at 1280×800 (`beautiful.render`), 72
 | **73** | 74 | railway.com | 0.69 | 0.36 | 0.51 | 0.87 | 0.94 | 0.89 | 0.88 |
 | **73** | 74 | hey.com | 0.77 | 0.30 | 0.34 | 0.92 | 0.86 | 0.83 | 1.00 |
 | **73** | 96 | vercel.com | 0.76 | 0.17 | 0.94 | 0.11 | 1.00 | 0.73 | 1.00 |
-| **73** | 94 | canva.com | 0.68 | 0.26 | 0.77 | 0.66 | 0.80 | 0.91 | 0.74 |
 | **72** | 92 | duckduckgo.com | 0.74 | 0.21 | 0.87 | 0.13 | 1.00 | 0.98 | 1.00 |
 | **70** | 94 | clerk.com | 0.78 | 0.17 | 0.60 | 0.36 | 1.00 | 0.78 | 1.00 |
 | **69** | 90 | loom.com | 0.77 | 0.17 | 0.23 | 0.97 | 0.91 | 0.69 | 1.00 |
@@ -75,4 +74,4 @@ Rendered 2026-09-19 with headless Chromium at 1280×800 (`beautiful.render`), 72
 | **27** | 100 | remix.run | 0.55 | 0.12 | 0.00 | 0.14 | 0.82 | 0.56 | 0.74 |
 | **25** | 85 | posthog.com | 0.33 | 0.24 | 0.02 | 0.01 | 0.84 | 0.90 | 1.00 |
 
-Skipped (the capture was not the page): medium.com (bot wall ('you have been blocked')), unsplash.com (bot wall ('access denied')), behance.net (rate-limit page), porsche.com_international (consent dialog over the page), awwwards.com (consent dialog over the page), openai.com (blank capture)
+Skipped (the capture was not the page): medium.com (bot wall ('you have been blocked')), unsplash.com (bot wall ('access denied')), behance.net (rate-limit page), porsche.com_international (consent dialog over the page), awwwards.com (consent dialog over the page), openai.com (blank capture), canva.com (maintenance page)

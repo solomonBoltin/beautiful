@@ -195,6 +195,9 @@ def _error(mid, code, message):
 
 
 def main() -> int:
+    for stream in (sys.stdin, sys.stdout):  # MCP is JSON over stdio: always UTF-8, whatever the console codepage
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
     out = sys.stdout
     for line in sys.stdin:
         line = line.strip()

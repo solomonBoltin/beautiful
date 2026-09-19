@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.1 — 2026-09-19
+
+- MCP server speaks UTF-8 on stdio regardless of the console codepage (Windows fix).
+- Hall of fame: Canva's maintenance-page capture dropped.
+
 ## 0.4.0 — 2026-09-19
 
 - **Lint code, not just screenshots.** `beautiful index.html`, `beautiful https://…` and the

@@ -50,6 +50,7 @@ SKIP = {
     "medium.com": "bot wall ('you have been blocked')", "unsplash.com": "bot wall ('access denied')",
     "behance.net": "rate-limit page", "porsche.com_international": "consent dialog over the page",
     "awwwards.com": "consent dialog over the page", "openai.com": "blank capture",
+    "canva.com": "maintenance page",
 }
 COLS, TW, TH, PAD, LABEL_H, TOP_N = 4, 380, 238, 16, 44, 16
 FONTS = ["/System/Library/Fonts/Helvetica.ttc", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", "C:/Windows/Fonts/arial.ttf"]
