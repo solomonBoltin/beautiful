@@ -155,6 +155,7 @@ RULES_JS = r"""
   if (sizes.size > 8) add('type-noise', 'warning', sizes.size + ' distinct font sizes on one page (a type scale has 5–8)', [...sizes].sort((a, b) => a - b).map(String));
 
   // text overlap: two text elements whose boxes intersect, neither containing the other
+  const lineBoxes = (el) => { const rs = [...el.getClientRects()].filter(r => r.width > 2 && r.height > 2); return rs.length ? rs : [rectOf(el)]; };
   const overlap = [];
   const tx = textEls.filter(t => t.r.top < H * 2 && t.chars >= 3);
   for (let i = 0; i < tx.length && overlap.length < 8; i++) for (let j = i + 1; j < tx.length; j++) {
@@ -162,8 +163,14 @@ RULES_JS = r"""
     if (a.el.contains(b.el) || b.el.contains(a.el)) continue;
     const ix = Math.min(a.r.right, b.r.right) - Math.max(a.r.left, b.r.left), iy = Math.min(a.r.bottom, b.r.bottom) - Math.max(a.r.top, b.r.top);
     if (ix <= 2 || iy <= 2) continue;
-    const inter = ix * iy, small = Math.min(a.r.width * a.r.height, b.r.width * b.r.height);
-    if (small > 0 && inter / small > 0.2) { overlap.push(tag(a.el) + ' × ' + tag(b.el)); break; }
+    // a wrapped inline element's bounding box covers whole lines it only partly occupies: compare line boxes
+    let hit = false;
+    for (const ra of lineBoxes(a.el)) { for (const rb of lineBoxes(b.el)) {
+      const jx = Math.min(ra.right, rb.right) - Math.max(ra.left, rb.left), jy = Math.min(ra.bottom, rb.bottom) - Math.max(ra.top, rb.top);
+      if (jx <= 2 || jy <= 2) continue;
+      const small = Math.min(ra.width * ra.height, rb.width * rb.height);
+      if (small > 0 && jx * jy / small > 0.2) { hit = true; break; } } if (hit) break; }
+    if (hit) { overlap.push(tag(a.el) + ' × ' + tag(b.el)); break; }
   }
   add('text-overlap', 'error', 'text drawn over other text', overlap);
 
