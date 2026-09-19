@@ -609,7 +609,11 @@ trivially balanced, gained one or two points and no more). A swoosh that scores 
 The Bina app icon gains seven points from a mark 20 % smaller in its tile (composition 0.68 → 0.75).
 Part of that gain is honest and part is the 124 px source: shrinking a blurred mark sharpens its
 edges, which simplicity and economy reward, so read the seven as "four or five". The grid mark is
-already at its optimum: the search moved it in every direction and found nothing.
+already at its optimum: the search moved it in every direction and found nothing. Redrawn as vectors
+from their measured geometry (`demo/logos/bina.py`, nothing added or removed) both score 91, and that
+is their ceiling: the last four points are mirror symmetry, which every mark in the nineties above has
+and a two-letter wordmark cannot. The same arch alone, centred, scores 94 and 95; it is a different
+logo, so it is offered, not applied.
 
 Reproduce with `python demo/logos/logos.py` (needs `pip install "beautiful[render]"`). Brand paths
 are from [Simple Icons](https://simpleicons.org) (CC0); the trademarks belong to their owners and

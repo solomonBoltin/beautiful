@@ -1,0 +1,62 @@
+{
+ "in-grid": {
+  "vector": 91,
+  "factors": {
+   "composition": 0.86,
+   "local": 0.17,
+   "alignment": 0.37,
+   "simplicity": 0.95,
+   "whitespace": 0.12,
+   "contrast": 1.0,
+   "economy": 0.83,
+   "harmony": 0.99
+  },
+  "mirror": 0.7826,
+  "balance": 0.9878,
+  "symmetric": 95,
+  "symmetric_params": [
+   0.8,
+   true
+  ],
+  "symmetric_factors": {
+   "composition": 0.97,
+   "local": 0.94,
+   "alignment": 0.3,
+   "simplicity": 1.0,
+   "whitespace": 0.06,
+   "contrast": 1.0,
+   "economy": 1.0,
+   "harmony": 0.99
+  }
+ },
+ "in-small": {
+  "vector": 91,
+  "factors": {
+   "composition": 0.83,
+   "local": 0.44,
+   "alignment": 0.32,
+   "simplicity": 0.95,
+   "whitespace": 0.08,
+   "contrast": 1.0,
+   "economy": 0.83,
+   "harmony": 0.99
+  },
+  "mirror": 0.4449,
+  "balance": 0.9808,
+  "symmetric": 94,
+  "symmetric_params": [
+   0.8,
+   true
+  ],
+  "symmetric_factors": {
+   "composition": 0.97,
+   "local": 0.95,
+   "alignment": 0.3,
+   "simplicity": 0.95,
+   "whitespace": 0.07,
+   "contrast": 1.0,
+   "economy": 0.83,
+   "harmony": 0.99
+  }
+ }
+}
