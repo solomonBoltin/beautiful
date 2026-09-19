@@ -45,6 +45,12 @@ CANDIDATES = [
     "https://www.docker.com/", "https://www.rust-lang.org/", "https://go.dev/", "https://www.python.org/",
     "https://www.swift.org/", "https://svelte.dev/", "https://astro.build/", "https://remix.run/",
 ]
+# what the crawler actually captured on 2026-09-19 instead of the page — dropped by hand
+SKIP = {
+    "medium.com": "bot wall ('you have been blocked')", "unsplash.com": "bot wall ('access denied')",
+    "behance.net": "rate-limit page", "porsche.com_international": "consent dialog over the page",
+    "awwwards.com": "consent dialog over the page", "openai.com": "blank capture",
+}
 COLS, TW, TH, PAD, LABEL_H, TOP_N = 4, 380, 238, 16, 44, 16
 FONTS = ["/System/Library/Fonts/Helvetica.ttc", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", "C:/Windows/Fonts/arial.ttf"]
 
@@ -71,13 +77,14 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     fetch = "--no-fetch" not in sys.argv
     chromium = None
-    if fetch:
-        from beautiful.render import _Chromium
-        chromium = _Chromium()
+    from beautiful.render import _Chromium
+    chromium = _Chromium()
     rows = []
     try:
         for url in CANDIDATES:
             name = name_of(url)
+            if name in SKIP:
+                continue
             path = os.path.join(OUT, name.replace(".", "_") + ".png")
             if fetch or not os.path.exists(path):
                 try:
@@ -103,6 +110,7 @@ def main():
           "| ui | web | site | " + " | ".join(keys) + " |", "|---:|---:|---|" + "---:|" * len(keys)]
     for x in rows:
         md.append(f"| **{x['ui']}** | {x['web']} | {x['site']} | " + " | ".join(f"{x['factors'][k]:.2f}" for k in keys) + " |")
+    md.append("\nSkipped (the capture was not the page): " + ", ".join(f"{k} ({v})" for k, v in SKIP.items()))
     open(os.path.join(HERE, "results_hall_of_fame.md"), "w", encoding="utf-8").write("\n".join(md) + "\n")
     json.dump([{k: v for k, v in x.items() if k != "file"} for x in rows],
               open(os.path.join(HERE, "results_hall_of_fame.json"), "w"), indent=1)

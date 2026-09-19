@@ -156,6 +156,35 @@ prefer rich, image-led, varied pages, and punish text-only ones. The two columns
 the point — one is a readable rule, the other is the crowd, and the gap between them is where the
 missing factors are (see below).
 
+## Hall of fame — what a high score looks like on the real web
+
+The famous-sites table above used a third-party screenshot service. This one uses the tool's own
+renderer: 72 design-led home pages rendered with headless Chromium at 1280×800 on 2026-09-19,
+frozen and scored. Bot walls and consent dialogs were dropped by hand (they are listed in
+[`demo/results_hall_of_fame.md`](demo/results_hall_of_fame.md)); reproduce with `python demo/hall_of_fame.py`.
+
+![Hall of fame](demo/hall_of_fame.png)
+
+| `ui` | `web` | site |
+|---:|---:|---|
+| **89** | 11 | ia.net |
+| **86** | 75 | culturedcode.com/things |
+| **86** | 14 | huggingface.co |
+| **80** | 82 | apple.com |
+| **80** | 91 | 1password.com |
+| **80** | 94 | swift.org |
+| **79** | 74 | ghost.org |
+| **79** | 23 | mailchimp.com |
+| **78** | 47 | mozilla.org |
+| **76** | 85 | readwise.io |
+| **76** | 97 | kagi.com |
+| **75** | 90 | bitwarden.com |
+
+What the top of the table has in common: **one centred object, a calm palette, and air** — iA
+Writer, Things, the Apple hero, Swift. The `ui` formula rewards exactly that, and it is blind to
+what the `web` column (the crowd model) sees in Hugging Face or iA: it does not know that a
+text-led page can be loved. Neither column is a verdict on the sites; both are a lens.
+
 ## Use it from your editor, agent or CI
 
 **Claude Code plugin** — the skill and the MCP server in two commands:

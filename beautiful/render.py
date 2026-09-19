@@ -106,8 +106,14 @@ class _Chromium:
                 page.set_content(source, wait_until="networkidle")
         except Exception:
             pass  # a slow third-party asset must not block a score; we screenshot what loaded
-        page.add_style_tag(content=_FREEZE_CSS)
-        page.evaluate("document.fonts && document.fonts.ready")
+        try:  # a strict Content-Security-Policy may refuse the inline style; the screenshot call disables animations anyway
+            page.add_style_tag(content=_FREEZE_CSS)
+        except Exception:
+            pass
+        try:
+            page.evaluate("document.fonts && document.fonts.ready")
+        except Exception:
+            pass
         page.wait_for_timeout(wait_ms)
         png = page.screenshot(full_page=full_page, animations="disabled", caret="hide")
         ctx.close()

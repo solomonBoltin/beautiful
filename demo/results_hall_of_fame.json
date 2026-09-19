@@ -1,0 +1,1082 @@
+[
+ {
+  "site": "ia.net",
+  "ui": 89,
+  "web": 11,
+  "factors": {
+   "composition": 0.83,
+   "local": 0.739,
+   "alignment": 0.455,
+   "simplicity": 0.801,
+   "whitespace": 0.935,
+   "colorfulness": 0.99,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "culturedcode.com_things",
+  "ui": 86,
+  "web": 75,
+  "factors": {
+   "composition": 0.94,
+   "local": 0.903,
+   "alignment": 0.327,
+   "simplicity": 0.966,
+   "whitespace": 0.115,
+   "colorfulness": 0.963,
+   "contrast": 1.0,
+   "harmony": 0.98
+  }
+ },
+ {
+  "site": "huggingface.co",
+  "ui": 86,
+  "web": 14,
+  "factors": {
+   "composition": 0.88,
+   "local": 0.925,
+   "alignment": 0.453,
+   "simplicity": 0.36,
+   "whitespace": 0.975,
+   "colorfulness": 0.96,
+   "contrast": 1.0,
+   "harmony": 0.946
+  }
+ },
+ {
+  "site": "apple.com",
+  "ui": 80,
+  "web": 82,
+  "factors": {
+   "composition": 0.81,
+   "local": 0.871,
+   "alignment": 0.138,
+   "simplicity": 0.5,
+   "whitespace": 0.949,
+   "colorfulness": 0.967,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "1password.com",
+  "ui": 80,
+  "web": 91,
+  "factors": {
+   "composition": 0.78,
+   "local": 0.839,
+   "alignment": 0.218,
+   "simplicity": 0.548,
+   "whitespace": 0.939,
+   "colorfulness": 0.976,
+   "contrast": 1.0,
+   "harmony": 0.922
+  }
+ },
+ {
+  "site": "swift.org",
+  "ui": 80,
+  "web": 94,
+  "factors": {
+   "composition": 0.85,
+   "local": 0.692,
+   "alignment": 0.221,
+   "simplicity": 0.424,
+   "whitespace": 0.981,
+   "colorfulness": 0.881,
+   "contrast": 1.0,
+   "harmony": 0.934
+  }
+ },
+ {
+  "site": "ghost.org",
+  "ui": 79,
+  "web": 74,
+  "factors": {
+   "composition": 0.7,
+   "local": 0.505,
+   "alignment": 0.23,
+   "simplicity": 0.675,
+   "whitespace": 0.99,
+   "colorfulness": 0.962,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "mailchimp.com",
+  "ui": 79,
+  "web": 23,
+  "factors": {
+   "composition": 0.9,
+   "local": 0.655,
+   "alignment": 0.373,
+   "simplicity": 0.14,
+   "whitespace": 0.999,
+   "colorfulness": 0.999,
+   "contrast": 1.0,
+   "harmony": 0.871
+  }
+ },
+ {
+  "site": "mozilla.org",
+  "ui": 78,
+  "web": 47,
+  "factors": {
+   "composition": 0.66,
+   "local": 0.776,
+   "alignment": 0.256,
+   "simplicity": 0.61,
+   "whitespace": 0.913,
+   "colorfulness": 0.993,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "readwise.io",
+  "ui": 76,
+  "web": 85,
+  "factors": {
+   "composition": 0.79,
+   "local": 0.658,
+   "alignment": 0.186,
+   "simplicity": 0.467,
+   "whitespace": 0.931,
+   "colorfulness": 0.999,
+   "contrast": 1.0,
+   "harmony": 0.85
+  }
+ },
+ {
+  "site": "kagi.com",
+  "ui": 76,
+  "web": 97,
+  "factors": {
+   "composition": 0.91,
+   "local": 0.652,
+   "alignment": 0.191,
+   "simplicity": 0.744,
+   "whitespace": 0.157,
+   "colorfulness": 0.824,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "bitwarden.com",
+  "ui": 75,
+  "web": 90,
+  "factors": {
+   "composition": 0.85,
+   "local": 0.82,
+   "alignment": 0.16,
+   "simplicity": 0.28,
+   "whitespace": 0.958,
+   "colorfulness": 0.701,
+   "contrast": 1.0,
+   "harmony": 0.932
+  }
+ },
+ {
+  "site": "railway.com",
+  "ui": 73,
+  "web": 74,
+  "factors": {
+   "composition": 0.69,
+   "local": 0.462,
+   "alignment": 0.363,
+   "simplicity": 0.51,
+   "whitespace": 0.868,
+   "colorfulness": 0.893,
+   "contrast": 0.883,
+   "harmony": 0.935
+  }
+ },
+ {
+  "site": "hey.com",
+  "ui": 73,
+  "web": 74,
+  "factors": {
+   "composition": 0.77,
+   "local": 0.516,
+   "alignment": 0.296,
+   "simplicity": 0.343,
+   "whitespace": 0.92,
+   "colorfulness": 0.833,
+   "contrast": 1.0,
+   "harmony": 0.858
+  }
+ },
+ {
+  "site": "vercel.com",
+  "ui": 73,
+  "web": 96,
+  "factors": {
+   "composition": 0.76,
+   "local": 0.748,
+   "alignment": 0.172,
+   "simplicity": 0.935,
+   "whitespace": 0.113,
+   "colorfulness": 0.734,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "canva.com",
+  "ui": 73,
+  "web": 94,
+  "factors": {
+   "composition": 0.68,
+   "local": 0.925,
+   "alignment": 0.257,
+   "simplicity": 0.771,
+   "whitespace": 0.66,
+   "colorfulness": 0.912,
+   "contrast": 0.745,
+   "harmony": 0.799
+  }
+ },
+ {
+  "site": "duckduckgo.com",
+  "ui": 72,
+  "web": 92,
+  "factors": {
+   "composition": 0.74,
+   "local": 0.541,
+   "alignment": 0.213,
+   "simplicity": 0.872,
+   "whitespace": 0.134,
+   "colorfulness": 0.981,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "clerk.com",
+  "ui": 70,
+  "web": 94,
+  "factors": {
+   "composition": 0.78,
+   "local": 0.732,
+   "alignment": 0.174,
+   "simplicity": 0.596,
+   "whitespace": 0.365,
+   "colorfulness": 0.776,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "loom.com",
+  "ui": 69,
+  "web": 90,
+  "factors": {
+   "composition": 0.77,
+   "local": 0.724,
+   "alignment": 0.168,
+   "simplicity": 0.232,
+   "whitespace": 0.968,
+   "colorfulness": 0.687,
+   "contrast": 1.0,
+   "harmony": 0.908
+  }
+ },
+ {
+  "site": "superhuman.com",
+  "ui": 69,
+  "web": 80,
+  "factors": {
+   "composition": 0.86,
+   "local": 0.885,
+   "alignment": 0.317,
+   "simplicity": 0.418,
+   "whitespace": 0.004,
+   "colorfulness": 0.94,
+   "contrast": 1.0,
+   "harmony": 0.909
+  }
+ },
+ {
+  "site": "dribbble.com",
+  "ui": 68,
+  "web": 2,
+  "factors": {
+   "composition": 0.4,
+   "local": 0.909,
+   "alignment": 0.545,
+   "simplicity": 1.0,
+   "whitespace": 0.057,
+   "colorfulness": 0.734,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "python.org",
+  "ui": 68,
+  "web": 74,
+  "factors": {
+   "composition": 0.75,
+   "local": 0.844,
+   "alignment": 0.326,
+   "simplicity": 0.436,
+   "whitespace": 0.157,
+   "colorfulness": 0.947,
+   "contrast": 1.0,
+   "harmony": 0.965
+  }
+ },
+ {
+  "site": "notion.com",
+  "ui": 67,
+  "web": 97,
+  "factors": {
+   "composition": 0.79,
+   "local": 0.499,
+   "alignment": 0.139,
+   "simplicity": 0.545,
+   "whitespace": 0.297,
+   "colorfulness": 1.0,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "raycast.com",
+  "ui": 64,
+  "web": 33,
+  "factors": {
+   "composition": 0.79,
+   "local": 0.669,
+   "alignment": 0.335,
+   "simplicity": 0.732,
+   "whitespace": 0.914,
+   "colorfulness": 0.248,
+   "contrast": 0.055,
+   "harmony": 0.897
+  }
+ },
+ {
+  "site": "gov.uk",
+  "ui": 64,
+  "web": 30,
+  "factors": {
+   "composition": 0.61,
+   "local": 0.697,
+   "alignment": 0.232,
+   "simplicity": 0.609,
+   "whitespace": 0.63,
+   "colorfulness": 0.41,
+   "contrast": 1.0,
+   "harmony": 0.966
+  }
+ },
+ {
+  "site": "intercom.com",
+  "ui": 64,
+  "web": 83,
+  "factors": {
+   "composition": 0.65,
+   "local": 0.602,
+   "alignment": 0.153,
+   "simplicity": 0.428,
+   "whitespace": 0.566,
+   "colorfulness": 0.971,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "arc.net",
+  "ui": 63,
+  "web": 97,
+  "factors": {
+   "composition": 0.96,
+   "local": 0.939,
+   "alignment": 0.313,
+   "simplicity": 0.36,
+   "whitespace": 0.376,
+   "colorfulness": 0.234,
+   "contrast": 0.499,
+   "harmony": 0.896
+  }
+ },
+ {
+  "site": "rust-lang.org",
+  "ui": 63,
+  "web": 84,
+  "factors": {
+   "composition": 0.68,
+   "local": 0.852,
+   "alignment": 0.191,
+   "simplicity": 0.36,
+   "whitespace": 0.704,
+   "colorfulness": 0.496,
+   "contrast": 1.0,
+   "harmony": 0.925
+  }
+ },
+ {
+  "site": "go.dev",
+  "ui": 63,
+  "web": 74,
+  "factors": {
+   "composition": 0.68,
+   "local": 0.795,
+   "alignment": 0.231,
+   "simplicity": 0.459,
+   "whitespace": 0.752,
+   "colorfulness": 0.165,
+   "contrast": 1.0,
+   "harmony": 0.928
+  }
+ },
+ {
+  "site": "sentry.io",
+  "ui": 62,
+  "web": 75,
+  "factors": {
+   "composition": 0.5,
+   "local": 0.45,
+   "alignment": 0.132,
+   "simplicity": 0.524,
+   "whitespace": 0.984,
+   "colorfulness": 0.992,
+   "contrast": 1.0,
+   "harmony": 0.908
+  }
+ },
+ {
+  "site": "nike.com",
+  "ui": 60,
+  "web": 100,
+  "factors": {
+   "composition": 0.81,
+   "local": 0.747,
+   "alignment": 0.25,
+   "simplicity": 0.398,
+   "whitespace": 0.025,
+   "colorfulness": 0.997,
+   "contrast": 0.835,
+   "harmony": 0.866
+  }
+ },
+ {
+  "site": "figma.com",
+  "ui": 59,
+  "web": 90,
+  "factors": {
+   "composition": 0.45,
+   "local": 0.385,
+   "alignment": 0.193,
+   "simplicity": 0.541,
+   "whitespace": 0.979,
+   "colorfulness": 0.963,
+   "contrast": 1.0,
+   "harmony": 0.816
+  }
+ },
+ {
+  "site": "resend.com",
+  "ui": 58,
+  "web": 82,
+  "factors": {
+   "composition": 0.33,
+   "local": 0.432,
+   "alignment": 0.166,
+   "simplicity": 0.848,
+   "whitespace": 0.797,
+   "colorfulness": 0.764,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "proton.me",
+  "ui": 58,
+  "web": 98,
+  "factors": {
+   "composition": 0.49,
+   "local": 0.59,
+   "alignment": 0.154,
+   "simplicity": 0.615,
+   "whitespace": 0.568,
+   "colorfulness": 0.998,
+   "contrast": 1.0,
+   "harmony": 0.858
+  }
+ },
+ {
+  "site": "webflow.com",
+  "ui": 55,
+  "web": 89,
+  "factors": {
+   "composition": 0.52,
+   "local": 0.767,
+   "alignment": 0.152,
+   "simplicity": 0.352,
+   "whitespace": 0.762,
+   "colorfulness": 0.665,
+   "contrast": 1.0,
+   "harmony": 0.889
+  }
+ },
+ {
+  "site": "pitch.com",
+  "ui": 54,
+  "web": 100,
+  "factors": {
+   "composition": 0.67,
+   "local": 0.721,
+   "alignment": 0.183,
+   "simplicity": 0.304,
+   "whitespace": 0.126,
+   "colorfulness": 0.944,
+   "contrast": 1.0,
+   "harmony": 0.972
+  }
+ },
+ {
+  "site": "astro.build",
+  "ui": 54,
+  "web": 97,
+  "factors": {
+   "composition": 0.64,
+   "local": 0.48,
+   "alignment": 0.169,
+   "simplicity": 0.481,
+   "whitespace": 0.152,
+   "colorfulness": 0.954,
+   "contrast": 1.0,
+   "harmony": 0.935
+  }
+ },
+ {
+  "site": "are.na",
+  "ui": 51,
+  "web": 11,
+  "factors": {
+   "composition": 0.32,
+   "local": 0.429,
+   "alignment": 0.322,
+   "simplicity": 0.925,
+   "whitespace": 0.085,
+   "colorfulness": 0.811,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "obsidian.md",
+  "ui": 50,
+  "web": 40,
+  "factors": {
+   "composition": 0.06,
+   "local": 0.604,
+   "alignment": 0.269,
+   "simplicity": 0.752,
+   "whitespace": 0.878,
+   "colorfulness": 0.983,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "dropbox.com",
+  "ui": 48,
+  "web": 83,
+  "factors": {
+   "composition": 0.24,
+   "local": 0.423,
+   "alignment": 0.176,
+   "simplicity": 0.636,
+   "whitespace": 0.792,
+   "colorfulness": 0.981,
+   "contrast": 1.0,
+   "harmony": 0.881
+  }
+ },
+ {
+  "site": "linear.app",
+  "ui": 47,
+  "web": 71,
+  "factors": {
+   "composition": 0.15,
+   "local": 0.532,
+   "alignment": 0.209,
+   "simplicity": 0.751,
+   "whitespace": 0.745,
+   "colorfulness": 0.782,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "spotify.com",
+  "ui": 47,
+  "web": 81,
+  "factors": {
+   "composition": 0.58,
+   "local": 0.736,
+   "alignment": 0.16,
+   "simplicity": 0.058,
+   "whitespace": 0.513,
+   "colorfulness": 0.999,
+   "contrast": 1.0,
+   "harmony": 0.833
+  }
+ },
+ {
+  "site": "slack.com",
+  "ui": 46,
+  "web": 85,
+  "factors": {
+   "composition": 0.47,
+   "local": 0.45,
+   "alignment": 0.185,
+   "simplicity": 0.443,
+   "whitespace": 0.357,
+   "colorfulness": 0.999,
+   "contrast": 1.0,
+   "harmony": 0.833
+  }
+ },
+ {
+  "site": "brave.com",
+  "ui": 46,
+  "web": 88,
+  "factors": {
+   "composition": 0.25,
+   "local": 0.643,
+   "alignment": 0.206,
+   "simplicity": 0.302,
+   "whitespace": 0.991,
+   "colorfulness": 0.957,
+   "contrast": 1.0,
+   "harmony": 0.862
+  }
+ },
+ {
+  "site": "teenage.engineering",
+  "ui": 44,
+  "web": 97,
+  "factors": {
+   "composition": 0.54,
+   "local": 0.437,
+   "alignment": 0.066,
+   "simplicity": 0.036,
+   "whitespace": 0.696,
+   "colorfulness": 0.892,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "zed.dev",
+  "ui": 44,
+  "web": 11,
+  "factors": {
+   "composition": 0.26,
+   "local": 0.401,
+   "alignment": 0.361,
+   "simplicity": 0.47,
+   "whitespace": 0.385,
+   "colorfulness": 0.981,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "framer.com",
+  "ui": 42,
+  "web": 30,
+  "factors": {
+   "composition": 0.04,
+   "local": 0.621,
+   "alignment": 0.231,
+   "simplicity": 0.507,
+   "whitespace": 0.969,
+   "colorfulness": 0.993,
+   "contrast": 1.0,
+   "harmony": 0.935
+  }
+ },
+ {
+  "site": "cal.com",
+  "ui": 42,
+  "web": 12,
+  "factors": {
+   "composition": 0.06,
+   "local": 0.377,
+   "alignment": 0.284,
+   "simplicity": 0.561,
+   "whitespace": 0.913,
+   "colorfulness": 0.904,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "mistral.ai",
+  "ui": 42,
+  "web": 33,
+  "factors": {
+   "composition": 0.1,
+   "local": 0.604,
+   "alignment": 0.342,
+   "simplicity": 0.751,
+   "whitespace": 0.853,
+   "colorfulness": 0.061,
+   "contrast": 1.0,
+   "harmony": 0.934
+  }
+ },
+ {
+  "site": "substack.com",
+  "ui": 41,
+  "web": 52,
+  "factors": {
+   "composition": 0.17,
+   "local": 0.773,
+   "alignment": 0.191,
+   "simplicity": 0.517,
+   "whitespace": 0.776,
+   "colorfulness": 0.643,
+   "contrast": 1.0,
+   "harmony": 0.86
+  }
+ },
+ {
+  "site": "anthropic.com",
+  "ui": 41,
+  "web": 92,
+  "factors": {
+   "composition": 0.29,
+   "local": 0.548,
+   "alignment": 0.154,
+   "simplicity": 0.376,
+   "whitespace": 0.689,
+   "colorfulness": 0.898,
+   "contrast": 1.0,
+   "harmony": 0.879
+  }
+ },
+ {
+  "site": "ui.shadcn.com",
+  "ui": 40,
+  "web": 94,
+  "factors": {
+   "composition": 0.32,
+   "local": 0.586,
+   "alignment": 0.154,
+   "simplicity": 0.464,
+   "whitespace": 0.392,
+   "colorfulness": 0.736,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "aesop.com",
+  "ui": 40,
+  "web": 24,
+  "factors": {
+   "composition": 0.28,
+   "local": 0.331,
+   "alignment": 0.287,
+   "simplicity": 0.609,
+   "whitespace": 0.127,
+   "colorfulness": 0.87,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "docker.com",
+  "ui": 40,
+  "web": 28,
+  "factors": {
+   "composition": 0.09,
+   "local": 0.632,
+   "alignment": 0.273,
+   "simplicity": 0.269,
+   "whitespace": 0.995,
+   "colorfulness": 0.972,
+   "contrast": 1.0,
+   "harmony": 0.928
+  }
+ },
+ {
+  "site": "tesla.com",
+  "ui": 39,
+  "web": 2,
+  "factors": {
+   "composition": 0.07,
+   "local": 0.296,
+   "alignment": 0.392,
+   "simplicity": 1.0,
+   "whitespace": 0.061,
+   "colorfulness": 0.734,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "bear.app",
+  "ui": 38,
+  "web": 70,
+  "factors": {
+   "composition": 0.1,
+   "local": 0.403,
+   "alignment": 0.237,
+   "simplicity": 0.744,
+   "whitespace": 0.371,
+   "colorfulness": 0.913,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "cursor.com",
+  "ui": 38,
+  "web": 28,
+  "factors": {
+   "composition": 0.14,
+   "local": 0.422,
+   "alignment": 0.308,
+   "simplicity": 0.413,
+   "whitespace": 0.75,
+   "colorfulness": 0.839,
+   "contrast": 1.0,
+   "harmony": 0.912
+  }
+ },
+ {
+  "site": "airbnb.com",
+  "ui": 37,
+  "web": 42,
+  "factors": {
+   "composition": 0.15,
+   "local": 0.346,
+   "alignment": 0.291,
+   "simplicity": 0.714,
+   "whitespace": 0.159,
+   "colorfulness": 0.904,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "supabase.com",
+  "ui": 36,
+  "web": 82,
+  "factors": {
+   "composition": 0.11,
+   "local": 0.539,
+   "alignment": 0.193,
+   "simplicity": 0.689,
+   "whitespace": 0.277,
+   "colorfulness": 0.919,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "lattice.com",
+  "ui": 36,
+  "web": 46,
+  "factors": {
+   "composition": 0.14,
+   "local": 0.367,
+   "alignment": 0.23,
+   "simplicity": 0.341,
+   "whitespace": 1.0,
+   "colorfulness": 0.865,
+   "contrast": 1.0,
+   "harmony": 0.756
+  }
+ },
+ {
+  "site": "tailwindcss.com",
+  "ui": 35,
+  "web": 90,
+  "factors": {
+   "composition": 0.11,
+   "local": 0.829,
+   "alignment": 0.172,
+   "simplicity": 0.513,
+   "whitespace": 0.369,
+   "colorfulness": 0.873,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "warp.dev",
+  "ui": 34,
+  "web": 31,
+  "factors": {
+   "composition": 0.07,
+   "local": 0.402,
+   "alignment": 0.349,
+   "simplicity": 0.656,
+   "whitespace": 0.18,
+   "colorfulness": 0.943,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "radix-ui.com",
+  "ui": 32,
+  "web": 89,
+  "factors": {
+   "composition": 0.06,
+   "local": 0.5,
+   "alignment": 0.21,
+   "simplicity": 0.31,
+   "whitespace": 0.869,
+   "colorfulness": 0.947,
+   "contrast": 1.0,
+   "harmony": 0.862
+  }
+ },
+ {
+  "site": "basecamp.com",
+  "ui": 32,
+  "web": 64,
+  "factors": {
+   "composition": 0.08,
+   "local": 0.313,
+   "alignment": 0.221,
+   "simplicity": 0.34,
+   "whitespace": 0.789,
+   "colorfulness": 0.994,
+   "contrast": 1.0,
+   "harmony": 0.874
+  }
+ },
+ {
+  "site": "pinterest.com",
+  "ui": 31,
+  "web": 75,
+  "factors": {
+   "composition": 0.08,
+   "local": 0.596,
+   "alignment": 0.132,
+   "simplicity": 0.257,
+   "whitespace": 0.891,
+   "colorfulness": 0.947,
+   "contrast": 1.0,
+   "harmony": 0.867
+  }
+ },
+ {
+  "site": "render.com",
+  "ui": 30,
+  "web": 83,
+  "factors": {
+   "composition": 0.09,
+   "local": 0.295,
+   "alignment": 0.168,
+   "simplicity": 0.657,
+   "whitespace": 0.275,
+   "colorfulness": 0.859,
+   "contrast": 1.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "site": "signal.org",
+  "ui": 30,
+  "web": 88,
+  "factors": {
+   "composition": 0.14,
+   "local": 0.588,
+   "alignment": 0.156,
+   "simplicity": 0.168,
+   "whitespace": 0.802,
+   "colorfulness": 0.772,
+   "contrast": 1.0,
+   "harmony": 0.916
+  }
+ },
+ {
+  "site": "craft.do",
+  "ui": 29,
+  "web": 100,
+  "factors": {
+   "composition": 0.31,
+   "local": 0.588,
+   "alignment": 0.204,
+   "simplicity": 0.281,
+   "whitespace": 0.052,
+   "colorfulness": 0.837,
+   "contrast": 1.0,
+   "harmony": 0.872
+  }
+ },
+ {
+  "site": "stripe.com",
+  "ui": 29,
+  "web": 57,
+  "factors": {
+   "composition": 0.05,
+   "local": 0.502,
+   "alignment": 0.248,
+   "simplicity": 0.356,
+   "whitespace": 0.957,
+   "colorfulness": 0.333,
+   "contrast": 1.0,
+   "harmony": 0.814
+  }
+ },
+ {
+  "site": "svelte.dev",
+  "ui": 27,
+  "web": 79,
+  "factors": {
+   "composition": 0.06,
+   "local": 0.427,
+   "alignment": 0.105,
+   "simplicity": 0.15,
+   "whitespace": 0.937,
+   "colorfulness": 0.999,
+   "contrast": 1.0,
+   "harmony": 0.853
+  }
+ },
+ {
+  "site": "remix.run",
+  "ui": 27,
+  "web": 100,
+  "factors": {
+   "composition": 0.55,
+   "local": 0.723,
+   "alignment": 0.123,
+   "simplicity": 0.0,
+   "whitespace": 0.144,
+   "colorfulness": 0.56,
+   "contrast": 0.742,
+   "harmony": 0.819
+  }
+ },
+ {
+  "site": "posthog.com",
+  "ui": 25,
+  "web": 85,
+  "factors": {
+   "composition": 0.33,
+   "local": 0.569,
+   "alignment": 0.242,
+   "simplicity": 0.023,
+   "whitespace": 0.014,
+   "colorfulness": 0.904,
+   "contrast": 1.0,
+   "harmony": 0.845
+  }
+ }
+]
