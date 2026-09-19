@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- **Corner-radius coherence (`logo` mode).** A stroke end whose cap radius is off the mark's radius
+  scale (a pill-ended underline next to squared-off arch feet) is a defect of finish: up to 8 points,
+  with the offending shape's box in the hint. Measured per flat shape from the bounding-box corners
+  that face the background, relative to stroke thickness; bends larger than the stroke are ignored.
+  Fixtures `demo/lint/caps-mismatch.png` (90) and `caps-match.png` (93); famous marks unchanged.
 - **Components.** Rendered pages: every landmark, section and control is cropped from one full-page screenshot and scored on its own (`beautiful/components.py`, classic scale, controls judged on both-axis symmetry). `--components` lists them; baselines store `{score, errors, components}` and `--baseline` fails when any component gets less beautiful or a new error-level rule fires.
 - **Balance counts in `logo` and `art` mode.** Composition in the generic (non-`ui`) formula was mirror
   symmetry alone, so a centred, balanced mark with no mirror axis (the Nike swoosh) scored like a

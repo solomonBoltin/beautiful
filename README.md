@@ -615,6 +615,15 @@ is their ceiling: the last four points are mirror symmetry, which every mark in 
 and a two-letter wordmark cannot. The same arch alone, centred, scores 94 and 95; it is a different
 logo, so it is offered, not applied.
 
+One thing the score could not see until this mark asked for it: an underline whose ends were full
+half-circles next to an arch whose feet were squared off. Every other cap on the mark sat at about a
+quarter of its stroke; the underline sat at a half. `logo` mode now measures **corner-radius
+coherence**: for every flat shape, the radius of each cap that faces the background, relative to the
+stroke's thickness (bends larger than the stroke, like the arch's top, are left out); a cap off the
+mark's radius scale is a defect of finish, up to 8 points, reported with the shape's box
+(`demo/lint/caps-mismatch.png` 90 vs `caps-match.png` 93). The eleven famous marks and every art
+fixture are untouched by it.
+
 Reproduce with `python demo/logos/logos.py` (needs `pip install "beautiful[render]"`). Brand paths
 are from [Simple Icons](https://simpleicons.org) (CC0); the trademarks belong to their owners and
 appear here only to compare scores.

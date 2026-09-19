@@ -192,3 +192,73 @@ def all_measurements(rgb: np.ndarray) -> dict:
         "sequence": round(sequence(rgb), 4),
         "hierarchy": round(hierarchy(rgb), 4),
     }
+
+
+# --------------------------------------------------------------------------- #
+# Corner-radius coherence (logo / icon marks).  Design systems keep one radius scale; a mark
+# whose strokes end in different caps (a pill next to a squared-off foot) reads as unfinished.
+# For every flat-coloured shape we take the corners of its bounding box that face the background,
+# read the corner radius from how far the shape stays from that corner (a rounded corner of
+# radius r keeps the shape r(√2−1) away along the diagonal) and express it relative to the
+# shape's stroke thickness (twice the largest inscribed disc).  Corners with a radius larger
+# than the stroke are bends (an arch), not caps, and are left out.  Coherence is 1.0 when
+# every shape's cap radius sits on the same scale, and falls with the worst outlier.
+# --------------------------------------------------------------------------- #
+def corner_coherence(rgb: np.ndarray, min_area: int = 40) -> dict:
+    from scipy import ndimage
+    H, W = rgb.shape[:2]
+    q = (rgb * 7).round()
+    key = (q[..., 0] * 64 + q[..., 1] * 8 + q[..., 2]).astype(np.int64)
+    vals, counts = np.unique(key, return_counts=True)
+    order = np.argsort(-counts)
+    bg_col = np.array([vals[order[0]] // 64, (vals[order[0]] // 8) % 8, vals[order[0]] % 8]) / 7.0
+    is_bg = np.abs(rgb - bg_col).sum(-1) < 0.25
+    shapes = []
+    for v, c in zip(vals[order[1:]], counts[order[1:]]):
+        if c < 0.002 * H * W:
+            break
+        col = np.array([v // 64, (v // 8) % 8, v % 8]) / 7.0
+        if np.abs(col - bg_col).sum() < 0.3:
+            continue                                       # anti-aliased shades of the background
+        mask = np.abs(rgb - col).sum(-1) < 0.25
+        lab, n = ndimage.label(mask)
+        for i in range(1, n + 1):
+            comp = lab == i
+            area = int(comp.sum())
+            if area < min_area:
+                continue
+            ys, xs = np.where(comp)
+            x0, x1, y0, y1 = xs.min(), xs.max(), ys.min(), ys.max()
+            if x1 - x0 < 4 or y1 - y0 < 4 or x0 == 0 or y0 == 0 or x1 == W - 1 or y1 == H - 1:
+                continue                                   # framing (canvas corners, a full-bleed tile), not a mark
+            dt = ndimage.distance_transform_edt(comp)
+            t = 2.0 * float(dt.max())
+            if t < 4:
+                continue
+            caps = []
+            win = max(3, int(round(0.35 * t))); big = max(4, int(round(1.2 * t)))
+            for cx, cy in ((x0, y0), (x1, y0), (x0, y1), (x1, y1)):
+                d = float(np.sqrt((xs - cx) ** 2 + (ys - cy) ** 2).min())
+                r = d / (np.sqrt(2) - 1)
+                if r > 0.65 * t:
+                    continue                               # a bend, not a cap
+                ya, yb = max(0, cy - big), min(H, cy + big + 1); xa, xb = max(0, cx - big), min(W, cx + big + 1)
+                if 2.0 * float(dt[ya:yb, xa:xb].max()) < 0.8 * t:
+                    continue                               # the stroke thins out here (a tip, a taper): not a cap
+                ya, yb = max(0, cy - win), min(H, cy + win + 1); xa, xb = max(0, cx - win), min(W, cx + win + 1)
+                outside = ~comp[ya:yb, xa:xb]
+                if outside.sum() and (~is_bg[ya:yb, xa:xb] & outside).mean() > 0.30:
+                    continue                               # the corner is cut by another shape, not designed
+                caps.append(r / t)
+            if len(caps) >= 2 and (max(caps) - min(caps)) <= 0.15:
+                shapes.append({"rho": float(np.mean(caps)), "t": round(t, 1), "box": [int(x0), int(y0), int(x1), int(y1)],
+                               "colour": [round(float(x), 2) for x in col], "caps": len(caps)})
+    if len(shapes) < 2:
+        return {"score": 1.0, "shapes": shapes, "median": None, "outliers": []}
+    med = float(np.median([s["rho"] for s in shapes]))
+    for s in shapes:
+        s["dev"] = round(abs(s["rho"] - med), 3)
+    worst = max(s["dev"] for s in shapes)
+    outliers = [s for s in shapes if s["dev"] > 0.12]
+    score = float(np.clip(1.0 - (worst - 0.12) / 0.30, 0.0, 1.0))
+    return {"score": round(score, 3), "median": round(med, 3), "shapes": shapes, "outliers": outliers}

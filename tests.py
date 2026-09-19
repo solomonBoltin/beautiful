@@ -16,6 +16,7 @@ checks = [
     ("classic: unstyled page scores low", S("github_login_unstyled", "classic") < 45),
     ("art: mandala beats abstract splashes beats noise", A("mandala_radial") > A("abstract_splashes") > A("random_noise")),
     ("logo: shield beats diagonal composition", A("shield_logo", "logo") > A("diagonal_composition", "logo") + 20),
+    ("logo: a stroke end off the mark's radius scale costs points", beauty_score("demo/lint/caps-mismatch.png", "logo") < beauty_score("demo/lint/caps-match.png", "logo") - 2),
 ]
 r = beauty("demo/screens/pinkas_documents.png", "ui")
 x = r["raw"]["experimental"]

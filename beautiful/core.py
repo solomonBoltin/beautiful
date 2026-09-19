@@ -154,6 +154,18 @@ def beauty(image, mode: str = "ui") -> dict:
     penalties = {}
     contact = raw["experimental"]["edge_contact"]
     suspect = None
+    coherence_hint = None
+    if mode == "logo":
+        # a stroke end that does not match the mark's other caps (a pill next to squared-off feet)
+        # is a defect of finish, not taste: up to 8 points off, reported with the offending shape
+        coh = X.corner_coherence(F.to_rgb(image, 512))
+        raw["experimental"]["corner_coherence"] = coh
+        if coh["score"] < 0.85 and coh["outliers"]:
+            penalties["radius-mismatch"] = int(round(8 * (1 - coh["score"])))
+            score = max(1, score - penalties["radius-mismatch"])
+            o = coh["outliers"][0]
+            coherence_hint = (f"radius mismatch: a shape at {o['box']} ends with a cap radius {o['rho']:.2f}× its stroke while the "
+                              f"mark's other caps sit at {coh['median']:.2f}×; give every stroke end the same radius scale")
     if mode == "ui":
         for side_name in ("right", "left"):
             c = contact[side_name]
@@ -181,6 +193,8 @@ def beauty(image, mode: str = "ui") -> dict:
     for loss, k in weakest:
         if loss > 0.03:
             hints.append(f"{k} ({g[k]:.2f}): {advice[k]}")
+    if coherence_hint:
+        hints.insert(0, coherence_hint)
     if suspect:
         side_name, c = suspect
         hints.insert(0, f"clipping? content touches the {side_name} edge in {c['runs']} places over "
