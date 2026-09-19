@@ -6,6 +6,10 @@ import sys
 
 from beautiful import beauty
 
+for _stream in (sys.stdout, sys.stderr):  # the table has emoji; a cp1252 console (Windows) must not crash on it
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+
 mode = os.environ.get("INPUT_MODE", "ui") or "ui"
 min_req = os.environ.get("INPUT_MIN", "").strip()
 files = sorted({f for g in os.environ["INPUT_IMAGES"].split() for f in glob.glob(g, recursive=True)})
