@@ -128,8 +128,10 @@ class _Chromium:
             return page.evaluate("""(device) => {
                 // compare against the *layout* viewport: a page without <meta name=viewport> lays
                 // out at 980px on a phone and is zoomed out, which is not overflow
-                const vw = window.innerWidth || device;
+                // documentElement.clientWidth is the layout viewport; innerWidth follows the visual
+                // viewport, which mobile Chrome widens when it zooms out to fit overflowing content
                 const de = document.documentElement, b = document.body;
+                const vw = (de && de.clientWidth) || window.innerWidth || device;
                 const sw = Math.max(de ? de.scrollWidth : 0, b ? b.scrollWidth : 0);
                 const out = [];
                 for (const el of document.querySelectorAll('body *')) {
