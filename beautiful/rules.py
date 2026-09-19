@@ -13,7 +13,7 @@ warning) separately.
     text-contrast        WCAG 2.2 SC 1.4.3 — text < 4.5:1 (3:1 for large text) against its background
     font-size            Lighthouse "legible font sizes" — text under 12 px; body text under 16 px on mobile
     touch-target         WCAG 2.5.8 (24 px floor), Apple HIG 44 pt, Material 48 dp
-    line-length          Bringhurst / GOV.UK / Butterick — measure over 90 characters (75 recommended)
+    line-length          Dyson 2001 / Shaikh 2005 / Bringhurst / GOV.UK — measure outside 35–100 characters
     line-height          WCAG 1.4.12 / Butterick — body text line-height under 1.2
     image-distortion     an <img> rendered at a different aspect ratio than its natural one
     text-clipped         a text element whose content is wider than its box (cut off, no ellipsis)
@@ -75,7 +75,9 @@ RULES_JS = r"""
     const rect = el.getBoundingClientRect();
     if (chars >= 120) {
       const cpl = rect.width / (fs * 0.5);
-      if (cpl > 90) longLines.push(tag(el) + ' ~' + Math.round(cpl) + ' chars/line');
+      // screen studies support 45–95 CPL (Dyson & Haselgrove 2001; Shaikh & Chaparro 2005);
+      // the guideline sweet spot is 60–75; flag only outside 35–100
+      if (cpl > 100 || cpl < 35) longLines.push(tag(el) + ' ~' + Math.round(cpl) + ' chars/line');
       const lh = cs.lineHeight === 'normal' ? 1.2 * fs : parseFloat(cs.lineHeight);
       if (lh / fs < 1.2) tightLeading.push(tag(el) + ' ' + (lh / fs).toFixed(2));
     }
@@ -85,7 +87,7 @@ RULES_JS = r"""
   if (lowContrast.length) add('text-contrast', 'error', 'text below WCAG contrast (4.5:1, 3:1 for large text)', lowContrast, {source: 'WCAG 2.2 SC 1.4.3'});
   if (tiny.length) add('font-size', textChars && tinyChars / textChars > 0.4 ? 'error' : 'warning', 'text under 12px', tiny, {share: textChars ? +(tinyChars / textChars).toFixed(2) : 0, source: 'Lighthouse legible font sizes'});
   if (smallBody.length) add('font-size-mobile', 'warning', 'body text under 16px on a phone', smallBody, {source: 'Apple HIG / GOV.UK / Material'});
-  if (longLines.length) add('line-length', 'warning', 'measure over 90 characters per line (45–75 recommended)', longLines, {source: 'Bringhurst; GOV.UK Design System'});
+  if (longLines.length) add('line-length', 'warning', 'measure outside 35–100 characters per line (60–75 is the guideline sweet spot; 45–95 is what screen studies support)', longLines, {source: 'Dyson & Haselgrove 2001; Shaikh & Chaparro 2005; Bringhurst; GOV.UK'});
   if (tightLeading.length) add('line-height', 'warning', 'body text line-height under 1.2', tightLeading, {source: 'WCAG 1.4.12; Butterick'});
   if (clipped.length) add('text-clipped', 'error', 'text cut off by its box (nowrap + overflow hidden, no ellipsis)', clipped, {source: 'beautiful'});
   if (families.size > 3) add('type-noise', 'warning', families.size + ' font families on one page (keep to 1–2)', [...families], {source: 'Refactoring UI'});

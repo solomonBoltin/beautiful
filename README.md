@@ -172,7 +172,7 @@ taste, with the thresholds the guidelines agree on and the source on every findi
 | `font-size-mobile` | body text under 16 px on a phone | Apple HIG, GOV.UK, Material |
 | `touch-target` | interactive element under 24 × 24 px — **error** (inline text links and unstyled native controls exempt, as in the standard) | WCAG 2.2 SC 2.5.8 |
 | `touch-target-mobile` | under 44 × 44 px on a phone | Apple HIG 44 pt, Material 48 dp |
-| `line-length` | more than ~90 characters per line (45–75 recommended) | Bringhurst, GOV.UK |
+| `line-length` | outside ~35–100 characters per line (screen studies support 45–95; guidelines say 60–75) | Dyson & Haselgrove 2001, Shaikh & Chaparro 2005, Bringhurst, GOV.UK |
 | `line-height` | body text line-height under 1.2 | WCAG 1.4.12, Butterick |
 | `text-clipped` | text wider than its box with `nowrap` + `overflow: hidden` and no ellipsis — **error** | — |
 | `image-distortion` | an `<img>` drawn at a different aspect ratio than its source — **error** | — |
