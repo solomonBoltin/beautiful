@@ -99,6 +99,16 @@ def to_sarif(results, min_score):
 
 
 
+def _baseline_key(k: str) -> str:
+    """Baseline keys are origin-free so a file made against localhost works in CI: 'http://x/en/@mobile' -> '/en/@mobile'."""
+    if k.startswith(("http://", "https://")):
+        src, _, vp = k.rpartition("@")
+        from urllib.parse import urlparse
+        u = urlparse(src)
+        return (u.path or "/") + (("?" + u.query) if u.query else "") + "@" + vp
+    return k
+
+
 def _error_rules(r: dict) -> list:
     """Error-level rule names (plus 'overflow') in a report — a baseline remembers them so a new one fails the gate."""
     names = {f["rule"] for f in r.get("rules", []) if f.get("level") == "error"}
@@ -224,9 +234,10 @@ def main(argv=None) -> int:
             print(f"beautiful: no baseline at {a.baseline} yet (will be created by --save-baseline)", file=sys.stderr)
         regressions = []
         for k, r in results.items():
-            if k not in base:
+            bk = _baseline_key(k) if _baseline_key(k) in base else k
+            if bk not in base:
                 continue
-            b = base[k]
+            b = base[bk]
             old = b["score"] if isinstance(b, dict) else b  # baselines written before 0.7.1 hold a bare score
             if r["score"] < old - a.tolerance:
                 regressions.append(f"{k}: {old} -> {r['score']}")
@@ -243,7 +254,7 @@ def main(argv=None) -> int:
             rc = 1
     if a.save_baseline:
         from .components import baseline_entry
-        json.dump({k: {"score": r["score"], "errors": _error_rules(r), "components": baseline_entry(r.get("components") or [])} for k, r in results.items()},
+        json.dump({_baseline_key(k): {"score": r["score"], "errors": _error_rules(r), "components": baseline_entry(r.get("components") or [])} for k, r in results.items()},
                   open(a.save_baseline, "w", encoding="utf-8"), indent=1, sort_keys=True)
     return rc
 
