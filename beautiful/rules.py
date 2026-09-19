@@ -217,7 +217,7 @@ async (vp) => {
     const inlineLink = el.tagName === 'A' && c.display === 'inline';
     const nativeControl = ['SELECT', 'INPUT', 'TEXTAREA'].includes(el.tagName) && c.appearance !== 'none';
     if (m < 24 && !inlineLink && !nativeControl) tinyC.push({el, r});
-    else if (mobile && m < 44) smallT.push(tag(el) + ' ' + Math.round(r.width) + '×' + Math.round(r.height));
+    else if (mobile && m < 44 && !inlineLink) smallT.push(tag(el) + ' ' + Math.round(r.width) + '×' + Math.round(r.height));  // a link inside running text cannot be 44 px tall; the HIG target size is for controls
     if (!inlineLink) targets.push({el, r});
     const name = (txt(el) || el.getAttribute('aria-label') || el.getAttribute('title') || (el.querySelector('img') && el.querySelector('img').alt) || (el.tagName === 'INPUT' ? (el.value || el.placeholder) : '') || '').trim();
     if (['A', 'BUTTON'].includes(el.tagName) && !name && !el.querySelector('svg[aria-label], [aria-label]')) emptyC.push(tag(el));
