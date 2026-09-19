@@ -385,6 +385,7 @@ the number and the hint on each frame are what `beautiful page.html` prints. Reb
 | [product](demo/gifs/product.gif) | desktop | Product page: six badges, a stretched hero, three price sizes → one image, one price, one action | 70 (1 error) → **74** (0) |
 | [onboarding](demo/gifs/onboarding.gif) | mobile | Phone onboarding: illustration bleeding off the edge, 12 px text, 32 px buttons → margins, 16 px body, 48 px targets | 75 (1 error) → **91** (0) |
 
+<p align="center"><img src="demo/gifs/signin.gif" width="720" alt="Sign-in split screen: off-axis card, clashing accent, floating labels → one axis, one accent, 48 px targets"></p>
 <p align="center"><img src="demo/gifs/dashboard.gif" width="720" alt="Analytics dashboard: cards off the grid, four accents, washed text → 8 px grid, one accent, crisp contrast"></p>
 <p align="center"><img src="demo/gifs/pricing.gif" width="720" alt="Pricing tiers: the highlighted tier lifted and shifted, three CTA colours, centred paragraph → equal cards, one primary"></p>
 <p align="center"><img src="demo/gifs/product.gif" width="720" alt="Product page: six badges, a stretched hero, three price sizes → one image, one price, one action"></p>
