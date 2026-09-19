@@ -13,7 +13,7 @@ A beauty lint: explicit formulas from 90 years of aesthetics research, measured 
   <a href="research/CALIBRATION.md"><img alt="calibrated" src="https://img.shields.io/badge/calibrated%20on-398%20rated%20sites-orange"></a>
 </p>
 
-<p align="center"><img src="demo/loop.gif" width="720" alt="A sign-in card whose button walks back to centre while the beauty score climbs from 64 to 93"></p>
+<p align="center"><img src="demo/gifs/signin.gif" width="720" alt="A sign-in page rendered by headless Chromium walks from an off-axis card with a clashing accent to one axis and one accent while the lint score climbs from 70 to 82 and the WCAG contrast error disappears"></p>
 
 ```python
 from beautiful import beauty
@@ -354,6 +354,48 @@ ten *rendered lint fixtures* (the pages planted with 44 DOM defects), the pixel 
 only AUC 0.55 from the acclaimed side and 0.35 from the ordinary side. Pixels do not see a missing
 alt text, a 9 px font or a pre-ticked checkbox. Render the page and the rules do — which is why the
 lint's number is the pixel score *minus* the rule penalties, never the pixel score alone.
+
+## Five scenarios, rendered and scored
+
+Real HTML, not drawings: each scene in [`demo/scenes/scenes.py`](demo/scenes/scenes.py) is a page
+parameterised from the state a rushed commit ships to the polished one. Every frame is rendered by
+the tool's own frozen Chromium and scored by the lint (pixel formula plus the 44 DOM rules), so
+the number and the hint on each frame are what `beautiful page.html` prints. Rebuild with
+`python demo/make_scene_gifs.py`.
+
+| scene | viewport | from → to | score |
+|---|---|---|---:|
+| [signin](demo/gifs/signin.gif) | desktop | Sign-in split screen: off-axis card, clashing accent, floating labels → one axis, one accent, 48 px targets | 83 → **82** |
+| [dashboard](demo/gifs/dashboard.gif) | desktop | Analytics dashboard: cards off the grid, four accents, washed text → 8 px grid, one accent, crisp contrast | 60 → **64** |
+| [pricing](demo/gifs/pricing.gif) | desktop | Pricing tiers: the highlighted tier lifted and shifted, three CTA colours, centred paragraph → equal cards, one primary | 86 → **91** |
+| [product](demo/gifs/product.gif) | desktop | Product page: six badges, a stretched hero, three price sizes → one image, one price, one action | 73 → **74** |
+| [onboarding](demo/gifs/onboarding.gif) | mobile | Phone onboarding: illustration bleeding off the edge, 12 px text, 32 px buttons → margins, 16 px body, 48 px targets | 88 → **91** |
+
+<p align="center"><img src="demo/gifs/dashboard.gif" width="720" alt="Analytics dashboard: cards off the grid, four accents, washed text → 8 px grid, one accent, crisp contrast"></p>
+<p align="center"><img src="demo/gifs/pricing.gif" width="720" alt="Pricing tiers: the highlighted tier lifted and shifted, three CTA colours, centred paragraph → equal cards, one primary"></p>
+<p align="center"><img src="demo/gifs/product.gif" width="720" alt="Product page: six badges, a stretched hero, three price sizes → one image, one price, one action"></p>
+<p align="center"><img src="demo/gifs/onboarding.gif" width="300" alt="Phone onboarding: illustration bleeding off the edge, 12 px text, 32 px buttons → margins, 16 px body, 48 px targets"></p>
+
+What the frames teach: the WCAG contrast error is what moves first (an error costs points and
+names its element); the pixel score then follows composition and hierarchy. The dashboard stays
+in the 60s even when polished because a dense data page *is* contour-heavy — the score is a lens,
+the rule list is the checklist.
+
+### Photographs — where the `art` formula stops
+
+![Three photographs and what the formula sees](demo/photos/photos_gallery.png)
+
+| photo | `art` | `web` | what went wrong |
+|---|---:|---:|---|
+| portrait | 54 | 89 | composition 0.12: hair and a tilted head read as asymmetric mass, though the face is centred |
+| sunset over a glacier lagoon | 34 | 100 | simplicity 0.02 and fractal 0.01: cloud texture is outside the bells the art formula was written with |
+| resplendent quetzal | 40 | 100 | contrast 0.27, local 0.24: no term for subject isolation, the one thing this photo is about |
+
+Three photographs most people would call beautiful, scored honestly. The `art` formula was
+checked on eight synthetic images and never on photographs; the crowd-calibrated `web` model
+gets them right for the wrong reasons (it likes rich, colourful images). Fixing this needs a photo
+bench like the UI one — [issue #46](https://github.com/solomonBoltin/beautiful/issues/46) says
+what it would take. Until then `art` is a formula for graphic composition, not a photo critic.
 
 ## Use it from your editor, agent or CI
 

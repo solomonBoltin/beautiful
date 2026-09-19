@@ -72,7 +72,6 @@ if __name__ == "__main__":
     ui()
     art()
     subprocess.run([py, os.path.join(HERE, "make_gallery.py")], check=True)
-    subprocess.run([py, os.path.join(HERE, "make_loop_gif.py")], check=True)
     if os.path.isdir(os.path.join(HERE, "famous")):
         subprocess.run([py, os.path.join(HERE, "famous.py"), "--no-fetch"], check=True)
         famous_web()

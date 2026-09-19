@@ -185,7 +185,13 @@ def _balance(tone: np.ndarray, mode: str = "generic") -> tuple[float, float, flo
     prof = gaussian_filter1d(prof, max(1.0, w / 12)) - prof.mean()
     prof_sym = float(max(0.0, np.dot(prof, prof[::-1]) / (np.dot(prof, prof) + EPS)))
     score = (0.5 * equilibrium + 0.3 * halves + 0.2 * prof_sym) if mode == "ui" else (0.5 * equilibrium + 0.5 * halves)
-    parts = {"equilibrium": round(equilibrium, 4), "left_right": round(lr, 4), "top_bottom": round(tb, 4),
+    # compactness: how tightly the mass gathers, 1 for a single figure on a ground, 0 for mass spread
+    # evenly over the canvas (noise, confetti). Balance without a figure is not composition.
+    sx = float(np.sqrt(((xs - cx) ** 2 * m).sum() / m.sum())) / (w / 2)
+    sy = float(np.sqrt(((ys - cy) ** 2 * m).sum() / m.sum())) / (h / 2)
+    spread = (sx + sy) / 2                                     # uniform mass gives 0.577
+    compact = float(np.clip((0.577 - spread) / (0.577 - 0.36), 0, 1))
+    parts = {"compactness": round(compact, 4), "equilibrium": round(equilibrium, 4), "left_right": round(lr, 4), "top_bottom": round(tb, 4),
              "profile_symmetry": round(prof_sym, 4),
              "mass_left": round(mL / (mL + mR + EPS), 3), "mass_right": round(mR / (mL + mR + EPS), 3)}
     return float(score), float(dx), float(dy), parts
@@ -221,7 +227,10 @@ def symmetry_report(image, mode: str = "generic") -> dict:
         raw = 0.60 * composed + 0.20 * (mirror + bal) / 2 + 0.15 * loc + 0.05 * r
     else:
         mirror = max(h, v)
-        raw = 0.50 * mirror + 0.10 * (h + v) / 2 + 0.05 * r + 0.15 * loc + 0.20 * bal
+        # a mark can be composed without a mirror axis (the Nike swoosh, a brush stroke): a centred,
+        # balanced figure earns most of the credit, capped below true symmetry so a mirror still wins
+        composed = max(mirror, 0.85 * bal ** 2 * bal_parts["compactness"])
+        raw = 0.50 * composed + 0.10 * (h + v) / 2 + 0.05 * r + 0.15 * loc + 0.20 * bal
     score = int(round(1 + 99 * _curve(raw)))
 
     dominant = "horizontal" if h >= v else "vertical"

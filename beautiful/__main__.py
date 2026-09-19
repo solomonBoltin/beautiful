@@ -8,7 +8,9 @@
     beautiful --min 70 shots/*.png             exit 1 below 70 (a gate)
     beautiful --format json|github|sarif ...   machine-readable, CI annotations, code scanning
     beautiful --save-baseline b.json shots/    remember today's scores
-    beautiful --baseline b.json shots/         fail on a score drop > 3 points or a new error-level finding
+    beautiful --baseline b.json shots/         fail on a score drop > 3 points, a new error-level finding,
+                                               or a component (section, control) that got less beautiful
+    beautiful index.html --components          every landmark, section and control scored on its own
 """
 from __future__ import annotations
 
@@ -125,6 +127,8 @@ def main(argv=None) -> int:
     p.add_argument("--save-renders", metavar="DIR", help="for HTML files and URLs: keep the rendered PNGs here")
     p.add_argument("--backend", choices=["playwright", "weasyprint"], default=None,
                    help="renderer for HTML/URLs (default: playwright if installed, else weasyprint)")
+    p.add_argument("--components", action="store_true", help="for HTML files and URLs: print every component's score (components are always measured and kept in baselines)")
+    p.add_argument("--no-components", action="store_true", help="skip component discovery and scoring")
     p.add_argument("--explain", metavar="DIR", help="write <name>.explain.png per image: the factors drawn over the image")
     p.add_argument("--version", action="version", version=f"beautiful {__version__}")
     a = p.parse_args(argv)
@@ -148,7 +152,7 @@ def main(argv=None) -> int:
             if is_renderable(path):
                 try:
                     from .render import score_html
-                    reps = score_html(path, viewports, a.mode, backend=a.backend, save_dir=a.save_renders)
+                    reps = score_html(path, viewports, a.mode, backend=a.backend, save_dir=a.save_renders, components=not a.no_components)
                 except Exception as e:
                     failures.append(f"{path}: {type(e).__name__}: {e}")
                     continue
@@ -172,6 +176,15 @@ def main(argv=None) -> int:
                 r["explain"] = os.path.join(a.explain, f"{stem}.explain.png")
         if fmt == "text":
             print(f"{r['score']:3d}  {path}")
+            comps = r.get("components") or []
+            if comps:
+                weakest = min(comps, key=lambda c: c["score"])
+                print(f"      components: {len(comps)} measured (classic scale), weakest {weakest['key']} {weakest['score']}")
+                if a.components:
+                    for c in comps:
+                        print(f"        {c['score']:3d}  {c['kind']:<8}{c['key']}  {c['rect'][2]}×{c['rect'][3]}")
+                        for h in c["hints"][:1]:
+                            print(f"               ->  {h}")
             if len(files) == 1 and len(results) == 1 and not is_renderable(files[0]):
                 for k, v in r["factors"].items():
                     print(f"      {k:<14}{v:.2f}")
@@ -220,12 +233,17 @@ def main(argv=None) -> int:
             new_errors = [e for e in _error_rules(r) if e not in (b.get("errors", []) if isinstance(b, dict) else [])]
             if isinstance(b, dict) and new_errors:
                 regressions.append(f"{k}: new error-level finding(s) {', '.join(new_errors)}")
+            if isinstance(b, dict) and b.get("components") and r.get("components"):
+                from .components import regressions as _comp_regs
+                for key, old_s, new_s in _comp_regs(b["components"], r["components"], a.tolerance):
+                    regressions.append(f"{k} component {key}: {old_s} -> {new_s} (less beautiful than the baseline)")
         for line in regressions:
             print(f"beautiful: regression {line}", file=sys.stderr)
         if regressions:
             rc = 1
     if a.save_baseline:
-        json.dump({k: {"score": r["score"], "errors": _error_rules(r)} for k, r in results.items()},
+        from .components import baseline_entry
+        json.dump({k: {"score": r["score"], "errors": _error_rules(r), "components": baseline_entry(r.get("components") or [])} for k, r in results.items()},
                   open(a.save_baseline, "w", encoding="utf-8"), indent=1, sort_keys=True)
     return rc
 

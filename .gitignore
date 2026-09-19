@@ -16,3 +16,4 @@ research/broken/
 research/bench_*.json
 research/fit_cache.json
 research/degraded_pairs.json
+demo/gifs/frames/

@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- **Five rendered scenarios** (`demo/scenes/`, `demo/gifs/`): sign-in, dashboard, pricing, product page and phone onboarding, each a real HTML page walking from a flawed state to a polished one, every frame rendered by the tool's own Chromium and scored by the lint. Replaces the drawn sign-in GIF.
+- **Photographs in the demo** (`demo/photos/`): a portrait, a sunset and a quetzal, with the honest finding that `art` mode underrates all three (issue #46).
+
 ## 0.7.0 — 2026-09-20
 
 - **Rules v2: 44 DOM rules.** The 19 rule issues from the design-lint survey implemented: text

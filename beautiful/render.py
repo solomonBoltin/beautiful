@@ -81,8 +81,9 @@ def backends_available() -> dict:
 class _Chromium:
     """One headless Chromium for many renders (launching is the slow part)."""
 
-    def __init__(self):
+    def __init__(self, components: bool = True):
         from playwright.sync_api import sync_playwright
+        self.components = components
         self._pw = sync_playwright().start()
         self.browser = self._pw.chromium.launch()
 
@@ -120,6 +121,10 @@ class _Chromium:
         self.last_layout = self._layout_facts(page, vp)
         from . import rules
         self.last_rules = rules.run(page, vp)
+        self.last_components = None
+        if self.components:
+            from . import components
+            self.last_components = components.capture(page, vp, screenshot=png if full_page else None)
         ctx.close()
         return Image.open(io.BytesIO(png)).convert("RGB")
 
@@ -200,12 +205,13 @@ def render(source: str, viewport: str = "desktop", backend: str | None = None, _
 
 
 def score_html(source: str, viewports: Iterable[str] = ("desktop", "tablet", "mobile"), mode: str = "ui",
-               backend: str | None = None, save_dir: str | None = None) -> dict:
-    """Render at each viewport and score. Returns {viewport: beauty report (+ 'image' path if saved)}."""
+               backend: str | None = None, save_dir: str | None = None, components: bool = True) -> dict:
+    """Render at each viewport and score. Returns {viewport: beauty report (+ 'image' path if saved,
+    + 'components': every landmark/section/control cropped and scored on the classic scale)}."""
     viewports = list(viewports)
     avail = backends_available()
     use = backend or ("playwright" if avail["playwright"] else "weasyprint")
-    chromium = _Chromium() if use == "playwright" else None
+    chromium = _Chromium(components=components) if use == "playwright" else None
     out = {}
     try:
         for vp in viewports:
@@ -229,6 +235,9 @@ def score_html(source: str, viewports: Iterable[str] = ("desktop", "tablet", "mo
             if findings is not None:
                 from . import rules
                 rules.apply(r, findings, vp)
+            comps = getattr(chromium, "last_components", None)
+            if comps is not None:
+                r["components"] = comps
             if save_dir:
                 os.makedirs(save_dir, exist_ok=True)
                 stem = re.sub(r"[^A-Za-z0-9._-]+", "_", os.path.basename(source.strip())[:60]) or "page"
