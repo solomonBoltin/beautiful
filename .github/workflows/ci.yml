@@ -1,0 +1,36 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: py${{ matrix.python }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python: ["3.9", "3.11", "3.13"]
+        include:
+          - os: macos-latest
+            python: "3.12"
+          - os: windows-latest
+            python: "3.12"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install
+        run: python -m pip install --upgrade pip && python -m pip install .
+      - name: Ordering invariants
+        run: python tests.py
+      - name: CLI smoke test and CI gate
+        run: |
+          beautiful --mode=ui demo/screens/pinkas_documents.png --min 80
+          beautiful --mode=art --json demo/art/mandala_radial.png > /dev/null
+          python -m beautiful --mode=logo demo/art/shield_logo.png demo/art/random_noise.png
+        shell: bash

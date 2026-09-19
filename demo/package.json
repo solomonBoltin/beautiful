@@ -1,0 +1,11 @@
+{
+  "name": "beautiful-demo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Headless-Chromium capture helpers for the beautiful demo (screenshot a URL or a local HTML file, then score it).",
+  "license": "MIT",
+  "dependencies": {
+    "@sparticuz/chromium": "^153.0.0",
+    "puppeteer-core": "^25.11.0"
+  }
+}

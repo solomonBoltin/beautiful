@@ -1,0 +1,268 @@
+[
+ {
+  "file": "pinkas_documents.png",
+  "label": "Pinkas — documents (built with beautiful)",
+  "score": 90,
+  "factors": {
+   "composition": 0.82,
+   "local": 0.634,
+   "alignment": 0.631,
+   "simplicity": 0.853,
+   "whitespace": 0.741,
+   "colorfulness": 0.929,
+   "contrast": 1.0,
+   "harmony": 1.0
+  },
+  "hints": [
+   "left/right symmetry is fine but top/bottom halves differ",
+   "alignment (0.63): snap element edges to a shared column/row grid"
+  ]
+ },
+ {
+  "file": "crates_io_search_q_http.png",
+  "label": "crates.io — search results (live)",
+  "score": 85,
+  "factors": {
+   "composition": 0.72,
+   "local": 0.903,
+   "alignment": 0.685,
+   "simplicity": 0.67,
+   "whitespace": 0.598,
+   "colorfulness": 0.933,
+   "contrast": 1.0,
+   "harmony": 0.916
+  },
+  "hints": [
+   "visual weight sits toward the top; shift or counterweight it",
+   "left/right symmetry is fine but top/bottom halves differ"
+  ]
+ },
+ {
+  "file": "pinkas_dialog.png",
+  "label": "Pinkas — new-document dialog",
+  "score": 85,
+  "factors": {
+   "composition": 0.97,
+   "local": 0.895,
+   "alignment": 0.317,
+   "simplicity": 0.748,
+   "whitespace": 0.354,
+   "colorfulness": 0.912,
+   "contrast": 0.954,
+   "harmony": 0.944
+  },
+  "hints": [
+   "alignment (0.32): snap element edges to a shared column/row grid",
+   "whitespace (0.35): adjust padding so ~60% of the canvas is background"
+  ]
+ },
+ {
+  "file": "digital_office_rebalanced.png",
+  "label": "Digital Office — rebalanced mock",
+  "score": 82,
+  "factors": {
+   "composition": 0.98,
+   "local": 0.904,
+   "alignment": 0.318,
+   "simplicity": 0.766,
+   "whitespace": 0.246,
+   "colorfulness": 0.959,
+   "contrast": 0.762,
+   "harmony": 0.964
+  },
+  "hints": [
+   "alignment (0.32): snap element edges to a shared column/row grid",
+   "whitespace (0.25): adjust padding so ~60% of the canvas is background"
+  ]
+ },
+ {
+  "file": "npm_home_unstyled.png",
+  "label": "npmjs.com — CSS blocked (unstyled)",
+  "score": 82,
+  "factors": {
+   "composition": 0.7,
+   "local": 0.685,
+   "alignment": 0.226,
+   "simplicity": 0.865,
+   "whitespace": 0.901,
+   "colorfulness": 0.895,
+   "contrast": 1.0,
+   "harmony": 1.0
+  },
+  "hints": [
+   "alignment (0.23): snap element edges to a shared column/row grid",
+   "composition (0.70): centre the main block; mirror controls at both ends of a row"
+  ]
+ },
+ {
+  "file": "pinkas_dashboard.png",
+  "label": "Pinkas — dashboard",
+  "score": 82,
+  "factors": {
+   "composition": 0.74,
+   "local": 0.564,
+   "alignment": 0.26,
+   "simplicity": 0.758,
+   "whitespace": 0.908,
+   "colorfulness": 0.975,
+   "contrast": 1.0,
+   "harmony": 1.0
+  },
+  "hints": [
+   "left/right symmetry is fine but top/bottom halves differ",
+   "alignment (0.26): snap element edges to a shared column/row grid"
+  ]
+ },
+ {
+  "file": "crates_io_crates_serde.png",
+  "label": "crates.io — crate page (live)",
+  "score": 77,
+  "factors": {
+   "composition": 0.75,
+   "local": 0.89,
+   "alignment": 0.52,
+   "simplicity": 0.582,
+   "whitespace": 0.287,
+   "colorfulness": 0.949,
+   "contrast": 1.0,
+   "harmony": 0.866
+  },
+  "hints": [
+   "visual weight sits toward the top; shift or counterweight it",
+   "left/right symmetry is fine but top/bottom halves differ"
+  ]
+ },
+ {
+  "file": "cratesio_home.png",
+  "label": "crates.io — home (live)",
+  "score": 77,
+  "factors": {
+   "composition": 0.67,
+   "local": 0.572,
+   "alignment": 0.264,
+   "simplicity": 0.613,
+   "whitespace": 0.997,
+   "colorfulness": 1.0,
+   "contrast": 1.0,
+   "harmony": 0.915
+  },
+  "hints": [
+   "visual weight sits toward the top; shift or counterweight it",
+   "left/right symmetry is fine but top/bottom halves differ"
+  ]
+ },
+ {
+  "file": "pypi_home.png",
+  "label": "PyPI — home (live)",
+  "score": 75,
+  "factors": {
+   "composition": 0.75,
+   "local": 0.617,
+   "alignment": 0.22,
+   "simplicity": 0.668,
+   "whitespace": 0.982,
+   "colorfulness": 0.234,
+   "contrast": 1.0,
+   "harmony": 0.979
+  },
+  "hints": [
+   "left/right symmetry is fine but top/bottom halves differ",
+   "alignment (0.22): snap element edges to a shared column/row grid"
+  ]
+ },
+ {
+  "file": "pypi_org_search__q_http.png",
+  "label": "PyPI — search results (live)",
+  "score": 73,
+  "factors": {
+   "composition": 0.91,
+   "local": 0.77,
+   "alignment": 0.398,
+   "simplicity": 0.754,
+   "whitespace": 0.267,
+   "colorfulness": 0.994,
+   "contrast": 0.367,
+   "harmony": 0.793
+  },
+  "hints": [
+   "left/right symmetry is fine but top/bottom halves differ",
+   "alignment (0.40): snap element edges to a shared column/row grid"
+  ]
+ },
+ {
+  "file": "pypi_org_project_numpy.png",
+  "label": "PyPI — project page (live)",
+  "score": 68,
+  "factors": {
+   "composition": 0.62,
+   "local": 0.754,
+   "alignment": 0.29,
+   "simplicity": 0.641,
+   "whitespace": 0.725,
+   "colorfulness": 0.249,
+   "contrast": 1.0,
+   "harmony": 0.972
+  },
+  "hints": [
+   "left/right symmetry is fine but top/bottom halves differ",
+   "alignment (0.29): snap element edges to a shared column/row grid"
+  ]
+ },
+ {
+  "file": "sample_asymmetric_ui.png",
+  "label": "Synthetic asymmetric UI sample",
+  "score": 59,
+  "factors": {
+   "composition": 0.08,
+   "local": 0.901,
+   "alignment": 0.607,
+   "simplicity": 0.865,
+   "whitespace": 0.476,
+   "colorfulness": 1.0,
+   "contrast": 1.0,
+   "harmony": 0.935
+  },
+  "hints": [
+   "visual weight sits toward the left; shift or counterweight it",
+   "no strong mirror axis; align key elements to the centre line or use a grid"
+  ]
+ },
+ {
+  "file": "digital_office_original.png",
+  "label": "Digital Office — original screenshot",
+  "score": 51,
+  "factors": {
+   "composition": 0.22,
+   "local": 0.917,
+   "alignment": 0.388,
+   "simplicity": 0.561,
+   "whitespace": 0.479,
+   "colorfulness": 0.975,
+   "contrast": 1.0,
+   "harmony": 0.898
+  },
+  "hints": [
+   "visual weight sits toward the right; shift or counterweight it",
+   "no strong mirror axis; align key elements to the centre line or use a grid"
+  ]
+ },
+ {
+  "file": "github_login_unstyled.png",
+  "label": "github.com/login — CSS blocked (unstyled)",
+  "score": 38,
+  "factors": {
+   "composition": 0.05,
+   "local": 0.334,
+   "alignment": 0.307,
+   "simplicity": 1.0,
+   "whitespace": 0.072,
+   "colorfulness": 0.88,
+   "contrast": 1.0,
+   "harmony": 1.0
+  },
+  "hints": [
+   "visual weight sits toward the left; shift or counterweight it",
+   "no strong mirror axis; align key elements to the centre line or use a grid"
+  ]
+ }
+]
