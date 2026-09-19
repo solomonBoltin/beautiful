@@ -494,10 +494,10 @@ What the numbers say, and where they are honest about their limits:
 | **82** | 96 | shield logo | 0.92 | 0.99 | 0.25 | 1.23 | -2.78 | 0.41 |
 | **69** | 96 | checkerboard | 0.97 | 1.00 | 0.82 | 1.81 | -2.16 | 0.00 |
 | **67** | 95 | bilateral leaf | 0.92 | 0.97 | 0.21 | 1.11 | -2.69 | 0.55 |
-| **48** | 18 | random coloured blobs | 0.06 | 0.57 | 0.35 | 1.40 | -2.73 | 0.26 |
-| **47** | 54 | diagonal composition | 0.02 | 0.92 | 0.22 | 1.15 | -2.78 | 0.26 |
-| **42** | 37 | abstract splashes | 0.06 | 0.92 | 0.30 | 1.32 | -2.72 | 0.15 |
-| **5** | 17 | random noise | 0.05 | 0.38 | 0.00 | 2.00 | 0.01 | 0.00 |
+| **48** | 20 | random coloured blobs | 0.06 | 0.57 | 0.35 | 1.40 | -2.73 | 0.26 |
+| **47** | 55 | diagonal composition | 0.02 | 0.92 | 0.22 | 1.15 | -2.78 | 0.26 |
+| **42** | 38 | abstract splashes | 0.06 | 0.92 | 0.30 | 1.32 | -2.72 | 0.15 |
+| **5** | 18 | random noise | 0.05 | 0.38 | 0.00 | 2.00 | 0.01 | 0.00 |
 <!-- /table:art -->
 
 ### Twelve icons, three versions each
