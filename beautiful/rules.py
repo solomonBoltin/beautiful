@@ -70,8 +70,11 @@ RULES_JS = r"""
   const all = [...document.querySelectorAll('body *')];
   const rectOf = (el) => el.getBoundingClientRect();
   const cs = (el) => getComputedStyle(el);
+  // an element inside an opacity:0 / visibility:hidden ancestor is invisible too — checkVisibility knows
   const vis = (el) => { const r = rectOf(el); const c = cs(el);
-    return r.width > 0 && r.height > 0 && c.visibility !== 'hidden' && c.display !== 'none' && c.opacity !== '0' && r.bottom > 0 && r.top < H * 3; };
+    if (!(r.width > 2 && r.height > 2 && c.visibility !== 'hidden' && c.display !== 'none' && c.opacity !== '0' && r.bottom > 0 && r.top < H * 3)) return false;
+    if (el.checkVisibility) { try { return el.checkVisibility({opacityProperty: true, visibilityProperty: true, contentVisibilityAuto: true}); } catch (e) { return true; } }
+    return true; };
   const tag = (el) => { const id = el.id ? '#' + el.id : ''; const cls = el.classList && el.classList.length ? '.' + [...el.classList].slice(0, 2).join('.') : ''; return el.tagName.toLowerCase() + id + cls; };
   const txt = (el) => (el.innerText || el.textContent || '').trim().replace(/\s+/g, ' ');
   const parseRGB = (s) => { const m = s && s.match(/rgba?\(([^)]+)\)/); if (!m) return null; const p = m[1].split(/[\s,\/]+/).filter(Boolean).map(parseFloat); return {r: p[0], g: p[1], b: p[2], a: p.length > 3 ? p[3] : 1}; };
@@ -165,7 +168,7 @@ RULES_JS = r"""
   add('text-overlap', 'error', 'text drawn over other text', overlap);
 
   // ---------------- controls ----------------
-  const tinyT = [], smallT = [], close = [], emptyC = [], genericL = [], redundantL = [], targets = [];
+  const tinyT = [], tinyC = [], smallT = [], close = [], emptyC = [], genericL = [], redundantL = [], targets = [];
   const generic = /^(click here|here|read more|more|learn more|link|this|continue|go)$/i;
   let prevHref = null, prevEl = null;
   for (const el of document.querySelectorAll(interactiveSel)) {
@@ -173,7 +176,7 @@ RULES_JS = r"""
     const r = rectOf(el), c = cs(el), m = Math.min(r.width, r.height);
     const inlineLink = el.tagName === 'A' && c.display === 'inline';
     const nativeControl = ['SELECT', 'INPUT', 'TEXTAREA'].includes(el.tagName) && c.appearance !== 'none';
-    if (m < 24 && !inlineLink && !nativeControl) tinyT.push(tag(el) + ' ' + Math.round(r.width) + '×' + Math.round(r.height));
+    if (m < 24 && !inlineLink && !nativeControl) tinyC.push({el, r});
     else if (mobile && m < 44) smallT.push(tag(el) + ' ' + Math.round(r.width) + '×' + Math.round(r.height));
     if (!inlineLink) targets.push({el, r});
     const name = (txt(el) || el.getAttribute('aria-label') || el.getAttribute('title') || (el.querySelector('img') && el.querySelector('img').alt) || (el.tagName === 'INPUT' ? (el.value || el.placeholder) : '') || '').trim();
@@ -182,6 +185,14 @@ RULES_JS = r"""
     if (el.tagName === 'A' && el.href && prevHref === el.href && prevEl && prevEl.parentElement === el.parentElement) redundantL.push(tag(el));
     prevHref = el.tagName === 'A' ? el.href : null; prevEl = el;
   }
+  // WCAG 2.5.8 spacing exception: a small target passes when a 24px circle centred on it meets no other target
+  for (const t of tinyC) {
+    const cx = (t.r.left + t.r.right) / 2, cy = (t.r.top + t.r.bottom) / 2; let clear = true;
+    for (const o of targets) { if (o.el === t.el || o.el.contains(t.el) || t.el.contains(o.el)) continue;
+      const dx = Math.max(o.r.left - cx, 0, cx - o.r.right), dy = Math.max(o.r.top - cy, 0, cy - o.r.bottom);
+      if (dx * dx + dy * dy < 144) { clear = false; break; } }
+    if (clear) { if (mobile && Math.min(t.r.width, t.r.height) < 44) smallT.push(tag(t.el) + ' ' + Math.round(t.r.width) + '×' + Math.round(t.r.height)); }
+    else tinyT.push(tag(t.el) + ' ' + Math.round(t.r.width) + '×' + Math.round(t.r.height)); }
   for (let i = 0; i < targets.length && close.length < 8; i++) for (let j = i + 1; j < targets.length; j++) {
     const a = targets[i].r, b = targets[j].r;
     const gapX = Math.max(a.left, b.left) - Math.min(a.right, b.right), gapY = Math.max(a.top, b.top) - Math.min(a.bottom, b.bottom);
