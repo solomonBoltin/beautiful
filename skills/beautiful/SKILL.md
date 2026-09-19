@@ -37,6 +37,10 @@ claude mcp add beautiful -- beautiful-mcp
    ```bash
    beautiful --mode=ui shot.png        # ui | art | logo | web
    ```
+   Rendered pages also get the **DOM rules** (WCAG contrast, font sizes, touch targets, line
+   length and height, stretched images, clipped text, viewport meta, heading order, alt text)
+   and the **overflow check**. Those are defects, not taste: fix every `error` before you look
+   at the beauty number at all.
 2. **Read the number per viewport.** A page that is 90 on desktop and 55 on mobile has a
    mobile layout problem, and the mobile hints say which factor.
    You get the number, every factor in 0–1, and hints ordered by how much each one costs.

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.6.0 — 2026-09-19
+
+- **DOM rules.** Rendered pages run a rule pass with sourced thresholds: WCAG text contrast,
+  font size (12 px floor, 16 px body on phones), touch targets (24 px WCAG floor, 44 px on
+  phones, with the standard's exemptions), line length and line height, stretched images,
+  clipped text, viewport meta, heading order, alt text, typographic noise. Errors cost points;
+  every finding names its elements. Fixtures in `demo/lint/` are checked in CI.
+- Demo page brought to zero rule errors by its own lint (44 px targets and 16 px body text on
+  phones, shorter measure).
+- `research/DESIGN-LINTS.md`: a survey of every published design lint, guideline, no-go and
+  measured rule we could find, each rated for whether pixels or the DOM can enforce it.
+
 ## 0.5.0 — 2026-09-19
 
 - **Balance stands in for symmetry.** In `ui` mode composition = *symmetric OR balanced*; balance

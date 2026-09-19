@@ -54,6 +54,14 @@ def findings(path, r, min_score):
     out = [{"rule": "score", "level": level_score, "path": path,
             "message": f"beauty {r['score']}/100 ({r['mode']} mode)"}]
     for h in r["hints"]:
+        if " [error, " in h or " [warning, " in h or " [note, " in h:  # a DOM rule finding
+            rule = h.split(" [", 1)[0]
+            lvl = h.split(" [", 1)[1].split(",", 1)[0]
+            out.append({"rule": rule, "level": lvl, "path": path, "message": h})
+            continue
+        if h.startswith("overflow:") or h.startswith("clipping?"):
+            out.append({"rule": "overflow" if h.startswith("overflow") else "clipping", "level": "error" if h.startswith("overflow") else "warning", "path": path, "message": h})
+            continue
         factor = h.split(" (", 1)[0] if " (" in h and h.split(" (", 1)[0] in r["factors"] else "composition"
         value = r["factors"].get(factor)
         lvl = "warning" if value is not None and value < 0.5 else "note"

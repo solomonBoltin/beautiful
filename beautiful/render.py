@@ -117,6 +117,8 @@ class _Chromium:
         page.wait_for_timeout(wait_ms)
         png = page.screenshot(full_page=full_page, animations="disabled", caret="hide")
         self.last_layout = self._layout_facts(page, vp)
+        from . import rules
+        self.last_rules = rules.run(page, vp)
         ctx.close()
         return Image.open(io.BytesIO(png)).convert("RGB")
 
@@ -221,6 +223,10 @@ def score_html(source: str, viewports: Iterable[str] = ("desktop", "tablet", "mo
                     if "clipping" not in r.get("penalties", {}):
                         r.setdefault("penalties", {})["overflow"] = 10
                         r["score"] = max(1, r["score"] - 10)
+            findings = getattr(chromium, "last_rules", None)
+            if findings is not None:
+                from . import rules
+                rules.apply(r, findings, vp)
             if save_dir:
                 os.makedirs(save_dir, exist_ok=True)
                 stem = re.sub(r"[^A-Za-z0-9._-]+", "_", os.path.basename(source.strip())[:60]) or "page"

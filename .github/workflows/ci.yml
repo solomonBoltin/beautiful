@@ -81,6 +81,27 @@ jobs:
         run: |
           printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"beauty_render","arguments":{"source":"<html><body style=\"margin:0;display:grid;place-items:center;height:100vh;background:#fff\"><div style=\"width:240px;height:120px;background:#002e5f;border-radius:12px\"></div></body></html>","viewports":["desktop","mobile"]}}}' | beautiful-mcp > mcp.out
           python -c "import json; r=json.loads(open('mcp.out').readline()); d=json.loads(r['result']['content'][0]['text']); assert d['desktop']['score']>=80 and d['mobile']['score']>=80, d; print('render ok', d['desktop']['score'], d['mobile']['score'])"
+      - name: DOM rules find every planted defect and none on the clean page
+        run: |
+          beautiful demo/lint/bad.html --viewports mobile --json > bad.json
+          python - <<'PY'
+          import json
+          r = list(json.load(open("bad.json")).values())[0]
+          found = {f["rule"] for f in r["rules"]}
+          need = {"text-contrast", "font-size", "line-height", "text-clipped", "touch-target", "image-distortion", "img-alt", "heading-order", "font-size-mobile"}
+          assert need <= found, need - found
+          assert r["penalties"].get("rules"), r["penalties"]
+          print("bad.html:", sorted(found))
+          PY
+          beautiful demo/lint/good.html --viewports mobile --json > good.json
+          python - <<'PY'
+          import json
+          r = list(json.load(open("good.json")).values())[0]
+          errors = [f for f in r["rules"] if f["level"] == "error"]
+          assert not errors, errors
+          print("good.html: no errors")
+          PY
+        shell: bash
       - uses: actions/upload-artifact@v4
         with:
           name: demo-renders

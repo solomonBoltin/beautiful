@@ -93,8 +93,10 @@ TOOLS = [
         "description": (
             "Render HTML (a string, a file path, or a URL such as a dev server or a Storybook story) at the "
             "desktop, tablet and mobile viewports with headless Chromium and score each — the same pixels a "
-            "screenshot would give, so the lint works on code without a manual screenshot. Returns per-viewport "
-            "score, factors and hints; optionally saves the renders."
+            "screenshot would give, so the lint works on code without a manual screenshot. Also runs the DOM "
+            "rules (WCAG text contrast, font sizes, touch targets, line length/height, stretched images, "
+            "clipped text, viewport meta, heading order, alt text, typographic noise) and the overflow check. "
+            "Returns per-viewport score, factors, hints, rules findings and penalties; optionally saves renders."
         ),
         "inputSchema": {
             "type": "object",
@@ -164,7 +166,7 @@ def _render(args: dict) -> dict:
     out = {}
     for vp, r in reps.items():
         row = {"score": r["score"], "factors": r["factors"], "hints": r["hints"], "backend": r["backend"],
-               "penalties": r.get("penalties", {}), "layout": r.get("layout", {})}
+               "penalties": r.get("penalties", {}), "layout": r.get("layout", {}), "rules": r.get("rules", [])}
         if "image" in r:
             row["image"] = r["image"]
         if args.get("explain_dir") and "image" in r:

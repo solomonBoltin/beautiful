@@ -160,6 +160,33 @@ formula and cost points on top of it:
 
 `report["penalties"]` carries them; `--format github` and SARIF show them as errors.
 
+### Rules the DOM can answer
+
+When a page is rendered, a rule pass runs inside it — the part of a beauty lint that is not
+taste, with the thresholds the guidelines agree on and the source on every finding:
+
+| rule | threshold | source |
+|---|---|---|
+| `text-contrast` | text under 4.5:1 against its background (3:1 for large text) — **error** | WCAG 2.2 SC 1.4.3 |
+| `font-size` | text under 12 px; error when it is most of the page's text | Lighthouse *legible font sizes* |
+| `font-size-mobile` | body text under 16 px on a phone | Apple HIG, GOV.UK, Material |
+| `touch-target` | interactive element under 24 × 24 px — **error** (inline text links and unstyled native controls exempt, as in the standard) | WCAG 2.2 SC 2.5.8 |
+| `touch-target-mobile` | under 44 × 44 px on a phone | Apple HIG 44 pt, Material 48 dp |
+| `line-length` | more than ~90 characters per line (45–75 recommended) | Bringhurst, GOV.UK |
+| `line-height` | body text line-height under 1.2 | WCAG 1.4.12, Butterick |
+| `text-clipped` | text wider than its box with `nowrap` + `overflow: hidden` and no ellipsis — **error** | — |
+| `image-distortion` | an `<img>` drawn at a different aspect ratio than its source — **error** | — |
+| `img-alt` | images without `alt` | WCAG 2.2 SC 1.1.1 |
+| `viewport-meta` | no `<meta name="viewport">` — **error** on the phone render | Lighthouse, MDN |
+| `heading-order` | no `h1`, or a skipped heading level | WCAG 1.3.1 |
+| `type-noise` | more than 3 font families or more than 8 distinct font sizes | Refactoring UI, Material type scale |
+
+Errors cost 3 points each (capped at 12); warnings are free. `report["rules"]` has every
+finding with the offending elements; the CLI, SARIF and the PR comment show them. The fixtures
+in [`demo/lint/`](demo/lint/) are CI's proof that every planted defect is found and the clean
+page is left alone. These rules are the first batch — the
+[design-lint survey](research/DESIGN-LINTS.md) lists what comes next.
+
 ## Famous sites, scored
 
 Twenty well-known home pages captured at 1280×800 on 2026-09-19 and scored with `--mode=ui`.
