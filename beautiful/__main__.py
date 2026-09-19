@@ -8,7 +8,7 @@
     beautiful --min 70 shots/*.png             exit 1 below 70 (a gate)
     beautiful --format json|github|sarif ...   machine-readable, CI annotations, code scanning
     beautiful --save-baseline b.json shots/    remember today's scores
-    beautiful --baseline b.json shots/         fail on any regression > 3 points
+    beautiful --baseline b.json shots/         fail on a score drop > 3 points or a new error-level finding
 """
 from __future__ import annotations
 
@@ -94,6 +94,15 @@ def to_sarif(results, min_score):
                                        "rules": list(rules.values())}},
                   "results": sarif_results}],
     }
+
+
+
+def _error_rules(r: dict) -> list:
+    """Error-level rule names (plus 'overflow') in a report — a baseline remembers them so a new one fails the gate."""
+    names = {f["rule"] for f in r.get("rules", []) if f.get("level") == "error"}
+    if r.get("penalties", {}).get("overflow"):
+        names.add("overflow")
+    return sorted(names)
 
 
 def main(argv=None) -> int:
@@ -200,14 +209,23 @@ def main(argv=None) -> int:
         except FileNotFoundError:
             base = {}
             print(f"beautiful: no baseline at {a.baseline} yet (will be created by --save-baseline)", file=sys.stderr)
-        regressions = [(k, base[k], r["score"]) for k, r in results.items()
-                       if k in base and r["score"] < base[k] - a.tolerance]
-        for k, old, new in regressions:
-            print(f"beautiful: regression {k}: {old} -> {new}", file=sys.stderr)
+        regressions = []
+        for k, r in results.items():
+            if k not in base:
+                continue
+            b = base[k]
+            old = b["score"] if isinstance(b, dict) else b  # baselines written before 0.7.1 hold a bare score
+            if r["score"] < old - a.tolerance:
+                regressions.append(f"{k}: {old} -> {r['score']}")
+            new_errors = [e for e in _error_rules(r) if e not in (b.get("errors", []) if isinstance(b, dict) else [])]
+            if isinstance(b, dict) and new_errors:
+                regressions.append(f"{k}: new error-level finding(s) {', '.join(new_errors)}")
+        for line in regressions:
+            print(f"beautiful: regression {line}", file=sys.stderr)
         if regressions:
             rc = 1
     if a.save_baseline:
-        json.dump({k: r["score"] for k, r in results.items()},
+        json.dump({k: {"score": r["score"], "errors": _error_rules(r)} for k, r in results.items()},
                   open(a.save_baseline, "w", encoding="utf-8"), indent=1, sort_keys=True)
     return rc
 
