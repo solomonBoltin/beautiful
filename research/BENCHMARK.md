@@ -8,53 +8,54 @@ AUC = the probability that a random page from the first set outscores a random p
 
 | signal | AUC acclaimed > ordinary | AUC acclaimed > broken | AUC ordinary > broken | ρ vs pairwise rank (ordinary) | ρ vs rating (rated) |
 |---|---:|---:|---:|---:|---:|
-| **`ui` score (shipped)** | 0.60 | 0.35 | 0.26 | -0.40 | -0.08 |
-| **`web` model** | 0.61 | 0.59 | 0.47 | 0.43 | 0.60 |
-| composition | 0.50 | 0.47 | 0.48 | -0.26 | 0.06 |
-| alignment | 0.43 | 0.23 | 0.30 | -0.28 | -0.20 |
-| simplicity | 0.72 | 0.27 | 0.15 | -0.14 | -0.03 |
-| whitespace | 0.64 | 0.74 | 0.60 | -0.26 | -0.25 |
+| **`classic` (literature weights)** | 0.60 | 0.35 | 0.27 | -0.40 | -0.08 |
+| **`ui` (fitted, research/fit_ui.py)** | 0.70 | 0.55 | 0.35 | -0.19 | 0.19 |
+| **`web` model** | 0.61 | 0.59 | 0.46 | 0.43 | 0.60 |
+| composition | 0.50 | 0.47 | 0.49 | -0.26 | 0.06 |
+| alignment | 0.42 | 0.24 | 0.31 | -0.28 | -0.20 |
+| simplicity | 0.73 | 0.28 | 0.15 | -0.14 | -0.03 |
+| whitespace | 0.65 | 0.75 | 0.59 | -0.26 | -0.25 |
 | harmony | 0.63 | 0.29 | 0.11 | -0.25 | 0.02 |
-| colorfulness | 0.56 | 0.47 | 0.42 | 0.06 | 0.06 |
+| colorfulness | 0.57 | 0.47 | 0.41 | 0.06 | 0.06 |
 | contrast | 0.54 | 0.43 | 0.39 | -0.42 | -0.15 |
-| local | 0.39 | 0.39 | 0.48 | -0.13 | 0.10 |
-| *feature_congestion* | 0.29 | 0.71 | 0.91 | 0.14 | -0.06 |
-| *contour_congestion* | 0.41 | 0.42 | 0.52 | 0.14 | -0.16 |
-| *edge_orientation_entropy* | 0.58 | 0.66 | 0.59 | 0.44 | 0.10 |
-| *anisotropy* | 0.40 | 0.34 | 0.44 | -0.45 | -0.11 |
-| *sequence* | 0.55 | 0.48 | 0.43 | -0.20 | -0.14 |
+| local | 0.39 | 0.36 | 0.45 | -0.13 | 0.10 |
+| *feature_congestion* | 0.30 | 0.70 | 0.89 | 0.14 | -0.06 |
+| *contour_congestion* | 0.40 | 0.42 | 0.53 | 0.14 | -0.16 |
+| *edge_orientation_entropy* | 0.58 | 0.67 | 0.60 | 0.44 | 0.10 |
+| *anisotropy* | 0.40 | 0.33 | 0.43 | -0.45 | -0.11 |
+| *sequence* | 0.56 | 0.52 | 0.46 | -0.20 | -0.14 |
 
-## 2. Weights fitted to separate acclaimed from ordinary (and both from broken)
+## 2. Weights fitted to separate acclaimed from ordinary (and both from broken) — first pass
 
-Same linear form as the shipped score; weights non-negative, sum to 1; objective 0.6·AUC(acclaimed > ordinary) + 0.4·AUC(all pages > broken), with a penalty whenever the human-rating correlation drops below the shipped weights'. 5-fold cross-validation over the acclaimed set (20 ordinary pages held out per fold).
+A first, linear-only pass (kept for the record; the shipped fit is research/fit_ui.py). Same linear form as the classic score; weights non-negative, sum to 1; objective 0.6·AUC(acclaimed > ordinary) + 0.4·AUC(all pages > broken), with a penalty whenever the human-rating correlation drops below the shipped weights'. 5-fold cross-validation over the acclaimed set (20 ordinary pages held out per fold).
 
 | | shipped weights | fitted weights |
 |---|---:|---:|
-| AUC acclaimed > ordinary (cross-validated) | 0.62 | 0.69 |
+| AUC acclaimed > ordinary (cross-validated) | 0.66 | 0.73 |
 | AUC acclaimed > ordinary (all data) | 0.60 | 0.64 |
-| AUC all > broken | 0.30 | 0.52 |
+| AUC all > broken | 0.31 | 0.49 |
 | ρ vs human rating (398) | -0.08 | -0.08 |
-| ρ vs human pairwise rank (100) | -0.40 | -0.15 |
+| ρ vs human pairwise rank (100) | -0.40 | -0.22 |
 
 | factor | shipped | fitted |
 |---|---:|---:|
-| composition | 0.28 | 0.02 |
-| alignment | 0.16 | 0.00 |
-| simplicity | 0.14 | 0.02 |
-| whitespace | 0.10 | 0.27 |
-| harmony | 0.10 | 0.10 |
-| colorfulness | 0.06 | 0.56 |
-| contrast | 0.10 | 0.01 |
-| local | 0.06 | 0.01 |
+| composition | 0.28 | 0.09 |
+| alignment | 0.16 | 0.01 |
+| simplicity | 0.14 | 0.04 |
+| whitespace | 0.10 | 0.24 |
+| harmony | 0.10 | 0.05 |
+| colorfulness | 0.06 | 0.45 |
+| contrast | 0.10 | 0.07 |
+| local | 0.06 | 0.05 |
 
 ## 3. What acclaimed pages have that ordinary ones don't
 
 | factor | acclaimed median | ordinary median | broken median |
 |---|---:|---:|---:|
-| composition | 0.63 | 0.70 | 0.73 |
-| alignment | 0.19 | 0.22 | 0.29 |
-| simplicity | 0.44 | 0.10 | 0.85 |
-| whitespace | 1.00 | 0.65 | 0.49 |
+| composition | 0.63 | 0.70 | 0.72 |
+| alignment | 0.19 | 0.22 | 0.30 |
+| simplicity | 0.45 | 0.10 | 0.85 |
+| whitespace | 1.00 | 0.65 | 0.54 |
 | harmony | 0.91 | 0.88 | 0.97 |
 | colorfulness | 0.89 | 0.86 | 0.89 |
 | contrast | 1.00 | 1.00 | 1.00 |
@@ -62,12 +63,12 @@ Same linear form as the shipped score; weights non-negative, sum to 1; objective
 | feature_congestion | 0.02 | 0.03 | 0.01 |
 | contour_congestion | 0.65 | 0.68 | 0.69 |
 | edge_orientation_entropy | 0.90 | 0.88 | 0.84 |
-| anisotropy | 0.81 | 0.93 | 1.15 |
+| anisotropy | 0.81 | 0.93 | 1.17 |
 | sequence | 0.60 | 0.50 | 0.55 |
 
 ## How to read this
 
 - An AUC near 0.5 means the signal cannot tell acclaimed design from a random page; near 1.0 it can.
-- The `ui` formula was written from the literature, not fitted; the `web` model was fitted to 398 human ratings of 2013-era sites. Neither has seen the acclaimed set before.
+- The `classic` formula was written from the literature, not fitted; the `web` model was fitted to 398 human ratings of 2013-era sites. Neither has seen the acclaimed set. The fitted `ui` formula (research/fit_ui.py, research/FIT.md) was fitted on the acclaimed set, so its numbers here are in-sample; read FIT.md for the cross-validated ones.
 - Fitted weights are only worth shipping if the cross-validated AUC beats the shipped weights *and* the human-rating correlation does not fall — both are printed above; the decision is made in the changelog, not here.
 - Acclaim is a designer's judgement (Awwwards, Siteinspire, brand lists); it is not the same target as crowd appeal, and the two disagree on purpose.

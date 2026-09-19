@@ -1,16 +1,16 @@
 {
  "fitted_ui_weights": {
-  "composition": 0.023,
-  "alignment": 0.002,
-  "simplicity": 0.02,
-  "whitespace": 0.273,
-  "harmony": 0.099,
-  "colorfulness": 0.563,
-  "contrast": 0.014,
-  "local": 0.005
+  "composition": 0.086,
+  "alignment": 0.009,
+  "simplicity": 0.037,
+  "whitespace": 0.245,
+  "harmony": 0.049,
+  "colorfulness": 0.45,
+  "contrast": 0.07,
+  "local": 0.054
  },
- "cv_auc_acclaimed_vs_ordinary": 0.6875,
- "shipped_cv_auc": 0.625,
+ "cv_auc_acclaimed_vs_ordinary": 0.727,
+ "shipped_cv_auc": 0.664,
  "rho_rating_fitted": -0.077,
  "rho_rating_shipped": -0.0771,
  "n": {

@@ -349,6 +349,12 @@ best are clutter and shifted blocks (100 %), a lopsided crop (83 %), clipping an
 worst is a colour cast (50 %), because the palette terms are the weakest in the formula — a
 factor proposal that fixes that has a bench to prove it on ([FACTORS.md](FACTORS.md)).
 
+One number in [`research/BENCHMARK.md`](research/BENCHMARK.md) is deliberately left ugly: against the
+ten *rendered lint fixtures* (the pages planted with 44 DOM defects), the pixel score alone reaches
+only AUC 0.55 from the acclaimed side and 0.35 from the ordinary side. Pixels do not see a missing
+alt text, a 9 px font or a pre-ticked checkbox. Render the page and the rules do — which is why the
+lint's number is the pixel score *minus* the rule penalties, never the pixel score alone.
+
 ## Use it from your editor, agent or CI
 
 **Claude Code plugin** — the skill and the MCP server in two commands:
