@@ -99,7 +99,7 @@
 
 <script src="https://cdn.jsdelivr.net/pyodide/v314.0.7/full/pyodide.js"></script>
 <script>
-const RAW = "https://raw.githubusercontent.com/solomonBoltin/beautiful/main/";
+const RAW = "https://cdn.jsdelivr.net/gh/solomonBoltin/beautiful@v0.3.0/";  // pinned to a release so the modules are always consistent
 const MODULES = ["__init__.py", "core.py", "features.py", "symmetry.py", "experimental.py", "web.py", "web_model.json"];
 const $ = (id) => document.getElementById(id);
 const status = (t, err = false) => { $("status").textContent = t; $("status").className = "status" + (err ? " err" : ""); };
