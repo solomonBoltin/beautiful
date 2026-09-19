@@ -1,7 +1,9 @@
 """Sanity checks: known orderings must hold. Run: python tests.py"""
 import os, sys
+import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from beautiful import beauty, beauty_score
+from beautiful.experimental import accent_discipline
 S = lambda p, m="ui": beauty_score(f"demo/screens/{p}.png", m)
 A = lambda p, m="art": beauty_score(f"demo/art/{p}.png", m)
 checks = [
@@ -29,6 +31,16 @@ checks += [
 w = beauty("demo/screens/pinkas_documents.png", "web")
 checks += [
     ("web mode returns a 1..100 percentile score with contributions", 1 <= w["score"] <= 100 and "contributions" in w["web"] and w["mode"] == "web"),
+]
+single_accent = np.ones((100, 100, 3), dtype=np.float32)
+single_accent[:5] = (1, 0, 0)
+two_accents = single_accent.copy()
+two_accents[5:10] = (0, 0, 1)
+checks += [
+    ("one small saturated accent is measured near its canvas share",
+     abs(accent_discipline(single_accent)["accent_share"] - 0.05) < 0.01),
+    ("a similarly sized second accent lowers accent-discipline goodness",
+     accent_discipline(two_accents)["accent_discipline"] < accent_discipline(single_accent)["accent_discipline"]),
 ]
 ok = True
 for name, cond in checks:
