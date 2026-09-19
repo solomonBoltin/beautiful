@@ -42,8 +42,9 @@ an original beats its broken twin, and the orderings a designer would insist on 
 cross-validated AUC 0.72, original over twin 74 %, 18 of 21 curated orderings. Four modes ship:
 `ui` (fitted), `classic` (literature weights, also inside every `ui` report), `art` / `logo`
 (explicit formulas), and `web` (calibrated on the crowd ratings). [The fit](research/FIT.md),
-[the benchmark](research/BENCHMARK.md) and [the calibration](research/CALIBRATION.md) are the
-most useful things in this repository.
+[the benchmark](research/BENCHMARK.md), [the calibration](research/CALIBRATION.md), [the cross-check
+against Aalto Interface Metrics](research/AIM.md) and [the survey of every public implementation](research/IMPLEMENTATIONS.md)
+are the most useful things in this repository.
 
 ## Install
 

@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- **Cross-check against AIM** (`research/AIM.md`, `research/aim_crosscheck.py`): Aalto Interface Metrics' reference implementations run on 103 of our screenshots. Luminance std, colourfulness, contour density and distinct colours agree (ρ 0.84–1.00); the congestion measures are approximations (0.56–0.71); figure-ground contrast disagrees (−0.61) and is really hard-edge strength (issue #47). `research/IMPLEMENTATIONS.md` surveys every public formula, learned predictor and rated dataset found.
 - **Corner-radius coherence (`logo` mode).** A stroke end whose cap radius is off the mark's radius
   scale (a pill-ended underline next to squared-off arch feet) is a defect of finish: up to 8 points,
   with the offending shape's box in the hint. Measured per flat shape from the bounding-box corners
