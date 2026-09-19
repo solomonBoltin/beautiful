@@ -7,7 +7,8 @@ and a baseline remembers it; the gate fails when a component's score drops.
 Scale: the crops are scored with the *classic* formula (the literature one, mode="classic"), not the
 fitted `ui` model, which was trained on whole pages. For controls (buttons, tabs, switches) the
 composition factor is the mean of horizontal mirror, vertical mirror and balance, because a control
-is expected to be symmetric on both axes; for blocks it is the classic max(mirror, balance).
+is expected to be symmetric on both axes, and the alignment factor is left out (edge alignment inside
+a 44 px box is sub-pixel noise); for blocks it is the classic max(mirror, balance) with all factors.
 """
 from __future__ import annotations
 
@@ -64,7 +65,9 @@ def score_crop(im: Image.Image, kind: str) -> dict:
     sym = r.get("raw", {}).get("symmetry", {})
     if kind == "control" and all(k in sym for k in ("horizontal_mirror", "vertical_mirror", "balance")):
         f["composition"] = round((sym["horizontal_mirror"] + sym["vertical_mirror"] + sym["balance"]) / 3, 4)
-    w = r.get("weights") or {}
+    w = dict(r.get("weights") or {})
+    if kind == "control":
+        w.pop("alignment", None)  # edge alignment inside a 44 px control is sub-pixel noise: a 4 px page shift moved it 0.75 -> 0.30
     total = sum(w.values()) or 1.0
     s = sum(w[k] * f.get(k, 0.0) for k in w) / total
     hints = list(r.get("hints", []))[:2]
