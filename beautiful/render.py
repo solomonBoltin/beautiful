@@ -125,7 +125,10 @@ class _Chromium:
         """Things the DOM knows for certain and pixels can only suspect: horizontal overflow and
         which elements stick out of the viewport."""
         try:
-            return page.evaluate("""(vw) => {
+            return page.evaluate("""(device) => {
+                // compare against the *layout* viewport: a page without <meta name=viewport> lays
+                // out at 980px on a phone and is zoomed out, which is not overflow
+                const vw = window.innerWidth || device;
                 const de = document.documentElement, b = document.body;
                 const sw = Math.max(de ? de.scrollWidth : 0, b ? b.scrollWidth : 0);
                 const out = [];
@@ -139,7 +142,8 @@ class _Chromium:
                         if (out.length >= 8) break;
                     }
                 }
-                return {viewport_width: vw, scroll_width: sw, overflow_x: Math.max(0, sw - vw), overflowing: out};
+                return {viewport_width: vw, device_width: device, scroll_width: sw, overflow_x: Math.max(0, sw - vw),
+                        no_viewport_meta: vw > device + 1, overflowing: out};
             }""", vp["width"])
         except Exception:
             return {}
@@ -206,6 +210,8 @@ def score_html(source: str, viewports: Iterable[str] = ("desktop", "tablet", "mo
             layout = getattr(chromium, "last_layout", None) or {}
             if layout:
                 r["layout"] = layout
+                if layout.get("no_viewport_meta") and vp == "mobile":
+                    r["hints"].insert(0, f"no <meta name=viewport>: the page lays out at {layout['viewport_width']}px on a phone and is shown zoomed out")
                 if layout.get("overflow_x", 0) > 2:
                     who = ", ".join(x["el"] for x in layout.get("overflowing", [])[:3]) or "an element"
                     r["hints"].insert(0, f"overflow: the page is {layout['overflow_x']}px wider than the {vp} viewport "
