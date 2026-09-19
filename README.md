@@ -163,29 +163,61 @@ formula and cost points on top of it:
 ### Rules the DOM can answer
 
 When a page is rendered, a rule pass runs inside it — the part of a beauty lint that is not
-taste, with the thresholds the guidelines agree on and the source on every finding:
+taste, with the thresholds the guidelines agree on and the source on every finding. 42 rules:
 
-| rule | threshold | source |
-|---|---|---|
-| `text-contrast` | text under 4.5:1 against its background (3:1 for large text) — **error** | WCAG 2.2 SC 1.4.3 |
-| `font-size` | text under 12 px; error when it is most of the page's text | Lighthouse *legible font sizes* |
-| `font-size-mobile` | body text under 16 px on a phone | Apple HIG, GOV.UK, Material |
-| `touch-target` | interactive element under 24 × 24 px — **error** (inline text links and unstyled native controls exempt, as in the standard) | WCAG 2.2 SC 2.5.8 |
-| `touch-target-mobile` | under 44 × 44 px on a phone | Apple HIG 44 pt, Material 48 dp |
-| `line-length` | outside ~35–100 characters per line (screen studies support 45–95; guidelines say 60–75) | Dyson & Haselgrove 2001, Shaikh & Chaparro 2005, Bringhurst, GOV.UK |
-| `line-height` | body text line-height under 1.2 | WCAG 1.4.12, Butterick |
-| `text-clipped` | text wider than its box with `nowrap` + `overflow: hidden` and no ellipsis — **error** | — |
-| `image-distortion` | an `<img>` drawn at a different aspect ratio than its source — **error** | — |
-| `img-alt` | images without `alt` | WCAG 2.2 SC 1.1.1 |
-| `viewport-meta` | no `<meta name="viewport">` — **error** on the phone render | Lighthouse, MDN |
-| `heading-order` | no `h1`, or a skipped heading level | WCAG 1.3.1 |
-| `type-noise` | more than 3 font families or more than 8 distinct font sizes | Refactoring UI, Material type scale |
+<!-- table:rules -->
+| rule | level | what | source |
+|---|---|---|---|
+| `text-contrast` | error | text under 4.5:1 (3:1 large) is unreadable for low-vision and in glare | WCAG 2.2 SC 1.4.3 |
+| `font-size` | warning | text under 12 px needs zoom | Lighthouse legible font sizes; Google Mobile-Friendly |
+| `font-size-mobile` | warning | body text under 16 px on a phone forces zoom and iOS zooms inputs | Apple HIG 17 pt; GOV.UK 16 px; Material 16 sp |
+| `touch-target` | error | targets under 24 × 24 px are missed | WCAG 2.2 SC 2.5.8 |
+| `touch-target-mobile` | warning | thumb targets need ~9 mm | Apple HIG 44 pt; Material 48 dp |
+| `target-spacing` | warning | targets closer than 8 px are mis-tapped | Material 8 dp; Lighthouse tap-targets; WCAG 2.5.8 clearance |
+| `line-length` | warning | screen studies support 45–95 characters per line | Dyson & Haselgrove 2001; Shaikh & Chaparro 2005; Bringhurst; GOV.UK |
+| `line-height` | warning | body text under 1.2 line-height is cramped | WCAG 1.4.12; Butterick |
+| `text-clipped` | error | text cut off by its box loses words | Xcode textClipped; ATF; UIS-Hunter |
+| `text-overlap` | error | two text blocks drawn over each other are unreadable | OwlEye / Nighthawk display-issue classes |
+| `image-distortion` | error | a stretched image reads as broken | Lighthouse image-aspect-ratio |
+| `image-broken` | error | a broken placeholder is the most visible defect on a page | OwlEye missing-image class; Impeccable broken-image |
+| `img-alt` | warning | images without alt are invisible to screen readers (55 % of pages fail) | WCAG 2.2 SC 1.1.1 |
+| `viewport-meta` | error | without a viewport meta the page lays out at 980 px on phones and is zoomed out | Lighthouse viewport; MDN |
+| `heading-order` | warning | skipped levels and a missing h1 break the outline assistive tech navigates by | WCAG 1.3.1; axe heading-order |
+| `type-noise` | warning | more than 2–3 families or 8 sizes means no type system | Refactoring UI; Material type scale; Ant (3–5 sizes) |
+| `empty-control` | error | a link or button with no accessible name cannot be used by assistive tech | WAVE link_empty / button_empty; WebAIM Million (45 % / 30 % of pages) |
+| `generic-link` | warning | "click here" / "read more" say nothing out of context | WAVE link_suspicious; jsx-a11y anchor-ambiguous-text; Lighthouse link-text |
+| `redundant-link` | warning | adjacent links to the same URL are read twice | WAVE link_redundant |
+| `justified-text` | warning | justified text on the web produces rivers of white space | WCAG 1.4.8; WAVE text_justified |
+| `underlined-text` | warning | underlined non-link text looks like a link | WAVE underline |
+| `all-caps-body` | warning | long all-caps runs lose word shapes and read slowly | Butterick (caps only under one line); HansCo |
+| `centered-body` | warning | centred paragraphs longer than 2–3 lines lose the reading axis | Refactoring UI; HansCo |
+| `contrast-polarity` | warning | light-on-dark body text under 16 px is read less accurately | Piepenbrock, Mayr, Mund & Buchner 2013/2014 (N = 169) |
+| `near-duplicate-colours` | warning | several colours within a just-noticeable difference of each other mean tokens were not used | Mahy 1994 (ΔE ≈ 2.3 JND); Refactoring UI; the "inconsistent greys" tell |
+| `too-many-hues` | warning | more than seven distinct saturated hues on one page have no hierarchy | Healey 1996 (~7 hues pre-attentively); Ant / Refactoring UI palette limits |
+| `pure-black-white` | note | #000 on #fff is harsh | Supercharge; Hobday rule 1; Hallmark gate 7 |
+| `edge-margin` | warning | text touching the viewport edge looks cramped and may be cut by device bezels | Apple 16/20 pt; Material 16/24 dp screen-edge margins |
+| `false-floor` | warning | when the first screenful ends on a clean edge with nothing peeking below, users think the page is over | NN/g Illusion of Completeness; CXL false bottom |
+| `hidden-nav-desktop` | warning | a hamburger at desktop widths halves navigation use | Pernice & Budiu 2016 (N = 179): −20 % discoverability, +39 % time |
+| `multiple-primaries` | warning | more than one primary button per view means nothing is primary | Balsamiq; Dannaway; KlientBoost; Von Restorff |
+| `consent-asymmetry` | warning | a filled Accept next to a plain or link-styled Reject steers the choice | deceptive.design; EDPB cookie-banner taskforce; FTC; DSA Art. 25 |
+| `prechecked-optin` | warning | a pre-ticked marketing box is consent nobody gave | deceptive.design preselection; DSA Art. 25 |
+| `urgency-text` | note | countdowns, "only N left" and "N people viewing" are the most-cited deceptive patterns | deceptive.design fake urgency / scarcity / social proof; FTC |
+| `confirmshaming` | note | a decline option phrased as self-insult manipulates | deceptive.design; Mathur et al. |
+| `placeholder-residue` | error | lorem ipsum, "undefined", "null", "NaN" or "[object Object]" on a page means it is unfinished or broken | Mobile-UI-Repair null-value class; AI-slop lorem-ipsum tell |
+| `focus-removed` | warning | outline: none without a replacement leaves keyboard users lost | WCAG 2.4.7; stylelint-a11y no-outline-none; Vercel WIG |
+| `motion` | warning | autoplaying media and looping animation without a reduced-motion alternative trigger vestibular symptoms (35 % of adults over 40) | WCAG 2.3.3 / C39; axe no-autoplay-audio; Vercel WIG |
+| `distracting-element` | error | blink and marquee are obsolete and cannot be paused | axe blink / marquee |
+| `spacing-scale` | warning | gaps off a 4/8 px scale and many distinct gap values read as arbitrary | 8-pt grid (10+ design systems); RL-paper D1 spacing consistency |
+| `ai-look` | note | indigo→cyan gradients, Inter as display, three identical icon cards, glass panels and nested cards are the tells readers use to spot generated pages | 8 sources 2025–2026 (925studios, mania.design, dev.to, Hallmark, Impeccable, taste-skill, ux-skill, Anthropic cookbook) |
+| `thumb-reach` | note | a primary control in the top-far corner of a phone is out of one-handed reach | Bergstrom-Lehtovirta & Oulasvirta 2014; Hoober 2013 (49 % one-thumb) |
+<!-- /table:rules -->
 
-Errors cost 3 points each (capped at 12); warnings are free. `report["rules"]` has every
-finding with the offending elements; the CLI, SARIF and the PR comment show them. The fixtures
-in [`demo/lint/`](demo/lint/) are CI's proof that every planted defect is found and the clean
-page is left alone. These rules are the first batch — the
-[design-lint survey](research/DESIGN-LINTS.md) lists what comes next.
+Errors cost 3 points each (capped at 12); warnings and notes are free — a note is a tell, never
+a penalty. Every finding carries `source`, `why` and `fix` plus the offending elements, in the
+record format the agent-era linters use; the CLI, SARIF and the PR comment show them. The
+fixtures in [`demo/lint/`](demo/lint/) are CI's proof that every planted defect is found and the
+clean page is left alone. The [design-lint survey](research/DESIGN-LINTS.md) is where each rule
+came from and what is still open.
 
 ## Famous sites, scored
 

@@ -86,7 +86,8 @@ class _Chromium:
         self._pw = sync_playwright().start()
         self.browser = self._pw.chromium.launch()
 
-    def render(self, source: str, viewport: str, wait_ms: int = 300, full_page: bool = False) -> Image.Image:
+    def render(self, source: str, viewport: str, wait_ms: int = 300, full_page: bool = False,
+               timeout_ms: int = 45000) -> Image.Image:
         vp = VIEWPORTS[viewport]
         ctx = self.browser.new_context(
             viewport={"width": vp["width"], "height": vp["height"]}, device_scale_factor=1,
@@ -99,9 +100,9 @@ class _Chromium:
         kind = _kind(source)
         try:
             if kind == "url":
-                page.goto(source, wait_until="networkidle", timeout=45000)
+                page.goto(source, wait_until="networkidle", timeout=timeout_ms)
             elif kind == "file":
-                page.goto("file://" + os.path.abspath(source), wait_until="networkidle", timeout=45000)
+                page.goto("file://" + os.path.abspath(source), wait_until="networkidle", timeout=timeout_ms)
             else:
                 page.set_content(source, wait_until="networkidle")
         except Exception:

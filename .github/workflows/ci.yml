@@ -88,10 +88,24 @@ jobs:
           import json
           r = list(json.load(open("bad.json")).values())[0]
           found = {f["rule"] for f in r["rules"]}
-          need = {"text-contrast", "font-size", "line-height", "text-clipped", "touch-target", "image-distortion", "img-alt", "heading-order", "font-size-mobile"}
+          need = {"text-contrast", "font-size", "line-height", "text-clipped", "touch-target", "image-distortion", "img-alt", "heading-order", "font-size-mobile",
+                  "text-overlap", "image-broken", "empty-control", "generic-link", "redundant-link", "justified-text", "underlined-text", "all-caps-body", "centered-body",
+                  "contrast-polarity", "near-duplicate-colours", "edge-margin", "multiple-primaries", "consent-asymmetry", "prechecked-optin", "urgency-text", "confirmshaming",
+                  "placeholder-residue", "focus-removed", "motion", "spacing-scale", "ai-look", "target-spacing", "touch-target-mobile"}
           assert need <= found, need - found
           assert r["penalties"].get("rules"), r["penalties"]
-          print("bad.html:", sorted(found))
+          print("bad.html:", len(found), "rules")
+          PY
+          beautiful demo/lint/floor.html --viewports desktop,mobile --json > floor.json
+          python - <<'PY'
+          import json
+          d = json.load(open("floor.json"))
+          desk = {f["rule"] for f in d["demo/lint/floor.html@desktop"]["rules"]}
+          mob = {f["rule"] for f in d["demo/lint/floor.html@mobile"]["rules"]}
+          need_d = {"false-floor", "hidden-nav-desktop", "distracting-element", "too-many-hues"}
+          assert need_d <= desk, need_d - desk
+          assert "thumb-reach" in mob, mob
+          print("floor.html:", sorted(desk | mob))
           PY
           beautiful demo/lint/good.html --viewports mobile --json > good.json
           python - <<'PY'
