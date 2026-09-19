@@ -37,7 +37,14 @@ jobs:
       - name: MCP server smoke test
         run: |
           printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}' '{"jsonrpc":"2.0","id":2,"method":"tools/list"}' '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"beauty_score","arguments":{"image":"demo/screens/pinkas_documents.png"}}}' | beautiful-mcp > mcp.out
-          grep -q '"beauty_compare"' mcp.out && grep -q '"score": 90' mcp.out
+          python - <<'PY'
+          import json
+          lines = [json.loads(l) for l in open("mcp.out", encoding="utf-8") if l.strip()]
+          assert any(t["name"] == "beauty_compare" for l in lines if l.get("id") == 2 for t in l["result"]["tools"])
+          call = next(l for l in lines if l.get("id") == 3)
+          assert json.loads(call["result"]["content"][0]["text"])["score"] == 90, call
+          print("mcp ok")
+          PY
         shell: bash
       - name: Action scorer smoke test
         env:
