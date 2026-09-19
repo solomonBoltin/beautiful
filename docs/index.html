@@ -142,10 +142,10 @@ async function score(bytes, name) {
 function render(r) {
   const n = $("num"); n.textContent = r.score;
   n.className = "n " + (r.score >= 80 ? "good" : r.score >= 60 ? "mid" : "bad");
-  $("modeLabel").textContent = r.mode;
-  const w = r.weights, f = r.factors;
-  const keys = Object.keys(w).sort((a, b) => w[b] - w[a]);
-  $("factors").innerHTML = keys.map(k => `<div class="row"><span class="k" title="weight ${w[k]}">${k}</span><div class="bar"><i style="width:${Math.round(f[k] * 100)}%"></i></div><span class="v">${f[k].toFixed(2)}</span></div>`).join("");
+  $("modeLabel").textContent = r.mode === "web" ? "web · percentile vs 398 human-rated sites (advisory)" : r.mode;
+  const w = r.weights || {}, f = r.factors;
+  const keys = Object.keys(f).sort((a, b) => (w[b] || 0) - (w[a] || 0));
+  $("factors").innerHTML = keys.map(k => `<div class="row"><span class="k" title="weight ${w[k] ?? "n/a"}">${k}</span><div class="bar"><i style="width:${Math.round(f[k] * 100)}%"></i></div><span class="v">${f[k].toFixed(2)}</span></div>`).join("");
   $("hints").innerHTML = r.hints.map(h => `<li>${h.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]))}</li>`).join("");
 }
 
