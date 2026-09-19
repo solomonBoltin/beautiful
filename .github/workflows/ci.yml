@@ -46,6 +46,18 @@ jobs:
           print("mcp ok")
           PY
         shell: bash
+      - name: Lint formats (directory input, github annotations, sarif, baseline)
+        run: |
+          beautiful demo/art --mode=logo | head -3
+          beautiful --mode=web --json demo/screens/pinkas_documents.png | python -c "import json,sys; d=json.load(sys.stdin); assert d['mode']=='web' and 1<=d['score']<=100, d"
+          beautiful --format github demo/screens/github_login_unstyled.png | grep -q '^::warning file=demo/screens/github_login_unstyled.png'
+          beautiful --format sarif demo/screens/pinkas_dialog.png > out.sarif
+          python -c "import json; s=json.load(open('out.sarif')); assert s['version']=='2.1.0' and s['runs'][0]['results'], 'sarif'"
+          beautiful --save-baseline base.json demo/screens/pinkas_dialog.png > /dev/null
+          beautiful --baseline base.json demo/screens/pinkas_dialog.png > /dev/null
+          python -c "import json; b=json.load(open('base.json')); b['demo/screens/pinkas_dialog.png']=99; json.dump(b,open('base.json','w'))"
+          if beautiful --baseline base.json demo/screens/pinkas_dialog.png > /dev/null 2>&1; then echo "regression not detected"; exit 1; fi
+        shell: bash
       - name: Action scorer smoke test
         env:
           INPUT_IMAGES: "demo/screens/pinkas_*.png"

@@ -1,7 +1,7 @@
 <h1 align="center">beautiful</h1>
 
-<p align="center"><strong>A mathematical beauty score, 1–100, for any screenshot, logo or artwork.</strong><br>
-Computed from pixels with explicit, inspectable formulas. No model, no dataset, no opinion you can't read.</p>
+<p align="center"><strong>A mathematical beauty score, 1–100, for any screenshot, logo or artwork — and a lint for the design it shows.</strong><br>
+Explicit, inspectable formulas from 90 years of aesthetics research; measured against human ratings; every number comes with its reasons.</p>
 
 <p align="center">
   <a href="https://solomonboltin.github.io/beautiful/"><img alt="try it in your browser" src="https://img.shields.io/badge/try%20it-in%20your%20browser-7c8cff"></a>
@@ -10,6 +10,7 @@ Computed from pixels with explicit, inspectable formulas. No model, no dataset, 
   <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-2ea44f"></a>
   <img alt="python" src="https://img.shields.io/badge/python-3.9%E2%80%933.13-blue">
   <img alt="weights" src="https://img.shields.io/badge/model%20weights-none-success">
+  <a href="research/CALIBRATION.md"><img alt="calibrated" src="https://img.shields.io/badge/calibrated%20on-398%20rated%20sites-orange"></a>
 </p>
 
 <p align="center"><img src="demo/loop.gif" width="720" alt="A sign-in card whose button walks back to centre while the beauty score climbs from 54 to 91"></p>
@@ -29,6 +30,13 @@ experimental aesthetics and HCI research measured each of these and found the ra
 prefer. `beautiful` turns those findings into one formula: every term is a pixel measurement mapped
 through a documented target curve, weighted, and summed. You can read every line of it, argue with
 it, and improve it.
+
+**And it is measured, not asserted.** The same measurements were fitted to 398 website
+screenshots with human appeal ratings and tested on 100 more that were ranked by pairwise votes.
+The literature-shaped `ui` formula turned out **not** to track what those raters preferred; the
+fitted model does, out of sample. Both ship: `ui` / `art` / `logo` are the transparent formulas,
+`web` is the calibrated one. [The numbers are here](research/CALIBRATION.md), and they are the
+most useful thing in this repository.
 
 ## Install
 
@@ -58,8 +66,35 @@ beautiful --min 70 screenshot.png            # exit 1 below 70 — a CI gate
   ->  alignment (0.26): snap element edges to a shared column/row grid
 ```
 
-Modes: **`ui`** (screens, pages, apps), **`art`** (paintings, photos, posters), **`logo`** (marks, icons).
-Input can be a path, a `PIL.Image`, or a numpy array.
+Modes: **`ui`** (screens, pages, apps), **`art`** (paintings, photos, posters), **`logo`** (marks, icons) —
+the explicit formulas — and **`web`**, the model calibrated on human ratings of websites (its score
+is a percentile: web 70 = above 70 % of the 398 rated sites). Input can be a path, a `PIL.Image`,
+or a numpy array.
+
+## Beauty lint
+
+```bash
+beautiful shots/                                   # every image in a folder (recursive), worst obvious at a glance
+beautiful --min 70 shots/                          # exit 1 below 70
+beautiful --save-baseline .beautiful.json shots/   # remember today's scores
+beautiful --baseline .beautiful.json shots/        # exit 1 on any regression > 3 points
+beautiful --format github shots/                   # ::warning annotations on the image files in a workflow
+beautiful --format sarif shots/ > beauty.sarif     # GitHub code scanning (upload-sarif)
+```
+
+As a **pre-commit** hook:
+
+```yaml
+repos:
+  - repo: https://github.com/solomonBoltin/beautiful
+    rev: v0.3.0
+    hooks:
+      - id: beautiful
+        args: ["--min", "60"]
+        files: ^design/screens/.*\.png$
+```
+
+Exit codes: 0 fine · 1 below `--min` or a regression · 2 an input could not be read.
 
 ## Famous sites, scored
 
@@ -69,29 +104,31 @@ Four captures came back blank or blocked and were dropped. Full table with every
 
 ![Famous sites scored](demo/famous_sites.png)
 
-| beauty | site | what the formula sees |
-|---:|---|---|
-| **85** | apple.com | one centred object, symmetric, calm palette, lots of air |
-| **66** | news.ycombinator.com | the best **alignment** in the set (0.70, one column grid), but no composition to speak of |
-| **64** | notion.com | centred hero, but only 31 % background and many container edges |
-| **61** | google.com | perfectly simple, yet the logo/search box sit high: 9 % white space in the formula's eyes |
-| **60** | craigslist.org | balanced and airy; the densest edge map in the set (**simplicity** 0.11) |
-| **54** | github.com | left-weighted hero, low grid quality |
-| **39** | tailwindcss.com | strong left anchoring (**composition** 0.13) |
-| **30** | vercel.com | a near-empty viewport with one text block bottom-left |
-| **26** | stripe.com | the diagonal gradient wipes out symmetry and sends colourfulness off the chart |
-| **16** | amazon.com | maximum edge density, 10 % background, 0.07 colour restraint |
+| `ui` | `web` | site | what the `ui` formula sees |
+|---:|---:|---|---|
+| **85** | 79 | apple.com | one centred object, symmetric, calm palette, lots of air |
+| **66** | 1 | news.ycombinator.com | the best **alignment** in the set (0.70, one column grid), but no composition to speak of |
+| **64** | 100 | notion.com | centred hero, but only 31 % background and many container edges |
+| **61** | 16 | google.com | perfectly simple, yet the logo/search box sit high: 9 % white space in the formula's eyes |
+| **60** | 58 | craigslist.org | balanced and airy; the densest edge map in the set (**simplicity** 0.11) |
+| **54** | 70 | github.com | left-weighted hero, low grid quality |
+| **39** | 90 | tailwindcss.com | strong left anchoring (**composition** 0.13) |
+| **30** | 62 | vercel.com | a near-empty viewport with one text block bottom-left |
+| **26** | 84 | stripe.com | the diagonal gradient wipes out symmetry and sends colourfulness off the chart |
+| **16** | 41 | amazon.com | maximum edge density, 10 % background, 0.07 colour restraint |
 
-The ranking is not a ranking of good websites. It is a ranking of *form in a single viewport*:
-Apple's splash wins because the formula measures composition, not conversion. Craigslist beats
-Stripe because Craigslist is symmetric and Stripe's hero is a diagonal. That is exactly the point —
-the number is explainable, and every disagreement you have with it is a factor waiting to be
-proposed (see below).
+The `ui` column is not a ranking of good websites. It is a ranking of *form in a single viewport*:
+Apple's splash wins because the formula measures composition, not conversion; Craigslist beats
+Stripe because Craigslist is symmetric and Stripe's hero is a diagonal. The `web` column is what a
+model fitted to human ratings says (Notion 100, Figma 93, Stripe 84 … Hacker News 1): raters
+prefer rich, image-led, varied pages, and punish text-only ones. The two columns disagreeing is
+the point — one is a readable rule, the other is the crowd, and the gap between them is where the
+missing factors are (see below).
 
 ## Use it from your editor, agent or CI
 
-**MCP server** — two tools, `beauty_score` and `beauty_compare`, for Claude Code, Cursor, Windsurf
-and any MCP client. Zero extra dependencies.
+**MCP server** — three tools, `beauty_score`, `beauty_compare` and `beauty_lint`, for Claude Code,
+Cursor, Windsurf and any MCP client. Zero extra dependencies.
 
 ```bash
 claude mcp add beautiful -- beautiful-mcp
@@ -107,10 +144,11 @@ runs the render → score → read hints → edit loop after any UI change.
 PR comment:
 
 ```yaml
-- uses: solomonBoltin/beautiful@v0.2.0
+- uses: solomonBoltin/beautiful@v0.3.0
   with:
     images: "e2e/screens/*.png"
     min: 60          # optional: fail the job below this
+    sarif: beauty.sarif   # optional: then upload it with github/codeql-action/upload-sarif
 ```
 
 **Any agent** — one line in `AGENTS.md` / `.cursorrules`:
@@ -162,18 +200,49 @@ What the numbers say, and where they are honest about their limits:
 
 | beauty (art) | beauty (logo) | image | composition | harmony | simplicity | fractal D | Fourier α | thirds |
 |---:|---:|---|---:|---:|---:|---:|---:|---:|
-| **85** | 90 | radial mandala | 0.97 | 0.87 | 0.81 | 1.64 | −2.43 | 0.06 |
-| **82** | 96 | shield logo | 0.93 | 0.99 | 0.25 | 1.23 | −2.78 | 0.41 |
-| **69** | 96 | checkerboard | 0.97 | 1.00 | 0.82 | 1.81 | −2.16 | 0.00 |
-| **67** | 95 | bilateral leaf | 0.92 | 0.97 | 0.21 | 1.11 | −2.69 | 0.55 |
-| **48** | 18 | random coloured blobs | 0.06 | 0.57 | 0.35 | 1.40 | −2.73 | 0.26 |
-| **47** | 54 | diagonal composition | 0.02 | 0.92 | 0.22 | 1.15 | −2.78 | 0.26 |
-| **42** | 37 | abstract splashes | 0.05 | 0.92 | 0.30 | 1.32 | −2.72 | 0.15 |
-| **5** | 17 | random noise | 0.05 | 0.38 | 0.00 | 2.00 | 0.01 | 0.00 |
+| **85** | – | 90 | radial mandala | 0.97 | 0.87 | 0.81 | 1.64 | −2.43 | 0.06 |
+| **82** | – | 96 | shield logo | 0.93 | 0.99 | 0.25 | 1.23 | −2.78 | 0.41 |
+| **69** | – | 96 | checkerboard | 0.97 | 1.00 | 0.82 | 1.81 | −2.16 | 0.00 |
+| **67** | – | 95 | bilateral leaf | 0.92 | 0.97 | 0.21 | 1.11 | −2.69 | 0.55 |
+| **48** | – | 18 | random coloured blobs | 0.06 | 0.57 | 0.35 | 1.40 | −2.73 | 0.26 |
+| **47** | – | 54 | diagonal composition | 0.02 | 0.92 | 0.22 | 1.15 | −2.78 | 0.26 |
+| **42** | – | 37 | abstract splashes | 0.05 | 0.92 | 0.30 | 1.32 | −2.72 | 0.15 |
+| **5** | – | 17 | random noise | 0.05 | 0.38 | 0.00 | 2.00 | 0.01 | 0.00 |
 
 The modes disagree on purpose: the checkerboard is a fine *logo* (96) and a dull *artwork* (69) — its
 fractal dimension (1.81) is far from the 1.3–1.5 band people prefer, and it has no focal point near a
 rule-of-thirds power point.
+
+---
+
+## Evidence and limits
+
+[research/SURVEY.md](research/SURVEY.md) is the landscape survey the formula is held to, and
+[research/CALIBRATION.md](research/CALIBRATION.md) is the measurement. In short:
+
+| factor | evidence for UIs | in `beautiful` |
+|---|---|---|
+| visual complexity / clutter (inverted-U) | strong, most replicated (Reinecke 2013, Miniukovich 2015, Tuch 2012, Rosenholtz 2007) | `simplicity`; feature congestion and contour congestion measured, unweighted |
+| colourfulness (inverted-U) | strong (Reinecke 2013) | `colorfulness` (Hasler–Süsstrunk) |
+| figure–ground contrast | supported (Miniukovich 2015; Reber 2004) | `contrast` |
+| symmetry & balance | robust, modest effect (Bauerly & Liu; Altaboli & Lin) | `composition` |
+| grid quality, white space | consistently positive (Miniukovich 2015) | `alignment`, `whitespace` |
+| Fourier slope ≈ −2, fractal D 1.3–1.5 | strong for art and photos | `art` mode |
+| golden ratio, Birkhoff O/C | **no reliable support** (Stieger & Swami 2015) | deliberately absent |
+
+**What the calibration found.** On 398 website screenshots with mean human appeal ratings
+(Reinecke & Gajos 2014, via the Calista mirror) the shipped `ui` score has Spearman ρ ≈ 0.00
+with the ratings, and on Calista's 100 pairwise-ranked pages ρ ≈ −0.39: raters preferred the rich,
+dense, image-led pages the formula marks down for white space and contrast. A ridge model on the
+same measurements (with the inverted-U terms the literature asks for and the experimental
+measurements) reaches cross-validated ρ 0.51 and ρ 0.41 on the pages it never saw. That model is
+`mode="web"`. By the survey's own rule it is *advisory* (ρ ≥ 0.7 is the bar to trust); hand-crafted
+metric sets in the literature explain at most ~49 % of rating variance, and learned models reach
+r ≈ 0.85 — the rest is content, brand, prototypicality and taste, which pixels cannot see.
+
+So: use `ui` when you want a rule you can read and act on (the hints name the fix), `web` when
+you want a guess at how a crowd would rate a website, and neither as a truth. Reproduce every
+number with `python research/calibrate.py` against a clone of the dataset.
 
 ---
 
@@ -275,7 +344,7 @@ optimisation loop, a learned model for a final sanity check.
 
 - `tests.py` — five ordering invariants (rebalanced > original by ≥ 15; unstyled < 45; centred dialog ≫ asymmetric sample; mandala > splashes > noise; logo shield ≫ diagonal). CI runs them on Linux, macOS and Windows, Python 3.9–3.13.
 - The composition module alone was validated on a labelled symmetry set (perfect / medium / asymmetric tiers, Spearman ρ = 0.96 against tier) and a synthetic gallery (ρ = 0.92 against an a-priori ranking).
-- Not validated against human appeal ratings. Doing that properly means Reinecke & Gajos's 398-page dataset or Calista's pairwise set, then fitting the weights — the obvious next step, and the honest gap between this and Webthetics-class numbers. **This is the single most valuable pull request the project can receive.**
+- Validated against human appeal ratings in [research/CALIBRATION.md](research/CALIBRATION.md): the `ui` formula does not track them (ρ ≈ 0.00 / −0.39); the fitted `web` model does, modestly (ρ 0.51 cross-validated, 0.41 out of sample). Raising that number is the most valuable pull request the project can receive.
 
 ## Limitations
 
@@ -291,12 +360,15 @@ beautiful/
   core.py          beauty(), beauty_score(), WEIGHTS, target curves, hints
   features.py      colourfulness, harmony, complexity, whitespace, alignment, contrast, fractal, fourier, thirds
   symmetry.py      composition: mirror / rotational / local symmetry, balance (ui + generic modes)
-  __main__.py      the `beautiful` CLI
-  mcp_server.py    the `beautiful-mcp` MCP server (dependency-free)
-action.yml         the GitHub Action (+ .github/scripts/)
+  experimental.py  feature congestion, contour congestion, edge-orientation entropy, anisotropy, sequence (measured, unweighted)
+  web.py           mode="web": the model calibrated on human ratings; web_model.json is written by research/calibrate.py
+  __main__.py      the `beautiful` CLI / lint (dirs, globs, --format github|sarif, baselines)
+  mcp_server.py    the `beautiful-mcp` MCP server (beauty_score, beauty_compare, beauty_lint; dependency-free)
+action.yml         the GitHub Action (+ .github/scripts/); .pre-commit-hooks.yaml
+research/          SURVEY.md (the evidence), calibrate.py + CALIBRATION.md (the measurement)
 docs/index.html    the browser demo (Pyodide)
 skills/beautiful/  a drop-in skill for Claude Code and similar agents
-FACTORS.md         the factor wishlist — start here to contribute
+FACTORS.md         the factor wishlist — start here to contribute; CHANGELOG.md
 demo/
   screens/  art/   the samples scored above          famous.py  results_famous.md  famous_sites.png
   results_ui.md    results_art.md   results_ui.json  ui_gallery.png  make_gallery.py  make_loop_gif.py
@@ -306,13 +378,13 @@ tests.py
 
 ## Roadmap
 
-- [ ] Fit the weights to a public human-rating dataset and report held-out correlation
+- [x] Fit the weights to a public human-rating dataset and report held-out correlation → `web` mode
+- [ ] Get `web` past ρ 0.7: Subband Entropy clutter, O'Donovan colour harmony, element segmentation for the Ngo box metrics, PHOG self-similarity ([issues](https://github.com/solomonBoltin/beautiful/issues?q=label%3Aresearch))
+- [ ] Cross-check against AIM and a learned model (NIMA / UIClip) on the same images
 - [ ] A JavaScript/TypeScript port for the browser and Playwright (no Pyodide)
 - [ ] More factors — see [FACTORS.md](FACTORS.md)
-- [x] MCP server
-- [x] GitHub Action
-- [x] Browser demo
-- [x] PyPI
+- [x] Beauty lint: directories, GitHub annotations, SARIF, baselines, pre-commit
+- [x] MCP server · GitHub Action · Browser demo · PyPI
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Counterexamples and factor ideas are the most useful things
 you can send.

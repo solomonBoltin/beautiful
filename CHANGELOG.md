@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.3.0 — 2026-09-19
+
+- **Beauty lint.** The CLI takes files, directories and globs; `--format github` emits workflow
+  annotations on the image files, `--format sarif` feeds GitHub code scanning, `--save-baseline` /
+  `--baseline` gate on regressions, exit codes 0 / 1 / 2. A `.pre-commit-hooks.yaml` and a
+  `beauty_lint` MCP tool. The Action annotates images and can write SARIF.
+- **Calibrated against human ratings.** `research/calibrate.py` fits the score to the Reinecke &
+  Gajos website ratings (Calista mirror) and tests on Calista's pairwise set; results in
+  `research/CALIBRATION.md`.
+- **Experimental measurements** (reported, not yet weighted): Rosenholtz feature congestion,
+  Miniukovich contour congestion, Redies edge-orientation entropy and anisotropy, Ngo sequence.
+- **Evidence base.** `research/SURVEY.md` — the landscape survey the formula is held to; FACTORS.md
+  now says what the evidence rules out (golden ratio, Birkhoff O/C).
+
 ## 0.2.0 — 2026-09-19
 
 - **MCP server**: `beautiful-mcp` exposes `beauty_score` and `beauty_compare` to any MCP client

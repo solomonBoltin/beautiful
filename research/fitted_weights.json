@@ -1,0 +1,18 @@
+{
+ "fitted_ui_weights": {
+  "composition": 0.4444,
+  "alignment": 0.0,
+  "simplicity": 0.0,
+  "whitespace": 0.0,
+  "harmony": 0.0,
+  "colorfulness": 0.1832,
+  "contrast": 0.0,
+  "local": 0.3725
+ },
+ "cv_rho_rating": 0.0921,
+ "transfer_rho_comparison": -0.1988,
+ "shipped_rho_rating": -0.0039,
+ "shipped_rho_comparison": -0.3907,
+ "n_rating": 398,
+ "n_comparison": 100
+}

@@ -57,8 +57,17 @@ matters (empty state, dialog open, mobile width) separately.
 - Trade legibility for symmetry. Text is texture to this metric; keep type readable.
 - Treat one point as signal. Differences under ~3 points are noise; a factor moving by 0.2 is not.
 
-## As a gate
+## As a lint
 
 ```bash
-beautiful --mode=ui shot.png --min 70   # exit 1 below 70 — usable in CI or a pre-commit hook
+beautiful shots/                          # every image in a folder, worst visible at a glance
+beautiful --min 70 shots/                 # exit 1 below 70
+beautiful --save-baseline .beautiful.json shots/   # remember today's scores
+beautiful --baseline .beautiful.json shots/        # exit 1 on any regression > 3 points
+beautiful --format github shots/          # annotations in a GitHub workflow
+beautiful --format sarif shots/ > b.sarif # GitHub code scanning
 ```
+
+Read `raw["experimental"]` too (feature congestion, contour congestion, edge-orientation
+entropy, sequence): they are measured but not yet weighted, and they often name the problem
+before the score moves.

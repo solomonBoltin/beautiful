@@ -14,6 +14,7 @@ Tools
 -----
     beauty_score   image path (+ mode) -> the 1-100 number, factors, hints
     beauty_compare two image paths     -> which is more beautiful and by how much, factor by factor
+    beauty_lint    files / dirs / globs -> every image scored, worst first, with lint findings
 
 The protocol subset implemented here (initialize, ping, tools/list, tools/call, notifications)
 is the whole of what a tool-only server needs, so the package keeps its "numpy, pillow, scipy
@@ -25,7 +26,7 @@ import json
 import sys
 
 from . import __version__
-from .core import WEIGHTS, beauty
+from .core import MODES, beauty
 
 PROTOCOL_VERSION = "2024-11-05"
 
@@ -44,7 +45,7 @@ TOOLS = [
                 "image": {"type": "string", "description": "Path to a PNG/JPEG/WebP file"},
                 "mode": {
                     "type": "string",
-                    "enum": list(WEIGHTS),
+                    "enum": MODES,
                     "default": "ui",
                     "description": "ui = screens and pages, art = paintings/photos/posters, logo = marks and icons",
                 },
@@ -63,9 +64,26 @@ TOOLS = [
             "properties": {
                 "before": {"type": "string", "description": "Path to the earlier image"},
                 "after": {"type": "string", "description": "Path to the later image"},
-                "mode": {"type": "string", "enum": list(WEIGHTS), "default": "ui"},
+                "mode": {"type": "string", "enum": MODES, "default": "ui"},
             },
             "required": ["before", "after"],
+        },
+    },
+    {
+        "name": "beauty_lint",
+        "description": (
+            "Lint a set of images (files, directories, globs): score each, list them worst first with the "
+            "factor that costs the most and what to change, and flag any below a minimum. Use it on a "
+            "screenshot folder after a UI change, or on a design export before hand-off."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "paths": {"type": "array", "items": {"type": "string"}, "description": "Files, directories or globs"},
+                "mode": {"type": "string", "enum": MODES, "default": "ui"},
+                "min": {"type": "integer", "description": "Flag images scoring below this"},
+            },
+            "required": ["paths"],
         },
     },
 ]
@@ -90,7 +108,22 @@ def _compare(args: dict) -> dict:
     }
 
 
-HANDLERS = {"beauty_score": _score, "beauty_compare": _compare}
+def _lint(args: dict) -> dict:
+    from .__main__ import expand, findings
+    mode, min_score = args.get("mode", "ui"), args.get("min")
+    files = expand(list(args["paths"]))
+    rows = []
+    for path in files:
+        r = beauty(path, mode)
+        rows.append({"path": path, "score": r["score"],
+                     "below_min": bool(min_score is not None and r["score"] < min_score),
+                     "findings": [f["message"] for f in findings(path, r, min_score) if f["rule"] != "score"]})
+    rows.sort(key=lambda x: x["score"])
+    return {"mode": mode, "count": len(rows), "lowest": rows[0]["score"] if rows else None,
+            "below_min": [x["path"] for x in rows if x["below_min"]], "images": rows}
+
+
+HANDLERS = {"beauty_score": _score, "beauty_compare": _compare, "beauty_lint": _lint}
 
 
 def _handle(msg: dict):

@@ -23,14 +23,30 @@ gets wrong are enough.
 composition (mirror symmetry, balance, local symmetry) · alignment (grid quality) · simplicity
 (edge density, JPEG bytes/pixel, dominant colours) · whitespace · harmony (Matsuda/Cohen-Or hue
 templates) · colourfulness (Hasler–Süsstrunk) · contrast (figure–ground) · fractal dimension ·
-Fourier slope · rule of thirds · economy (logo)
+Fourier slope · rule of thirds (art only) · economy (logo)
+
+## Measured, reported, not yet weighted (`raw["experimental"]`)
+
+Literature-backed measurements computed on every call so that calibration against human ratings
+([research/CALIBRATION.md](research/CALIBRATION.md)) can decide their weight instead of taste:
+**feature congestion** (Rosenholtz 2007, simplified) · **contour congestion** (Miniukovich 2014,
+proxy) · **edge-orientation entropy** and **anisotropy** (Redies / Aesthetics Toolbox) ·
+**sequence** (Ngo 2003, from pixels). Each is in `beautiful/experimental.py` with its
+simplifications documented; a faithful port of any of them is a welcome PR.
+
+## Evidence says no
+
+The survey in [research/SURVEY.md](research/SURVEY.md) is explicit: the **golden ratio** carries
+no reliable preference (Godkewitsch 1974; Stieger & Swami 2015) and a pure **Birkhoff O/C** term
+was never validated. Neither will be given positive weight. The **rule of thirds** stays in `art`
+mode only.
 
 ## Open ideas — take one
 
 | idea | what it would measure | a starting point | status |
 |---|---|---|---|
-| **rhythm / repetition** | regular spacing of repeated elements (cards, rows, list items) — Ngo's *rhythm* and *sequence* | autocorrelation of the horizontal/vertical edge-projection; peaks at a constant period score high | open |
-| **proportion** | are the main rectangles in "pleasing" ratios (golden, √2, 3:2, 4:3)? | connected components of the structural edge map → aspect ratios → distance to the classic set (Ngo *proportion*) | open |
+| **rhythm / repetition** | regular spacing of repeated elements (cards, rows, list items) — Ngo's *rhythm* (sequence is now measured, see above) | autocorrelation of the horizontal/vertical edge-projection; peaks at a constant period score high | open |
+| **proportion** | are the main rectangles in ratios people actually prefer? **Not the golden ratio** (no replicated preference); 1:1 and 1:√2 have some cross-cultural support | connected components of the structural edge map → aspect ratios → distance to {1:1, 1:√2}; must show signal on the calibration set before it gets weight | open, evidence-gated |
 | **typographic hierarchy** | a clear size ladder (title ≫ subtitle ≫ body) instead of many nearly-equal sizes | run-length / connected-component heights of text-like regions; entropy of the height histogram | open |
 | **line length** | body-text measure of ~45–75 characters reads as calm | width of text-like runs vs estimated x-height | open |
 | **density gradient** | visual weight decreasing top → bottom (F/Z reading pattern) rather than uniform | row-wise edge mass fitted to a monotone curve | open |
@@ -45,9 +61,11 @@ Fourier slope · rule of thirds · economy (logo)
 | **depth / layering** (art) | foreground–background separation | local contrast at large vs small scale | open |
 | **cultural RTL awareness** | mirrored expectations for right-to-left interfaces | flip the balance prior when the page is RTL (detectable from where text lines end) | open |
 
-Better weights are also a contribution: the current ones are literature-shaped, not fitted.
-A pull request that fits them to a public human-rating dataset and reports held-out correlation
-would be the biggest improvement this project can get. See the *Validation* section of the README.
+Better weights are also a contribution. `research/calibrate.py` fits them to the Reinecke & Gajos
+ratings (via the Calista mirror) and reports cross-validated ρ; every factor proposal should come
+with its row in that table. Other open research items: Subband Entropy clutter, O'Donovan colour
+harmony, PHOG self-similarity, element segmentation for the Ngo box metrics, cross-checks against
+AIM and a learned model — all tracked as issues.
 
 When an idea lands, its row moves to "in the formula" and the README formula table gets a line
 with your name on the source.

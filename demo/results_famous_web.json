@@ -1,0 +1,82 @@
+[
+ {
+  "site": "notion.com",
+  "web": 100,
+  "ui": 64
+ },
+ {
+  "site": "figma.com",
+  "web": 93,
+  "ui": 59
+ },
+ {
+  "site": "tailwindcss.com",
+  "web": 90,
+  "ui": 39
+ },
+ {
+  "site": "stripe.com",
+  "web": 84,
+  "ui": 26
+ },
+ {
+  "site": "wired.com",
+  "web": 82,
+  "ui": 35
+ },
+ {
+  "site": "apple.com",
+  "web": 79,
+  "ui": 85
+ },
+ {
+  "site": "nytimes.com",
+  "web": 74,
+  "ui": 61
+ },
+ {
+  "site": "github.com",
+  "web": 70,
+  "ui": 54
+ },
+ {
+  "site": "wikipedia.org",
+  "web": 67,
+  "ui": 58
+ },
+ {
+  "site": "vercel.com",
+  "web": 62,
+  "ui": 30
+ },
+ {
+  "site": "craigslist.org",
+  "web": 58,
+  "ui": 60
+ },
+ {
+  "site": "amazon.com",
+  "web": 41,
+  "ui": 16
+ },
+ {
+  "site": "motherfuckingwebsite.com",
+  "web": 22,
+  "ui": 28
+ },
+ {
+  "site": "google.com",
+  "web": 16,
+  "ui": 61
+ },
+ {
+  "site": "berkshirehathaway.com",
+  "web": 16,
+  "ui": 50
+ },
+ {
+  "site": "news.ycombinator.com",
+  "web": 1,
+  "ui": 66
+ }
+]

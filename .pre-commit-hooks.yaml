@@ -1,0 +1,16 @@
+# Use from another repo:
+#   repos:
+#     - repo: https://github.com/solomonBoltin/beautiful
+#       rev: v0.3.0
+#       hooks:
+#         - id: beautiful
+#           args: ["--min", "60"]        # optional gate
+#           files: ^design/screens/.*\.png$
+- id: beautiful
+  name: beautiful (beauty lint)
+  description: Score committed screenshots / artwork 1-100 and report the weakest factors.
+  entry: beautiful
+  language: python
+  types: [image]
+  files: \.(png|jpe?g|webp)$
+  pass_filenames: true

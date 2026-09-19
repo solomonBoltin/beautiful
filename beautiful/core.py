@@ -22,8 +22,10 @@ formula, so an agent can read the breakdown and know what to change.
 from __future__ import annotations
 
 import numpy as np
+from . import experimental as X
 from . import features as F
 from .symmetry import symmetry_report
+from . import web as W
 
 # --------------------------------------------------------------------------- #
 # target curves
@@ -56,9 +58,20 @@ WEIGHTS = {
 }
 
 
+MODES = list(WEIGHTS) + ["web"]
+
+
 def beauty(image, mode: str = "ui") -> dict:
+    if mode == "web":
+        # the model calibrated on human ratings of websites (beautiful/web.py) — it consumes the
+        # ui measurements, so compute those first and then replace the number and the hints
+        r = beauty(image, "ui")
+        w = W.web_score(r["factors"], r["raw"])
+        r.update({"score": w["score"], "mode": "web", "weights": None, "weighted_sum": None,
+                  "hints": w["hints"] or ["nothing stands out against rated-high pages"], "web": w})
+        return r
     if mode not in WEIGHTS:
-        raise ValueError(f"mode must be one of {list(WEIGHTS)}")
+        raise ValueError(f"mode must be one of {MODES}")
     rgb = F.to_rgb(image, 768)
 
     # ---- raw measurements -------------------------------------------------
@@ -71,6 +84,9 @@ def beauty(image, mode: str = "ui") -> dict:
     con = F.contrast(rgb)
     raw = dict(symmetry=sym, colorfulness=col, harmony=har, complexity=cpx,
                whitespace=ws, alignment=ali, contrast=con)
+    # Literature-backed measurements that carry no weight yet (see experimental.py and
+    # research/CALIBRATION.md): reported so calibration and linters can use them.
+    raw["experimental"] = X.all_measurements(F.to_rgb(image, 384))
     if mode == "art":
         raw["fractal_dimension"] = F.fractal_dimension(rgb)
         raw["fourier_slope"] = F.fourier_slope(rgb)

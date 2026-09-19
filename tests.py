@@ -1,7 +1,7 @@
 """Sanity checks: known orderings must hold. Run: python tests.py"""
 import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from beautiful import beauty_score
+from beautiful import beauty, beauty_score
 S = lambda p, m="ui": beauty_score(f"demo/screens/{p}.png", m)
 A = lambda p, m="art": beauty_score(f"demo/art/{p}.png", m)
 checks = [
@@ -10,6 +10,18 @@ checks = [
     ("asymmetric sample scores below centred dialog", S("sample_asymmetric_ui") < S("pinkas_dialog") - 15),
     ("art: mandala beats abstract splashes beats noise", A("mandala_radial") > A("abstract_splashes") > A("random_noise")),
     ("logo: shield beats diagonal composition", A("shield_logo", "logo") > A("diagonal_composition", "logo") + 20),
+]
+r = beauty("demo/screens/pinkas_documents.png", "ui")
+x = r["raw"]["experimental"]
+checks += [
+    ("experimental measurements are reported", all(k in x for k in ("feature_congestion", "contour_congestion", "edge_orientation_entropy", "anisotropy", "sequence"))),
+    ("experimental values are in range", 0 <= x["contour_congestion"] <= 1 and 0 <= x["edge_orientation_entropy"] <= 1 and 0 <= x["sequence"] <= 1),
+    ("unstyled page is more contour-congested than the composed one",
+     beauty("demo/screens/github_login_unstyled.png")["raw"]["experimental"]["contour_congestion"] > x["contour_congestion"]),
+]
+w = beauty("demo/screens/pinkas_documents.png", "web")
+checks += [
+    ("web mode returns a 1..100 percentile score with contributions", 1 <= w["score"] <= 100 and "contributions" in w["web"] and w["mode"] == "web"),
 ]
 ok = True
 for name, cond in checks:

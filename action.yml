@@ -17,6 +17,9 @@ inputs:
   comment:
     description: "Post / update a comment with the table on the pull request."
     default: "true"
+  sarif:
+    description: "Also write a SARIF file to this path (upload it with github/codeql-action/upload-sarif to see findings in code scanning)."
+    default: ""
   github-token:
     description: "Token used to comment."
     default: ${{ github.token }}
@@ -42,6 +45,12 @@ runs:
         INPUT_MODE: ${{ inputs.mode }}
         INPUT_MIN: ${{ inputs.min }}
       run: python "${{ github.action_path }}/.github/scripts/score.py"
+    - name: Annotate the images (lint findings)
+      shell: bash
+      run: beautiful --format github --mode "${{ inputs.mode }}" ${{ inputs.min && format('--min {0}', inputs.min) || '' }} ${{ inputs.images }} || true
+    - if: ${{ inputs.sarif != '' }}
+      shell: bash
+      run: beautiful --format sarif --mode "${{ inputs.mode }}" ${{ inputs.images }} > "${{ inputs.sarif }}" || true
     - if: ${{ inputs.comment == 'true' && github.event_name == 'pull_request' }}
       shell: bash
       env:

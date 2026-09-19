@@ -72,7 +72,7 @@
         <input type="file" id="file" accept="image/*" hidden>
       </div>
       <div class="controls">
-        <label>mode <select id="mode"><option value="ui">ui — screens &amp; pages</option><option value="art">art — paintings, photos, posters</option><option value="logo">logo — marks &amp; icons</option></select></label>
+        <label>mode <select id="mode"><option value="ui">ui — screens &amp; pages</option><option value="art">art — paintings, photos, posters</option><option value="logo">logo — marks &amp; icons</option><option value="web">web — calibrated on human ratings (advisory)</option></select></label>
         <button id="rescore" disabled>re-score</button>
       </div>
       <div class="samples" id="samples">
@@ -100,7 +100,7 @@
 <script src="https://cdn.jsdelivr.net/pyodide/v314.0.7/full/pyodide.js"></script>
 <script>
 const RAW = "https://raw.githubusercontent.com/solomonBoltin/beautiful/main/";
-const MODULES = ["__init__.py", "core.py", "features.py", "symmetry.py"];
+const MODULES = ["__init__.py", "core.py", "features.py", "symmetry.py", "experimental.py", "web.py", "web_model.json"];
 const $ = (id) => document.getElementById(id);
 const status = (t, err = false) => { $("status").textContent = t; $("status").className = "status" + (err ? " err" : ""); };
 const prog = (v) => { $("prog").value = v; $("prog").style.display = v >= 100 ? "none" : ""; };
