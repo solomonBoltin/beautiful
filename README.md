@@ -194,6 +194,49 @@ beautiful https://example.com --save-baseline b.json
 beautiful https://example.com --baseline b.json       # fails on a score drop, a new error, or a worse component
 ```
 
+### Case study: a real site, before and after — and the regression the gate caught
+
+The lint was pointed at [bina-solutions.co.il](https://www.bina-solutions.co.il) (134 pages, desktop
+and mobile). Its findings on the home page — a busy hero photo costing simplicity 0.24, contrast 0.29
+and white space 0.30, visual weight pulled to the bottom by a bright animated wave, a 46 × 28 px menu
+toggle, nine font sizes — were answered with one CSS file of overrides and nothing else touched.
+
+![bina-solutions.co.il home page before and after the lint-driven overrides](demo/case-study/bina-home-before-after.png)
+
+Classic scale, home page: desktop 44 → 84, tablet 53 → 83, mobile 48 → 86 (on the fitted `ui`
+scale the same renders read 88 → 91, 92 → 96, 89 → 96). Site-wide the run also found what no
+screenshot score would: five news posts wider than the phone (a markdown table emitted as inline
+`<code>`), a legal page sticking out 22 px, a heading hidden under the sticky header, meta text at
+4.4 : 1 on 75 pages.
+
+Then the first version of that CSS broke the mobile menu: asymmetric padding pushed the hamburger
+11 px off centre and a visibility rule kept the drawer hidden while `aria-expanded` still flipped.
+The page score moved three points, inside the tolerance. The gate failed anyway:
+
+![menu toggle, baseline 84 and the broken version at 74](demo/case-study/menu-toggle-before-after.png)
+
+```text
+$ beautiful http://localhost:8091/ --viewports mobile,desktop --save-baseline baseline.json
+ 96  http://localhost:8091/@mobile
+      components: 53 measured (classic scale), weakest button.carousel__button 55
+         84  control button.site-header__toggle  46×44
+
+# ... a commit changes the header CSS ...
+$ beautiful http://localhost:8091/ --viewports mobile,desktop --baseline baseline.json
+beautiful: regression http://localhost:8091/@mobile: new error-level finding(s) dead-toggle
+beautiful: regression http://localhost:8091/@mobile component button.site-header__toggle: 84 -> 74 (less beautiful than the baseline)
+ 93  http://localhost:8091/@mobile
+         74  control button.site-header__toggle  44×44
+           ->  dead-toggle [error, mobile]: toggle that changes nothing when activated — button.site-header__toggle → #site-nav (aria-expanded flips but the target stays hidden)
+exit code: 1
+```
+
+Three things fired: `icon-off-centre` measured the drift, `dead-toggle` clicked the button after the
+screenshot and saw that `#site-nav` never appeared, and the component baseline noticed the button
+itself was less beautiful. The site now runs this on every push
+(`.beautiful/baseline.json` + a `beauty` workflow, refreshed on the CI runner so fonts match).
+Full transcript: [demo/case-study/regression-gate.txt](demo/case-study/regression-gate.txt).
+
 ### Rules the DOM can answer
 
 When a page is rendered, a rule pass runs inside it — the part of a beauty lint that is not
