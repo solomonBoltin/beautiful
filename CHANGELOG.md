@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- **Components.** Rendered pages: every landmark, section and control is cropped from one full-page screenshot and scored on its own (`beautiful/components.py`, classic scale, controls judged on both-axis symmetry). `--components` lists them; baselines store `{score, errors, components}` and `--baseline` fails when any component gets less beautiful or a new error-level rule fires.
 - **Balance counts in `logo` and `art` mode.** Composition in the generic (non-`ui`) formula was mirror
   symmetry alone, so a centred, balanced mark with no mirror axis (the Nike swoosh) scored like a
   lopsided one. A compact, balanced figure now earns most of the composition credit (`max(mirror,

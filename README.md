@@ -180,6 +180,20 @@ formula and cost points on top of it:
 
 `report["penalties"]` carries them; `--format github` and SARIF show them as errors.
 
+### Components, each on its own
+
+A page score hides a broken part inside a good whole. On rendered pages every landmark, section
+and control is discovered in the DOM, cropped from one full-page screenshot and scored on its own
+(the `classic` scale; controls are judged on both-axis symmetry, so an off-centre icon in a menu
+button shows). `--components` lists them with stable keys; `--save-baseline` stores them, and
+`--baseline` exits 1 when any one of them gets less beautiful, not only the page.
+
+```bash
+beautiful https://example.com --components          # header 88, nav 91, button#menu 74 …
+beautiful https://example.com --save-baseline b.json
+beautiful https://example.com --baseline b.json       # fails on a score drop, a new error, or a worse component
+```
+
 ### Rules the DOM can answer
 
 When a page is rendered, a rule pass runs inside it — the part of a beauty lint that is not
