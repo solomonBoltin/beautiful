@@ -14,7 +14,7 @@ from __future__ import annotations
 import numpy as np
 from scipy.ndimage import gaussian_filter, uniform_filter, zoom
 
-from .features import EPS, luminance, sobel
+from .features import EPS, luminance, rgb_to_hsv, sobel
 
 
 def _lab_ab(rgb: np.ndarray):
@@ -166,8 +166,40 @@ def edge_contact(rgb: np.ndarray, band: int = 3, thresh: float = 0.12) -> dict:
     }
 
 
+def accent_discipline(rgb: np.ndarray, bins: int = 36) -> dict:
+    """Estimate whether a small, dominant saturated hue acts as one accent.
+
+    The returned goodness remains unweighted until calibration validates its
+    effect on the headline score.
+    """
+    hue, saturation, _ = rgb_to_hsv(rgb)
+    hist, _ = np.histogram(hue[saturation > 0.4], bins=bins, range=(0, 1))
+    if hist.sum() == 0:
+        return {"accent_share": 0.0, "second_accent_ratio": 0.0, "accent_discipline": 0.0}
+
+    # A three-bin circular window groups nearby shades into one accent hue.
+    clustered = np.roll(hist, 1) + hist + np.roll(hist, -1)
+    primary = int(clustered.argmax())
+    primary_bins = {(primary + offset) % bins for offset in (-2, -1, 0, 1, 2)}
+    remaining = hist.copy()
+    remaining[list(primary_bins)] = 0
+    secondary = np.roll(remaining, 1) + remaining + np.roll(remaining, -1)
+    second_count = int(secondary.max()) if remaining.any() else 0
+
+    share = float(clustered[primary] / saturation.size)
+    second_ratio = float(second_count / clustered[primary])
+    target = float(np.exp(-((share - 0.05) / 0.03) ** 2))
+    goodness = target * float(np.clip(1 - second_ratio / 0.8, 0, 1))
+    return {
+        "accent_share": round(share, 4),
+        "second_accent_ratio": round(second_ratio, 4),
+        "accent_discipline": round(goodness, 4),
+    }
+
+
 def all_measurements(rgb: np.ndarray) -> dict:
     fc = feature_congestion(rgb)
+    accent = accent_discipline(rgb)
     return {
         "edge_contact": edge_contact(rgb),
         "feature_congestion": fc["feature_congestion"],
@@ -176,4 +208,5 @@ def all_measurements(rgb: np.ndarray) -> dict:
         "edge_orientation_entropy": round(edge_orientation_entropy(rgb), 4),
         "anisotropy": round(anisotropy(rgb), 4),
         "sequence": round(sequence(rgb), 4),
+        "accent_discipline": accent,
     }

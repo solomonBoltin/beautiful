@@ -52,7 +52,7 @@ mode only.
 | **density gradient** | visual weight decreasing top → bottom (F/Z reading pattern) rather than uniform | row-wise edge mass fitted to a monotone curve | open |
 | **focal point count** | one clear centre of attention vs many competing ones | saliency proxy (local contrast × saturation), count of separated peaks; bell centred at 1–2 | open |
 | **colour temperature consistency** | a page that is all warm or all cool vs a mixed bag | variance of hue-temperature over saturated pixels | open |
-| **accent discipline** | one accent colour used for a small share of pixels (buttons, links) | share of the most saturated hue cluster; bell around 2–8 % | open |
+| **accent discipline** | one accent colour used for a small share of pixels (buttons, links) | share of the most saturated hue cluster; bell around 2–8 % | experimental raw measurement; unweighted pending calibration |
 | **edge softness / consistency** | consistent corner radii and border weights | histogram of curvature at corners of structural components | open |
 | **gestalt grouping** | related things close together, unrelated things apart | gap distribution between structural components; bimodal is good | open |
 | **contrast ratio for text** | WCAG-style luminance ratio at text edges specifically, not all edges | text-like regions only (small connected components) | open |
