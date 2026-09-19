@@ -141,9 +141,35 @@ def anisotropy(rgb: np.ndarray) -> float:
     return float(p.std() / (1 / 16))
 
 
+def edge_contact(rgb: np.ndarray, band: int = 3, thresh: float = 0.12) -> dict:
+    """How much content touches each edge of the viewport.
+
+    For each border, the share of rows (left/right) or columns (top/bottom) whose outermost
+    `band` pixels contain a luminance edge. Designed pages keep a margin, so the side bands are
+    quiet; content that is *cut off* by the viewport (horizontal overflow, an element wider than
+    the screen) produces edges right at the border along its whole height. Full-bleed images
+    also touch the edges, but softly and on all sides, and they rarely carry sharp structure in
+    the last three pixels. Used as a defect signal (see core.py), not as beauty.
+    """
+    g = luminance(rgb)
+    e = sobel(g) > thresh
+    h, w = e.shape
+
+    def side(line):  # line: bool per row/col — coverage, and how fragmented the contact is
+        cov = float(line.mean())
+        runs = int((np.diff(np.concatenate([[0], line.astype(int), [0]])) == 1).sum())
+        return {"coverage": round(cov, 4), "runs": runs}
+
+    return {
+        "left": side(e[:, :band].any(axis=1)), "right": side(e[:, w - band:].any(axis=1)),
+        "top": side(e[:band, :].any(axis=0)), "bottom": side(e[h - band:, :].any(axis=0)),
+    }
+
+
 def all_measurements(rgb: np.ndarray) -> dict:
     fc = feature_congestion(rgb)
     return {
+        "edge_contact": edge_contact(rgb),
         "feature_congestion": fc["feature_congestion"],
         "feature_congestion_parts": {k: v for k, v in fc.items() if k != "feature_congestion"},
         "contour_congestion": round(contour_congestion(rgb), 4),

@@ -2,267 +2,324 @@
  {
   "file": "pinkas_documents.png",
   "label": "Pinkas — documents (built with beautiful)",
-  "score": 90,
+  "score": 91,
   "factors": {
-   "composition": 0.82,
+   "composition": 0.83,
    "local": 0.634,
    "alignment": 0.631,
    "simplicity": 0.853,
-   "whitespace": 0.741,
+   "whitespace": 0.856,
    "colorfulness": 0.929,
    "contrast": 1.0,
    "harmony": 1.0
   },
   "hints": [
    "left/right symmetry is fine but top/bottom halves differ",
-   "alignment (0.63): snap element edges to a shared column/row grid"
+   "alignment (0.63): snap element edges to a shared column/row grid",
+   "composition (0.83): centre the main block; mirror controls at both ends of a row"
   ]
  },
  {
   "file": "crates_io_search_q_http.png",
   "label": "crates.io — search results (live)",
-  "score": 85,
+  "score": 89,
   "factors": {
-   "composition": 0.72,
+   "composition": 0.81,
    "local": 0.903,
    "alignment": 0.685,
    "simplicity": 0.67,
-   "whitespace": 0.598,
+   "whitespace": 0.749,
    "colorfulness": 0.933,
    "contrast": 1.0,
    "harmony": 0.916
   },
   "hints": [
    "visual weight sits toward the top; shift or counterweight it",
-   "left/right symmetry is fine but top/bottom halves differ"
-  ]
- },
- {
-  "file": "pinkas_dialog.png",
-  "label": "Pinkas — new-document dialog",
-  "score": 85,
-  "factors": {
-   "composition": 0.97,
-   "local": 0.895,
-   "alignment": 0.317,
-   "simplicity": 0.748,
-   "whitespace": 0.354,
-   "colorfulness": 0.912,
-   "contrast": 0.954,
-   "harmony": 0.944
-  },
-  "hints": [
-   "alignment (0.32): snap element edges to a shared column/row grid",
-   "whitespace (0.35): adjust padding so ~60% of the canvas is background"
-  ]
- },
- {
-  "file": "digital_office_rebalanced.png",
-  "label": "Digital Office — rebalanced mock",
-  "score": 82,
-  "factors": {
-   "composition": 0.98,
-   "local": 0.904,
-   "alignment": 0.318,
-   "simplicity": 0.766,
-   "whitespace": 0.246,
-   "colorfulness": 0.959,
-   "contrast": 0.762,
-   "harmony": 0.964
-  },
-  "hints": [
-   "alignment (0.32): snap element edges to a shared column/row grid",
-   "whitespace (0.25): adjust padding so ~60% of the canvas is background"
-  ]
- },
- {
-  "file": "npm_home_unstyled.png",
-  "label": "npmjs.com — CSS blocked (unstyled)",
-  "score": 82,
-  "factors": {
-   "composition": 0.7,
-   "local": 0.685,
-   "alignment": 0.226,
-   "simplicity": 0.865,
-   "whitespace": 0.901,
-   "colorfulness": 0.895,
-   "contrast": 1.0,
-   "harmony": 1.0
-  },
-  "hints": [
-   "alignment (0.23): snap element edges to a shared column/row grid",
-   "composition (0.70): centre the main block; mirror controls at both ends of a row"
-  ]
- },
- {
-  "file": "pinkas_dashboard.png",
-  "label": "Pinkas — dashboard",
-  "score": 82,
-  "factors": {
-   "composition": 0.74,
-   "local": 0.564,
-   "alignment": 0.26,
-   "simplicity": 0.758,
-   "whitespace": 0.908,
-   "colorfulness": 0.975,
-   "contrast": 1.0,
-   "harmony": 1.0
-  },
-  "hints": [
    "left/right symmetry is fine but top/bottom halves differ",
-   "alignment (0.26): snap element edges to a shared column/row grid"
+   "composition (0.81): centre the main block; mirror controls at both ends of a row",
+   "alignment (0.68): snap element edges to a shared column/row grid",
+   "simplicity (0.67): reduce edge count, borders and the number of distinct colours"
   ]
  },
  {
   "file": "crates_io_crates_serde.png",
   "label": "crates.io — crate page (live)",
-  "score": 77,
+  "score": 87,
   "factors": {
-   "composition": 0.75,
+   "composition": 0.8,
    "local": 0.89,
    "alignment": 0.52,
    "simplicity": 0.582,
-   "whitespace": 0.287,
+   "whitespace": 1.0,
    "colorfulness": 0.949,
    "contrast": 1.0,
    "harmony": 0.866
   },
   "hints": [
    "visual weight sits toward the top; shift or counterweight it",
-   "left/right symmetry is fine but top/bottom halves differ"
+   "left/right symmetry is fine but top/bottom halves differ",
+   "alignment (0.52): snap element edges to a shared column/row grid",
+   "simplicity (0.58): reduce edge count, borders and the number of distinct colours",
+   "composition (0.80): centre the main block; mirror controls at both ends of a row"
   ]
  },
  {
-  "file": "cratesio_home.png",
-  "label": "crates.io — home (live)",
-  "score": 77,
+  "file": "pinkas_dashboard.png",
+  "label": "Pinkas — dashboard",
+  "score": 87,
   "factors": {
-   "composition": 0.67,
-   "local": 0.572,
-   "alignment": 0.264,
-   "simplicity": 0.613,
-   "whitespace": 0.997,
-   "colorfulness": 1.0,
+   "composition": 0.89,
+   "local": 0.564,
+   "alignment": 0.26,
+   "simplicity": 0.758,
+   "whitespace": 1.0,
+   "colorfulness": 0.975,
    "contrast": 1.0,
-   "harmony": 0.915
-  },
-  "hints": [
-   "visual weight sits toward the top; shift or counterweight it",
-   "left/right symmetry is fine but top/bottom halves differ"
-  ]
- },
- {
-  "file": "pypi_home.png",
-  "label": "PyPI — home (live)",
-  "score": 75,
-  "factors": {
-   "composition": 0.75,
-   "local": 0.617,
-   "alignment": 0.22,
-   "simplicity": 0.668,
-   "whitespace": 0.982,
-   "colorfulness": 0.234,
-   "contrast": 1.0,
-   "harmony": 0.979
+   "harmony": 1.0
   },
   "hints": [
    "left/right symmetry is fine but top/bottom halves differ",
-   "alignment (0.22): snap element edges to a shared column/row grid"
+   "alignment (0.26): snap element edges to a shared column/row grid",
+   "simplicity (0.76): reduce edge count, borders and the number of distinct colours",
+   "composition (0.89): centre the main block; mirror controls at both ends of a row"
+  ]
+ },
+ {
+  "file": "pinkas_dialog.png",
+  "label": "Pinkas — new-document dialog",
+  "score": 87,
+  "factors": {
+   "composition": 0.98,
+   "local": 0.895,
+   "alignment": 0.317,
+   "simplicity": 0.748,
+   "whitespace": 0.559,
+   "colorfulness": 0.912,
+   "contrast": 0.954,
+   "harmony": 0.944
+  },
+  "hints": [
+   "alignment (0.32): snap element edges to a shared column/row grid",
+   "whitespace (0.56): adjust padding so ~60% of the canvas is background",
+   "simplicity (0.75): reduce edge count, borders and the number of distinct colours"
+  ]
+ },
+ {
+  "file": "digital_office_rebalanced.png",
+  "label": "Digital Office — rebalanced mock",
+  "score": 85,
+  "factors": {
+   "composition": 0.98,
+   "local": 0.904,
+   "alignment": 0.318,
+   "simplicity": 0.766,
+   "whitespace": 0.456,
+   "colorfulness": 0.959,
+   "contrast": 0.762,
+   "harmony": 0.964
+  },
+  "hints": [
+   "alignment (0.32): snap element edges to a shared column/row grid",
+   "whitespace (0.46): adjust padding so ~60% of the canvas is background",
+   "simplicity (0.77): reduce edge count, borders and the number of distinct colours"
+  ]
+ },
+ {
+  "file": "npm_home_unstyled.png",
+  "label": "npmjs.com — CSS blocked (unstyled)",
+  "score": 85,
+  "factors": {
+   "composition": 0.77,
+   "local": 0.685,
+   "alignment": 0.226,
+   "simplicity": 0.865,
+   "whitespace": 1.0,
+   "colorfulness": 0.895,
+   "contrast": 1.0,
+   "harmony": 1.0
+  },
+  "hints": [
+   "clipping? content touches the left edge in 6 places over 67% of the height — looks cut off; check horizontal overflow (render the page with `beautiful page.html` to know for certain)",
+   "alignment (0.23): snap element edges to a shared column/row grid",
+   "composition (0.77): centre the main block; mirror controls at both ends of a row"
   ]
  },
  {
   "file": "pypi_org_search__q_http.png",
   "label": "PyPI — search results (live)",
-  "score": 73,
+  "score": 84,
   "factors": {
-   "composition": 0.91,
+   "composition": 0.94,
    "local": 0.77,
    "alignment": 0.398,
    "simplicity": 0.754,
-   "whitespace": 0.267,
+   "whitespace": 1.0,
    "colorfulness": 0.994,
    "contrast": 0.367,
    "harmony": 0.793
   },
   "hints": [
    "left/right symmetry is fine but top/bottom halves differ",
-   "alignment (0.40): snap element edges to a shared column/row grid"
+   "alignment (0.40): snap element edges to a shared column/row grid",
+   "contrast (0.37): raise figure–ground luminance contrast for text and controls",
+   "simplicity (0.75): reduce edge count, borders and the number of distinct colours"
+  ]
+ },
+ {
+  "file": "cratesio_home.png",
+  "label": "crates.io — home (live)",
+  "score": 80,
+  "factors": {
+   "composition": 0.74,
+   "local": 0.572,
+   "alignment": 0.264,
+   "simplicity": 0.613,
+   "whitespace": 1.0,
+   "colorfulness": 1.0,
+   "contrast": 1.0,
+   "harmony": 0.915
+  },
+  "hints": [
+   "visual weight sits toward the top; shift or counterweight it",
+   "left/right symmetry is fine but top/bottom halves differ",
+   "alignment (0.26): snap element edges to a shared column/row grid",
+   "composition (0.74): centre the main block; mirror controls at both ends of a row",
+   "simplicity (0.61): reduce edge count, borders and the number of distinct colours"
+  ]
+ },
+ {
+  "file": "pypi_home.png",
+  "label": "PyPI — home (live)",
+  "score": 77,
+  "factors": {
+   "composition": 0.78,
+   "local": 0.617,
+   "alignment": 0.22,
+   "simplicity": 0.668,
+   "whitespace": 1.0,
+   "colorfulness": 0.234,
+   "contrast": 1.0,
+   "harmony": 0.979
+  },
+  "hints": [
+   "visual weight sits toward the bottom; shift or counterweight it",
+   "left/right symmetry is fine but top/bottom halves differ",
+   "alignment (0.22): snap element edges to a shared column/row grid",
+   "composition (0.78): centre the main block; mirror controls at both ends of a row",
+   "simplicity (0.67): reduce edge count, borders and the number of distinct colours"
   ]
  },
  {
   "file": "pypi_org_project_numpy.png",
   "label": "PyPI — project page (live)",
-  "score": 68,
+  "score": 67,
   "factors": {
-   "composition": 0.62,
+   "composition": 0.57,
    "local": 0.754,
    "alignment": 0.29,
    "simplicity": 0.641,
-   "whitespace": 0.725,
+   "whitespace": 0.844,
    "colorfulness": 0.249,
    "contrast": 1.0,
    "harmony": 0.972
   },
   "hints": [
+   "visual weight sits toward the top; shift or counterweight it",
    "left/right symmetry is fine but top/bottom halves differ",
-   "alignment (0.29): snap element edges to a shared column/row grid"
+   "composition (0.57): centre the main block; mirror controls at both ends of a row",
+   "alignment (0.29): snap element edges to a shared column/row grid",
+   "simplicity (0.64): reduce edge count, borders and the number of distinct colours"
   ]
  },
  {
   "file": "sample_asymmetric_ui.png",
   "label": "Synthetic asymmetric UI sample",
-  "score": 59,
+  "score": 64,
   "factors": {
-   "composition": 0.08,
+   "composition": 0.1,
    "local": 0.901,
    "alignment": 0.607,
    "simplicity": 0.865,
-   "whitespace": 0.476,
+   "whitespace": 0.658,
    "colorfulness": 1.0,
    "contrast": 1.0,
    "harmony": 0.935
   },
   "hints": [
    "visual weight sits toward the left; shift or counterweight it",
-   "no strong mirror axis; align key elements to the centre line or use a grid"
+   "neither symmetric nor balanced; centre the main block, or counterweight it on the other side",
+   "composition (0.10): centre the main block; mirror controls at both ends of a row",
+   "alignment (0.61): snap element edges to a shared column/row grid",
+   "whitespace (0.66): adjust padding so ~60% of the canvas is background"
+  ]
+ },
+ {
+  "file": "medium_home.png",
+  "label": "medium.com — home (live, rendered with beautiful.render)",
+  "score": 62,
+  "factors": {
+   "composition": 0.41,
+   "local": 0.321,
+   "alignment": 0.28,
+   "simplicity": 0.572,
+   "whitespace": 1.0,
+   "colorfulness": 0.962,
+   "contrast": 1.0,
+   "harmony": 0.925
+  },
+  "hints": [
+   "clipping? content touches the right edge in 9 places over 20% of the height — looks cut off; check horizontal overflow (render the page with `beautiful page.html` to know for certain)",
+   "neither symmetric nor balanced; centre the main block, or counterweight it on the other side",
+   "individual components are themselves asymmetric; tidy internal alignment",
+   "composition (0.41): centre the main block; mirror controls at both ends of a row",
+   "alignment (0.28): snap element edges to a shared column/row grid",
+   "simplicity (0.57): reduce edge count, borders and the number of distinct colours"
   ]
  },
  {
   "file": "digital_office_original.png",
   "label": "Digital Office — original screenshot",
-  "score": 51,
+  "score": 61,
   "factors": {
-   "composition": 0.22,
+   "composition": 0.34,
    "local": 0.917,
    "alignment": 0.388,
    "simplicity": 0.561,
-   "whitespace": 0.479,
+   "whitespace": 0.661,
    "colorfulness": 0.975,
    "contrast": 1.0,
    "harmony": 0.898
   },
   "hints": [
+   "clipping? content touches the left edge in 17 places over 20% of the height — looks cut off; check horizontal overflow (render the page with `beautiful page.html` to know for certain)",
    "visual weight sits toward the right; shift or counterweight it",
-   "no strong mirror axis; align key elements to the centre line or use a grid"
+   "neither symmetric nor balanced; centre the main block, or counterweight it on the other side",
+   "composition (0.34): centre the main block; mirror controls at both ends of a row",
+   "alignment (0.39): snap element edges to a shared column/row grid",
+   "simplicity (0.56): reduce edge count, borders and the number of distinct colours"
   ]
  },
  {
   "file": "github_login_unstyled.png",
   "label": "github.com/login — CSS blocked (unstyled)",
-  "score": 38,
+  "score": 41,
   "factors": {
-   "composition": 0.05,
+   "composition": 0.11,
    "local": 0.334,
    "alignment": 0.307,
    "simplicity": 1.0,
-   "whitespace": 0.072,
+   "whitespace": 0.094,
    "colorfulness": 0.88,
    "contrast": 1.0,
    "harmony": 1.0
   },
   "hints": [
    "visual weight sits toward the left; shift or counterweight it",
-   "no strong mirror axis; align key elements to the centre line or use a grid"
+   "neither symmetric nor balanced; centre the main block, or counterweight it on the other side",
+   "individual components are themselves asymmetric; tidy internal alignment",
+   "composition (0.11): centre the main block; mirror controls at both ends of a row",
+   "alignment (0.31): snap element edges to a shared column/row grid",
+   "whitespace (0.09): adjust padding so ~60% of the canvas is background"
   ]
  }
 ]

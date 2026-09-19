@@ -48,8 +48,9 @@ TOOLS = [
                     "type": "string",
                     "enum": MODES,
                     "default": "ui",
-                    "description": "ui = screens and pages, art = paintings/photos/posters, logo = marks and icons",
+                    "description": "ui = screens and pages, art = paintings/photos/posters, logo = marks and icons, web = calibrated on human ratings",
                 },
+                "explain_dir": {"type": "string", "description": "If given, also write <name>.explain.png here: every factor drawn over the image (mirror map, centre of mass, grid lines, whitespace mask, edges, hue wheel, edge bands) so you can see what the score sees"},
             },
             "required": ["image"],
         },
@@ -103,6 +104,7 @@ TOOLS = [
                               "default": ["desktop", "tablet", "mobile"]},
                 "mode": {"type": "string", "enum": MODES, "default": "ui"},
                 "save_dir": {"type": "string", "description": "Directory to keep the rendered PNGs (optional)"},
+                "explain_dir": {"type": "string", "description": "If given, also write an explain sheet per viewport (what the score sees)"},
             },
             "required": ["source"],
         },
@@ -111,8 +113,17 @@ TOOLS = [
 
 
 def _score(args: dict) -> dict:
+    import os
     r = beauty(args["image"], args.get("mode", "ui"))
-    return {"score": r["score"], "mode": r["mode"], "factors": r["factors"], "hints": r["hints"], "raw": r["raw"]}
+    out = {"score": r["score"], "mode": r["mode"], "factors": r["factors"], "hints": r["hints"],
+           "penalties": r.get("penalties", {}), "raw": r["raw"]}
+    if args.get("explain_dir"):
+        from .explain import explain
+        os.makedirs(args["explain_dir"], exist_ok=True)
+        path = os.path.join(args["explain_dir"], os.path.splitext(os.path.basename(args["image"]))[0] + ".explain.png")
+        explain(args["image"], r["mode"], r).save(path)
+        out["explain"] = path
+    return out
 
 
 def _compare(args: dict) -> dict:
@@ -145,11 +156,25 @@ def _lint(args: dict) -> dict:
 
 
 def _render(args: dict) -> dict:
+    import os
     from .render import score_html
+    save_dir = args.get("save_dir") or args.get("explain_dir")
     reps = score_html(args["source"], args.get("viewports") or ("desktop", "tablet", "mobile"),
-                      args.get("mode", "ui"), save_dir=args.get("save_dir"))
-    return {vp: {"score": r["score"], "factors": r["factors"], "hints": r["hints"], "backend": r["backend"],
-                 **({"image": r["image"]} if "image" in r else {})} for vp, r in reps.items()}
+                      args.get("mode", "ui"), save_dir=save_dir)
+    out = {}
+    for vp, r in reps.items():
+        row = {"score": r["score"], "factors": r["factors"], "hints": r["hints"], "backend": r["backend"],
+               "penalties": r.get("penalties", {}), "layout": r.get("layout", {})}
+        if "image" in r:
+            row["image"] = r["image"]
+        if args.get("explain_dir") and "image" in r:
+            from .explain import explain
+            os.makedirs(args["explain_dir"], exist_ok=True)
+            path = os.path.join(args["explain_dir"], os.path.splitext(os.path.basename(r["image"]))[0] + ".explain.png")
+            explain(r["image"], r["mode"], r).save(path)
+            row["explain"] = path
+        out[vp] = row
+    return out
 
 
 HANDLERS = {"beauty_score": _score, "beauty_compare": _compare, "beauty_lint": _lint, "beauty_render": _render}

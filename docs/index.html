@@ -58,8 +58,9 @@
   code { font-family: var(--mono); font-size: 13px; background: #1c1f28; padding: 2px 6px; border-radius: 4px; }
   @media (max-width: 480px) {
     h1 { font-size: 34px; } .score .n { font-size: 64px; } .row { grid-template-columns: 96px 1fr 40px; }
-    .controls { display: grid; grid-template-columns: 1fr; width: 100%; }
-    .controls label { display: grid; grid-template-columns: auto 1fr; }
+    .controls { display: grid; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    .controls label { display: grid; grid-template-columns: auto minmax(0, 1fr); min-width: 0; }
+    .controls select { width: 100%; min-width: 0; }
     .controls button { width: 100%; }
     .samples { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
     .samples span { grid-column: 1 / -1; }
@@ -87,6 +88,7 @@
   <div class="controls">
     <label>mode <select id="mode"><option value="ui">ui — screens &amp; pages</option><option value="art">art — paintings, photos, posters</option><option value="logo">logo — marks &amp; icons</option><option value="web">web — calibrated on human ratings (advisory)</option></select></label>
     <button id="rescore" disabled>re-score</button>
+    <button id="explain" disabled title="draw every factor over the image">what does it see?</button>
   </div>
   <div class="samples" id="samples">
     <span>try a sample</span>
@@ -107,13 +109,18 @@
     <progress id="prog" max="100" value="0"></progress>
   </div>
 
+  <div class="panel" id="explainPanel" hidden>
+    <div id="modeLabel2" style="color:var(--muted);font-size:13px">what the formula sees — red = left/right disagree, dot = centre of mass, green/blue = grid lines, blue tint = air, orange = edges, red/green = weak/crisp contrast, wheel = hues + template, edge bands = contact</div>
+    <img id="explainImg" alt="what the formula sees" style="width:100%;border-radius:10px">
+  </div>
+
   <p class="privacy">The score is <code>Σ wₖ·goodnessₖ</code> spread over 1–100. Every factor descends from a paper (Birkhoff 1933, Ngo 2003, Reinecke &amp; Gajos 2013, Miniukovich &amp; De Angeli 2015, Cohen-Or 2006, Hasler &amp; Süsstrunk 2003…). No model weights, no dataset, no network call for the image. First load fetches numpy, scipy and pillow (~25 MB) via <a href="https://pyodide.org">Pyodide</a>; cached afterwards. Same numbers as <code>pip install beautiful-score</code>.</p>
 </main>
 
 <script src="https://cdn.jsdelivr.net/pyodide/v314.0.7/full/pyodide.js"></script>
 <script>
-const RAW = "https://cdn.jsdelivr.net/gh/solomonBoltin/beautiful@v0.4.0/";  // pinned to a release so the modules are always consistent
-const MODULES = ["__init__.py", "core.py", "features.py", "symmetry.py", "experimental.py", "web.py", "web_model.json"];
+const RAW = "https://cdn.jsdelivr.net/gh/solomonBoltin/beautiful@v0.5.0/";  // pinned to a release so the modules are always consistent
+const MODULES = ["__init__.py", "core.py", "features.py", "symmetry.py", "experimental.py", "web.py", "web_model.json", "explain.py"];
 const $ = (id) => document.getElementById(id);
 const status = (t, err = false) => { $("status").textContent = t; $("status").className = "status" + (err ? " err" : ""); };
 const prog = (v) => { $("prog").value = v; $("prog").style.display = v >= 100 ? "none" : ""; };
@@ -135,7 +142,7 @@ async function boot() {
     await py.runPythonAsync("import sys, json; sys.path.insert(0, '/pkg'); import beautiful");
     const v = py.runPython("beautiful.__version__");
     status("ready · beautiful " + v + " · everything runs locally"); prog(100);
-    $("rescore").disabled = false;
+    $("rescore").disabled = false; $("explain").disabled = false;
   } catch (e) { status("failed to load: " + e, true); }
 }
 
@@ -178,6 +185,21 @@ $("file").addEventListener("change", (e) => handleFile(e.target.files[0]));
 drop.addEventListener("drop", (e) => handleFile(e.dataTransfer.files[0]));
 document.addEventListener("paste", (e) => { const it = [...e.clipboardData.items].find(i => i.type.startsWith("image/")); if (it) handleFile(it.getAsFile()); });
 $("rescore").addEventListener("click", () => lastBytes && score(lastBytes, lastName));
+$("explain").addEventListener("click", async () => {
+  if (!py || !lastBytes) { status("score an image first", true); return; }
+  status("drawing what it sees…");
+  try {
+    const b64 = await py.runPythonAsync(`
+import base64, io
+from beautiful.explain import explain
+_im = explain('/tmp/in.bin', '${$("mode").value === "web" ? "ui" : $("mode").value}')
+_buf = io.BytesIO(); _im.save(_buf, format='PNG'); base64.b64encode(_buf.getvalue()).decode()`);
+    $("explainImg").src = "data:image/png;base64," + b64;
+    $("explainPanel").hidden = false;
+    $("explainPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+    status("drawn · " + lastName);
+  } catch (e) { status("could not draw: " + String(e).split("\n").slice(-2).join(" "), true); }
+});
 $("mode").addEventListener("change", () => lastBytes && score(lastBytes, lastName));
 $("samples").addEventListener("click", async (e) => {
   const b = e.target.closest("button"); if (!b) return;

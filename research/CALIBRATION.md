@@ -6,16 +6,16 @@ Rating set: **398** website screenshots with mean appeal ratings (Reinecke & Gaj
 
 | | rating set | comparison set |
 |---|---:|---:|
-| `beauty(mode='ui')` vs human | **-0.004** | **-0.391** |
+| `beauty(mode='ui')` vs human | **-0.076** | **-0.402** |
 
 ## 2. Each factor on its own
 
 | factor | ρ (rating) | ρ (comparison) |
 |---|---:|---:|
-| composition | +0.139 | -0.206 |
+| composition | +0.060 | -0.257 |
 | alignment | -0.203 | -0.278 |
 | simplicity | -0.028 | -0.142 |
-| whitespace | -0.179 | -0.288 |
+| whitespace | -0.246 | -0.255 |
 | harmony | +0.023 | -0.251 |
 | colorfulness | +0.059 | +0.064 |
 | contrast | -0.146 | -0.416 |
@@ -33,42 +33,44 @@ Rating set: **398** website screenshots with mean appeal ratings (Reinecke & Gaj
 
 ## 3. Non-negative weights fitted on the goodness factors
 
-Same linear form as the shipped score. Cross-validated ρ on the rating set: **0.092**; the weights fitted on all of it, applied to the comparison set it never saw: **-0.199**.
+Same linear form as the shipped score. Cross-validated ρ on the rating set: **0.066**; the weights fitted on all of it, applied to the comparison set it never saw: **-0.162**.
 
 | factor | shipped weight | fitted weight |
 |---|---:|---:|
-| composition | 0.28 | 0.44 |
+| composition | 0.28 | 0.19 |
 | alignment | 0.16 | 0.00 |
 | simplicity | 0.14 | 0.00 |
 | whitespace | 0.10 | 0.00 |
 | harmony | 0.10 | 0.00 |
-| colorfulness | 0.06 | 0.18 |
+| colorfulness | 0.06 | 0.19 |
 | contrast | 0.10 | 0.00 |
-| local | 0.06 | 0.37 |
+| local | 0.06 | 0.63 |
 
 ## 4. Ridge with inverted-U terms and the experimental measurements
 
-Inputs: the 8 goodness factors, the 5 experimental measurements, and edge density and colourfulness with their squares (the inverted-U). Best λ = 0.3; cross-validated ρ on the rating set: **0.509**; transfer to the comparison set: **0.408**.
+Inputs: the 8 goodness factors, the 5 experimental measurements, and edge density and colourfulness with their squares (the inverted-U). Best λ = 1; cross-validated ρ on the rating set: **0.544**; transfer to the comparison set: **0.432**.
 
 | term | standardised coefficient |
 |---|---:|
-| anisotropy | -0.868 |
-| edge_orientation_entropy | -0.646 |
-| alignment | -0.471 |
-| contour_congestion | -0.338 |
-| feature_congestion | -0.328 |
-| colorfulness | +0.217 |
-| simplicity | -0.217 |
-| whitespace | -0.170 |
-| edge_density | -0.151 |
-| composition | +0.133 |
-| harmony | -0.108 |
-| colorfulness | +0.102 |
-| colorfulness² | -0.089 |
-| local | +0.084 |
-| edge_density² | -0.074 |
-| sequence | -0.063 |
-| contrast | +0.009 |
+| anisotropy | -0.633 |
+| alignment | -0.468 |
+| edge_orientation_entropy | -0.421 |
+| feature_congestion | -0.335 |
+| contour_congestion | -0.306 |
+| whitespace | -0.284 |
+| edge_density² | -0.220 |
+| colorfulness | +0.175 |
+| simplicity | -0.146 |
+| local | +0.136 |
+| colorfulness | +0.131 |
+| harmony | -0.107 |
+| composition | +0.103 |
+| edge_density | -0.057 |
+| colorfulness² | -0.050 |
+| sequence | -0.041 |
+| contrast | -0.003 |
+
+This ridge model ships as `beauty(image, mode='web')`: the prediction is reported as a percentile against the 398 rated sites (a web score of 70 = the model puts it above 70 % of them). Cross-validated ρ ≈ 0.54 and out-of-sample ρ ≈ 0.43 make it **advisory**, not a truth — the survey's own rule is ρ ≥ 0.7 to trust, < 0.5 advisory.
 
 ## How to read this
 

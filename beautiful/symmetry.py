@@ -38,6 +38,7 @@ How the score is built
 from __future__ import annotations
 
 import numpy as np
+from scipy.ndimage import gaussian_filter1d
 from PIL import Image, ImageFilter
 
 WORK = 256          # working resolution (square)
@@ -151,8 +152,14 @@ def _local_symmetry(gray: np.ndarray, n: int = 3) -> float:
     return num / den
 
 
-def _balance(tone: np.ndarray, mode: str = "generic") -> tuple[float, float, float]:
-    """(balance_score, dx, dy): visual mass = deviation from the border colour."""
+def _balance(tone: np.ndarray, mode: str = "generic") -> tuple[float, float, float, dict]:
+    """(balance_score, dx, dy, parts): visual mass = deviation from the dominant tone.
+
+    Two classic measures (Ngo 2003): *equilibrium* — how far the centre of mass sits from the
+    centre — and *balance* — how equal the mass on the two sides of each axis is. A hero with a
+    headline on the left and an illustration on the right has poor mirror symmetry but can be
+    perfectly balanced; that is the most common good layout on the web, and balance is what
+    catches it."""
     h, w = tone.shape
     hist, bins = np.histogram(tone, bins=32, range=(0, 1))
     k = int(hist.argmax())
@@ -165,7 +172,23 @@ def _balance(tone: np.ndarray, mode: str = "generic") -> tuple[float, float, flo
     dy = (cy - (h - 1) / 2) / (h / 2)
     # screens scroll, so being top-heavy within a viewport is normal
     off = np.hypot(dx, 0.4 * dy) if mode == "ui" else np.hypot(dx, dy)
-    return float(np.exp(-(off / 0.30) ** 2)), float(dx), float(dy)
+    equilibrium = float(np.exp(-(off / (0.20 if mode == "ui" else 0.30)) ** 2))
+    mL, mR = float(m[:, : w // 2].sum()), float(m[:, w // 2:].sum())
+    mT, mB = float(m[: h // 2].sum()), float(m[h // 2:].sum())
+    lr = 1 - abs(mL - mR) / (mL + mR + EPS)
+    tb = 1 - abs(mT - mB) / (mT + mB + EPS)
+    halves = (0.75 * lr + 0.25 * tb) if mode == "ui" else (0.5 * lr + 0.5 * tb)
+    # profile symmetry: the coarse left-to-right distribution of mass mirrored about the centre.
+    # A headline at 25 % and an illustration at 75 % mirror each other even though their shapes
+    # don't; a sidebar at 5 % and a modal at 60 % do not.
+    prof = m.sum(0)
+    prof = gaussian_filter1d(prof, max(1.0, w / 12)) - prof.mean()
+    prof_sym = float(max(0.0, np.dot(prof, prof[::-1]) / (np.dot(prof, prof) + EPS)))
+    score = (0.5 * equilibrium + 0.3 * halves + 0.2 * prof_sym) if mode == "ui" else (0.5 * equilibrium + 0.5 * halves)
+    parts = {"equilibrium": round(equilibrium, 4), "left_right": round(lr, 4), "top_bottom": round(tb, 4),
+             "profile_symmetry": round(prof_sym, 4),
+             "mass_left": round(mL / (mL + mR + EPS), 3), "mass_right": round(mR / (mL + mR + EPS), 3)}
+    return float(score), float(dx), float(dy), parts
 
 
 def _curve(x: float) -> float:
@@ -188,11 +211,14 @@ def symmetry_report(image, mode: str = "generic") -> dict:
     v = _axis_score(g, tone, edges, np.flipud, st, mode)
     r = _axis_score(g, tone, edges, lambda a: np.rot90(a, 2), st, mode)
     loc = _local_symmetry(st if mode == "ui" else g)
-    bal, dx, dy = _balance(tone, mode)
+    bal, dx, dy, bal_parts = _balance(tone, mode)
 
     if mode == "ui":
         mirror = 0.8 * h + 0.2 * v
-        raw = 0.55 * mirror + 0.05 * r + 0.15 * loc + 0.25 * bal
+        # composed = mirror-symmetric OR balanced. A centred layout and a headline-left /
+        # image-right layout are both composed; only a lopsided one is not.
+        composed = max(mirror, bal)
+        raw = 0.60 * composed + 0.20 * (mirror + bal) / 2 + 0.15 * loc + 0.05 * r
     else:
         mirror = max(h, v)
         raw = 0.50 * mirror + 0.10 * (h + v) / 2 + 0.05 * r + 0.15 * loc + 0.20 * bal
@@ -203,8 +229,8 @@ def symmetry_report(image, mode: str = "generic") -> dict:
     if bal < 0.6:
         side = ("right" if dx > 0 else "left") if abs(dx) > abs(dy) else ("bottom" if dy > 0 else "top")
         hints.append(f"visual weight sits toward the {side}; shift or counterweight it")
-    if mirror < 0.5:
-        hints.append("no strong mirror axis; align key elements to the centre line or use a grid")
+    if mirror < 0.5 and bal < 0.7:
+        hints.append("neither symmetric nor balanced; centre the main block, or counterweight it on the other side")
     elif h < 0.5 <= v:
         hints.append("top/bottom symmetry is fine but left/right halves differ")
     elif v < 0.5 <= h:
@@ -220,6 +246,7 @@ def symmetry_report(image, mode: str = "generic") -> dict:
         "rotational_180": round(r, 4),
         "local_symmetry": round(loc, 4),
         "balance": round(bal, 4),
+        "balance_parts": bal_parts,
         "mass_offset": {"dx": round(dx, 3), "dy": round(dy, 3)},
         "dominant_axis": dominant,
         "mode": mode,

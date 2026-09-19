@@ -19,6 +19,13 @@ checks += [
     ("unstyled page is more contour-congested than the composed one",
      beauty("demo/screens/github_login_unstyled.png")["raw"]["experimental"]["contour_congestion"] > x["contour_congestion"]),
 ]
+med = beauty("demo/screens/medium_home.png", "ui")
+checks += [
+    ("asymmetric-but-balanced hero (Medium) is recognised as composed",
+     med["factors"]["composition"] > 0.35 and med["factors"]["composition"] > beauty("demo/screens/sample_asymmetric_ui.png")["factors"]["composition"] + 0.2),
+    ("airy pages are not punished for white space", med["factors"]["whitespace"] > 0.9),
+    ("edge contact is measured on every side", all(k in med["raw"]["experimental"]["edge_contact"] for k in ("left", "right", "top", "bottom"))),
+]
 w = beauty("demo/screens/pinkas_documents.png", "web")
 checks += [
     ("web mode returns a 1..100 percentile score with contributions", 1 <= w["score"] <= 100 and "contributions" in w["web"] and w["mode"] == "web"),

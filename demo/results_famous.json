@@ -3,101 +3,101 @@
   "site": "apple.com",
   "score": 85,
   "factors": {
-   "composition": 0.84,
+   "composition": 0.85,
    "local": 0.954,
    "alignment": 0.167,
    "simplicity": 0.65,
-   "whitespace": 0.95,
+   "whitespace": 1.0,
    "colorfulness": 0.949,
    "contrast": 1.0,
    "harmony": 1.0
   },
-  "hint": "composition (0.84): centre the main block; mirror controls at both ends of a row"
+  "hint": "composition (0.85): centre the main block; mirror controls at both ends of a row"
  },
  {
-  "site": "news.ycombinator.com",
-  "score": 66,
+  "site": "wikipedia.org",
+  "score": 85,
   "factors": {
-   "composition": 0.3,
-   "local": 0.77,
-   "alignment": 0.704,
-   "simplicity": 0.4,
-   "whitespace": 0.864,
-   "colorfulness": 0.948,
+   "composition": 0.89,
+   "local": 0.569,
+   "alignment": 0.232,
+   "simplicity": 0.758,
+   "whitespace": 0.782,
+   "colorfulness": 0.935,
    "contrast": 1.0,
-   "harmony": 0.89
+   "harmony": 1.0
   },
-  "hint": "alignment (0.70): snap element edges to a shared column/row grid"
+  "hint": "composition (0.89): centre the main block; mirror controls at both ends of a row"
  },
  {
   "site": "notion.com",
-  "score": 64,
+  "score": 81,
   "factors": {
-   "composition": 0.76,
+   "composition": 0.91,
    "local": 0.462,
    "alignment": 0.136,
    "simplicity": 0.561,
-   "whitespace": 0.312,
+   "whitespace": 1.0,
    "colorfulness": 0.999,
    "contrast": 1.0,
    "harmony": 0.886
   },
-  "hint": "composition (0.76): centre the main block; mirror controls at both ends of a row"
+  "hint": "local (0.46): make individual components internally symmetric"
  },
  {
-  "site": "google.com",
-  "score": 61,
+  "site": "berkshirehathaway.com",
+  "score": 81,
   "factors": {
-   "composition": 0.38,
-   "local": 0.382,
-   "alignment": 0.418,
-   "simplicity": 1.0,
-   "whitespace": 0.094,
-   "colorfulness": 0.981,
+   "composition": 0.78,
+   "local": 0.557,
+   "alignment": 0.29,
+   "simplicity": 0.61,
+   "whitespace": 0.883,
+   "colorfulness": 0.96,
    "contrast": 1.0,
    "harmony": 1.0
   },
-  "hint": "whitespace (0.09): adjust padding so ~60% of the canvas is background"
+  "hint": "simplicity (0.61): reduce edge count, borders and the number of distinct colours"
  },
  {
-  "site": "nytimes.com",
-  "score": 61,
+  "site": "github.com",
+  "score": 80,
   "factors": {
-   "composition": 0.5,
-   "local": 0.717,
-   "alignment": 0.192,
-   "simplicity": 0.575,
-   "whitespace": 0.567,
-   "colorfulness": 0.897,
+   "composition": 0.81,
+   "local": 0.401,
+   "alignment": 0.189,
+   "simplicity": 0.62,
+   "whitespace": 1.0,
+   "colorfulness": 1.0,
    "contrast": 1.0,
-   "harmony": 1.0
+   "harmony": 0.949
   },
-  "hint": "simplicity (0.58): reduce edge count, borders and the number of distinct colours"
+  "hint": "composition (0.81): centre the main block; mirror controls at both ends of a row"
  },
  {
   "site": "craigslist.org",
-  "score": 60,
+  "score": 77,
   "factors": {
-   "composition": 0.58,
+   "composition": 0.92,
    "local": 0.776,
    "alignment": 0.241,
    "simplicity": 0.107,
-   "whitespace": 0.92,
+   "whitespace": 1.0,
    "colorfulness": 0.961,
    "contrast": 1.0,
    "harmony": 0.861
   },
-  "hint": "composition (0.58): centre the main block; mirror controls at both ends of a row"
+  "hint": "alignment (0.24): snap element edges to a shared column/row grid"
  },
  {
   "site": "figma.com",
-  "score": 59,
+  "score": 74,
   "factors": {
-   "composition": 0.43,
+   "composition": 0.72,
    "local": 0.436,
    "alignment": 0.168,
    "simplicity": 0.605,
-   "whitespace": 0.97,
+   "whitespace": 1.0,
    "colorfulness": 0.961,
    "contrast": 1.0,
    "harmony": 0.816
@@ -105,59 +105,74 @@
   "hint": "simplicity (0.61): reduce edge count, borders and the number of distinct colours"
  },
  {
-  "site": "wikipedia.org",
-  "score": 58,
+  "site": "google.com",
+  "score": 72,
   "factors": {
-   "composition": 0.5,
-   "local": 0.569,
-   "alignment": 0.232,
-   "simplicity": 0.758,
-   "whitespace": 0.159,
-   "colorfulness": 0.935,
+   "composition": 0.52,
+   "local": 0.382,
+   "alignment": 0.418,
+   "simplicity": 1.0,
+   "whitespace": 0.312,
+   "colorfulness": 0.981,
    "contrast": 1.0,
    "harmony": 1.0
   },
-  "hint": "whitespace (0.16): adjust padding so ~60% of the canvas is background"
+  "hint": "whitespace (0.31): adjust padding so ~60% of the canvas is background"
  },
  {
-  "site": "github.com",
-  "score": 54,
+  "site": "nytimes.com",
+  "score": 69,
   "factors": {
-   "composition": 0.39,
-   "local": 0.401,
-   "alignment": 0.189,
-   "simplicity": 0.62,
-   "whitespace": 0.629,
-   "colorfulness": 1.0,
-   "contrast": 1.0,
-   "harmony": 0.949
-  },
-  "hint": "simplicity (0.62): reduce edge count, borders and the number of distinct colours"
- },
- {
-  "site": "berkshirehathaway.com",
-  "score": 50,
-  "factors": {
-   "composition": 0.38,
-   "local": 0.557,
-   "alignment": 0.29,
-   "simplicity": 0.61,
-   "whitespace": 0.176,
-   "colorfulness": 0.96,
+   "composition": 0.49,
+   "local": 0.717,
+   "alignment": 0.192,
+   "simplicity": 0.575,
+   "whitespace": 1.0,
+   "colorfulness": 0.897,
    "contrast": 1.0,
    "harmony": 1.0
   },
-  "hint": "whitespace (0.18): adjust padding so ~60% of the canvas is background"
+  "hint": "simplicity (0.58): reduce edge count, borders and the number of distinct colours"
+ },
+ {
+  "site": "news.ycombinator.com",
+  "score": 65,
+  "factors": {
+   "composition": 0.23,
+   "local": 0.77,
+   "alignment": 0.704,
+   "simplicity": 0.4,
+   "whitespace": 1.0,
+   "colorfulness": 0.948,
+   "contrast": 1.0,
+   "harmony": 0.89
+  },
+  "hint": "alignment (0.70): snap element edges to a shared column/row grid"
+ },
+ {
+  "site": "motherfuckingwebsite.com",
+  "score": 43,
+  "factors": {
+   "composition": 0.16,
+   "local": 0.763,
+   "alignment": 0.263,
+   "simplicity": 0.277,
+   "whitespace": 1.0,
+   "colorfulness": 0.958,
+   "contrast": 1.0,
+   "harmony": 0.853
+  },
+  "hint": "simplicity (0.28): reduce edge count, borders and the number of distinct colours"
  },
  {
   "site": "tailwindcss.com",
-  "score": 39,
+  "score": 40,
   "factors": {
-   "composition": 0.13,
+   "composition": 0.1,
    "local": 0.596,
    "alignment": 0.147,
    "simplicity": 0.491,
-   "whitespace": 0.889,
+   "whitespace": 1.0,
    "colorfulness": 0.984,
    "contrast": 1.0,
    "harmony": 0.807
@@ -165,14 +180,29 @@
   "hint": "simplicity (0.49): reduce edge count, borders and the number of distinct colours"
  },
  {
-  "site": "wired.com",
-  "score": 35,
+  "site": "amazon.com",
+  "score": 40,
   "factors": {
-   "composition": 0.15,
+   "composition": 0.87,
+   "local": 0.602,
+   "alignment": 0.119,
+   "simplicity": 0.0,
+   "whitespace": 0.255,
+   "colorfulness": 0.068,
+   "contrast": 1.0,
+   "harmony": 0.655
+  },
+  "hint": "whitespace (0.26): adjust padding so ~60% of the canvas is background"
+ },
+ {
+  "site": "wired.com",
+  "score": 39,
+  "factors": {
+   "composition": 0.19,
    "local": 0.569,
    "alignment": 0.182,
    "simplicity": 0.451,
-   "whitespace": 0.667,
+   "whitespace": 0.8,
    "colorfulness": 0.995,
    "contrast": 1.0,
    "harmony": 0.734
@@ -181,62 +211,32 @@
  },
  {
   "site": "vercel.com",
-  "score": 30,
+  "score": 32,
   "factors": {
-   "composition": 0.03,
+   "composition": 0.04,
    "local": 0.196,
    "alignment": 0.176,
    "simplicity": 0.986,
-   "whitespace": 0.082,
+   "whitespace": 0.203,
    "colorfulness": 0.734,
    "contrast": 1.0,
    "harmony": 1.0
   },
-  "hint": "whitespace (0.08): adjust padding so ~60% of the canvas is background"
- },
- {
-  "site": "motherfuckingwebsite.com",
-  "score": 28,
-  "factors": {
-   "composition": 0.1,
-   "local": 0.763,
-   "alignment": 0.263,
-   "simplicity": 0.277,
-   "whitespace": 0.294,
-   "colorfulness": 0.958,
-   "contrast": 1.0,
-   "harmony": 0.853
-  },
-  "hint": "simplicity (0.28): reduce edge count, borders and the number of distinct colours"
+  "hint": "whitespace (0.20): adjust padding so ~60% of the canvas is background"
  },
  {
   "site": "stripe.com",
-  "score": 26,
+  "score": 28,
   "factors": {
-   "composition": 0.05,
+   "composition": 0.06,
    "local": 0.655,
    "alignment": 0.196,
    "simplicity": 0.341,
-   "whitespace": 0.907,
+   "whitespace": 1.0,
    "colorfulness": 0.177,
    "contrast": 1.0,
    "harmony": 0.818
   },
   "hint": "simplicity (0.34): reduce edge count, borders and the number of distinct colours"
- },
- {
-  "site": "amazon.com",
-  "score": 16,
-  "factors": {
-   "composition": 0.36,
-   "local": 0.602,
-   "alignment": 0.119,
-   "simplicity": 0.0,
-   "whitespace": 0.105,
-   "colorfulness": 0.068,
-   "contrast": 1.0,
-   "harmony": 0.655
-  },
-  "hint": "simplicity (0.00): reduce edge count, borders and the number of distinct colours"
  }
 ]

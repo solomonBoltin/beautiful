@@ -116,8 +116,33 @@ class _Chromium:
             pass
         page.wait_for_timeout(wait_ms)
         png = page.screenshot(full_page=full_page, animations="disabled", caret="hide")
+        self.last_layout = self._layout_facts(page, vp)
         ctx.close()
         return Image.open(io.BytesIO(png)).convert("RGB")
+
+    @staticmethod
+    def _layout_facts(page, vp) -> dict:
+        """Things the DOM knows for certain and pixels can only suspect: horizontal overflow and
+        which elements stick out of the viewport."""
+        try:
+            return page.evaluate("""(vw) => {
+                const de = document.documentElement, b = document.body;
+                const sw = Math.max(de ? de.scrollWidth : 0, b ? b.scrollWidth : 0);
+                const out = [];
+                for (const el of document.querySelectorAll('body *')) {
+                    const r = el.getBoundingClientRect();
+                    if (r.width < 2 || r.height < 2) continue;
+                    if (r.right > vw + 1 || r.left < -1) {
+                        const id = el.id ? '#' + el.id : '';
+                        const cls = el.classList.length ? '.' + [...el.classList].slice(0, 2).join('.') : '';
+                        out.push({el: el.tagName.toLowerCase() + id + cls, left: Math.round(r.left), right: Math.round(r.right)});
+                        if (out.length >= 8) break;
+                    }
+                }
+                return {viewport_width: vw, scroll_width: sw, overflow_x: Math.max(0, sw - vw), overflowing: out};
+            }""", vp["width"])
+        except Exception:
+            return {}
 
     def close(self):
         self.browser.close()
@@ -178,6 +203,16 @@ def score_html(source: str, viewports: Iterable[str] = ("desktop", "tablet", "mo
             r = beauty(im, mode)
             r["viewport"] = vp
             r["backend"] = use
+            layout = getattr(chromium, "last_layout", None) or {}
+            if layout:
+                r["layout"] = layout
+                if layout.get("overflow_x", 0) > 2:
+                    who = ", ".join(x["el"] for x in layout.get("overflowing", [])[:3]) or "an element"
+                    r["hints"].insert(0, f"overflow: the page is {layout['overflow_x']}px wider than the {vp} viewport "
+                                         f"({who} sticks out) — horizontal scroll and clipped content")
+                    if "clipping" not in r.get("penalties", {}):
+                        r.setdefault("penalties", {})["overflow"] = 10
+                        r["score"] = max(1, r["score"] - 10)
             if save_dir:
                 os.makedirs(save_dir, exist_ok=True)
                 stem = re.sub(r"[^A-Za-z0-9._-]+", "_", os.path.basename(source.strip())[:60]) or "page"

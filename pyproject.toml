@@ -1,6 +1,6 @@
 [project]
 name = "beautiful-score"
-version = "0.4.1"
+version = "0.5.0"
 description = "A mathematical beauty score, 1-100, for any screenshot, logo or artwork - computed from pixels with explicit, inspectable formulas."
 readme = "README.md"
 license = { text = "MIT" }

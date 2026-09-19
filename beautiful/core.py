@@ -104,7 +104,10 @@ def beauty(image, mode: str = "ui") -> dict:
         g["simplicity"] = (0.4 * ramp(cpx["edge_density"], 0.22, 0.05)
                            + 0.35 * ramp(cpx["jpeg_bpp"], 0.16, 0.04)
                            + 0.25 * ramp(cpx["dominant_colors"], 9, 2))
-        g["whitespace"] = bell(ws, 0.62, 0.22)                    # not empty, not packed
+        # air is good (Miniukovich 2015; the calibration set agrees): a ramp up to ~55 %
+        # background, a plateau through the airy heroes people love (Apple 67 %, Medium 84 %),
+        # and a fall only when the viewport is essentially empty (unstyled pages).
+        g["whitespace"] = ramp(ws, 0.20, 0.55) * (1.0 if ws <= 0.90 else ramp(ws, 0.985, 0.90))
         g["colorfulness"] = bell(col["variety"], 25, 45)          # restrained palette (one bold hue is fine)
         g["contrast"] = ramp(con["edge_contrast"], 0.30, 0.80)    # crisp figure–ground
     elif mode == "art":
@@ -126,6 +129,20 @@ def beauty(image, mode: str = "ui") -> dict:
     total = sum(w[k] * g[k] for k in w)
     score = spread(total)
 
+    # ---- defects are reported separately from beauty. Pixels can only *suspect* clipping
+    # (a full-bleed image also touches the edge); the renderer knows (render.py measures
+    # horizontal overflow in the DOM and applies the penalty). Here: a hint when the contact
+    # with a side edge is fragmented, which is what cut-off text and controls look like.
+    penalties = {}
+    contact = raw["experimental"]["edge_contact"]
+    suspect = None
+    if mode == "ui":
+        for side_name in ("right", "left"):
+            c = contact[side_name]
+            if c["coverage"] > 0.05 and c["runs"] >= 6:
+                suspect = (side_name, c)
+                break
+
     # ---- hints for an optimising agent ------------------------------------
     hints = list(sym.get("hints", []))
     weakest = sorted(((w[k] * (1 - g[k]), k) for k in w), reverse=True)[:3]
@@ -146,9 +163,15 @@ def beauty(image, mode: str = "ui") -> dict:
     for loss, k in weakest:
         if loss > 0.03:
             hints.append(f"{k} ({g[k]:.2f}): {advice[k]}")
+    if suspect:
+        side_name, c = suspect
+        hints.insert(0, f"clipping? content touches the {side_name} edge in {c['runs']} places over "
+                        f"{int(100 * c['coverage'])}% of the height — looks cut off; check horizontal overflow "
+                        f"(render the page with `beautiful page.html` to know for certain)")
 
     return {
         "score": score,
+        "penalties": penalties,
         "mode": mode,
         "weighted_sum": round(float(total), 4),
         "factors": {k: round(float(v), 3) for k, v in g.items()},

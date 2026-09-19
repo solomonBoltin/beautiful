@@ -1,6 +1,7 @@
 """beautiful — the beauty lint.
 
     beautiful screen.png                       one image: score, factors, hints
+    beautiful --explain out/ screen.png        + out/screen.explain.png: what the formula sees, drawn
     beautiful index.html                       render at desktop, tablet and mobile, score each
     beautiful https://example.com --viewports mobile
     beautiful shots/ --mode=ui                 every PNG/JPEG/WebP/HTML in a directory
@@ -107,6 +108,7 @@ def main(argv=None) -> int:
     p.add_argument("--save-renders", metavar="DIR", help="for HTML files and URLs: keep the rendered PNGs here")
     p.add_argument("--backend", choices=["playwright", "weasyprint"], default=None,
                    help="renderer for HTML/URLs (default: playwright if installed, else weasyprint)")
+    p.add_argument("--explain", metavar="DIR", help="write <name>.explain.png per image: the factors drawn over the image")
     p.add_argument("--version", action="version", version=f"beautiful {__version__}")
     a = p.parse_args(argv)
     fmt = "json" if a.json else a.format
@@ -143,6 +145,14 @@ def main(argv=None) -> int:
 
     for path, r in scored():
         results[path] = r
+        if a.explain:
+            from .explain import explain
+            os.makedirs(a.explain, exist_ok=True)
+            src = r.get("image") or (path if not is_renderable(path) else None)
+            if src:
+                stem = os.path.splitext(os.path.basename(src))[0]
+                explain(src, a.mode, r).save(os.path.join(a.explain, f"{stem}.explain.png"))
+                r["explain"] = os.path.join(a.explain, f"{stem}.explain.png")
         if fmt == "text":
             print(f"{r['score']:3d}  {path}")
             if len(files) == 1 and len(results) == 1 and not is_renderable(files[0]):

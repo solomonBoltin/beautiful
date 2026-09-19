@@ -1,18 +1,18 @@
 {
  "fitted_ui_weights": {
-  "composition": 0.4444,
+  "composition": 0.1861,
   "alignment": 0.0,
   "simplicity": 0.0,
   "whitespace": 0.0,
   "harmony": 0.0,
-  "colorfulness": 0.1832,
+  "colorfulness": 0.1863,
   "contrast": 0.0,
-  "local": 0.3725
+  "local": 0.6276
  },
- "cv_rho_rating": 0.0921,
- "transfer_rho_comparison": -0.1988,
- "shipped_rho_rating": -0.0039,
- "shipped_rho_comparison": -0.3907,
+ "cv_rho_rating": 0.0662,
+ "transfer_rho_comparison": -0.1618,
+ "shipped_rho_rating": -0.076,
+ "shipped_rho_comparison": -0.402,
  "n_rating": 398,
  "n_comparison": 100
 }

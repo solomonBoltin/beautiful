@@ -1,0 +1,138 @@
+[
+ {
+  "image": "mandala_radial",
+  "art": 85,
+  "logo": 90,
+  "factors": {
+   "composition": 0.97,
+   "local": 0.626,
+   "alignment": 0.304,
+   "simplicity": 0.813,
+   "colorfulness": 0.929,
+   "contrast": 1.0,
+   "fractal": 0.403,
+   "fourier": 0.993,
+   "thirds": 0.062,
+   "harmony": 0.87
+  }
+ },
+ {
+  "image": "shield_logo",
+  "art": 82,
+  "logo": 96,
+  "factors": {
+   "composition": 0.92,
+   "local": 0.623,
+   "alignment": 0.625,
+   "simplicity": 0.254,
+   "colorfulness": 0.806,
+   "contrast": 0.994,
+   "fractal": 0.636,
+   "fourier": 0.883,
+   "thirds": 0.411,
+   "harmony": 0.988
+  }
+ },
+ {
+  "image": "checker",
+  "art": 69,
+  "logo": 96,
+  "factors": {
+   "composition": 0.97,
+   "local": 0.62,
+   "alignment": 0.257,
+   "simplicity": 0.819,
+   "colorfulness": 0.085,
+   "contrast": 1.0,
+   "fractal": 0.064,
+   "fourier": 0.839,
+   "thirds": 0.0,
+   "harmony": 1.0
+  }
+ },
+ {
+  "image": "leaf",
+  "art": 67,
+  "logo": 95,
+  "factors": {
+   "composition": 0.92,
+   "local": 0.596,
+   "alignment": 0.755,
+   "simplicity": 0.212,
+   "colorfulness": 0.972,
+   "contrast": 0.036,
+   "fractal": 0.262,
+   "fourier": 0.946,
+   "thirds": 0.548,
+   "harmony": 0.974
+  }
+ },
+ {
+  "image": "random_blobs",
+  "art": 48,
+  "logo": 18,
+  "factors": {
+   "composition": 0.06,
+   "local": 0.293,
+   "alignment": 0.232,
+   "simplicity": 0.348,
+   "colorfulness": 0.792,
+   "contrast": 0.87,
+   "fractal": 1.0,
+   "fourier": 0.918,
+   "thirds": 0.262,
+   "harmony": 0.566
+  }
+ },
+ {
+  "image": "diagonal_composition",
+  "art": 47,
+  "logo": 54,
+  "factors": {
+   "composition": 0.02,
+   "local": 0.001,
+   "alignment": 0.3,
+   "simplicity": 0.219,
+   "colorfulness": 0.95,
+   "contrast": 1.0,
+   "fractal": 0.365,
+   "fourier": 0.881,
+   "thirds": 0.26,
+   "harmony": 0.923
+  }
+ },
+ {
+  "image": "abstract_splashes",
+  "art": 42,
+  "logo": 37,
+  "factors": {
+   "composition": 0.06,
+   "local": 0.318,
+   "alignment": 0.3,
+   "simplicity": 0.297,
+   "colorfulness": 0.053,
+   "contrast": 1.0,
+   "fractal": 0.896,
+   "fourier": 0.927,
+   "thirds": 0.155,
+   "harmony": 0.923
+  }
+ },
+ {
+  "image": "random_noise",
+  "art": 5,
+  "logo": 17,
+  "factors": {
+   "composition": 0.05,
+   "local": 0.018,
+   "alignment": 0.027,
+   "simplicity": 0.0,
+   "colorfulness": 0.003,
+   "contrast": 0.765,
+   "fractal": 0.003,
+   "fourier": 0.0,
+   "thirds": 0.0,
+   "harmony": 0.377
+  }
+ }
+]

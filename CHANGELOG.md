@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.5.0 — 2026-09-19
+
+- **Balance stands in for symmetry.** In `ui` mode composition = *symmetric OR balanced*; balance
+  is equilibrium (tighter, σ 0.20), half-mass equality, and a new *profile symmetry* (the coarse
+  left-to-right mass distribution mirrored about the centre). A headline-left / illustration-right
+  hero — Medium's home page — went from composition 0.16 to 0.41 and from 36 to 62; the lopsided
+  sample stays at 0.10.
+- **Air is good.** Whitespace is a ramp-and-plateau, not a bell: Apple (67 %) and Medium (84 %)
+  are no longer punished; an empty viewport still is.
+- **Defects are not taste.** Rendered pages get a DOM overflow check (scroll width, the elements
+  that stick out): −10 and a hint naming them. Screenshots get a *clipping?* hint when content
+  touches a side edge in many places. `report["penalties"]`.
+- **See what it sees.** `beautiful --explain DIR`, MCP `explain_dir`, and a "what does it see?"
+  button in the demo: one sheet per image with the mirror-disagreement map, centre of mass and
+  mass split, grid lines, whitespace mask, edge map, contrast, hue wheel + template + palette,
+  and the four edge bands.
+- Demo page: mobile overflow fixed (the select ran off the screen — exactly what the new check
+  catches); 92 / 84 / 84 at desktop / tablet / mobile.
+- Every demo artefact regenerated with the new formula (`demo/rescore.py`); recalibrated:
+  `ui` ρ −0.08 / −0.40, ridge 0.54 / 0.43 → `web` model refreshed.
+
 ## 0.4.1 — 2026-09-19
 
 - MCP server speaks UTF-8 on stdio regardless of the console codepage (Windows fix).

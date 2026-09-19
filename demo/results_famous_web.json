@@ -1,82 +1,82 @@
 [
  {
   "site": "notion.com",
-  "web": 100,
-  "ui": 64
+  "web": 94,
+  "ui": 81
  },
  {
   "site": "figma.com",
-  "web": 93,
-  "ui": 59
+  "web": 91,
+  "ui": 74
  },
  {
   "site": "tailwindcss.com",
-  "web": 90,
-  "ui": 39
+  "web": 88,
+  "ui": 40
  },
  {
-  "site": "stripe.com",
-  "web": 84,
-  "ui": 26
+  "site": "apple.com",
+  "web": 83,
+  "ui": 85
  },
  {
   "site": "wired.com",
   "web": 82,
-  "ui": 35
- },
- {
-  "site": "apple.com",
-  "web": 79,
-  "ui": 85
- },
- {
-  "site": "nytimes.com",
-  "web": 74,
-  "ui": 61
- },
- {
-  "site": "github.com",
-  "web": 70,
-  "ui": 54
- },
- {
-  "site": "wikipedia.org",
-  "web": 67,
-  "ui": 58
+  "ui": 39
  },
  {
   "site": "vercel.com",
-  "web": 62,
-  "ui": 30
+  "web": 76,
+  "ui": 32
  },
  {
-  "site": "craigslist.org",
-  "web": 58,
-  "ui": 60
- },
- {
-  "site": "amazon.com",
-  "web": 41,
-  "ui": 16
- },
- {
-  "site": "motherfuckingwebsite.com",
-  "web": 22,
+  "site": "stripe.com",
+  "web": 76,
   "ui": 28
  },
  {
+  "site": "wikipedia.org",
+  "web": 69,
+  "ui": 85
+ },
+ {
+  "site": "github.com",
+  "web": 69,
+  "ui": 80
+ },
+ {
+  "site": "nytimes.com",
+  "web": 64,
+  "ui": 69
+ },
+ {
+  "site": "craigslist.org",
+  "web": 60,
+  "ui": 77
+ },
+ {
+  "site": "amazon.com",
+  "web": 45,
+  "ui": 40
+ },
+ {
   "site": "google.com",
-  "web": 16,
-  "ui": 61
+  "web": 30,
+  "ui": 72
+ },
+ {
+  "site": "motherfuckingwebsite.com",
+  "web": 18,
+  "ui": 43
  },
  {
   "site": "berkshirehathaway.com",
   "web": 16,
-  "ui": 50
+  "ui": 81
  },
  {
   "site": "news.ycombinator.com",
   "web": 1,
-  "ui": 66
+  "ui": 65
  }
 ]

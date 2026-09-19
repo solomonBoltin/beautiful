@@ -230,7 +230,7 @@ def main():
     }
     json.dump(web, open(os.path.join(os.path.dirname(HERE), "beautiful", "web_model.json"), "w"), indent=1)
     lines += ["", "This ridge model ships as `beauty(image, mode='web')`: the prediction is reported as a "
-              "percentile against the 398 rated sites (a web score of 70 = the model puts it above 70 % of "
+              "percentile against the 398 rated sites (a web score of 70 = the model puts it above 70 %% of "
               "them). Cross-validated ρ ≈ %.2f and out-of-sample ρ ≈ %.2f make it **advisory**, not a truth — "
               "the survey's own rule is ρ ≥ 0.7 to trust, < 0.5 advisory." % (best[1], web["transfer_rho_comparison"])]
     lines += ["", "## How to read this", "",
