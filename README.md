@@ -514,52 +514,58 @@ What the numbers say, and where they are honest about their limits:
 | **5** | 18 | random noise | 0.05 | 0.38 | 0.00 | 2.00 | 0.01 | 0.00 |
 <!-- /table:art -->
 
-### Twelve icons, three versions each
+### Thirteen icons, three versions each
 
-![Twelve icons: a worse version, the icon as published, and the best the formula could find](demo/logos_gallery.png)
+![Thirteen icons: a worse version, the icon as published, and the best the formula could find](demo/logos_gallery.png)
 
-Chrome, ten more marks that designers hold up as near-perfect, and one working icon (the `in` mark of
-[Bina Solutions](https://www.bina-solutions.co.il)). Each is rendered by the tool's own Chromium at
-1024 px on a white square and scored in `logo` mode three times: a **less perfect** twin (shifted off
-centre, tilted 9°, cramped against the edges, with a stray bar and a stray dot the mark never asked
-for), the mark **as published**, and a **more perfect** twin: the best the formula could find by moving
-only what a designer would move (size on the canvas, optical centring by centre of mass, brand colour
-or ink). A candidate has to beat the original by two points to count; otherwise the mark is reported
-as already at its optimum.
+Chrome, ten more marks that designers hold up as near-perfect, and the two icons of
+[Bina Solutions](https://www.bina-solutions.co.il) exactly as supplied (an app icon and a grid mark, both
+raster). Each is rendered at 1024 px and scored in `logo` mode three times: a **less perfect** twin
+(shifted off centre, tilted 9°, cramped against the edges, with a stray bar and a stray dot the mark
+never asked for), the mark **as published**, and a **more perfect** twin: the best the formula could
+find by moving only what a designer would move (size on the canvas, optical centring by centre of mass,
+brand colour or ink). For the raster icons the mark is lifted off its tile and only re-placed; the tile
+is never touched, and the published version goes through the same lift-and-replace so resampling
+cannot favour one side. A candidate has to beat the original by two points to count; otherwise the mark
+is reported as already at its optimum.
 
 <!-- table:logos -->
 | icon | less perfect | as published | more perfect | what the formula moved |
 |---|---:|---:|---:|---|
 | Chrome | 63 | **96** | 96 | already at its optimum |
 | Apple | 64 | **90** | 95 | composition 0.67→0.81, whitespace 0.37→0.80 |
-| Nike | 56 | **60** | 60 | already at its optimum |
+| Nike | 56 | **60** | 87 | composition 0.18→0.66 |
 | GitHub | 63 | **95** | 95 | already at its optimum |
 | Slack | 65 | **95** | 95 | already at its optimum |
 | Spotify | 65 | **95** | 95 | already at its optimum |
-| Figma | 62 | **91** | 91 | already at its optimum |
+| Figma | 62 | **91** | 93 | composition 0.76→0.87, whitespace 0.14→0.08 |
 | Airbnb | 54 | **94** | 94 | already at its optimum |
-| Target | 65 | **96** | 97 | whitespace 0.39→0.84 |
-| Telegram | 63 | **95** | 96 | composition 0.91→0.84, whitespace 0.56→0.99 |
-| Mastercard | 69 | **96** | 97 | whitespace 0.34→0.76 |
-| in (Bina) | 48 | **83** | 89 | composition 0.62→0.76 |
+| Target | 65 | **96** | 96 | already at its optimum |
+| Telegram | 63 | **95** | 95 | already at its optimum |
+| Mastercard | 69 | **96** | 96 | already at its optimum |
+| in (Bina, app icon) | 28 | **82** | 89 | composition 0.68→0.75, simplicity 0.73→0.86, whitespace 0.63→0.52, economy 0.50→0.83 |
+| in (Bina, grid mark) | 54 | **89** | 89 | already at its optimum |
 <!-- /table:logos -->
 
-What the numbers say. The degraded twins lose 26–40 points on every mark but Nike, so the score
-notices the things an icon review notices. For seven of the eleven famous marks the search found
-nothing better than what their designers shipped, and three more gain a single point from a slightly
-larger mark on the canvas (whitespace moves towards the 55 % the formula likes), which is a framing
-choice, not a redesign. Apple gains five points from a 30 % larger mark nudged 7 % up, because the
-leaf sits high and the mass low. The `in`
-icon is the one real design finding: the arch side is heavier than the `i`, so the wordmark reads
-off-centre until it is shifted 45 units left with a bigger character (composition 0.62 → 0.76).
+What the numbers say. The degraded twins lose 26–54 points on every mark but Nike, so the score
+notices the things an icon review notices. For eight of the eleven famous marks the search found
+nothing better than what their designers shipped. Apple gains five points from a 30 % larger mark
+nudged 7 % up, because the leaf sits high and the mass low; Figma gains two from a smaller mark in
+ink instead of five colours. Both are framing choices, not redesigns.
 
-Nike is the honest failure. The swoosh has no mirror axis and is a thin, wide stroke, so mirror
-symmetry is near zero and the canvas is 95 % air; it scores 60 where a designer would say 95, and its
-degraded twin loses only 4 points because there is little composition left to break. This
-comparison is what made `logo` and `art` mode credit *balance* at all (a centred, compact figure now
-earns most of the composition credit without a mirror axis, which took Nike from 50 to 60 without
-moving noise, blobs or splashes); a formula that puts the swoosh in the nineties without also
-promoting a random brush stroke is an open problem, and a good first factor to propose.
+Nike is the interesting one. Centred by its bounding box at 62 % of the canvas, the swoosh scores
+60: it has no mirror axis and is a thin, wide stroke, so mirror symmetry is near zero and the canvas
+is about 95 % air. Re-framed by its centre of mass (14 % to the right) and enlarged, the same swoosh scores
+87. Its degraded twin loses only 4 points because at 60 there is little composition left to break.
+This pair is what made `logo` and `art` mode credit *balance* at all: a centred, compact figure now
+earns most of the composition credit without a mirror axis (noise, blobs and splashes, which are
+trivially balanced, gained one or two points and no more). A swoosh that scores in the nineties
+*without* moving it is still an open problem, and a good first factor to propose.
+
+The Bina app icon gains seven points from a mark 20 % smaller in its tile (composition 0.68 → 0.75).
+Part of that gain is honest and part is the 124 px source: shrinking a blurred mark sharpens its
+edges, which simplicity and economy reward, so read the seven as "four or five". The grid mark is
+already at its optimum: the search moved it in every direction and found nothing.
 
 Reproduce with `python demo/logos/logos.py` (needs `pip install "beautiful[render]"`). Brand paths
 are from [Simple Icons](https://simpleicons.org) (CC0); the trademarks belong to their owners and
