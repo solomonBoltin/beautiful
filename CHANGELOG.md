@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- **Balance counts in `logo` and `art` mode.** Composition in the generic (non-`ui`) formula was mirror
+  symmetry alone, so a centred, balanced mark with no mirror axis (the Nike swoosh) scored like a
+  lopsided one. A compact, balanced figure now earns most of the composition credit (`max(mirror,
+  0.85·balance²·compactness)`); compactness gates it so noise and confetti, which are trivially
+  balanced, gain nothing (noise 17 → 18, blobs 18 → 20, splashes 37 → 38; symmetric marks unchanged).
+- **Twelve icons, three versions each** (`demo/logos/`, `demo/results_logos.md`): Chrome, ten acclaimed
+  marks and one working icon, each scored as published, degraded, and after a search for the best
+  framing. Nine of eleven famous marks come back "already at its optimum"; Nike (60) is the documented
+  failure.
 - **Five rendered scenarios** (`demo/scenes/`, `demo/gifs/`): sign-in, dashboard, pricing, product page and phone onboarding, each a real HTML page walking from a flawed state to a polished one, every frame rendered by the tool's own Chromium and scored by the lint. Replaces the drawn sign-in GIF.
 - **Photographs in the demo** (`demo/photos/`): a portrait, a sunset and a quetzal, with the honest finding that `art` mode underrates all three (issue #46).
 

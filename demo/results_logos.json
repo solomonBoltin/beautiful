@@ -2,53 +2,58 @@
  {
   "slug": "googlechrome",
   "name": "Chrome",
-  "less": 64,
-  "original": 95,
-  "more": 95,
+  "less": 63,
+  "original": 96,
+  "more": 96,
   "more_params": {},
-  "why_less": "composition 0.91\u21920.05, whitespace 0.57\u21921.00",
+  "why_less": "composition 0.92\u21920.04, whitespace 0.57\u21920.98",
   "why_more": "already at its optimum",
   "hints": [
-   "composition (0.91): centre the main block; mirror controls at both ends of a row",
-   "whitespace (0.57): adjust padding so ~60% of the canvas is background"
+   "whitespace (0.57): adjust padding so ~60% of the canvas is background",
+   "composition (0.92): centre the main block; mirror controls at both ends of a row"
   ]
  },
  {
   "slug": "apple",
   "name": "Apple",
-  "less": 67,
-  "original": 80,
-  "more": 80,
-  "more_params": {},
-  "why_less": "composition 0.43\u21920.10, whitespace 0.37\u21920.99",
-  "why_more": "already at its optimum",
+  "less": 64,
+  "original": 90,
+  "more": 95,
+  "more_params": {
+   "scale": 0.8,
+   "colour": null,
+   "dx": 0.012209033390440176,
+   "dy": -0.0657922833856505
+  },
+  "why_less": "composition 0.67\u21920.06, whitespace 0.37\u21920.98",
+  "why_more": "composition 0.67\u21920.81, whitespace 0.37\u21920.80",
   "hints": [
-   "composition (0.43): centre the main block; mirror controls at both ends of a row",
+   "composition (0.67): centre the main block; mirror controls at both ends of a row",
    "whitespace (0.37): adjust padding so ~60% of the canvas is background"
   ]
  },
  {
   "slug": "nike",
   "name": "Nike",
-  "less": 50,
-  "original": 50,
-  "more": 50,
+  "less": 56,
+  "original": 60,
+  "more": 60,
   "more_params": {},
-  "why_less": "whitespace 0.06\u21920.11",
+  "why_less": "composition 0.18\u21920.12, whitespace 0.06\u21920.12",
   "why_more": "already at its optimum",
   "hints": [
    "individual components are themselves asymmetric; tidy internal alignment",
-   "composition (0.06): centre the main block; mirror controls at both ends of a row"
+   "composition (0.18): centre the main block; mirror controls at both ends of a row"
   ]
  },
  {
   "slug": "github",
   "name": "GitHub",
-  "less": 64,
+  "less": 63,
   "original": 95,
   "more": 95,
   "more_params": {},
-  "why_less": "composition 0.92\u21920.07, whitespace 0.28\u21920.87",
+  "why_less": "composition 0.92\u21920.08, whitespace 0.28\u21920.80",
   "why_more": "already at its optimum",
   "hints": [
    "left/right symmetry is fine but top/bottom halves differ",
@@ -58,42 +63,41 @@
  {
   "slug": "slack",
   "name": "Slack",
-  "less": 64,
-  "original": 94,
-  "more": 94,
+  "less": 65,
+  "original": 95,
+  "more": 95,
   "more_params": {},
-  "why_less": "composition 0.88\u21920.06, whitespace 0.36\u21920.99",
+  "why_less": "composition 0.94\u21920.09, whitespace 0.36\u21920.96",
   "why_more": "already at its optimum",
   "hints": [
-   "whitespace (0.36): adjust padding so ~60% of the canvas is background",
-   "composition (0.88): centre the main block; mirror controls at both ends of a row"
+   "whitespace (0.36): adjust padding so ~60% of the canvas is background"
   ]
  },
  {
   "slug": "spotify",
   "name": "Spotify",
-  "less": 64,
+  "less": 65,
   "original": 95,
   "more": 95,
   "more_params": {},
-  "why_less": "composition 0.87\u21920.06, whitespace 0.53\u21920.98",
+  "why_less": "composition 0.89\u21920.08, whitespace 0.53\u21920.96",
   "why_more": "already at its optimum",
   "hints": [
-   "composition (0.87): centre the main block; mirror controls at both ends of a row",
+   "composition (0.89): centre the main block; mirror controls at both ends of a row",
    "whitespace (0.53): adjust padding so ~60% of the canvas is background"
   ]
  },
  {
   "slug": "figma",
   "name": "Figma",
-  "less": 56,
-  "original": 90,
-  "more": 90,
+  "less": 62,
+  "original": 91,
+  "more": 91,
   "more_params": {},
-  "why_less": "composition 0.75\u21920.06, whitespace 0.14\u21920.43",
+  "why_less": "composition 0.76\u21920.14, whitespace 0.14\u21920.44",
   "why_more": "already at its optimum",
   "hints": [
-   "composition (0.75): centre the main block; mirror controls at both ends of a row",
+   "composition (0.76): centre the main block; mirror controls at both ends of a row",
    "whitespace (0.14): adjust padding so ~60% of the canvas is background"
   ]
  },
@@ -104,7 +108,7 @@
   "original": 94,
   "more": 94,
   "more_params": {},
-  "why_less": "composition 0.92\u21920.04, whitespace 0.14\u21920.41",
+  "why_less": "composition 0.92\u21920.05, whitespace 0.14\u21920.39",
   "why_more": "already at its optimum",
   "hints": [
    "left/right symmetry is fine but top/bottom halves differ",
@@ -114,12 +118,17 @@
  {
   "slug": "target",
   "name": "Target",
-  "less": 64,
+  "less": 65,
   "original": 96,
-  "more": 96,
-  "more_params": {},
-  "why_less": "composition 0.98\u21920.06, whitespace 0.39\u21921.00",
-  "why_more": "already at its optimum",
+  "more": 97,
+  "more_params": {
+   "scale": 0.8,
+   "colour": null,
+   "dx": 0.0,
+   "dy": 0.0
+  },
+  "why_less": "composition 0.98\u21920.07, whitespace 0.39\u21920.97",
+  "why_more": "whitespace 0.39\u21920.84",
   "hints": [
    "whitespace (0.39): adjust padding so ~60% of the canvas is background"
   ]
@@ -127,12 +136,17 @@
  {
   "slug": "telegram",
   "name": "Telegram",
-  "less": 65,
+  "less": 63,
   "original": 95,
-  "more": 95,
-  "more_params": {},
-  "why_less": "composition 0.91\u21920.07, whitespace 0.56\u21921.00",
-  "why_more": "already at its optimum",
+  "more": 96,
+  "more_params": {
+   "scale": 0.8,
+   "colour": null,
+   "dx": 0.0,
+   "dy": 0.0
+  },
+  "why_less": "composition 0.91\u21920.05, whitespace 0.56\u21920.97",
+  "why_more": "composition 0.91\u21920.84, whitespace 0.56\u21920.99",
   "hints": [
    "composition (0.91): centre the main block; mirror controls at both ends of a row",
    "whitespace (0.56): adjust padding so ~60% of the canvas is background"
@@ -141,12 +155,17 @@
  {
   "slug": "mastercard",
   "name": "Mastercard",
-  "less": 67,
+  "less": 69,
   "original": 96,
-  "more": 96,
-  "more_params": {},
-  "why_less": "composition 0.98\u21920.10, whitespace 0.34\u21920.97",
-  "why_more": "already at its optimum",
+  "more": 97,
+  "more_params": {
+   "scale": 0.8,
+   "colour": null,
+   "dx": 0.0,
+   "dy": 0.0
+  },
+  "why_less": "composition 0.98\u21920.13, whitespace 0.34\u21920.95",
+  "why_more": "whitespace 0.34\u21920.76",
   "hints": [
    "whitespace (0.34): adjust padding so ~60% of the canvas is background"
   ]
@@ -154,7 +173,7 @@
  {
   "slug": "in",
   "name": "in (Bina)",
-  "less": 51,
+  "less": 48,
   "original": 83,
   "more": 89,
   "more_params": {
@@ -162,7 +181,7 @@
    "dx": -45,
    "char": 1.3
   },
-  "why_less": "composition 0.62\u21920.08, whitespace 0.14\u21920.34",
+  "why_less": "composition 0.62\u21920.05, whitespace 0.14\u21920.35",
   "why_more": "composition 0.62\u21920.76",
   "hints": [
    "individual components are themselves asymmetric; tidy internal alignment",

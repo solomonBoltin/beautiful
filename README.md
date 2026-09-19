@@ -499,3 +499,54 @@ What the numbers say, and where they are honest about their limits:
 | **42** | 37 | abstract splashes | 0.06 | 0.92 | 0.30 | 1.32 | -2.72 | 0.15 |
 | **5** | 17 | random noise | 0.05 | 0.38 | 0.00 | 2.00 | 0.01 | 0.00 |
 <!-- /table:art -->
+
+### Twelve icons, three versions each
+
+![Twelve icons: a worse version, the icon as published, and the best the formula could find](demo/logos_gallery.png)
+
+Chrome, ten more marks that designers hold up as near-perfect, and one working icon (the `in` mark of
+[Bina Solutions](https://www.bina-solutions.co.il)). Each is rendered by the tool's own Chromium at
+1024 px on a white square and scored in `logo` mode three times: a **less perfect** twin (shifted off
+centre, tilted 9°, cramped against the edges, with a stray bar and a stray dot the mark never asked
+for), the mark **as published**, and a **more perfect** twin: the best the formula could find by moving
+only what a designer would move (size on the canvas, optical centring by centre of mass, brand colour
+or ink). A candidate has to beat the original by two points to count; otherwise the mark is reported
+as already at its optimum.
+
+<!-- table:logos -->
+| icon | less perfect | as published | more perfect | what the formula moved |
+|---|---:|---:|---:|---|
+| Chrome | 63 | **96** | 96 | already at its optimum |
+| Apple | 64 | **90** | 95 | composition 0.67→0.81, whitespace 0.37→0.80 |
+| Nike | 56 | **60** | 60 | already at its optimum |
+| GitHub | 63 | **95** | 95 | already at its optimum |
+| Slack | 65 | **95** | 95 | already at its optimum |
+| Spotify | 65 | **95** | 95 | already at its optimum |
+| Figma | 62 | **91** | 91 | already at its optimum |
+| Airbnb | 54 | **94** | 94 | already at its optimum |
+| Target | 65 | **96** | 97 | whitespace 0.39→0.84 |
+| Telegram | 63 | **95** | 96 | composition 0.91→0.84, whitespace 0.56→0.99 |
+| Mastercard | 69 | **96** | 97 | whitespace 0.34→0.76 |
+| in (Bina) | 48 | **83** | 89 | composition 0.62→0.76 |
+<!-- /table:logos -->
+
+What the numbers say. The degraded twins lose 26–40 points on every mark but Nike, so the score
+notices the things an icon review notices. For seven of the eleven famous marks the search found
+nothing better than what their designers shipped, and three more gain a single point from a slightly
+larger mark on the canvas (whitespace moves towards the 55 % the formula likes), which is a framing
+choice, not a redesign. Apple gains five points from a 30 % larger mark nudged 7 % up, because the
+leaf sits high and the mass low. The `in`
+icon is the one real design finding: the arch side is heavier than the `i`, so the wordmark reads
+off-centre until it is shifted 45 units left with a bigger character (composition 0.62 → 0.76).
+
+Nike is the honest failure. The swoosh has no mirror axis and is a thin, wide stroke, so mirror
+symmetry is near zero and the canvas is 95 % air; it scores 60 where a designer would say 95, and its
+degraded twin loses only 4 points because there is little composition left to break. This
+comparison is what made `logo` and `art` mode credit *balance* at all (a centred, compact figure now
+earns most of the composition credit without a mirror axis, which took Nike from 50 to 60 without
+moving noise, blobs or splashes); a formula that puts the swoosh in the nineties without also
+promoting a random brush stroke is an open problem, and a good first factor to propose.
+
+Reproduce with `python demo/logos/logos.py` (needs `pip install "beautiful[render]"`). Brand paths
+are from [Simple Icons](https://simpleicons.org) (CC0); the trademarks belong to their owners and
+appear here only to compare scores.
