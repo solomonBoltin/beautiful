@@ -20,6 +20,8 @@ RULES = {
     "font-size-mobile": dict(level="warning", source="Apple HIG 17 pt; GOV.UK 16 px; Material 16 sp", why="body text under 16 px on a phone forces zoom and iOS zooms inputs", fix="body and inputs ≥ 16 px at the mobile breakpoint"),
     "touch-target": dict(level="error", source="WCAG 2.2 SC 2.5.8", why="targets under 24 × 24 px are missed; error rates exceed 40 % below 8 mm (Henze 2011)", fix="give the element ≥ 24 px in both dimensions or 24 px of clearance; inline text links and unstyled native controls are exempt"),
     "touch-target-mobile": dict(level="warning", source="Apple HIG 44 pt; Material 48 dp", why="thumb targets need ~9 mm; below 44 px accuracy drops", fix="min-height / min-width 44 px on phones, padding rather than font size"),
+    "icon-off-centre": dict(level="warning", source="Material icon buttons; Apple HIG; Gestalt symmetry", why="an icon drifting off the centre of its box reads as broken and the hit area no longer matches the glyph — the commonest padding regression", fix="centre the icon with flex (align-items / justify-content) or equal padding on all four sides"),
+    "dead-toggle": dict(level="error", source="WAI-ARIA APG disclosure pattern; WCAG 4.1.2", why="a toggle that flips aria-expanded but reveals nothing, or does nothing at all, is a broken control — menus and accordions die this way after a CSS change", fix="check the CSS that shows the controlled element (opacity / visibility / display) and that the handler is attached"),
     "target-spacing": dict(level="warning", source="Material 8 dp; Lighthouse tap-targets; WCAG 2.5.8 clearance", why="targets closer than 8 px are mis-tapped; WCAG accepts small targets only with a 24 px clearance circle", fix="add ≥ 8 px between adjacent targets, or enlarge them"),
     "line-length": dict(level="warning", source="Dyson & Haselgrove 2001; Shaikh & Chaparro 2005; Bringhurst; GOV.UK", why="screen studies support 45–95 characters per line; guidelines put the sweet spot at 60–75", fix="max-width around 65ch on text blocks"),
     "line-height": dict(level="warning", source="WCAG 1.4.12; Butterick", why="body text under 1.2 line-height is cramped; 1.5 is what WCAG asks layouts to tolerate", fix="line-height 1.5 for body, 1.1–1.25 for display"),
@@ -60,7 +62,7 @@ RULES = {
 }
 
 RULES_JS = r"""
-(vp) => {
+async (vp) => {
   const out = [];
   const add = (rule, level, message, examples, extra) => {
     if (!examples.length) return;
@@ -153,6 +155,37 @@ RULES_JS = r"""
   add('edge-margin', 'warning', 'text touching the viewport edge', edge);
   if (families.size > 3) add('type-noise', 'warning', families.size + ' font families on one page (keep to 1–2)', [...families]);
   if (sizes.size > 8) add('type-noise', 'warning', sizes.size + ' distinct font sizes on one page (a type scale has 5–8)', [...sizes].sort((a, b) => a - b).map(String));
+
+  // icon centring: a text-less control holding one visible child should hold it centred
+  const offC = [];
+  for (const el of all) {
+    if (!(['A', 'BUTTON'].includes(el.tagName) || el.getAttribute('role') === 'button') || !vis(el)) continue;
+    if ([...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim())) continue;
+    // the glyph may be a 2px bar whose ::before/::after draw the rest, so judge children by their own box, not vis()
+    const kids = [...el.children].filter(k => { const kr = rectOf(k), kc = cs(k); return kr.width > 0 && kr.height > 0 && (kr.width > 1 || kr.height > 1) && kc.display !== 'none' && kc.visibility !== 'hidden'; });
+    if (kids.length !== 1) continue;
+    const r = rectOf(el), k = rectOf(kids[0]);
+    if (r.width < 24 || r.height < 24 || (k.width > r.width * 0.9 && k.height > r.height * 0.9)) continue;
+    const dx = (k.left + k.right - r.left - r.right) / 2, dy = (k.top + k.bottom - r.top - r.bottom) / 2;
+    if (Math.abs(dx) > 2.5 || Math.abs(dy) > 2.5) offC.push(tag(el) + ' ' + [Math.abs(dx) > 2.5 ? Math.round(dx) + 'px across' : '', Math.abs(dy) > 2.5 ? Math.round(dy) + 'px down' : ''].filter(Boolean).join(', '));
+  }
+  add('icon-off-centre', 'warning', 'icon not centred in its control', offC);
+
+  // toggles: a button with aria-expanded / aria-controls must change something when activated (runs after the screenshot; state is restored)
+  const dead = [];
+  const shown = (t) => !!t && vis(t) && parseFloat(cs(t).opacity) > 0.5 && cs(t).pointerEvents !== 'none';
+  const toggles = all.filter(el => (el.tagName === 'BUTTON' || el.getAttribute('role') === 'button') && !el.closest('a') && (el.hasAttribute('aria-expanded') || el.hasAttribute('aria-controls')) && vis(el)).slice(0, 4);
+  for (const el of toggles) {
+    const target = el.getAttribute('aria-controls') ? document.getElementById(el.getAttribute('aria-controls')) : null;
+    const before = el.getAttribute('aria-expanded'), tBefore = target ? shown(target) : null;
+    try { el.click(); } catch (e) { continue; }
+    await new Promise(r => setTimeout(r, 400));
+    const flipped = el.getAttribute('aria-expanded') !== before, moved = target ? shown(target) !== tBefore : null;
+    if (target ? !moved : !flipped) dead.push(tag(el) + (target ? ' → #' + target.id + (flipped ? ' (aria-expanded flips but the target stays ' + (tBefore ? 'visible' : 'hidden') + ')' : ' (nothing changes)') : ' (aria-expanded does not change)'));
+    try { el.click(); await new Promise(r => setTimeout(r, 150)); } catch (e) {}
+    if (before !== null && el.getAttribute('aria-expanded') !== before) el.setAttribute('aria-expanded', before);
+  }
+  add('dead-toggle', 'error', 'toggle that changes nothing when activated', dead);
 
   // text overlap: two text elements whose boxes intersect, neither containing the other
   const lineBoxes = (el) => { const rs = [...el.getClientRects()].filter(r => r.width > 2 && r.height > 2); return rs.length ? rs : [rectOf(el)]; };

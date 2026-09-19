@@ -19,9 +19,10 @@ A beauty lint: explicit formulas from 90 years of aesthetics research, measured 
 from beautiful import beauty
 
 r = beauty("screenshot.png", mode="ui")
-r["score"]    # 82
-r["factors"]  # {'composition': 0.74, 'alignment': 0.26, 'simplicity': 0.76, 'whitespace': 0.91, ...}
-r["hints"]    # ['alignment (0.26): snap element edges to a shared column/row grid', ...]
+r["score"]    # 76
+r["factors"]  # {'composition': 1.0, 'alignment': 1.0, 'contrast': 0.18, 'harmony': 1.0, 'hierarchy': 0.01, ...}
+r["hints"]    # ['contour (0.05): contours crowd each other more than on acclaimed pages', ...]
+r["classic"]  # the literature-weighted formula's score and factors for the same image
 ```
 
 **Beauty has structure.** Symmetry and balance, alignment to a grid, the right amount of white
@@ -31,12 +32,18 @@ prefer. `beautiful` turns those findings into one formula: every term is a pixel
 through a documented target curve, weighted, and summed. You can read every line of it, argue with
 it, and improve it.
 
-**And it is measured, not asserted.** The same measurements were fitted to 398 website
-screenshots with human appeal ratings and tested on 100 more that were ranked by pairwise votes.
-The literature-shaped `ui` formula turned out **not** to track what those raters preferred; the
-fitted model does, out of sample. Both ship: `ui` / `art` / `logo` are the transparent formulas,
-`web` is the calibrated one. [The numbers are here](research/CALIBRATION.md), and they are the
-most useful thing in this repository.
+**And it is measured, not asserted.** The pure literature formula (`classic`) was put on a
+bench: 100 of the most acclaimed home pages on the web, 100 random pages, a deliberately broken
+twin of every acclaimed page, and 398 crowd-rated screenshots. It could not tell acclaimed
+design from a random page (AUC 0.59) and preferred the broken twin a third of the time. So the
+`ui` formula you get by default is the same explicit shape **fitted to that evidence**: every
+curve centred on what acclaimed pages measure, weights chosen so that acclaimed beats ordinary,
+an original beats its broken twin, and the orderings a designer would insist on hold —
+cross-validated AUC 0.72, original over twin 74 %, 18 of 21 curated orderings. Four modes ship:
+`ui` (fitted), `classic` (literature weights, also inside every `ui` report), `art` / `logo`
+(explicit formulas), and `web` (calibrated on the crowd ratings). [The fit](research/FIT.md),
+[the benchmark](research/BENCHMARK.md) and [the calibration](research/CALIBRATION.md) are the
+most useful things in this repository.
 
 ## Install
 
@@ -56,20 +63,33 @@ beautiful --min 70 screenshot.png            # exit 1 below 70 — a CI gate
 ```
 
 ```
- 82  screenshot.png
-      composition   0.74
-      alignment     0.26
-      simplicity    0.76
-      whitespace    0.91
+ 76  screenshot.png
+      composition   1.00
+      local         0.67
+      alignment     1.00
+      contrast      0.18
       harmony       1.00
-      contrast      1.00
-  ->  alignment (0.26): snap element edges to a shared column/row grid
+      edge_density  0.91
+      jpeg_bpp      0.82
+      colours       0.93
+      whitespace    0.96
+      colorfulness  0.97
+      congestion    0.79
+      contour       0.05
+      orientation   0.49
+      anisotropy    0.29
+      hierarchy     0.01
+      margin        0.99
+  ->  contour (0.05): contours crowd each other more than on acclaimed pages
+  ->  hierarchy (0.01): little structure at block scale: give the page a hero, sections or a clear heading scale
 ```
 
-Modes: **`ui`** (screens, pages, apps), **`art`** (paintings, photos, posters), **`logo`** (marks, icons) —
-the explicit formulas — and **`web`**, the model calibrated on human ratings of websites (its score
-is a percentile: web 70 = above 70 % of the 398 rated sites). Input can be a path, a `PIL.Image`,
-or a numpy array.
+Modes: **`ui`** (screens, pages, apps — the formula fitted to acclaimed design), **`classic`**
+(the same measurements with the literature's weights, unfitted), **`art`** (paintings, photos,
+posters), **`logo`** (marks, icons), and **`web`**, the model calibrated on human ratings of
+websites (its score is a percentile: web 70 = above 70 % of the 398 rated sites). Input can be a
+path, a `PIL.Image`, or a numpy array. Every factor is a goodness in 0–1 (1 = in the range
+acclaimed pages occupy); the hints name the terms losing the most points.
 
 ## Beauty lint
 
@@ -87,10 +107,10 @@ beautiful src/pages/ --save-renders renders/        # every .html in a tree, kee
 
 ```
  92  docs/index.html@desktop
- 84  docs/index.html@tablet
- 78  docs/index.html@mobile
-  mobile  composition 0.66  alignment 0.41  simplicity 0.52  whitespace 0.83  …
-           ->  alignment (0.41): snap element edges to a shared column/row grid
+ 87  docs/index.html@tablet
+ 92  docs/index.html@mobile
+  tablet  composition 0.71  alignment 0.62  contrast 1.00  harmony 1.00  hierarchy 0.88  …
+           ->  alignment (0.62): snap element edges to a shared column/row grid
 ```
 
 The render is frozen — animations and transitions off, fonts awaited, network idle, fixed clock,
@@ -163,7 +183,7 @@ formula and cost points on top of it:
 ### Rules the DOM can answer
 
 When a page is rendered, a rule pass runs inside it — the part of a beauty lint that is not
-taste, with the thresholds the guidelines agree on and the source on every finding. 42 rules:
+taste, with the thresholds the guidelines agree on and the source on every finding. 44 rules:
 
 <!-- table:rules -->
 | rule | level | what | source |
@@ -210,6 +230,8 @@ taste, with the thresholds the guidelines agree on and the source on every findi
 | `spacing-scale` | warning | gaps off a 4/8 px scale and many distinct gap values read as arbitrary | 8-pt grid (10+ design systems); RL-paper D1 spacing consistency |
 | `ai-look` | note | indigo→cyan gradients, Inter as display, three identical icon cards, glass panels and nested cards are the tells readers use to spot generated pages | 8 sources 2025–2026 (925studios, mania.design, dev.to, Hallmark, Impeccable, taste-skill, ux-skill, Anthropic cookbook) |
 | `thumb-reach` | note | a primary control in the top-far corner of a phone is out of one-handed reach | Bergstrom-Lehtovirta & Oulasvirta 2014; Hoober 2013 (49 % one-thumb) |
+| `icon-off-centre` | warning | icon not centred in a text-less control (offset > 2.5 px) | Material icon buttons; Apple HIG |
+| `dead-toggle` | error | button with aria-expanded / aria-controls that reveals nothing when clicked | WAI-ARIA APG disclosure; WCAG 4.1.2 |
 <!-- /table:rules -->
 
 Errors cost 3 points each (capped at 12); warnings and notes are free — a note is a tell, never

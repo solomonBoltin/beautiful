@@ -30,7 +30,8 @@ jobs:
         run: python tests.py
       - name: CLI smoke test and CI gate
         run: |
-          beautiful --mode=ui demo/screens/pinkas_documents.png --min 80
+          beautiful --mode=ui demo/screens/pinkas_documents.png --min 70
+          beautiful --mode=classic demo/screens/pinkas_documents.png --min 85
           beautiful --mode=art --json demo/art/mandala_radial.png > /dev/null
           python -m beautiful --mode=logo demo/art/shield_logo.png demo/art/random_noise.png
         shell: bash
@@ -42,7 +43,7 @@ jobs:
           lines = [json.loads(l) for l in open("mcp.out", encoding="utf-8") if l.strip()]
           assert any(t["name"] == "beauty_compare" for l in lines if l.get("id") == 2 for t in l["result"]["tools"])
           call = next(l for l in lines if l.get("id") == 3)
-          assert json.loads(call["result"]["content"][0]["text"])["score"] >= 85, call
+          assert json.loads(call["result"]["content"][0]["text"])["score"] >= 70, call
           print("mcp ok")
           PY
         shell: bash
@@ -80,7 +81,7 @@ jobs:
       - name: HTML string and MCP render tool
         run: |
           printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"beauty_render","arguments":{"source":"<html><body style=\"margin:0;display:grid;place-items:center;height:100vh;background:#fff\"><div style=\"width:240px;height:120px;background:#002e5f;border-radius:12px\"></div></body></html>","viewports":["desktop","mobile"]}}}' | beautiful-mcp > mcp.out
-          python -c "import json; r=json.loads(open('mcp.out').readline()); d=json.loads(r['result']['content'][0]['text']); assert d['desktop']['score']>=80 and d['mobile']['score']>=80, d; print('render ok', d['desktop']['score'], d['mobile']['score'])"
+          python -c "import json; r=json.loads(open('mcp.out').readline()); d=json.loads(r['result']['content'][0]['text']); assert d['desktop']['score']>=70 and d['mobile']['score']>=70, d; print('render ok', d['desktop']['score'], d['mobile']['score'])"
       - name: DOM rules find every planted defect and none on the clean page
         run: |
           beautiful demo/lint/bad.html --viewports mobile --json > bad.json
@@ -91,7 +92,7 @@ jobs:
           need = {"text-contrast", "font-size", "line-height", "text-clipped", "touch-target", "image-distortion", "img-alt", "heading-order", "font-size-mobile",
                   "text-overlap", "image-broken", "empty-control", "generic-link", "redundant-link", "justified-text", "underlined-text", "all-caps-body", "centered-body",
                   "contrast-polarity", "near-duplicate-colours", "edge-margin", "multiple-primaries", "consent-asymmetry", "prechecked-optin", "urgency-text", "confirmshaming",
-                  "placeholder-residue", "focus-removed", "motion", "spacing-scale", "ai-look", "target-spacing", "touch-target-mobile"}
+                  "placeholder-residue", "focus-removed", "motion", "spacing-scale", "ai-look", "target-spacing", "touch-target-mobile", "icon-off-centre", "dead-toggle"}
           assert need <= found, need - found
           assert r["penalties"].get("rules"), r["penalties"]
           print("bad.html:", len(found), "rules")
