@@ -89,7 +89,8 @@
   </div>
 
   <div class="controls">
-    <label>mode <select id="mode"><option value="ui">ui — screens &amp; pages</option><option value="art">art — paintings, photos, posters</option><option value="logo">logo — marks &amp; icons</option><option value="web">web — calibrated on human ratings (advisory)</option></select></label>
+    <label>mode <select id="mode"><option value="ui">ui — screens &amp; pages</option><option value="art">art — paintings, photos, posters</option><option value="logo">logo — marks &amp; icons</option><option value="web">web — calibrated on human ratings (advisory)</option>
+      <option value="classic">classic — the literature weights, unfitted</option></select></label>
     <button id="rescore" disabled>re-score</button>
     <button id="explain" disabled title="draw every factor over the image">what does it see?</button>
   </div>
@@ -117,7 +118,7 @@
     <img id="explainImg" alt="what the formula sees" style="width:100%;border-radius:10px">
   </div>
 
-  <p class="privacy">The score is <code>Σ wₖ·goodnessₖ</code> spread over 1–100. Every factor descends from a paper (Birkhoff 1933, Ngo 2003, Reinecke &amp; Gajos 2013, Miniukovich &amp; De Angeli 2015, Cohen-Or 2006, Hasler &amp; Süsstrunk 2003…). No model weights, no dataset, no network call for the image. First load fetches numpy, scipy and pillow (~25 MB) via <a href="https://pyodide.org">Pyodide</a>; cached afterwards. Same numbers as <code>pip install beautiful-score</code>.</p>
+  <p class="privacy">The score is <code>Σ wₖ·goodnessₖ</code> spread over 1–100. Every factor descends from a paper (Birkhoff 1933, Ngo 2003, Reinecke &amp; Gajos 2013, Miniukovich &amp; De Angeli 2015, Cohen-Or 2006, Hasler &amp; Süsstrunk 2003…). The <code>ui</code> weights are sixteen readable numbers (<a href="https://github.com/solomonBoltin/beautiful/blob/main/beautiful/ui_model.json">ui_model.json</a>) fitted on a public bench of acclaimed, ordinary and deliberately broken pages (<a href="https://github.com/solomonBoltin/beautiful/blob/main/research/FIT.md">the fit</a>); no neural network, no network call for the image. First load fetches numpy, scipy and pillow (~25 MB) via <a href="https://pyodide.org">Pyodide</a>; cached afterwards. Same numbers as <code>pip install beautiful-score</code>.</p>
 </main>
 
 <script src="https://cdn.jsdelivr.net/pyodide/v314.0.7/full/pyodide.js"></script>

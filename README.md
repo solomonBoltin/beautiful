@@ -9,7 +9,7 @@ A beauty lint: explicit formulas from 90 years of aesthetics research, measured 
   <a href="https://pypi.org/project/beautiful-score/"><img alt="pypi" src="https://img.shields.io/pypi/v/beautiful-score?color=2ea44f&label=pypi"></a>
   <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-2ea44f"></a>
   <img alt="python" src="https://img.shields.io/badge/python-3.9%E2%80%933.13-blue">
-  <img alt="weights" src="https://img.shields.io/badge/model%20weights-none-success">
+  <img alt="weights" src="https://img.shields.io/badge/weights-16%20readable%20numbers-success">
   <a href="research/CALIBRATION.md"><img alt="calibrated" src="https://img.shields.io/badge/calibrated%20on-398%20rated%20sites-orange"></a>
 </p>
 
