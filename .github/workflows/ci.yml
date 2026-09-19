@@ -34,3 +34,15 @@ jobs:
           beautiful --mode=art --json demo/art/mandala_radial.png > /dev/null
           python -m beautiful --mode=logo demo/art/shield_logo.png demo/art/random_noise.png
         shell: bash
+      - name: MCP server smoke test
+        run: |
+          printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}' '{"jsonrpc":"2.0","id":2,"method":"tools/list"}' '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"beauty_score","arguments":{"image":"demo/screens/pinkas_documents.png"}}}' | beautiful-mcp > mcp.out
+          grep -q '"beauty_compare"' mcp.out && grep -q '"score": 90' mcp.out
+        shell: bash
+      - name: Action scorer smoke test
+        env:
+          INPUT_IMAGES: "demo/screens/pinkas_*.png"
+          INPUT_MODE: ui
+          INPUT_MIN: "50"
+        run: python .github/scripts/score.py
+        shell: bash

@@ -1,15 +1,18 @@
 <h1 align="center">beautiful</h1>
 
-<p align="center"><strong>A beauty number, 1–100, for any screenshot, logo or artwork — from pixels alone.</strong><br>
-Built so AI coding agents can <em>see</em> what they ship, and fix it.</p>
+<p align="center"><strong>A mathematical beauty score, 1–100, for any screenshot, logo or artwork.</strong><br>
+Computed from pixels with explicit, inspectable formulas. No model, no dataset, no opinion you can't read.</p>
 
 <p align="center">
+  <a href="https://solomonboltin.github.io/beautiful/"><img alt="try it in your browser" src="https://img.shields.io/badge/try%20it-in%20your%20browser-7c8cff"></a>
   <a href="https://github.com/solomonBoltin/beautiful/actions/workflows/ci.yml"><img alt="ci" src="https://github.com/solomonBoltin/beautiful/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://pypi.org/project/beautiful-score/"><img alt="pypi" src="https://img.shields.io/pypi/v/beautiful-score?color=2ea44f&label=pypi"></a>
   <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-2ea44f"></a>
   <img alt="python" src="https://img.shields.io/badge/python-3.9%E2%80%933.13-blue">
-  <img alt="deps" src="https://img.shields.io/badge/deps-numpy%20%C2%B7%20pillow%20%C2%B7%20scipy-lightgrey">
   <img alt="weights" src="https://img.shields.io/badge/model%20weights-none-success">
 </p>
+
+<p align="center"><img src="demo/loop.gif" width="720" alt="A sign-in card whose button walks back to centre while the beauty score climbs from 54 to 91"></p>
 
 ```python
 from beautiful import beauty
@@ -20,27 +23,20 @@ r["factors"]  # {'composition': 0.74, 'alignment': 0.26, 'simplicity': 0.76, 'wh
 r["hints"]    # ['alignment (0.26): snap element edges to a shared column/row grid', ...]
 ```
 
-## Why
-
-Your coding agent is great at logic and blind to looks. It never sees the page it just built, so it
-edits CSS by guesswork and ships the lopsided, cramped, off-grid screens every vibe coder knows.
-
-`beautiful` gives it eyes for **form**. One number to hill-climb, and a breakdown that says *which*
-property is wrong — composition, alignment, white space, colour harmony, contrast — with a hint on
-what to change. Every term is an explicit formula with a target range from the experimental-aesthetics
-and HCI literature. No model weights, no network, no dataset.
-
-```
-render  →  beauty()  →  read the hints  →  edit  →  repeat
-```
+**Beauty has structure.** Symmetry and balance, alignment to a grid, the right amount of white
+space, a harmonic palette, crisp figure–ground contrast, intermediate complexity. Ninety years of
+experimental aesthetics and HCI research measured each of these and found the ranges people
+prefer. `beautiful` turns those findings into one formula: every term is a pixel measurement mapped
+through a documented target curve, weighted, and summed. You can read every line of it, argue with
+it, and improve it.
 
 ## Install
 
 ```bash
-pip install git+https://github.com/solomonBoltin/beautiful
+pip install beautiful-score
 ```
 
-Python 3.9+. Pulls in `numpy`, `pillow`, `scipy` and nothing else.
+Python 3.9+, pulls in `numpy`, `pillow`, `scipy` and nothing else. Or **[try it in your browser](https://solomonboltin.github.io/beautiful/)** — the same package running on Pyodide, your image never leaves the tab.
 
 ## 30 seconds
 
@@ -65,47 +61,71 @@ beautiful --min 70 screenshot.png            # exit 1 below 70 — a CI gate
 Modes: **`ui`** (screens, pages, apps), **`art`** (paintings, photos, posters), **`logo`** (marks, icons).
 Input can be a path, a `PIL.Image`, or a numpy array.
 
-## Use it with your AI coding agent
+## Famous sites, scored
 
-The intended user is not you — it is the agent editing your UI. Give it the loop:
+Twenty well-known home pages captured at 1280×800 on 2026-09-19 and scored with `--mode=ui`.
+Four captures came back blank or blocked and were dropped. Full table with every factor:
+[`demo/results_famous.md`](demo/results_famous.md); reproduce with `python demo/famous.py`.
 
-**Claude Code** — drop [`skills/beautiful/SKILL.md`](skills/beautiful/SKILL.md) into your project's
-`.claude/skills/beautiful/` (or `~/.claude/skills/`). It triggers on any UI change and runs the loop
-until the score stops moving.
+![Famous sites scored](demo/famous_sites.png)
 
-**Cursor / Codex / Copilot / anything else** — paste this into your rules file (`AGENTS.md`,
-`.cursorrules`, `CLAUDE.md`):
+| beauty | site | what the formula sees |
+|---:|---|---|
+| **85** | apple.com | one centred object, symmetric, calm palette, lots of air |
+| **66** | news.ycombinator.com | the best **alignment** in the set (0.70, one column grid), but no composition to speak of |
+| **64** | notion.com | centred hero, but only 31 % background and many container edges |
+| **61** | google.com | perfectly simple, yet the logo/search box sit high: 9 % white space in the formula's eyes |
+| **60** | craigslist.org | balanced and airy; the densest edge map in the set (**simplicity** 0.11) |
+| **54** | github.com | left-weighted hero, low grid quality |
+| **39** | tailwindcss.com | strong left anchoring (**composition** 0.13) |
+| **30** | vercel.com | a near-empty viewport with one text block bottom-left |
+| **26** | stripe.com | the diagonal gradient wipes out symmetry and sends colourfulness off the chart |
+| **16** | amazon.com | maximum edge density, 10 % background, 0.07 colour restraint |
 
-```md
-After any change that renders something, screenshot it at 1280×800 and run
-`beautiful --mode=ui shot.png`. Read the hints. Make one edit for the top hint,
-re-render, re-score. Stop when the score stops moving. Report before/after.
-```
+The ranking is not a ranking of good websites. It is a ranking of *form in a single viewport*:
+Apple's splash wins because the formula measures composition, not conversion. Craigslist beats
+Stripe because Craigslist is symmetric and Stripe's hero is a diagonal. That is exactly the point —
+the number is explainable, and every disagreement you have with it is a factor waiting to be
+proposed (see below).
 
-**In CI** — fail the build when a screenshot regresses:
+## Use it from your editor, agent or CI
+
+**MCP server** — two tools, `beauty_score` and `beauty_compare`, for Claude Code, Cursor, Windsurf
+and any MCP client. Zero extra dependencies.
 
 ```bash
-beautiful --mode=ui e2e/screens/*.png --min 70
+claude mcp add beautiful -- beautiful-mcp
+```
+```json
+{ "mcpServers": { "beautiful": { "command": "beautiful-mcp" } } }
 ```
 
-The score is smooth enough to optimise. A card whose button drifts off centre:
+**Claude Code skill** — copy [`skills/beautiful/`](skills/beautiful/) into `.claude/skills/`. It
+runs the render → score → read hints → edit loop after any UI change.
 
-| button offset | beauty (ui) |
-|---:|---:|
-| 160 px | 40 |
-| 80 px | 43 |
-| 40 px | 68 |
-| 0 px | 88 |
+**GitHub Action** — score the screenshots your E2E suite already produces and get the table as a
+PR comment:
 
-[`demo/capture_and_score.py`](demo/capture_and_score.py) is a minimal driver (headless Chromium →
-PNG → score).
+```yaml
+- uses: solomonBoltin/beautiful@v0.2.0
+  with:
+    images: "e2e/screens/*.png"
+    min: 60          # optional: fail the job below this
+```
+
+**Any agent** — one line in `AGENTS.md` / `.cursorrules`:
+
+```md
+After any change that renders something, screenshot it at 1280×800, run `beautiful --mode=ui shot.png`,
+fix the top hint, re-score. Stop when the score stops moving. Report before/after.
+```
+
+The score is smooth enough to optimise (the GIF above is a real trace: 54 → 91 as a button walks
+back to centre). [`demo/capture_and_score.py`](demo/capture_and_score.py) is a minimal driver.
 
 ---
 
-## Demo: beauty numbers for real UI screenshots
-
-Live pages captured headlessly at 1280×800. Two captures came through **without CSS** because the
-sandbox blocked their asset CDNs; they are kept, labelled, as raw-HTML anchors.
+## Demo: real UI screenshots
 
 ![UI gallery](demo/ui_gallery.png)
 
@@ -193,6 +213,19 @@ mirror weight (a sidebar is top/bottom-uniform, which nobody reads as "composed"
 symmetry is measured on a blurred structural map so text doesn't count, and top-heaviness is
 discounted because screens scroll.
 
+## Make the score better — propose a factor
+
+The formula is deliberately incomplete. Rhythm, proportion, typographic hierarchy, focal-point
+count, accent-colour discipline, negative-space shape: none of these are in it yet, and each is
+measurable from pixels. **[FACTORS.md](FACTORS.md)** is the wishlist with a starting point for
+each. To propose one, open a [factor proposal](https://github.com/solomonBoltin/beautiful/issues/new?template=1-propose-a-beauty-factor.yml)
+— an idea with a source and two images the current score gets wrong is enough; you don't have to
+implement it. To disprove one, open a [counterexample](https://github.com/solomonBoltin/beautiful/issues/new?template=2-score-is-wrong.yml).
+
+Rules: pixels only (numpy / PIL / scipy, no DOM, no learned models), a cited target range, and the
+demo table must move in the right direction. Every factor that lands gets a line in the table
+above with your name on the source.
+
 ---
 
 ## Research: what the world has tried
@@ -231,10 +264,10 @@ discounted because screens scroll.
 
 **Why `beautiful` is closed-form anyway.** Learned predictors score higher on their own benchmarks
 but return a number without a reason, inherit the taste of their raters, and can't be steered
-factor-by-factor. For an *agent that must edit a design*, a transparent mixture whose terms are the
-very properties the agent controls (alignment, balance, palette size, contrast) is the useful tool —
-and Iigaya et al. show such a mixture is not a toy. The two are complementary: use `beautiful` for
-the inner optimisation loop, a learned model for a final sanity check.
+factor-by-factor. A transparent mixture whose terms are the very properties a designer controls
+(alignment, balance, palette size, contrast) can be read, argued with and improved — and Iigaya et
+al. show such a mixture is not a toy. The two are complementary: use `beautiful` for the inner
+optimisation loop, a learned model for a final sanity check.
 
 ---
 
@@ -242,7 +275,7 @@ the inner optimisation loop, a learned model for a final sanity check.
 
 - `tests.py` — five ordering invariants (rebalanced > original by ≥ 15; unstyled < 45; centred dialog ≫ asymmetric sample; mandala > splashes > noise; logo shield ≫ diagonal). CI runs them on Linux, macOS and Windows, Python 3.9–3.13.
 - The composition module alone was validated on a labelled symmetry set (perfect / medium / asymmetric tiers, Spearman ρ = 0.96 against tier) and a synthetic gallery (ρ = 0.92 against an a-priori ranking).
-- Not validated against human appeal ratings. Doing that properly means Reinecke & Gajos's 398-page dataset or Calista's pairwise set, then fitting the weights — the obvious next step, and the honest gap between this and Webthetics-class numbers.
+- Not validated against human appeal ratings. Doing that properly means Reinecke & Gajos's 398-page dataset or Calista's pairwise set, then fitting the weights — the obvious next step, and the honest gap between this and Webthetics-class numbers. **This is the single most valuable pull request the project can receive.**
 
 ## Limitations
 
@@ -259,10 +292,14 @@ beautiful/
   features.py      colourfulness, harmony, complexity, whitespace, alignment, contrast, fractal, fourier, thirds
   symmetry.py      composition: mirror / rotational / local symmetry, balance (ui + generic modes)
   __main__.py      the `beautiful` CLI
+  mcp_server.py    the `beautiful-mcp` MCP server (dependency-free)
+action.yml         the GitHub Action (+ .github/scripts/)
+docs/index.html    the browser demo (Pyodide)
 skills/beautiful/  a drop-in skill for Claude Code and similar agents
+FACTORS.md         the factor wishlist — start here to contribute
 demo/
-  screens/         the UI screenshots scored above       art/   the art/logo samples
-  results_ui.md    results_art.md   results_ui.json      ui_gallery.png   make_gallery.py
+  screens/  art/   the samples scored above          famous.py  results_famous.md  famous_sites.png
+  results_ui.md    results_art.md   results_ui.json  ui_gallery.png  make_gallery.py  make_loop_gif.py
   screenshot_url.js  screenshot_file.js  capture_and_score.py  package.json
 tests.py
 ```
@@ -270,15 +307,16 @@ tests.py
 ## Roadmap
 
 - [ ] Fit the weights to a public human-rating dataset and report held-out correlation
-- [ ] A JavaScript/TypeScript port for the browser and Playwright
-- [ ] An MCP server so any agent can call `beauty()` as a tool
-- [ ] A GitHub Action that scores every screenshot a PR adds
-- [ ] Publish to PyPI
+- [ ] A JavaScript/TypeScript port for the browser and Playwright (no Pyodide)
+- [ ] More factors — see [FACTORS.md](FACTORS.md)
+- [x] MCP server
+- [x] GitHub Action
+- [x] Browser demo
+- [x] PyPI
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) — screenshots that break the score are the most useful thing
+See [CONTRIBUTING.md](CONTRIBUTING.md). Counterexamples and factor ideas are the most useful things
 you can send.
 
 ## License
 
-[MIT](LICENSE) © 2026 Solomon Bolotin. Made at [Bina Solutions](https://www.bina-solutions.co.il/),
-where it keeps the [Digital Office](https://www.bina-solutions.co.il/) screens honest.
+[MIT](LICENSE) © 2026 Solomon Bolotin. Made at [Bina Solutions](https://www.bina-solutions.co.il/).

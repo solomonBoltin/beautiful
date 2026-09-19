@@ -1,35 +1,42 @@
 ---
 name: beautiful
-description: Score any screenshot, logo or artwork 1–100 for beauty and get concrete hints on what to fix. Use after ANY change that renders something (a page, a component, a dialog, a chart, a logo) and before declaring UI work done. Trigger words - UI, UX, layout, design, CSS, screenshot, "looks off", "make it prettier", "polish".
+description: Measure the beauty of any screenshot, logo or artwork as a number 1–100 with a factor breakdown (composition, alignment, white space, colour harmony, contrast, complexity) and concrete hints. Use after ANY change that renders something and before declaring UI work done. Trigger words - UI, UX, layout, design, CSS, screenshot, "looks off", "make it prettier", "polish".
 ---
 
-# beautiful — see what you ship
+# beautiful — measure, don't guess
 
-You cannot look at a page. `beautiful` can measure one. Use it as your eyes for form:
-composition, alignment, white space, colour harmony and contrast, all from pixels.
+Looking at a page tells you *that* something is off. `beautiful` tells you *what*, as a number
+you can move: composition, alignment, white space, colour harmony, contrast, complexity — each
+an explicit formula from the aesthetics literature, computed from pixels.
 
 ## Install (once)
 
 ```bash
-python -m pip install git+https://github.com/solomonBoltin/beautiful
+python -m pip install beautiful-score          # or: pip install git+https://github.com/solomonBoltin/beautiful
+```
+
+Or as an MCP tool, so you can call `beauty_score` / `beauty_compare` directly:
+
+```bash
+claude mcp add beautiful -- beautiful-mcp
 ```
 
 ## The loop
 
 1. **Render** the thing you changed to a PNG at the size a user sees it (a 1280×800 viewport
-   for pages; the natural size for a logo). Use whatever screenshot tool the project has
-   (Playwright, Puppeteer, the browser tool, `demo/screenshot_url.js` in the repo).
+   for pages; the natural size for a logo). Use the project's screenshot tool (Playwright,
+   Puppeteer, the browser tool, `demo/screenshot_url.js` in the repo).
 2. **Score** it:
    ```bash
    beautiful --mode=ui shot.png        # ui | art | logo
    ```
    You get the number, every factor in 0–1, and hints ordered by how much each one costs.
-3. **Read the hints, not just the number.** Each hint names the weakest factor and the edit
-   that raises it. Typical: "composition: centre the main block", "alignment: snap element
-   edges to a shared grid", "whitespace: adjust padding so ~60% of the canvas is background".
-4. **Make one edit** that addresses the top hint. Re-render. Re-score.
-5. **Stop** when the score stops moving, or at the target the task set. Report the
-   before/after numbers and the factor that moved.
+3. **Read the hints, not just the number.** Each names the weakest factor and the edit that
+   raises it: "composition: centre the main block", "alignment: snap element edges to a shared
+   grid", "whitespace: adjust padding so ~60% of the canvas is background".
+4. **Make one edit** for the top hint. Re-render. Re-score (or `beauty_compare` before/after).
+5. **Stop** when the score stops moving, or at the target the task set. Report before/after
+   and the factor that moved.
 
 Score the viewport, not a full-page capture of a very tall page. Score each state that
 matters (empty state, dialog open, mobile width) separately.
@@ -38,7 +45,7 @@ matters (empty state, dialog open, mobile width) separately.
 
 | score | means |
 |---:|---|
-| 85+ | composed, aligned, calm — production quality |
+| 85+ | composed, aligned, calm |
 | 70–84 | fine; one factor is dragging it (read the hint) |
 | 50–69 | something structural is off — usually composition or white space |
 | < 50 | unstyled, lopsided, or cluttered |

@@ -1,0 +1,33 @@
+name: "The score is wrong for this image"
+description: "A screenshot that looks great and scores low, or looks bad and scores high."
+title: "score: "
+labels: ["counterexample"]
+body:
+  - type: markdown
+    attributes:
+      value: Counterexamples become test cases. Thank you.
+  - type: textarea
+    id: image
+    attributes:
+      label: The image
+      description: Attach it (drag and drop). Say what it is and at what viewport it was captured.
+    validations:
+      required: true
+  - type: input
+    id: got
+    attributes:
+      label: Score it got
+      placeholder: "beautiful --mode=ui shot.png"
+    validations:
+      required: true
+  - type: input
+    id: expected
+    attributes:
+      label: Roughly what you expected, and why
+    validations:
+      required: true
+  - type: textarea
+    id: factors
+    attributes:
+      label: The factor breakdown (paste the CLI output)
+      render: text

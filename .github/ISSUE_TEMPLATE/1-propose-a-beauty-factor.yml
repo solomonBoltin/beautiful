@@ -1,0 +1,51 @@
+name: "Propose a beauty factor"
+description: "An idea for a new term in the formula (or a better version of an existing one)."
+title: "factor: "
+labels: ["factor-proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The score is a weighted sum of explicit, pixel-only factors. The best way to make it better
+        is a new factor that measures something real about beauty. You do **not** need to implement it —
+        a clear idea with a source is enough to get it into the [factor wishlist](../blob/main/FACTORS.md).
+  - type: input
+    id: name
+    attributes:
+      label: Factor name
+      placeholder: "e.g. rhythm, golden-ratio proportion, typographic hierarchy"
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What does it measure, in one paragraph?
+      description: The property of the image, as a human would describe it.
+    validations:
+      required: true
+  - type: textarea
+    id: how
+    attributes:
+      label: How could it be computed from pixels alone?
+      description: A sketch is fine. numpy / PIL / scipy only, no learned models, no DOM.
+  - type: textarea
+    id: target
+    attributes:
+      label: Target range
+      description: "Is more always better (ramp) or is there a sweet spot (bell)? What values?"
+  - type: textarea
+    id: source
+    attributes:
+      label: Source
+      description: The paper, book, design rule or experiment this comes from. Links welcome.
+  - type: dropdown
+    id: modes
+    attributes:
+      label: Which modes should it affect?
+      multiple: true
+      options: ["ui", "art", "logo"]
+  - type: textarea
+    id: example
+    attributes:
+      label: Two images the current score gets wrong because this factor is missing
+      description: Attach or link them. This is the single most convincing thing you can add.

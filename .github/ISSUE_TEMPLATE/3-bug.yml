@@ -1,0 +1,20 @@
+name: "Bug"
+description: "A crash, a wrong result that is not about taste, a packaging problem."
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: How to reproduce
+      render: bash
+  - type: input
+    id: env
+    attributes:
+      label: OS / Python / beautiful version
+      placeholder: "macOS 15, Python 3.12, beautiful 0.2.0"

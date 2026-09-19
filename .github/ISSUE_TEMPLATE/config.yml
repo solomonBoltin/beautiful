@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Discuss a factor idea first
+    url: https://github.com/solomonBoltin/beautiful/discussions/categories/factor-ideas
+    about: Not sure it's measurable, or want to argue about the weights? Start a discussion.
