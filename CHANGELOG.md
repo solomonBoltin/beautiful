@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.7.0 — 2026-09-20
+
+- **Rules v2: 44 DOM rules.** The 19 rule issues from the design-lint survey implemented: text
+  overlap, broken images, empty controls, generic and redundant links, justified / underlined /
+  all-caps / centred body text, contrast polarity, near-duplicate colours, too many hues, pure
+  black-on-white, edge margins, false floor, hidden desktop nav, multiple primaries, consent
+  asymmetry, pre-ticked opt-ins, urgency and confirmshaming text, placeholder residue, focus rings
+  removed, motion without reduced-motion, marquee/blink, off-scale spacing, thumb reach, and the
+  AI-look signature (a note, never a penalty). Every finding carries `source`, `why` and `fix`.
+  Fixtures `demo/lint/bad.html` (33 rules) and `floor.html` (5 more) are proven in CI.
+- **The 100-site benchmark.** `research/top100.py` renders the 100 most acclaimed home pages
+  (after dropping 44 bot walls, consent dialogs and blank captures by eye) and scores them;
+  `research/degrade.py` makes a broken twin of each (a block shifted off its grid, content
+  clipped by the viewport, an overlapping duplicate, a stretched region, a contrast wash,
+  clutter, a lopsided crop, a colour cast); `research/benchmark.py` measures whether a score
+  separates acclaimed from 100 random pages and from broken renders — see `research/BENCHMARK.md`.
+- **`ui` is now a fitted formula; the literature formula is `classic`.** The benchmark showed
+  the literature-weighted formula could not tell acclaimed design from a random page (AUC 0.59)
+  and preferred the broken twin 37 % of the time. `research/fit_ui.py` keeps the explicit shape —
+  a weighted sum of documented curves over pixel measurements — but centres each curve on what
+  acclaimed pages measure and fits the weights to four targets at once: acclaimed > ordinary,
+  original > degraded twin, the crowd-rating correlation must not go negative, and 21 curated
+  UI orderings (rebalanced > original, composed screens > unstyled, designed pages > plain text
+  dumps) must hold. Priors keep it a *UI* score: composition ≥ 0.15 of the weight, the
+  photographic-texture and amount-of-content terms capped. Cross-validated: AUC 0.72 (was 0.59),
+  original beats its twin 74 % (was 63 %), ρ vs crowd ratings +0.14 (was −0.08), 18 of 21
+  curated orderings respected — the three it misses are all "a well-set plain page beats a
+  designed one", which pixels alone cannot settle and the DOM rules are for. Two new measurements
+  it needed: **hierarchy** (the share of contrast that survives a block-scale blur) and
+  **margin** (quiet side edges, from `edge_contact`). Every `ui` report carries the classic score
+  under `classic`; `--mode=classic` returns the old report unchanged. Report: `research/FIT.md`.
+- Tests and CI gates rewritten for the fitted scale (the curated orderings are the tests);
+  demo tables re-scored; `research/results_top100.md` lists all 100 sites with `ui`, `classic`
+  and `web`.
+
 ## 0.6.0 — 2026-09-19
 
 - **DOM rules.** Rendered pages run a rule pass with sourced thresholds: WCAG text contrast,

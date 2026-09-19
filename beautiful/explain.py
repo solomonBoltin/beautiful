@@ -216,7 +216,8 @@ def explain(image, mode: str = "ui", report: dict | None = None) -> Image.Image:
     fac = r["factors"]
     rgb = F.to_rgb(img, 768)
     panels = [("original  ·  beauty %d" % r["score"], _fit(img))]
-    panels.append((f"composition {fac.get('composition', 0):.2f}  ·  red = left/right disagree, dot = centre of mass", panel_composition(img, r, mode)))
+    comp = fac.get("composition", fac.get("balance", 0))
+    panels.append((f"composition {comp:.2f}  ·  red = left/right disagree, dot = centre of mass", panel_composition(img, r, mode)))
     if "alignment" in fac:
         panels.append((f"alignment {fac['alignment']:.2f}  ·  the grid lines the layout is explained by", panel_alignment(img, r)))
     if "whitespace" in fac:
@@ -227,10 +228,11 @@ def explain(image, mode: str = "ui", report: dict | None = None) -> Image.Image:
         bgc = np.array([bg // 256, (bg // 16) % 16, bg % 16]) / 15.0
         mask = (np.abs(rgb - bgc).sum(-1) < 0.12).astype(np.float32)
         panels.append((f"whitespace {fac['whitespace']:.2f}  ·  blue = counts as air ({r['raw']['whitespace']:.0%})", panel_mask(img, mask, (70, 130, 255), 0.55)))
-    if "simplicity" in fac:
+    if "simplicity" in fac or "edge_density" in fac:
         e = (F.sobel(F.luminance(rgb)) > 0.15).astype(np.float32)
         cpx = r["raw"]["complexity"]
-        panels.append((f"simplicity {fac['simplicity']:.2f}  ·  edges {cpx['edge_density']:.0%}, {cpx['dominant_colors']} colours, {cpx['jpeg_bpp']:.2f} B/px", panel_mask(img, e, (255, 170, 0), 0.9)))
+        lab = f"simplicity {fac['simplicity']:.2f}" if "simplicity" in fac else f"detail {fac['edge_density']:.2f}"
+        panels.append((f"{lab}  ·  edges {cpx['edge_density']:.0%}, {cpx['dominant_colors']} colours, {cpx['jpeg_bpp']:.2f} B/px", panel_mask(img, e, (255, 170, 0), 0.9)))
     if "contrast" in fac:
         panels.append((f"contrast {fac['contrast']:.2f}  ·  green = crisp edges, red = weak figure–ground", panel_contrast(img)))
     panels.append((f"harmony {fac.get('harmony', 0):.2f}  ·  hue wheel, fitted template, dominant colours", panel_harmony(img, r)))

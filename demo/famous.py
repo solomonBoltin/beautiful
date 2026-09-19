@@ -80,7 +80,7 @@ def main():
     rows.sort(key=lambda x: -x["score"])
 
     # markdown
-    keys = ["composition", "alignment", "simplicity", "whitespace", "harmony", "colorfulness", "contrast"]
+    keys = ["composition", "alignment", "contrast", "harmony", "whitespace", "congestion", "contour", "hierarchy", "margin"]
     md = [f"Captured {date.today().isoformat()} at 1280×800 via thum.io, scored with `beautiful --mode=ui`.\n",
           "| beauty | site | " + " | ".join(keys) + " |", "|---:|---|" + "---:|" * len(keys)]
     for x in rows:

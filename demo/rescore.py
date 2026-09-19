@@ -15,7 +15,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from beautiful import beauty  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-KEYS = ["composition", "alignment", "simplicity", "whitespace", "harmony", "colorfulness", "contrast"]
+KEYS = ["composition", "alignment", "contrast", "harmony", "whitespace", "congestion", "contour", "hierarchy", "margin"]  # the fitted `ui` terms shown in the README table
 
 
 def ui():
@@ -27,12 +27,12 @@ def ui():
         if not f.endswith(".png"):
             continue
         r = beauty(os.path.join(HERE, "screens", f), "ui")
-        out.append({"file": f, "label": labels.get(f, f), "score": r["score"], "factors": r["factors"], "hints": r["hints"]})
+        out.append({"file": f, "label": labels.get(f, f), "score": r["score"], "classic": r["classic"]["score"], "factors": r["factors"], "hints": r["hints"]})
     out.sort(key=lambda x: -x["score"])
     json.dump(out, open(os.path.join(HERE, "results_ui.json"), "w"), indent=1, ensure_ascii=False)
-    md = ["| beauty | screen | " + " | ".join(KEYS) + " |", "|---:|---|" + "---:|" * len(KEYS)]
+    md = ["| `ui` | `classic` | screen | " + " | ".join(KEYS) + " |", "|---:|---:|---|" + "---:|" * len(KEYS)]
     for x in out:
-        md.append(f"| **{x['score']}** | {x['label']} | " + " | ".join(f"{x['factors'][k]:.2f}" for k in KEYS) + " |")
+        md.append(f"| **{x['score']}** | {x['classic']} | {x['label']} | " + " | ".join(f"{x['factors'][k]:.2f}" for k in KEYS) + " |")
     open(os.path.join(HERE, "results_ui.md"), "w", encoding="utf-8").write("\n".join(md) + "\n")
     print("ui:", [(x["score"], x["file"]) for x in out])
 

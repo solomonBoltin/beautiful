@@ -2,7 +2,7 @@
 beautiful.web
 -------------
 ``mode="web"``: the score *calibrated on human ratings of real websites*, as opposed to the
-literature-shaped formula of ``mode="ui"``.
+literature-shaped formula of ``mode="classic"`` and the acclaim-fitted formula of ``mode="ui"``.
 
 A ridge regression from the same pixel measurements (the goodness factors, the experimental
 measurements, and edge density / colourfulness with their squares) to the mean appeal ratings of
@@ -54,7 +54,7 @@ def model() -> dict:
 
 
 def inputs_from_report(factors: dict, raw: dict) -> dict:
-    """The model's input vector, by term name, from a mode='ui' report."""
+    """The model's input vector, by term name, from a mode='classic' report (the literature factors)."""
     x = raw["experimental"]
     ed = raw["complexity"]["edge_density"]
     cf = raw["colorfulness"]["variety"]

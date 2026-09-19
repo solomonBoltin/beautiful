@@ -1,6 +1,6 @@
 [project]
 name = "beautiful-score"
-version = "0.6.0"
+version = "0.7.0"
 description = "A mathematical beauty score, 1-100, for any screenshot, logo or artwork - computed from pixels with explicit, inspectable formulas."
 readme = "README.md"
 license = { text = "MIT" }
@@ -49,4 +49,4 @@ build-backend = "setuptools.build_meta"
 packages = ["beautiful"]
 
 [tool.setuptools.package-data]
-beautiful = ["web_model.json"]
+beautiful = ["web_model.json", "ui_model.json"]

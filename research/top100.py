@@ -3,6 +3,7 @@
     pip install "beautiful-score[render]" && playwright install chromium
     python research/top100.py                  # ~30 min: render 130 candidates, keep the first 100 that load
     python research/top100.py --no-fetch       # reuse research/top100/*.png
+    python research/top100.py --from-json      # rewrite the table and gallery from results_top100.json
 
 Candidates: Awwwards Site-of-the-Year / Site-of-the-Day studios and winners, Siteinspire / Godly /
 Lapa staples, the design-led product and brand sites that every "best website design" list repeats,
@@ -17,6 +18,7 @@ from __future__ import annotations
 
 import json
 import os
+import subprocess
 import sys
 from datetime import date
 
@@ -64,8 +66,26 @@ CANDIDATES = [
     "https://www.mailchimp.com/", "https://slack.com/", "https://www.intercom.com/", "https://www.canva.com/",
     "https://www.dribbble.com/", "https://www.behance.net/", "https://unsplash.com/", "https://www.pinterest.com/",
     "https://medium.com/", "https://substack.com/", "https://ghost.org/", "https://www.are.na/",
+    # second wave, added after the first crawl lost 30 candidates to bot walls and consent dialogs
+    "https://www.duolingo.com/", "https://www.headspace.com/", "https://www.calm.com/", "https://monzo.com/",
+    "https://wise.com/", "https://www.coinbase.com/", "https://www.shopify.com/", "https://www.squarespace.com/",
+    "https://gumroad.com/", "https://www.lemonsqueezy.com/", "https://mercury.com/", "https://ramp.com/",
+    "https://www.rippling.com/", "https://attio.com/", "https://rive.app/", "https://spline.design/",
+    "https://mobbin.com/", "https://www.sketch.com/", "https://penpot.app/", "https://miro.com/",
+    "https://www.family.co/", "https://ouraring.com/", "https://www.whoop.com/", "https://bellroy.com/",
+    "https://www.rapha.cc/", "https://www.everlane.com/", "https://www.uniswap.org/", "https://www.moleskine.com/",
 ]
-SKIP = {}  # filled after the first run: site -> reason (bot wall, consent dialog, blank)
+SKIP = {  # what the crawler captured on 2026-09-20 instead of the page (checked by eye)
+    "allbirds.com": "loading skeleton", "area17.com": "consent dialog over a black page", "dyson.com": "bot wall",
+    "bang-olufsen.com": "consent dialog", "behance.net": "rate-limit page", "medium.com": "bot wall", "pentagram.com": "loader",
+    "nytimes.com": "bot wall", "bloomberg.com": "bot wall (press & hold)", "unseen.co": "loader", "warbyparker.com": "maintenance page",
+    "unsplash.com": "access denied", "igloo.inc": "loader", "obys.agency": "loader", "basicagency.com": "splash/loader",
+    "hermes.com": "access restricted", "porsche.com": "consent dialog", "canva.com": "maintenance page", "dribbble.com": "bot challenge",
+    "dogstudio.co": "loader", "activetheory.net": "browser-not-supported page", "designmuseum.org": "consent dialog",
+    "guggenheim.org": "consent dialog", "aesop.com": "security verification", "mouthwash.studio": "loader", "stinkstudios.com": "consent dialog",
+    "economist.com": "security verification", "tesla.com": "access denied", "patagonia.com": "bot wall", "aristidebenoist.com": "loader",
+    "coinbase.com": "security verification", "ramp.com": "unstyled capture", "monzo.com": "consent dialog", "duolingo.com": "never reached network idle",
+}
 FONTS = ["/System/Library/Fonts/Helvetica.ttc", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", "C:/Windows/Fonts/arial.ttf"]
 
 
@@ -95,18 +115,25 @@ def is_blank(im):
 def main():
     os.makedirs(OUT, exist_ok=True)
     fetch = "--no-fetch" not in sys.argv
-    from beautiful.render import _Chromium
-    chromium = _Chromium()
     rows, skipped = [], dict(SKIP)
-    try:
+    if True:
         for url in CANDIDATES:
             name = name_of(url)
             if name in skipped:
                 continue
             path = os.path.join(OUT, name.replace(".", "_") + ".png")
             if fetch and not os.path.exists(path):
+                # each fetch in its own process with a hard wall-clock limit: one site that never
+                # reaches network-idle must not hang the whole run
+                code = ("import sys; from beautiful.render import render; "
+                        "render(sys.argv[1], 'desktop', timeout_ms=20000).save(sys.argv[2])")
                 try:
-                    chromium.render(url, "desktop", wait_ms=1200, timeout_ms=20000).save(path)
+                    subprocess.run([sys.executable, "-c", code, url, path], timeout=75, check=True,
+                                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                except subprocess.TimeoutExpired:
+                    skipped[name] = "render hung (75 s)"
+                    print("skip", name, skipped[name], flush=True)
+                    continue
                 except Exception as e:
                     skipped[name] = f"render failed: {type(e).__name__}"
                     print("skip", name, skipped[name], flush=True)
@@ -118,26 +145,30 @@ def main():
                 skipped[name] = "blank capture"
                 print("blank", name, flush=True)
                 continue
-            r = beauty(path, "ui")
+            r = beauty(path, "ui")            # the fitted formula (what `beauty()` returns by default)
             w = beauty(path, "web")["score"]
-            rows.append({"site": name, "url": url, "ui": r["score"], "web": w, "factors": r["factors"],
+            rows.append({"site": name, "url": url, "ui": r["score"], "classic": r["classic"]["score"], "web": w, "factors": r["factors"],
                          "experimental": {k: v for k, v in r["raw"]["experimental"].items() if not isinstance(v, dict)},
                          "hint": r["hints"][0] if r["hints"] else "", "file": os.path.relpath(path, HERE)})
             print(f"ui {r['score']:3d}  web {w:3d}  {name}", flush=True)
-    finally:
-        chromium.close()
+    rows = rows[:100]  # the benchmark is the first 100 clean captures in candidate order
     rows.sort(key=lambda x: -x["ui"])
     json.dump({"date": date.today().isoformat(), "rows": rows, "skipped": skipped},
               open(os.path.join(HERE, "results_top100.json"), "w"), indent=1)
-    keys = ["composition", "alignment", "simplicity", "whitespace", "harmony", "colorfulness", "contrast"]
+    write_outputs(rows, skipped)
+
+
+def write_outputs(rows, skipped):
+    """results_top100.md and the gallery from the scored rows (also: `--from-json`, no scoring)."""
+    keys = ["composition", "alignment", "contrast", "harmony", "whitespace", "congestion", "contour", "hierarchy", "margin"]
     md = [f"# The 100 most acclaimed home pages, scored\n",
           f"Rendered {date.today().isoformat()} with headless Chromium at 1280×800 (`beautiful.render`); "
           f"{len(rows)} of {len(CANDIDATES)} candidates loaded and are listed; {len(skipped)} dropped (bot walls, "
           f"consent dialogs, blank captures — listed at the end). Sorted by the `ui` formula; `web` is the model "
           "calibrated on human ratings.\n",
-          "| # | ui | web | site | " + " | ".join(keys) + " | weakest |", "|---:|---:|---:|---|" + "---:|" * len(keys) + "---|"]
+          "| # | ui | classic | web | site | " + " | ".join(keys) + " | weakest |", "|---:|---:|---:|---:|---|" + "---:|" * len(keys) + "---|"]
     for i, x in enumerate(rows, 1):
-        md.append(f"| {i} | **{x['ui']}** | {x['web']} | [{x['site']}]({x['url']}) | " +
+        md.append(f"| {i} | **{x['ui']}** | {x.get('classic', '')} | {x['web']} | [{x['site']}]({x['url']}) | " +
                   " | ".join(f"{x['factors'][k]:.2f}" for k in keys) + f" | {x['hint'][:60]} |")
     md.append("\nDropped: " + ", ".join(f"{k} ({v})" for k, v in skipped.items()))
     open(os.path.join(HERE, "results_top100.md"), "w", encoding="utf-8").write("\n".join(md) + "\n")
@@ -163,4 +194,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if "--from-json" in sys.argv:
+        _d = json.load(open(os.path.join(HERE, "results_top100.json")))
+        write_outputs(_d["rows"], _d["skipped"])
+    else:
+        main()

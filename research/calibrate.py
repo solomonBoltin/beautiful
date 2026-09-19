@@ -56,7 +56,7 @@ def load_ratings(root):
 
 
 def features_for(path):
-    r = beauty(path, "ui")
+    r = beauty(path, "classic")   # the web model is a ridge over the literature (classic) factors
     x = r["raw"]["experimental"]
     row = {"score": r["score"], "weighted_sum": r["weighted_sum"]}
     row.update({f"g_{k}": r["factors"][k] for k in FACTORS})

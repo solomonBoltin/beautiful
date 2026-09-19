@@ -2,81 +2,81 @@
  {
   "site": "notion.com",
   "web": 94,
-  "ui": 81
+  "ui": 85
  },
  {
   "site": "figma.com",
   "web": 91,
-  "ui": 74
+  "ui": 90
  },
  {
   "site": "tailwindcss.com",
   "web": 88,
-  "ui": 40
+  "ui": 81
  },
  {
   "site": "apple.com",
   "web": 83,
-  "ui": 85
+  "ui": 90
  },
  {
   "site": "wired.com",
   "web": 82,
-  "ui": 39
- },
- {
-  "site": "vercel.com",
-  "web": 76,
-  "ui": 32
+  "ui": 71
  },
  {
   "site": "stripe.com",
   "web": 76,
-  "ui": 28
+  "ui": 78
+ },
+ {
+  "site": "vercel.com",
+  "web": 76,
+  "ui": 58
  },
  {
   "site": "wikipedia.org",
   "web": 69,
-  "ui": 85
+  "ui": 90
  },
  {
   "site": "github.com",
   "web": 69,
-  "ui": 80
+  "ui": 90
  },
  {
   "site": "nytimes.com",
   "web": 64,
-  "ui": 69
+  "ui": 92
  },
  {
   "site": "craigslist.org",
   "web": 60,
-  "ui": 77
+  "ui": 86
  },
  {
   "site": "amazon.com",
   "web": 45,
-  "ui": 40
+  "ui": 51
  },
  {
   "site": "google.com",
   "web": 30,
-  "ui": 72
+  "ui": 68
  },
  {
   "site": "motherfuckingwebsite.com",
   "web": 18,
-  "ui": 43
+  "ui": 59
  },
  {
   "site": "berkshirehathaway.com",
   "web": 16,
-  "ui": 81
+  "ui": 84
  },
  {
   "site": "news.ycombinator.com",
   "web": 1,
-  "ui": 65
+  "ui": 71
  }
 ]

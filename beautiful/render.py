@@ -178,7 +178,8 @@ def _render_weasy(source: str, viewport: str) -> Image.Image:
 # --------------------------------------------------------------------------- #
 # public
 # --------------------------------------------------------------------------- #
-def render(source: str, viewport: str = "desktop", backend: str | None = None, _chromium=None) -> Image.Image:
+def render(source: str, viewport: str = "desktop", backend: str | None = None, _chromium=None,
+           timeout_ms: int = 45000) -> Image.Image:
     """HTML string / file / URL -> RGB image at the named viewport."""
     if viewport not in VIEWPORTS:
         raise ValueError(f"viewport must be one of {list(VIEWPORTS)}")
@@ -191,7 +192,7 @@ def render(source: str, viewport: str = "desktop", backend: str | None = None, _
         own = _chromium is None
         c = _chromium or _Chromium()
         try:
-            return c.render(source, viewport)
+            return c.render(source, viewport, timeout_ms=timeout_ms)
         finally:
             if own:
                 c.close()

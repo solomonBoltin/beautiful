@@ -1,107 +1,1060 @@
 [
  {
-  "site": "ia.net",
-  "ui": 92,
-  "web": 10,
+  "site": "1password.com",
+  "ui": 96,
+  "web": 90,
   "factors": {
-   "composition": 0.93,
-   "local": 0.739,
-   "alignment": 0.455,
-   "simplicity": 0.801,
-   "whitespace": 1.0,
-   "colorfulness": 0.99,
+   "composition": 0.94,
+   "local": 1.0,
+   "alignment": 0.612,
    "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "culturedcode.com_things",
-  "ui": 89,
-  "web": 81,
-  "factors": {
-   "composition": 0.96,
-   "local": 0.903,
-   "alignment": 0.327,
-   "simplicity": 0.966,
-   "whitespace": 0.488,
-   "colorfulness": 0.963,
-   "contrast": 1.0,
-   "harmony": 0.98
-  }
- },
- {
-  "site": "kagi.com",
-  "ui": 85,
-  "web": 93,
-  "factors": {
-   "composition": 0.95,
-   "local": 0.652,
-   "alignment": 0.191,
-   "simplicity": 0.744,
-   "whitespace": 0.773,
-   "colorfulness": 0.824,
-   "contrast": 1.0,
-   "harmony": 1.0
+   "harmony": 0.583,
+   "edge_density": 0.973,
+   "jpeg_bpp": 0.997,
+   "colours": 1.0,
+   "whitespace": 0.991,
+   "colorfulness": 0.992,
+   "congestion": 0.915,
+   "contour": 0.948,
+   "orientation": 0.99,
+   "anisotropy": 0.955,
+   "hierarchy": 0.945,
+   "margin": 0.971
   }
  },
  {
   "site": "huggingface.co",
-  "ui": 84,
+  "ui": 95,
   "web": 16,
   "factors": {
-   "composition": 0.82,
-   "local": 0.925,
-   "alignment": 0.453,
-   "simplicity": 0.36,
-   "whitespace": 1.0,
-   "colorfulness": 0.96,
+   "composition": 1.0,
+   "local": 1.0,
+   "alignment": 1.0,
+   "contrast": 0.489,
+   "harmony": 0.709,
+   "edge_density": 0.976,
+   "jpeg_bpp": 0.974,
+   "colours": 1.0,
+   "whitespace": 0.999,
+   "colorfulness": 0.985,
+   "congestion": 0.996,
+   "contour": 0.752,
+   "orientation": 0.781,
+   "anisotropy": 0.769,
+   "hierarchy": 0.881,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "mozilla.org",
+  "ui": 95,
+  "web": 49,
+  "factors": {
+   "composition": 0.627,
+   "local": 1.0,
+   "alignment": 0.886,
    "contrast": 1.0,
-   "harmony": 0.946
+   "harmony": 1.0,
+   "edge_density": 0.981,
+   "jpeg_bpp": 0.997,
+   "colours": 0.982,
+   "whitespace": 0.987,
+   "colorfulness": 0.998,
+   "congestion": 0.838,
+   "contour": 0.975,
+   "orientation": 0.832,
+   "anisotropy": 0.787,
+   "hierarchy": 1.0,
+   "margin": 0.967
+  }
+ },
+ {
+  "site": "clerk.com",
+  "ui": 94,
+  "web": 86,
+  "factors": {
+   "composition": 0.982,
+   "local": 0.984,
+   "alignment": 0.293,
+   "contrast": 0.89,
+   "harmony": 1.0,
+   "edge_density": 0.99,
+   "jpeg_bpp": 0.995,
+   "colours": 0.982,
+   "whitespace": 0.906,
+   "colorfulness": 0.911,
+   "congestion": 0.766,
+   "contour": 0.999,
+   "orientation": 1.0,
+   "anisotropy": 1.0,
+   "hierarchy": 0.38,
+   "margin": 0.967
+  }
+ },
+ {
+  "site": "ghost.org",
+  "ui": 94,
+  "web": 69,
+  "factors": {
+   "composition": 0.883,
+   "local": 0.267,
+   "alignment": 0.7,
+   "contrast": 1.0,
+   "harmony": 1.0,
+   "edge_density": 0.922,
+   "jpeg_bpp": 0.955,
+   "colours": 0.996,
+   "whitespace": 0.998,
+   "colorfulness": 0.985,
+   "congestion": 0.944,
+   "contour": 0.937,
+   "orientation": 0.86,
+   "anisotropy": 0.906,
+   "hierarchy": 1.0,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "apple.com",
+  "ui": 93,
+  "web": 84,
+  "factors": {
+   "composition": 0.996,
+   "local": 1.0,
+   "alignment": 0.036,
+   "contrast": 0.361,
+   "harmony": 1.0,
+   "edge_density": 0.994,
+   "jpeg_bpp": 0.921,
+   "colours": 0.982,
+   "whitespace": 0.992,
+   "colorfulness": 0.987,
+   "congestion": 0.958,
+   "contour": 0.997,
+   "orientation": 0.456,
+   "anisotropy": 0.356,
+   "hierarchy": 1.0,
+   "margin": 0.979
+  }
+ },
+ {
+  "site": "mailchimp.com",
+  "ui": 93,
+  "web": 19,
+  "factors": {
+   "composition": 1.0,
+   "local": 0.741,
+   "alignment": 1.0,
+   "contrast": 0.709,
+   "harmony": 0.305,
+   "edge_density": 0.909,
+   "jpeg_bpp": 0.883,
+   "colours": 0.931,
+   "whitespace": 1.0,
+   "colorfulness": 0.999,
+   "congestion": 0.985,
+   "contour": 0.999,
+   "orientation": 0.813,
+   "anisotropy": 0.75,
+   "hierarchy": 0.802,
+   "margin": 0.867
+  }
+ },
+ {
+  "site": "rust-lang.org",
+  "ui": 93,
+  "web": 83,
+  "factors": {
+   "composition": 0.684,
+   "local": 1.0,
+   "alignment": 0.414,
+   "contrast": 1.0,
+   "harmony": 0.597,
+   "edge_density": 0.993,
+   "jpeg_bpp": 0.923,
+   "colours": 1.0,
+   "whitespace": 0.958,
+   "colorfulness": 0.782,
+   "congestion": 0.975,
+   "contour": 0.737,
+   "orientation": 0.972,
+   "anisotropy": 0.989,
+   "hierarchy": 1.0,
+   "margin": 0.946
+  }
+ },
+ {
+  "site": "go.dev",
+  "ui": 93,
+  "web": 72,
+  "factors": {
+   "composition": 0.783,
+   "local": 1.0,
+   "alignment": 0.703,
+   "contrast": 0.723,
+   "harmony": 0.614,
+   "edge_density": 0.997,
+   "jpeg_bpp": 0.953,
+   "colours": 0.982,
+   "whitespace": 0.965,
+   "colorfulness": 0.529,
+   "congestion": 0.711,
+   "contour": 0.789,
+   "orientation": 0.994,
+   "anisotropy": 0.954,
+   "hierarchy": 1.0,
+   "margin": 0.979
+  }
+ },
+ {
+  "site": "arc.net",
+  "ui": 92,
+  "web": 96,
+  "factors": {
+   "composition": 1.0,
+   "local": 1.0,
+   "alignment": 1.0,
+   "contrast": 0.0,
+   "harmony": 0.443,
+   "edge_density": 0.999,
+   "jpeg_bpp": 0.999,
+   "colours": 0.895,
+   "whitespace": 0.892,
+   "colorfulness": 0.599,
+   "congestion": 0.95,
+   "contour": 0.325,
+   "orientation": 0.978,
+   "anisotropy": 0.997,
+   "hierarchy": 1.0,
+   "margin": 0.95
+  }
+ },
+ {
+  "site": "hey.com",
+  "ui": 92,
+  "web": 61,
+  "factors": {
+   "composition": 0.996,
+   "local": 0.302,
+   "alignment": 1.0,
+   "contrast": 0.994,
+   "harmony": 0.238,
+   "edge_density": 1.0,
+   "jpeg_bpp": 0.962,
+   "colours": 0.982,
+   "whitespace": 0.994,
+   "colorfulness": 0.939,
+   "congestion": 0.748,
+   "contour": 0.874,
+   "orientation": 0.996,
+   "anisotropy": 0.998,
+   "hierarchy": 0.537,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "ia.net",
+  "ui": 92,
+  "web": 10,
+  "factors": {
+   "composition": 1.0,
+   "local": 1.0,
+   "alignment": 1.0,
+   "contrast": 0.848,
+   "harmony": 1.0,
+   "edge_density": 0.917,
+   "jpeg_bpp": 0.844,
+   "colours": 0.961,
+   "whitespace": 0.995,
+   "colorfulness": 0.996,
+   "congestion": 0.818,
+   "contour": 0.977,
+   "orientation": 0.817,
+   "anisotropy": 0.869,
+   "hierarchy": 0.0,
+   "margin": 0.883
+  }
+ },
+ {
+  "site": "gov.uk",
+  "ui": 92,
+  "web": 32,
+  "factors": {
+   "composition": 0.655,
+   "local": 0.873,
+   "alignment": 0.714,
+   "contrast": 1.0,
+   "harmony": 0.815,
+   "edge_density": 0.977,
+   "jpeg_bpp": 0.999,
+   "colours": 0.982,
+   "whitespace": 0.945,
+   "colorfulness": 0.731,
+   "congestion": 0.942,
+   "contour": 1.0,
+   "orientation": 0.654,
+   "anisotropy": 0.453,
+   "hierarchy": 1.0,
+   "margin": 0.975
+  }
+ },
+ {
+  "site": "bitwarden.com",
+  "ui": 92,
+  "web": 90,
+  "factors": {
+   "composition": 1.0,
+   "local": 1.0,
+   "alignment": 0.195,
+   "contrast": 0.994,
+   "harmony": 0.638,
+   "edge_density": 0.98,
+   "jpeg_bpp": 0.879,
+   "colours": 0.996,
+   "whitespace": 0.997,
+   "colorfulness": 0.884,
+   "congestion": 0.971,
+   "contour": 0.981,
+   "orientation": 0.884,
+   "anisotropy": 0.744,
+   "hierarchy": 0.298,
+   "margin": 0.979
+  }
+ },
+ {
+  "site": "loom.com",
+  "ui": 92,
+  "web": 89,
+  "factors": {
+   "composition": 1.0,
+   "local": 0.959,
+   "alignment": 0.249,
+   "contrast": 0.748,
+   "harmony": 0.506,
+   "edge_density": 0.979,
+   "jpeg_bpp": 0.933,
+   "colours": 0.931,
+   "whitespace": 0.998,
+   "colorfulness": 0.877,
+   "congestion": 1.0,
+   "contour": 1.0,
+   "orientation": 0.894,
+   "anisotropy": 0.798,
+   "hierarchy": 0.393,
+   "margin": 0.825
+  }
+ },
+ {
+  "site": "raycast.com",
+  "ui": 91,
+  "web": 33,
+  "factors": {
+   "composition": 1.0,
+   "local": 0.785,
+   "alignment": 1.0,
+   "contrast": 0.0,
+   "harmony": 0.445,
+   "edge_density": 0.806,
+   "jpeg_bpp": 0.835,
+   "colours": 0.996,
+   "whitespace": 0.993,
+   "colorfulness": 0.612,
+   "congestion": 0.999,
+   "contour": 0.851,
+   "orientation": 0.506,
+   "anisotropy": 0.527,
+   "hierarchy": 1.0,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "culturedcode.com_things",
+  "ui": 91,
+  "web": 81,
+  "factors": {
+   "composition": 1.0,
+   "local": 1.0,
+   "alignment": 1.0,
+   "contrast": 0.719,
+   "harmony": 0.891,
+   "edge_density": 0.788,
+   "jpeg_bpp": 0.694,
+   "colours": 0.895,
+   "whitespace": 0.805,
+   "colorfulness": 0.986,
+   "congestion": 0.752,
+   "contour": 0.837,
+   "orientation": 0.928,
+   "anisotropy": 0.894,
+   "hierarchy": 0.246,
+   "margin": 0.987
+  }
+ },
+ {
+  "site": "nike.com",
+  "ui": 91,
+  "web": 100,
+  "factors": {
+   "composition": 1.0,
+   "local": 1.0,
+   "alignment": 0.839,
+   "contrast": 0.079,
+   "harmony": 0.281,
+   "edge_density": 0.996,
+   "jpeg_bpp": 0.998,
+   "colours": 0.804,
+   "whitespace": 0.662,
+   "colorfulness": 0.999,
+   "congestion": 0.99,
+   "contour": 0.55,
+   "orientation": 0.997,
+   "anisotropy": 0.974,
+   "hierarchy": 0.748,
+   "margin": 0.967
+  }
+ },
+ {
+  "site": "intercom.com",
+  "ui": 91,
+  "web": 75,
+  "factors": {
+   "composition": 0.954,
+   "local": 0.574,
+   "alignment": 0.145,
+   "contrast": 0.554,
+   "harmony": 1.0,
+   "edge_density": 0.988,
+   "jpeg_bpp": 0.999,
+   "colours": 1.0,
+   "whitespace": 0.948,
+   "colorfulness": 0.988,
+   "congestion": 0.999,
+   "contour": 0.992,
+   "orientation": 0.88,
+   "anisotropy": 0.842,
+   "hierarchy": 0.486,
+   "margin": 0.683
+  }
+ },
+ {
+  "site": "figma.com",
+  "ui": 91,
+  "web": 87,
+  "factors": {
+   "composition": 0.897,
+   "local": 0.0,
+   "alignment": 0.432,
+   "contrast": 0.746,
+   "harmony": 0.012,
+   "edge_density": 0.993,
+   "jpeg_bpp": 0.976,
+   "colours": 1.0,
+   "whitespace": 0.999,
+   "colorfulness": 0.988,
+   "congestion": 0.894,
+   "contour": 0.905,
+   "orientation": 0.96,
+   "anisotropy": 0.979,
+   "hierarchy": 1.0,
+   "margin": 0.992
+  }
+ },
+ {
+  "site": "webflow.com",
+  "ui": 90,
+  "web": 86,
+  "factors": {
+   "composition": 0.911,
+   "local": 1.0,
+   "alignment": 0.137,
+   "contrast": 0.846,
+   "harmony": 0.404,
+   "edge_density": 0.976,
+   "jpeg_bpp": 0.964,
+   "colours": 1.0,
+   "whitespace": 0.976,
+   "colorfulness": 0.867,
+   "congestion": 0.946,
+   "contour": 0.933,
+   "orientation": 0.827,
+   "anisotropy": 0.802,
+   "hierarchy": 0.251,
+   "margin": 0.971
+  }
+ },
+ {
+  "site": "brave.com",
+  "ui": 90,
+  "web": 92,
+  "factors": {
+   "composition": 0.954,
+   "local": 0.704,
+   "alignment": 0.522,
+   "contrast": 1.0,
+   "harmony": 0.258,
+   "edge_density": 0.956,
+   "jpeg_bpp": 0.914,
+   "colours": 1.0,
+   "whitespace": 0.998,
+   "colorfulness": 0.985,
+   "congestion": 0.912,
+   "contour": 0.931,
+   "orientation": 0.996,
+   "anisotropy": 0.991,
+   "hierarchy": 0.016,
+   "margin": 0.95
+  }
+ },
+ {
+  "site": "superhuman.com",
+  "ui": 90,
+  "web": 94,
+  "factors": {
+   "composition": 1.0,
+   "local": 1.0,
+   "alignment": 1.0,
+   "contrast": 0.385,
+   "harmony": 0.513,
+   "edge_density": 0.99,
+   "jpeg_bpp": 0.996,
+   "colours": 0.527,
+   "whitespace": 0.534,
+   "colorfulness": 0.979,
+   "congestion": 0.997,
+   "contour": 0.802,
+   "orientation": 0.727,
+   "anisotropy": 0.595,
+   "hierarchy": 0.908,
+   "margin": 0.904
+  }
+ },
+ {
+  "site": "zed.dev",
+  "ui": 89,
+  "web": 9,
+  "factors": {
+   "composition": 0.883,
+   "local": 0.0,
+   "alignment": 1.0,
+   "contrast": 0.214,
+   "harmony": 1.0,
+   "edge_density": 0.999,
+   "jpeg_bpp": 0.996,
+   "colours": 0.996,
+   "whitespace": 0.911,
+   "colorfulness": 0.992,
+   "congestion": 0.85,
+   "contour": 1.0,
+   "orientation": 0.999,
+   "anisotropy": 0.966,
+   "hierarchy": 0.0,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "kagi.com",
+  "ui": 89,
+  "web": 93,
+  "factors": {
+   "composition": 1.0,
+   "local": 0.731,
+   "alignment": 0.416,
+   "contrast": 1.0,
+   "harmony": 1.0,
+   "edge_density": 0.94,
+   "jpeg_bpp": 0.933,
+   "colours": 0.961,
+   "whitespace": 0.831,
+   "colorfulness": 0.931,
+   "congestion": 0.696,
+   "contour": 0.921,
+   "orientation": 0.843,
+   "anisotropy": 0.782,
+   "hierarchy": 0.0,
+   "margin": 1.0
   }
  },
  {
   "site": "duckduckgo.com",
-  "ui": 84,
+  "ui": 89,
   "web": 90,
   "factors": {
-   "composition": 0.87,
-   "local": 0.541,
-   "alignment": 0.213,
-   "simplicity": 0.872,
-   "whitespace": 0.623,
-   "colorfulness": 0.981,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "resend.com",
-  "ui": 83,
-  "web": 87,
-  "factors": {
-   "composition": 0.82,
-   "local": 0.432,
-   "alignment": 0.166,
-   "simplicity": 0.848,
-   "whitespace": 1.0,
-   "colorfulness": 0.764,
-   "contrast": 1.0,
-   "harmony": 1.0
+   "composition": 1.0,
+   "local": 0.38,
+   "alignment": 0.575,
+   "contrast": 0.97,
+   "harmony": 1.0,
+   "edge_density": 0.87,
+   "jpeg_bpp": 0.838,
+   "colours": 0.895,
+   "whitespace": 0.817,
+   "colorfulness": 0.992,
+   "congestion": 0.946,
+   "contour": 0.996,
+   "orientation": 0.921,
+   "anisotropy": 0.881,
+   "hierarchy": 0.0,
+   "margin": 1.0
   }
  },
  {
   "site": "notion.com",
-  "ui": 83,
+  "ui": 89,
   "web": 89,
   "factors": {
-   "composition": 0.92,
-   "local": 0.499,
-   "alignment": 0.139,
-   "simplicity": 0.545,
-   "whitespace": 1.0,
-   "colorfulness": 1.0,
+   "composition": 1.0,
+   "local": 0.246,
+   "alignment": 0.045,
    "contrast": 1.0,
-   "harmony": 1.0
+   "harmony": 1.0,
+   "edge_density": 0.997,
+   "jpeg_bpp": 0.996,
+   "colours": 0.982,
+   "whitespace": 0.887,
+   "colorfulness": 1.0,
+   "congestion": 0.995,
+   "contour": 0.884,
+   "orientation": 0.941,
+   "anisotropy": 0.899,
+   "hierarchy": 0.002,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "vercel.com",
+  "ui": 89,
+  "web": 97,
+  "factors": {
+   "composition": 0.84,
+   "local": 1.0,
+   "alignment": 0.278,
+   "contrast": 1.0,
+   "harmony": 1.0,
+   "edge_density": 0.806,
+   "jpeg_bpp": 0.764,
+   "colours": 0.931,
+   "whitespace": 0.803,
+   "colorfulness": 0.893,
+   "congestion": 0.646,
+   "contour": 0.996,
+   "orientation": 0.918,
+   "anisotropy": 0.904,
+   "hierarchy": 0.205,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "ui.shadcn.com",
+  "ui": 88,
+  "web": 88,
+  "factors": {
+   "composition": 0.67,
+   "local": 0.521,
+   "alignment": 0.151,
+   "contrast": 1.0,
+   "harmony": 1.0,
+   "edge_density": 1.0,
+   "jpeg_bpp": 0.999,
+   "colours": 1.0,
+   "whitespace": 0.913,
+   "colorfulness": 0.894,
+   "congestion": 0.665,
+   "contour": 0.98,
+   "orientation": 0.967,
+   "anisotropy": 0.969,
+   "hierarchy": 0.217,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "proton.me",
+  "ui": 88,
+  "web": 97,
+  "factors": {
+   "composition": 1.0,
+   "local": 0.536,
+   "alignment": 0.151,
+   "contrast": 0.796,
+   "harmony": 0.237,
+   "edge_density": 0.964,
+   "jpeg_bpp": 0.983,
+   "colours": 0.996,
+   "whitespace": 0.948,
+   "colorfulness": 0.999,
+   "congestion": 1.0,
+   "contour": 0.911,
+   "orientation": 0.944,
+   "anisotropy": 0.943,
+   "hierarchy": 0.045,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "pitch.com",
+  "ui": 88,
+  "web": 100,
+  "factors": {
+   "composition": 0.712,
+   "local": 0.95,
+   "alignment": 0.359,
+   "contrast": 0.547,
+   "harmony": 0.85,
+   "edge_density": 0.997,
+   "jpeg_bpp": 0.983,
+   "colours": 0.804,
+   "whitespace": 0.79,
+   "colorfulness": 0.981,
+   "congestion": 0.933,
+   "contour": 0.54,
+   "orientation": 0.949,
+   "anisotropy": 0.964,
+   "hierarchy": 0.584,
+   "margin": 0.946
+  }
+ },
+ {
+  "site": "swift.org",
+  "ui": 88,
+  "web": 90,
+  "factors": {
+   "composition": 1.0,
+   "local": 0.859,
+   "alignment": 0.636,
+   "contrast": 0.331,
+   "harmony": 0.646,
+   "edge_density": 0.979,
+   "jpeg_bpp": 1.0,
+   "colours": 0.931,
+   "whitespace": 0.999,
+   "colorfulness": 0.957,
+   "congestion": 0.7,
+   "contour": 0.997,
+   "orientation": 0.764,
+   "anisotropy": 0.625,
+   "hierarchy": 0.049,
+   "margin": 0.683
+  }
+ },
+ {
+  "site": "resend.com",
+  "ui": 87,
+  "web": 87,
+  "factors": {
+   "composition": 1.0,
+   "local": 0.037,
+   "alignment": 0.241,
+   "contrast": 0.539,
+   "harmony": 1.0,
+   "edge_density": 0.889,
+   "jpeg_bpp": 0.866,
+   "colours": 0.931,
+   "whitespace": 0.98,
+   "colorfulness": 0.906,
+   "congestion": 0.715,
+   "contour": 0.938,
+   "orientation": 0.945,
+   "anisotropy": 0.913,
+   "hierarchy": 0.102,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "substack.com",
+  "ui": 87,
+  "web": 58,
+  "factors": {
+   "composition": 0.186,
+   "local": 1.0,
+   "alignment": 0.416,
+   "contrast": 0.401,
+   "harmony": 0.247,
+   "edge_density": 1.0,
+   "jpeg_bpp": 0.995,
+   "colours": 0.996,
+   "whitespace": 0.978,
+   "colorfulness": 0.857,
+   "congestion": 0.801,
+   "contour": 0.965,
+   "orientation": 0.985,
+   "anisotropy": 0.95,
+   "hierarchy": 0.962,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "python.org",
+  "ui": 87,
+  "web": 74,
+  "factors": {
+   "composition": 0.854,
+   "local": 1.0,
+   "alignment": 1.0,
+   "contrast": 0.449,
+   "harmony": 0.814,
+   "edge_density": 1.0,
+   "jpeg_bpp": 1.0,
+   "colours": 0.996,
+   "whitespace": 0.809,
+   "colorfulness": 0.982,
+   "congestion": 0.997,
+   "contour": 0.36,
+   "orientation": 0.068,
+   "anisotropy": 0.04,
+   "hierarchy": 1.0,
+   "margin": 0.975
+  }
+ },
+ {
+  "site": "slack.com",
+  "ui": 86,
+  "web": 73,
+  "factors": {
+   "composition": 0.968,
+   "local": 0.093,
+   "alignment": 0.372,
+   "contrast": 1.0,
+   "harmony": 0.106,
+   "edge_density": 0.998,
+   "jpeg_bpp": 0.977,
+   "colours": 0.996,
+   "whitespace": 0.904,
+   "colorfulness": 1.0,
+   "congestion": 0.763,
+   "contour": 0.976,
+   "orientation": 0.902,
+   "anisotropy": 0.887,
+   "hierarchy": 0.103,
+   "margin": 0.992
+  }
+ },
+ {
+  "site": "dribbble.com",
+  "ui": 86,
+  "web": 10,
+  "factors": {
+   "composition": 0.826,
+   "local": 1.0,
+   "alignment": 1.0,
+   "contrast": 1.0,
+   "harmony": 1.0,
+   "edge_density": 0.6,
+   "jpeg_bpp": 0.493,
+   "colours": 0.895,
+   "whitespace": 0.748,
+   "colorfulness": 0.893,
+   "congestion": 0.611,
+   "contour": 0.941,
+   "orientation": 0.896,
+   "anisotropy": 0.899,
+   "hierarchy": 0.0,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "are.na",
+  "ui": 86,
+  "web": 37,
+  "factors": {
+   "composition": 0.897,
+   "local": 0.027,
+   "alignment": 1.0,
+   "contrast": 0.908,
+   "harmony": 1.0,
+   "edge_density": 0.805,
+   "jpeg_bpp": 0.794,
+   "colours": 0.895,
+   "whitespace": 0.78,
+   "colorfulness": 0.925,
+   "congestion": 0.661,
+   "contour": 0.986,
+   "orientation": 1.0,
+   "anisotropy": 0.969,
+   "hierarchy": 0.0,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "tailwindcss.com",
+  "ui": 85,
+  "web": 83,
+  "factors": {
+   "composition": 0.0,
+   "local": 1.0,
+   "alignment": 0.279,
+   "contrast": 1.0,
+   "harmony": 1.0,
+   "edge_density": 1.0,
+   "jpeg_bpp": 0.983,
+   "colours": 0.982,
+   "whitespace": 0.907,
+   "colorfulness": 0.951,
+   "congestion": 0.856,
+   "contour": 0.977,
+   "orientation": 0.999,
+   "anisotropy": 0.998,
+   "hierarchy": 0.546,
+   "margin": 0.996
+  }
+ },
+ {
+  "site": "sentry.io",
+  "ui": 85,
+  "web": 81,
+  "factors": {
+   "composition": 1.0,
+   "local": 0.091,
+   "alignment": 0.0,
+   "contrast": 0.619,
+   "harmony": 0.503,
+   "edge_density": 0.996,
+   "jpeg_bpp": 0.977,
+   "colours": 0.982,
+   "whitespace": 0.999,
+   "colorfulness": 0.998,
+   "congestion": 0.642,
+   "contour": 0.936,
+   "orientation": 0.952,
+   "anisotropy": 0.958,
+   "hierarchy": 0.0,
+   "margin": 0.887
+  }
+ },
+ {
+  "site": "framer.com",
+  "ui": 84,
+  "web": 35,
+  "factors": {
+   "composition": 0.0,
+   "local": 0.633,
+   "alignment": 0.703,
+   "contrast": 0.886,
+   "harmony": 0.651,
+   "edge_density": 0.989,
+   "jpeg_bpp": 0.984,
+   "colours": 0.996,
+   "whitespace": 0.995,
+   "colorfulness": 0.998,
+   "congestion": 0.924,
+   "contour": 0.934,
+   "orientation": 0.957,
+   "anisotropy": 0.963,
+   "hierarchy": 0.642,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "readwise.io",
+  "ui": 84,
+  "web": 78,
+  "factors": {
+   "composition": 1.0,
+   "local": 0.751,
+   "alignment": 0.382,
+   "contrast": 0.477,
+   "harmony": 0.196,
+   "edge_density": 0.986,
+   "jpeg_bpp": 0.997,
+   "colours": 0.996,
+   "whitespace": 0.995,
+   "colorfulness": 0.999,
+   "congestion": 0.997,
+   "contour": 0.733,
+   "orientation": 0.467,
+   "anisotropy": 0.596,
+   "hierarchy": 0.077,
+   "margin": 0.954
+  }
+ },
+ {
+  "site": "craft.do",
+  "ui": 83,
+  "web": 100,
+  "factors": {
+   "composition": 0.94,
+   "local": 0.527,
+   "alignment": 0.511,
+   "contrast": 0.177,
+   "harmony": 0.312,
+   "edge_density": 0.995,
+   "jpeg_bpp": 0.965,
+   "colours": 0.641,
+   "whitespace": 0.717,
+   "colorfulness": 0.94,
+   "congestion": 0.982,
+   "contour": 0.588,
+   "orientation": 0.989,
+   "anisotropy": 0.989,
+   "hierarchy": 0.303,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "bear.app",
+  "ui": 83,
+  "web": 48,
+  "factors": {
+   "composition": 0.0,
+   "local": 0.0,
+   "alignment": 0.745,
+   "contrast": 0.726,
+   "harmony": 1.0,
+   "edge_density": 0.896,
+   "jpeg_bpp": 0.847,
+   "colours": 0.996,
+   "whitespace": 0.908,
+   "colorfulness": 0.966,
+   "congestion": 0.88,
+   "contour": 0.968,
+   "orientation": 1.0,
+   "anisotropy": 0.997,
+   "hierarchy": 0.992,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "dropbox.com",
+  "ui": 83,
+  "web": 88,
+  "factors": {
+   "composition": 0.968,
+   "local": 0.008,
+   "alignment": 0.312,
+   "contrast": 0.66,
+   "harmony": 0.36,
+   "edge_density": 0.991,
+   "jpeg_bpp": 0.991,
+   "colours": 0.961,
+   "whitespace": 0.98,
+   "colorfulness": 0.994,
+   "congestion": 1.0,
+   "contour": 0.879,
+   "orientation": 0.999,
+   "anisotropy": 1.0,
+   "hierarchy": 0.0,
+   "margin": 0.596
+  }
+ },
+ {
+  "site": "aesop.com",
+  "ui": 83,
+  "web": 27,
+  "factors": {
+   "composition": 0.513,
+   "local": 0.0,
+   "alignment": 1.0,
+   "contrast": 0.785,
+   "harmony": 1.0,
+   "edge_density": 0.97,
+   "jpeg_bpp": 0.981,
+   "colours": 0.996,
+   "whitespace": 0.813,
+   "colorfulness": 0.95,
+   "congestion": 0.677,
+   "contour": 0.954,
+   "orientation": 0.98,
+   "anisotropy": 1.0,
+   "hierarchy": 0.0,
+   "margin": 1.0
   }
  },
  {
@@ -109,959 +1062,574 @@
   "ui": 82,
   "web": 72,
   "factors": {
-   "composition": 0.88,
-   "local": 0.462,
-   "alignment": 0.363,
-   "simplicity": 0.51,
-   "whitespace": 0.964,
-   "colorfulness": 0.893,
-   "contrast": 0.883,
-   "harmony": 0.935
-  }
- },
- {
-  "site": "readwise.io",
-  "ui": 82,
-  "web": 78,
-  "factors": {
-   "composition": 0.93,
-   "local": 0.658,
-   "alignment": 0.186,
-   "simplicity": 0.467,
-   "whitespace": 1.0,
-   "colorfulness": 0.999,
-   "contrast": 1.0,
-   "harmony": 0.85
-  }
- },
- {
-  "site": "swift.org",
-  "ui": 82,
-  "web": 90,
-  "factors": {
-   "composition": 0.92,
-   "local": 0.692,
-   "alignment": 0.221,
-   "simplicity": 0.424,
-   "whitespace": 1.0,
-   "colorfulness": 0.881,
-   "contrast": 1.0,
-   "harmony": 0.934
-  }
- },
- {
-  "site": "apple.com",
-  "ui": 81,
-  "web": 84,
-  "factors": {
-   "composition": 0.81,
-   "local": 0.871,
-   "alignment": 0.138,
-   "simplicity": 0.5,
-   "whitespace": 1.0,
-   "colorfulness": 0.967,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "clerk.com",
-  "ui": 81,
-  "web": 86,
-  "factors": {
-   "composition": 0.8,
-   "local": 0.732,
-   "alignment": 0.174,
-   "simplicity": 0.596,
-   "whitespace": 1.0,
-   "colorfulness": 0.776,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "mailchimp.com",
-  "ui": 81,
-  "web": 19,
-  "factors": {
-   "composition": 0.94,
-   "local": 0.655,
-   "alignment": 0.373,
-   "simplicity": 0.14,
-   "whitespace": 1.0,
-   "colorfulness": 0.999,
-   "contrast": 1.0,
-   "harmony": 0.871
-  }
- },
- {
-  "site": "proton.me",
-  "ui": 81,
-  "web": 97,
-  "factors": {
-   "composition": 0.85,
-   "local": 0.59,
-   "alignment": 0.154,
-   "simplicity": 0.615,
-   "whitespace": 1.0,
-   "colorfulness": 0.998,
-   "contrast": 1.0,
-   "harmony": 0.858
-  }
- },
- {
-  "site": "1password.com",
-  "ui": 81,
-  "web": 90,
-  "factors": {
-   "composition": 0.77,
-   "local": 0.839,
-   "alignment": 0.218,
-   "simplicity": 0.548,
-   "whitespace": 1.0,
-   "colorfulness": 0.976,
-   "contrast": 1.0,
-   "harmony": 0.922
-  }
- },
- {
-  "site": "ghost.org",
-  "ui": 80,
-  "web": 69,
-  "factors": {
-   "composition": 0.73,
-   "local": 0.505,
-   "alignment": 0.23,
-   "simplicity": 0.675,
-   "whitespace": 1.0,
-   "colorfulness": 0.962,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "dribbble.com",
-  "ui": 80,
-  "web": 10,
-  "factors": {
-   "composition": 0.69,
-   "local": 0.909,
-   "alignment": 0.545,
-   "simplicity": 1.0,
-   "whitespace": 0.0,
-   "colorfulness": 0.734,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "dropbox.com",
-  "ui": 79,
-  "web": 88,
-  "factors": {
-   "composition": 0.79,
-   "local": 0.423,
-   "alignment": 0.176,
-   "simplicity": 0.636,
-   "whitespace": 1.0,
-   "colorfulness": 0.981,
-   "contrast": 1.0,
-   "harmony": 0.881
-  }
- },
- {
-  "site": "zed.dev",
-  "ui": 79,
-  "web": 9,
-  "factors": {
-   "composition": 0.73,
-   "local": 0.401,
-   "alignment": 0.361,
-   "simplicity": 0.47,
-   "whitespace": 1.0,
-   "colorfulness": 0.981,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "bitwarden.com",
-  "ui": 79,
-  "web": 90,
-  "factors": {
-   "composition": 0.95,
-   "local": 0.82,
-   "alignment": 0.16,
-   "simplicity": 0.28,
-   "whitespace": 1.0,
-   "colorfulness": 0.701,
-   "contrast": 1.0,
-   "harmony": 0.932
-  }
- },
- {
-  "site": "sentry.io",
-  "ui": 78,
-  "web": 81,
-  "factors": {
-   "composition": 0.85,
-   "local": 0.45,
-   "alignment": 0.132,
-   "simplicity": 0.524,
-   "whitespace": 1.0,
-   "colorfulness": 0.992,
-   "contrast": 1.0,
-   "harmony": 0.908
-  }
- },
- {
-  "site": "intercom.com",
-  "ui": 77,
-  "web": 75,
-  "factors": {
-   "composition": 0.78,
-   "local": 0.602,
-   "alignment": 0.153,
-   "simplicity": 0.428,
-   "whitespace": 1.0,
-   "colorfulness": 0.971,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "vercel.com",
-  "ui": 76,
-  "web": 97,
-  "factors": {
-   "composition": 0.7,
-   "local": 0.748,
-   "alignment": 0.172,
-   "simplicity": 0.935,
-   "whitespace": 0.475,
-   "colorfulness": 0.734,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "loom.com",
-  "ui": 76,
-  "web": 89,
-  "factors": {
-   "composition": 0.93,
-   "local": 0.724,
-   "alignment": 0.168,
-   "simplicity": 0.232,
-   "whitespace": 1.0,
-   "colorfulness": 0.687,
-   "contrast": 1.0,
-   "harmony": 0.908
-  }
- },
- {
-  "site": "hey.com",
-  "ui": 75,
-  "web": 61,
-  "factors": {
-   "composition": 0.81,
-   "local": 0.516,
-   "alignment": 0.296,
-   "simplicity": 0.343,
-   "whitespace": 1.0,
-   "colorfulness": 0.833,
-   "contrast": 1.0,
-   "harmony": 0.858
-  }
- },
- {
-  "site": "slack.com",
-  "ui": 75,
-  "web": 73,
-  "factors": {
-   "composition": 0.79,
-   "local": 0.45,
-   "alignment": 0.185,
-   "simplicity": 0.443,
-   "whitespace": 1.0,
-   "colorfulness": 0.999,
-   "contrast": 1.0,
-   "harmony": 0.833
-  }
- },
- {
-  "site": "are.na",
-  "ui": 75,
-  "web": 37,
-  "factors": {
-   "composition": 0.74,
-   "local": 0.429,
-   "alignment": 0.322,
-   "simplicity": 0.925,
-   "whitespace": 0.234,
-   "colorfulness": 0.811,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "mozilla.org",
-  "ui": 75,
-  "web": 49,
-  "factors": {
-   "composition": 0.55,
-   "local": 0.776,
-   "alignment": 0.256,
-   "simplicity": 0.61,
-   "whitespace": 1.0,
-   "colorfulness": 0.993,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "figma.com",
-  "ui": 74,
-  "web": 87,
-  "factors": {
-   "composition": 0.74,
-   "local": 0.385,
-   "alignment": 0.193,
-   "simplicity": 0.541,
-   "whitespace": 1.0,
-   "colorfulness": 0.963,
-   "contrast": 1.0,
-   "harmony": 0.816
-  }
- },
- {
-  "site": "brave.com",
-  "ui": 73,
-  "web": 92,
-  "factors": {
-   "composition": 0.78,
-   "local": 0.643,
-   "alignment": 0.206,
-   "simplicity": 0.302,
-   "whitespace": 1.0,
-   "colorfulness": 0.957,
-   "contrast": 1.0,
-   "harmony": 0.862
-  }
- },
- {
-  "site": "raycast.com",
-  "ui": 72,
-  "web": 33,
-  "factors": {
-   "composition": 0.92,
-   "local": 0.669,
-   "alignment": 0.335,
-   "simplicity": 0.732,
-   "whitespace": 1.0,
-   "colorfulness": 0.248,
-   "contrast": 0.055,
-   "harmony": 0.897
-  }
- },
- {
-  "site": "superhuman.com",
-  "ui": 72,
-  "web": 94,
-  "factors": {
-   "composition": 0.92,
-   "local": 0.885,
-   "alignment": 0.317,
-   "simplicity": 0.418,
-   "whitespace": 0.0,
-   "colorfulness": 0.94,
-   "contrast": 1.0,
-   "harmony": 0.909
-  }
- },
- {
-  "site": "webflow.com",
-  "ui": 71,
-  "web": 86,
-  "factors": {
-   "composition": 0.75,
-   "local": 0.767,
-   "alignment": 0.152,
-   "simplicity": 0.352,
-   "whitespace": 1.0,
-   "colorfulness": 0.665,
-   "contrast": 1.0,
-   "harmony": 0.889
-  }
- },
- {
-  "site": "airbnb.com",
-  "ui": 71,
-  "web": 40,
-  "factors": {
-   "composition": 0.57,
-   "local": 0.346,
-   "alignment": 0.291,
-   "simplicity": 0.714,
-   "whitespace": 0.786,
-   "colorfulness": 0.904,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "python.org",
-  "ui": 69,
-  "web": 74,
-  "factors": {
-   "composition": 0.71,
-   "local": 0.844,
-   "alignment": 0.326,
-   "simplicity": 0.436,
-   "whitespace": 0.344,
-   "colorfulness": 0.947,
-   "contrast": 1.0,
-   "harmony": 0.965
-  }
- },
- {
-  "site": "arc.net",
-  "ui": 68,
-  "web": 96,
-  "factors": {
-   "composition": 0.97,
-   "local": 0.939,
-   "alignment": 0.313,
-   "simplicity": 0.36,
-   "whitespace": 0.579,
-   "colorfulness": 0.234,
-   "contrast": 0.499,
-   "harmony": 0.896
-  }
- },
- {
-  "site": "teenage.engineering",
-  "ui": 68,
-  "web": 94,
-  "factors": {
-   "composition": 0.89,
-   "local": 0.437,
-   "alignment": 0.066,
-   "simplicity": 0.036,
-   "whitespace": 1.0,
-   "colorfulness": 0.892,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "nike.com",
-  "ui": 67,
-  "web": 100,
-  "factors": {
-   "composition": 0.95,
-   "local": 0.747,
-   "alignment": 0.25,
-   "simplicity": 0.398,
-   "whitespace": 0.0,
-   "colorfulness": 0.997,
-   "contrast": 0.835,
-   "harmony": 0.866
-  }
- },
- {
-  "site": "ui.shadcn.com",
-  "ui": 66,
-  "web": 88,
-  "factors": {
-   "composition": 0.58,
-   "local": 0.586,
-   "alignment": 0.154,
-   "simplicity": 0.464,
-   "whitespace": 1.0,
-   "colorfulness": 0.736,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "go.dev",
-  "ui": 65,
-  "web": 72,
-  "factors": {
-   "composition": 0.66,
-   "local": 0.795,
-   "alignment": 0.231,
-   "simplicity": 0.459,
-   "whitespace": 0.864,
-   "colorfulness": 0.165,
-   "contrast": 1.0,
-   "harmony": 0.928
-  }
- },
- {
-  "site": "gov.uk",
-  "ui": 64,
-  "web": 32,
-  "factors": {
-   "composition": 0.57,
-   "local": 0.697,
-   "alignment": 0.232,
-   "simplicity": 0.609,
-   "whitespace": 0.773,
-   "colorfulness": 0.41,
-   "contrast": 1.0,
-   "harmony": 0.966
-  }
- },
- {
-  "site": "rust-lang.org",
-  "ui": 61,
-  "web": 83,
-  "factors": {
-   "composition": 0.59,
-   "local": 0.852,
-   "alignment": 0.191,
-   "simplicity": 0.36,
-   "whitespace": 0.828,
-   "colorfulness": 0.496,
-   "contrast": 1.0,
-   "harmony": 0.925
-  }
- },
- {
-  "site": "aesop.com",
-  "ui": 59,
-  "web": 27,
-  "factors": {
-   "composition": 0.47,
-   "local": 0.331,
-   "alignment": 0.287,
-   "simplicity": 0.609,
-   "whitespace": 0.577,
-   "colorfulness": 0.87,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "cursor.com",
-  "ui": 58,
-  "web": 25,
-  "factors": {
-   "composition": 0.41,
-   "local": 0.422,
-   "alignment": 0.308,
-   "simplicity": 0.413,
-   "whitespace": 1.0,
-   "colorfulness": 0.839,
-   "contrast": 1.0,
-   "harmony": 0.912
-  }
- },
- {
-  "site": "linear.app",
-  "ui": 56,
-  "web": 70,
-  "factors": {
-   "composition": 0.21,
-   "local": 0.532,
-   "alignment": 0.209,
-   "simplicity": 0.751,
-   "whitespace": 1.0,
-   "colorfulness": 0.782,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "supabase.com",
-  "ui": 56,
-  "web": 74,
-  "factors": {
-   "composition": 0.23,
-   "local": 0.539,
-   "alignment": 0.193,
-   "simplicity": 0.689,
-   "whitespace": 1.0,
-   "colorfulness": 0.919,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "render.com",
-  "ui": 55,
-  "web": 70,
-  "factors": {
-   "composition": 0.3,
-   "local": 0.295,
-   "alignment": 0.168,
-   "simplicity": 0.657,
-   "whitespace": 1.0,
-   "colorfulness": 0.859,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "craft.do",
-  "ui": 55,
-  "web": 100,
-  "factors": {
-   "composition": 0.77,
-   "local": 0.588,
-   "alignment": 0.204,
-   "simplicity": 0.281,
-   "whitespace": 0.118,
-   "colorfulness": 0.837,
-   "contrast": 1.0,
-   "harmony": 0.872
-  }
- },
- {
-  "site": "warp.dev",
-  "ui": 54,
-  "web": 18,
-  "factors": {
-   "composition": 0.17,
-   "local": 0.402,
-   "alignment": 0.349,
-   "simplicity": 0.656,
-   "whitespace": 0.905,
-   "colorfulness": 0.943,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "pitch.com",
-  "ui": 54,
-  "web": 100,
-  "factors": {
-   "composition": 0.61,
-   "local": 0.721,
-   "alignment": 0.183,
-   "simplicity": 0.304,
-   "whitespace": 0.295,
-   "colorfulness": 0.944,
-   "contrast": 1.0,
-   "harmony": 0.972
-  }
- },
- {
-  "site": "obsidian.md",
-  "ui": 53,
-  "web": 45,
-  "factors": {
-   "composition": 0.07,
-   "local": 0.604,
-   "alignment": 0.269,
-   "simplicity": 0.752,
-   "whitespace": 1.0,
-   "colorfulness": 0.983,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "astro.build",
-  "ui": 53,
-  "web": 97,
-  "factors": {
-   "composition": 0.56,
-   "local": 0.48,
-   "alignment": 0.169,
-   "simplicity": 0.481,
-   "whitespace": 0.337,
-   "colorfulness": 0.954,
-   "contrast": 1.0,
-   "harmony": 0.935
-  }
- },
- {
-  "site": "lattice.com",
-  "ui": 51,
-  "web": 48,
-  "factors": {
-   "composition": 0.42,
-   "local": 0.367,
-   "alignment": 0.23,
-   "simplicity": 0.341,
-   "whitespace": 1.0,
-   "colorfulness": 0.865,
-   "contrast": 1.0,
-   "harmony": 0.756
-  }
- },
- {
-  "site": "bear.app",
-  "ui": 50,
-  "web": 48,
-  "factors": {
-   "composition": 0.1,
-   "local": 0.403,
-   "alignment": 0.237,
-   "simplicity": 0.744,
-   "whitespace": 1.0,
-   "colorfulness": 0.913,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "cal.com",
-  "ui": 49,
-  "web": 16,
-  "factors": {
-   "composition": 0.14,
-   "local": 0.377,
-   "alignment": 0.284,
-   "simplicity": 0.561,
-   "whitespace": 1.0,
-   "colorfulness": 0.904,
-   "contrast": 1.0,
-   "harmony": 1.0
-  }
- },
- {
-  "site": "substack.com",
-  "ui": 49,
-  "web": 58,
-  "factors": {
-   "composition": 0.24,
-   "local": 0.773,
-   "alignment": 0.191,
-   "simplicity": 0.517,
-   "whitespace": 1.0,
-   "colorfulness": 0.643,
-   "contrast": 1.0,
-   "harmony": 0.86
-  }
- },
- {
-  "site": "tesla.com",
-  "ui": 48,
-  "web": 10,
-  "factors": {
-   "composition": 0.26,
-   "local": 0.296,
-   "alignment": 0.392,
-   "simplicity": 1.0,
-   "whitespace": 0.0,
-   "colorfulness": 0.734,
-   "contrast": 1.0,
-   "harmony": 1.0
+   "composition": 1.0,
+   "local": 0.129,
+   "alignment": 1.0,
+   "contrast": 0.096,
+   "harmony": 0.651,
+   "edge_density": 0.995,
+   "jpeg_bpp": 0.997,
+   "colours": 1.0,
+   "whitespace": 0.981,
+   "colorfulness": 0.959,
+   "congestion": 0.922,
+   "contour": 0.156,
+   "orientation": 0.868,
+   "anisotropy": 0.852,
+   "hierarchy": 0.089,
+   "margin": 1.0
   }
  },
  {
   "site": "anthropic.com",
-  "ui": 48,
+  "ui": 80,
   "web": 92,
   "factors": {
-   "composition": 0.38,
-   "local": 0.548,
-   "alignment": 0.154,
-   "simplicity": 0.376,
-   "whitespace": 0.816,
-   "colorfulness": 0.898,
+   "composition": 0.385,
+   "local": 0.401,
+   "alignment": 0.149,
    "contrast": 1.0,
-   "harmony": 0.879
-  }
- },
- {
-  "site": "spotify.com",
-  "ui": 46,
-  "web": 80,
-  "factors": {
-   "composition": 0.5,
-   "local": 0.736,
-   "alignment": 0.16,
-   "simplicity": 0.058,
-   "whitespace": 0.687,
-   "colorfulness": 0.999,
-   "contrast": 1.0,
-   "harmony": 0.833
-  }
- },
- {
-  "site": "tailwindcss.com",
-  "ui": 46,
-  "web": 83,
-  "factors": {
-   "composition": 0.1,
-   "local": 0.829,
-   "alignment": 0.172,
-   "simplicity": 0.513,
-   "whitespace": 1.0,
-   "colorfulness": 0.873,
-   "contrast": 1.0,
-   "harmony": 1.0
+   "harmony": 0.349,
+   "edge_density": 0.995,
+   "jpeg_bpp": 0.998,
+   "colours": 0.961,
+   "whitespace": 0.955,
+   "colorfulness": 0.964,
+   "congestion": 0.992,
+   "contour": 0.718,
+   "orientation": 0.89,
+   "anisotropy": 0.848,
+   "hierarchy": 0.588,
+   "margin": 0.942
   }
  },
  {
   "site": "posthog.com",
-  "ui": 44,
+  "ui": 79,
   "web": 95,
   "factors": {
-   "composition": 0.72,
-   "local": 0.569,
-   "alignment": 0.242,
-   "simplicity": 0.023,
-   "whitespace": 0.0,
-   "colorfulness": 0.904,
-   "contrast": 1.0,
-   "harmony": 0.845
+   "composition": 0.869,
+   "local": 0.467,
+   "alignment": 0.785,
+   "contrast": 0.371,
+   "harmony": 0.17,
+   "edge_density": 0.786,
+   "jpeg_bpp": 0.722,
+   "colours": 0.895,
+   "whitespace": 0.623,
+   "colorfulness": 0.966,
+   "congestion": 0.825,
+   "contour": 1.0,
+   "orientation": 0.912,
+   "anisotropy": 0.82,
+   "hierarchy": 0.373,
+   "margin": 0.471
   }
  },
  {
-  "site": "framer.com",
-  "ui": 43,
-  "web": 35,
+  "site": "teenage.engineering",
+  "ui": 78,
+  "web": 94,
   "factors": {
-   "composition": 0.05,
-   "local": 0.621,
-   "alignment": 0.231,
-   "simplicity": 0.507,
-   "whitespace": 1.0,
+   "composition": 1.0,
+   "local": 0.051,
+   "alignment": 0.0,
+   "contrast": 1.0,
+   "harmony": 1.0,
+   "edge_density": 0.609,
+   "jpeg_bpp": 0.444,
+   "colours": 0.982,
+   "whitespace": 0.967,
+   "colorfulness": 0.958,
+   "congestion": 0.791,
+   "contour": 0.282,
+   "orientation": 0.977,
+   "anisotropy": 0.96,
+   "hierarchy": 0.232,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "obsidian.md",
+  "ui": 78,
+  "web": 45,
+  "factors": {
+   "composition": 0.0,
+   "local": 0.58,
+   "alignment": 0.975,
+   "contrast": 0.821,
+   "harmony": 1.0,
+   "edge_density": 0.959,
+   "jpeg_bpp": 0.951,
+   "colours": 0.931,
+   "whitespace": 0.989,
    "colorfulness": 0.993,
-   "contrast": 1.0,
-   "harmony": 0.935
+   "congestion": 0.919,
+   "contour": 1.0,
+   "orientation": 0.871,
+   "anisotropy": 0.827,
+   "hierarchy": 0.027,
+   "margin": 1.0
   }
  },
  {
-  "site": "mistral.ai",
-  "ui": 43,
-  "web": 24,
+  "site": "cursor.com",
+  "ui": 78,
+  "web": 25,
   "factors": {
-   "composition": 0.08,
-   "local": 0.604,
-   "alignment": 0.342,
-   "simplicity": 0.751,
-   "whitespace": 0.949,
-   "colorfulness": 0.061,
-   "contrast": 1.0,
-   "harmony": 0.934
+   "composition": 0.428,
+   "local": 0.002,
+   "alignment": 1.0,
+   "contrast": 0.213,
+   "harmony": 0.528,
+   "edge_density": 0.998,
+   "jpeg_bpp": 1.0,
+   "colours": 0.996,
+   "whitespace": 0.974,
+   "colorfulness": 0.937,
+   "congestion": 0.808,
+   "contour": 0.741,
+   "orientation": 0.91,
+   "anisotropy": 0.833,
+   "hierarchy": 0.261,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "airbnb.com",
+  "ui": 78,
+  "web": 40,
+  "factors": {
+   "composition": 0.655,
+   "local": 0.0,
+   "alignment": 1.0,
+   "contrast": 0.506,
+   "harmony": 1.0,
+   "edge_density": 0.954,
+   "jpeg_bpp": 0.963,
+   "colours": 0.961,
+   "whitespace": 0.832,
+   "colorfulness": 0.963,
+   "congestion": 0.798,
+   "contour": 0.483,
+   "orientation": 0.957,
+   "anisotropy": 0.861,
+   "hierarchy": 0.0,
+   "margin": 0.987
   }
  },
  {
   "site": "docker.com",
-  "ui": 40,
+  "ui": 78,
   "web": 28,
   "factors": {
-   "composition": 0.1,
-   "local": 0.632,
-   "alignment": 0.273,
-   "simplicity": 0.269,
+   "composition": 0.0,
+   "local": 0.669,
+   "alignment": 1.0,
+   "contrast": 0.638,
+   "harmony": 0.614,
+   "edge_density": 0.948,
+   "jpeg_bpp": 0.936,
+   "colours": 0.996,
    "whitespace": 1.0,
-   "colorfulness": 0.972,
-   "contrast": 1.0,
-   "harmony": 0.928
+   "colorfulness": 0.991,
+   "congestion": 0.993,
+   "contour": 0.832,
+   "orientation": 0.4,
+   "anisotropy": 0.31,
+   "hierarchy": 0.962,
+   "margin": 0.904
   }
  },
  {
-  "site": "basecamp.com",
-  "ui": 39,
-  "web": 61,
+  "site": "astro.build",
+  "ui": 78,
+  "web": 97,
   "factors": {
-   "composition": 0.19,
-   "local": 0.313,
-   "alignment": 0.221,
-   "simplicity": 0.34,
-   "whitespace": 0.894,
-   "colorfulness": 0.994,
+   "composition": 0.641,
+   "local": 0.187,
+   "alignment": 0.26,
    "contrast": 1.0,
-   "harmony": 0.874
+   "harmony": 0.65,
+   "edge_density": 0.948,
+   "jpeg_bpp": 0.99,
+   "colours": 0.752,
+   "whitespace": 0.807,
+   "colorfulness": 0.984,
+   "congestion": 0.998,
+   "contour": 0.807,
+   "orientation": 0.856,
+   "anisotropy": 0.822,
+   "hierarchy": 0.113,
+   "margin": 1.0
   }
  },
  {
-  "site": "radix-ui.com",
-  "ui": 38,
-  "web": 86,
+  "site": "spotify.com",
+  "ui": 77,
+  "web": 80,
   "factors": {
-   "composition": 0.13,
-   "local": 0.5,
-   "alignment": 0.21,
-   "simplicity": 0.31,
-   "whitespace": 1.0,
-   "colorfulness": 0.947,
-   "contrast": 1.0,
-   "harmony": 0.862
+   "composition": 0.556,
+   "local": 0.998,
+   "alignment": 0.193,
+   "contrast": 0.465,
+   "harmony": 0.101,
+   "edge_density": 0.601,
+   "jpeg_bpp": 0.721,
+   "colours": 0.982,
+   "whitespace": 0.924,
+   "colorfulness": 1.0,
+   "congestion": 0.646,
+   "contour": 0.887,
+   "orientation": 0.99,
+   "anisotropy": 0.925,
+   "hierarchy": 0.707,
+   "margin": 0.079
   }
  },
  {
-  "site": "pinterest.com",
-  "ui": 36,
+  "site": "supabase.com",
+  "ui": 75,
   "web": 74,
   "factors": {
-   "composition": 0.13,
-   "local": 0.596,
-   "alignment": 0.132,
-   "simplicity": 0.257,
-   "whitespace": 1.0,
-   "colorfulness": 0.947,
-   "contrast": 1.0,
-   "harmony": 0.867
+   "composition": 0.172,
+   "local": 0.373,
+   "alignment": 0.434,
+   "contrast": 0.409,
+   "harmony": 1.0,
+   "edge_density": 0.992,
+   "jpeg_bpp": 0.972,
+   "colours": 0.931,
+   "whitespace": 0.881,
+   "colorfulness": 0.969,
+   "congestion": 0.763,
+   "contour": 0.966,
+   "orientation": 0.965,
+   "anisotropy": 0.974,
+   "hierarchy": 0.0,
+   "margin": 0.925
   }
  },
  {
-  "site": "remix.run",
-  "ui": 34,
-  "web": 100,
+  "site": "linear.app",
+  "ui": 74,
+  "web": 70,
   "factors": {
-   "composition": 0.64,
-   "local": 0.723,
-   "alignment": 0.123,
-   "simplicity": 0.0,
-   "whitespace": 0.325,
-   "colorfulness": 0.56,
-   "contrast": 0.742,
-   "harmony": 0.819
+   "composition": 0.144,
+   "local": 0.353,
+   "alignment": 0.549,
+   "contrast": 0.843,
+   "harmony": 1.0,
+   "edge_density": 0.94,
+   "jpeg_bpp": 0.918,
+   "colours": 0.961,
+   "whitespace": 0.974,
+   "colorfulness": 0.914,
+   "congestion": 0.703,
+   "contour": 0.995,
+   "orientation": 0.842,
+   "anisotropy": 0.728,
+   "hierarchy": 0.0,
+   "margin": 0.987
+  }
+ },
+ {
+  "site": "cal.com",
+  "ui": 74,
+  "web": 16,
+  "factors": {
+   "composition": 0.044,
+   "local": 0.0,
+   "alignment": 1.0,
+   "contrast": 0.48,
+   "harmony": 1.0,
+   "edge_density": 1.0,
+   "jpeg_bpp": 0.991,
+   "colours": 0.982,
+   "whitespace": 0.993,
+   "colorfulness": 0.963,
+   "congestion": 0.95,
+   "contour": 0.869,
+   "orientation": 0.998,
+   "anisotropy": 0.983,
+   "hierarchy": 0.003,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "lattice.com",
+  "ui": 74,
+  "web": 48,
+  "factors": {
+   "composition": 0.442,
+   "local": 0.0,
+   "alignment": 0.699,
+   "contrast": 0.697,
+   "harmony": 0.0,
+   "edge_density": 0.999,
+   "jpeg_bpp": 0.988,
+   "colours": 0.752,
+   "whitespace": 1.0,
+   "colorfulness": 0.952,
+   "congestion": 0.565,
+   "contour": 0.943,
+   "orientation": 0.919,
+   "anisotropy": 0.876,
+   "hierarchy": 0.19,
+   "margin": 0.987
+  }
+ },
+ {
+  "site": "render.com",
+  "ui": 73,
+  "web": 70,
+  "factors": {
+   "composition": 0.271,
+   "local": 0.0,
+   "alignment": 0.249,
+   "contrast": 0.812,
+   "harmony": 1.0,
+   "edge_density": 0.988,
+   "jpeg_bpp": 0.977,
+   "colours": 0.961,
+   "whitespace": 0.881,
+   "colorfulness": 0.945,
+   "congestion": 0.77,
+   "contour": 0.79,
+   "orientation": 0.986,
+   "anisotropy": 0.986,
+   "hierarchy": 0.086,
+   "margin": 0.908
   }
  },
  {
   "site": "signal.org",
-  "ui": 33,
+  "ui": 72,
   "web": 82,
   "factors": {
-   "composition": 0.17,
-   "local": 0.588,
-   "alignment": 0.156,
-   "simplicity": 0.168,
-   "whitespace": 0.904,
-   "colorfulness": 0.772,
-   "contrast": 1.0,
-   "harmony": 0.916
-  }
- },
- {
-  "site": "svelte.dev",
-  "ui": 30,
-  "web": 77,
-  "factors": {
-   "composition": 0.11,
-   "local": 0.427,
-   "alignment": 0.105,
-   "simplicity": 0.15,
-   "whitespace": 1.0,
-   "colorfulness": 0.999,
-   "contrast": 1.0,
-   "harmony": 0.853
+   "composition": 0.087,
+   "local": 0.529,
+   "alignment": 0.163,
+   "contrast": 0.411,
+   "harmony": 0.551,
+   "edge_density": 0.851,
+   "jpeg_bpp": 0.868,
+   "colours": 0.996,
+   "whitespace": 0.972,
+   "colorfulness": 0.914,
+   "congestion": 0.877,
+   "contour": 0.467,
+   "orientation": 0.808,
+   "anisotropy": 0.729,
+   "hierarchy": 0.969,
+   "margin": 0.975
   }
  },
  {
   "site": "stripe.com",
-  "ui": 29,
+  "ui": 72,
   "web": 48,
   "factors": {
-   "composition": 0.05,
-   "local": 0.502,
-   "alignment": 0.248,
-   "simplicity": 0.356,
-   "whitespace": 1.0,
-   "colorfulness": 0.333,
+   "composition": 0.0,
+   "local": 0.256,
+   "alignment": 0.829,
+   "contrast": 0.883,
+   "harmony": 0.003,
+   "edge_density": 1.0,
+   "jpeg_bpp": 0.979,
+   "colours": 0.982,
+   "whitespace": 0.997,
+   "colorfulness": 0.679,
+   "congestion": 0.481,
+   "contour": 1.0,
+   "orientation": 0.906,
+   "anisotropy": 0.823,
+   "hierarchy": 0.874,
+   "margin": 0.558
+  }
+ },
+ {
+  "site": "remix.run",
+  "ui": 72,
+  "web": 100,
+  "factors": {
+   "composition": 0.755,
+   "local": 0.956,
+   "alignment": 0.0,
+   "contrast": 0.047,
+   "harmony": 0.03,
+   "edge_density": 0.486,
+   "jpeg_bpp": 0.567,
+   "colours": 0.852,
+   "whitespace": 0.802,
+   "colorfulness": 0.816,
+   "congestion": 0.877,
+   "contour": 0.923,
+   "orientation": 0.923,
+   "anisotropy": 0.925,
+   "hierarchy": 0.328,
+   "margin": 0.554
+  }
+ },
+ {
+  "site": "basecamp.com",
+  "ui": 71,
+  "web": 61,
+  "factors": {
+   "composition": 0.115,
+   "local": 0.0,
+   "alignment": 0.629,
+   "contrast": 0.562,
+   "harmony": 0.322,
+   "edge_density": 0.929,
+   "jpeg_bpp": 0.896,
+   "colours": 0.982,
+   "whitespace": 0.97,
+   "colorfulness": 0.998,
+   "congestion": 0.992,
+   "contour": 0.985,
+   "orientation": 0.98,
+   "anisotropy": 0.994,
+   "hierarchy": 0.073,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "pinterest.com",
+  "ui": 71,
+  "web": 74,
+  "factors": {
+   "composition": 0.03,
+   "local": 0.555,
+   "alignment": 0.0,
+   "contrast": 0.446,
+   "harmony": 0.288,
+   "edge_density": 0.905,
+   "jpeg_bpp": 0.973,
+   "colours": 0.996,
+   "whitespace": 0.991,
+   "colorfulness": 0.982,
+   "congestion": 0.692,
+   "contour": 0.538,
+   "orientation": 0.966,
+   "anisotropy": 0.956,
+   "hierarchy": 0.661,
+   "margin": 1.0
+  }
+ },
+ {
+  "site": "warp.dev",
+  "ui": 70,
+  "web": 18,
+  "factors": {
+   "composition": 0.087,
+   "local": 0.0,
+   "alignment": 1.0,
+   "contrast": 0.372,
+   "harmony": 1.0,
+   "edge_density": 0.987,
+   "jpeg_bpp": 0.981,
+   "colours": 0.961,
+   "whitespace": 0.843,
+   "colorfulness": 0.978,
+   "congestion": 0.838,
+   "contour": 0.681,
+   "orientation": 0.994,
+   "anisotropy": 0.996,
+   "hierarchy": 0.0,
+   "margin": 0.987
+  }
+ },
+ {
+  "site": "tesla.com",
+  "ui": 69,
+  "web": 10,
+  "factors": {
+   "composition": 0.215,
+   "local": 0.0,
+   "alignment": 1.0,
    "contrast": 1.0,
-   "harmony": 0.814
+   "harmony": 1.0,
+   "edge_density": 0.636,
+   "jpeg_bpp": 0.528,
+   "colours": 0.895,
+   "whitespace": 0.753,
+   "colorfulness": 0.893,
+   "congestion": 0.611,
+   "contour": 1.0,
+   "orientation": 1.0,
+   "anisotropy": 0.968,
+   "hierarchy": 0.09,
+   "margin": 0.896
+  }
+ },
+ {
+  "site": "svelte.dev",
+  "ui": 66,
+  "web": 77,
+  "factors": {
+   "composition": 0.001,
+   "local": 0.021,
+   "alignment": 0.0,
+   "contrast": 0.523,
+   "harmony": 0.211,
+   "edge_density": 0.873,
+   "jpeg_bpp": 0.953,
+   "colours": 0.961,
+   "whitespace": 0.99,
+   "colorfulness": 1.0,
+   "congestion": 0.958,
+   "contour": 0.576,
+   "orientation": 0.981,
+   "anisotropy": 0.991,
+   "hierarchy": 0.808,
+   "margin": 0.9
+  }
+ },
+ {
+  "site": "mistral.ai",
+  "ui": 63,
+  "web": 24,
+  "factors": {
+   "composition": 0.0,
+   "local": 0.58,
+   "alignment": 1.0,
+   "contrast": 0.6,
+   "harmony": 0.645,
+   "edge_density": 0.884,
+   "jpeg_bpp": 0.849,
+   "colours": 0.996,
+   "whitespace": 0.979,
+   "colorfulness": 0.37,
+   "congestion": 0.841,
+   "contour": 0.259,
+   "orientation": 0.697,
+   "anisotropy": 0.697,
+   "hierarchy": 1.0,
+   "margin": 0.567
+  }
+ },
+ {
+  "site": "radix-ui.com",
+  "ui": 58,
+  "web": 86,
+  "factors": {
+   "composition": 0.03,
+   "local": 0.251,
+   "alignment": 0.55,
+   "contrast": 0.476,
+   "harmony": 0.261,
+   "edge_density": 0.986,
+   "jpeg_bpp": 0.982,
+   "colours": 0.982,
+   "whitespace": 0.988,
+   "colorfulness": 0.98,
+   "congestion": 0.982,
+   "contour": 0.479,
+   "orientation": 1.0,
+   "anisotropy": 0.999,
+   "hierarchy": 0.0,
+   "margin": 0.687
   }
  }
 ]

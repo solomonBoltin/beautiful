@@ -20,10 +20,17 @@ gets wrong are enough.
 
 ## Already in the formula
 
-composition (mirror symmetry, balance, local symmetry) · alignment (grid quality) · simplicity
-(edge density, JPEG bytes/pixel, dominant colours) · whitespace · harmony (Matsuda/Cohen-Or hue
-templates) · colourfulness (Hasler–Süsstrunk) · contrast (figure–ground) · fractal dimension ·
-Fourier slope · rule of thirds (art only) · economy (logo)
+The fitted `ui` formula ([research/FIT.md](research/FIT.md)): composition (symmetric OR balanced)
+· local symmetry · alignment (grid quality) · contrast (figure–ground) · harmony (Matsuda/Cohen-Or
+hue templates) · edge density, JPEG bytes/pixel, dominant colours, white space, colourfulness (each
+a bell centred on what acclaimed pages measure) · feature congestion · contour congestion ·
+edge-orientation entropy · anisotropy · hierarchy (block-scale structure) · margin (quiet side
+edges). `classic` keeps the literature's own grouping and weights: composition · alignment ·
+simplicity · whitespace · harmony · colourfulness · contrast. `art` / `logo` add fractal
+dimension · Fourier slope · rule of thirds · economy.
+
+A new factor now has a bench to pass, not just a demo table: add it to `MEASURES` in
+`research/fit_ui.py`, rerun the fit, and show the cross-validated numbers in FIT.md move.
 
 ## Measured, reported, not yet weighted (`raw["experimental"]`)
 

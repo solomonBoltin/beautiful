@@ -1,0 +1,198 @@
+{
+ "name": "ui",
+ "fitted_on": {
+  "acclaimed": 100,
+  "ordinary": 100,
+  "pairs": 100,
+  "rated": 398
+ },
+ "terms": [
+  {
+   "name": "composition",
+   "kind": "ramp",
+   "centre": null,
+   "width": null,
+   "lo": 0.10900000000000003,
+   "hi": 0.8125,
+   "weight": 0.1499,
+   "source": "Ngo 2003; Bauerly & Liu 2006 \u2014 symmetric OR balanced (symmetry.py)"
+  },
+  {
+   "name": "local",
+   "kind": "ramp",
+   "centre": null,
+   "width": null,
+   "lo": 0.42089000000000004,
+   "hi": 0.73685,
+   "weight": 0.0605,
+   "source": "local tile symmetry"
+  },
+  {
+   "name": "alignment",
+   "kind": "ramp",
+   "centre": null,
+   "width": null,
+   "lo": 0.1328625,
+   "hi": 0.2721625,
+   "weight": 0.0367,
+   "source": "Miniukovich 2015 grid quality"
+  },
+  {
+   "name": "contrast",
+   "kind": "ramp",
+   "centre": null,
+   "width": null,
+   "lo": 0.60187,
+   "hi": 2.06505,
+   "weight": 0.0214,
+   "source": "Miniukovich 2015; Reber 2004"
+  },
+  {
+   "name": "harmony",
+   "kind": "ramp",
+   "centre": null,
+   "width": null,
+   "lo": 0.81379,
+   "hi": 1.0,
+   "weight": 0.0429,
+   "source": "Cohen-Or 2006 templates"
+  },
+  {
+   "name": "edge_density",
+   "kind": "bell",
+   "centre": 0.139,
+   "width": 0.17643750000000002,
+   "lo": null,
+   "hi": null,
+   "weight": 0.0431,
+   "source": "Reinecke & Gajos 2013 (complexity, inverted-U)"
+  },
+  {
+   "name": "jpeg_bpp",
+   "kind": "bell",
+   "centre": 0.10225000000000001,
+   "width": 0.08775000000000002,
+   "lo": null,
+   "hi": null,
+   "weight": 0.0709,
+   "source": "Rigau 2008 Kolmogorov proxy"
+  },
+  {
+   "name": "colours",
+   "kind": "bell",
+   "centre": 6.0,
+   "width": 15.0,
+   "lo": null,
+   "hi": null,
+   "weight": 0.0709,
+   "source": "Miniukovich 2015 dominant colours"
+  },
+  {
+   "name": "whitespace",
+   "kind": "bell",
+   "centre": 0.62985,
+   "width": 0.6728125000000001,
+   "lo": null,
+   "hi": null,
+   "weight": 0.0709,
+   "source": "Miniukovich 2015 white space"
+  },
+  {
+   "name": "colorfulness",
+   "kind": "bell",
+   "centre": 25.33775,
+   "width": 75.250875,
+   "lo": null,
+   "hi": null,
+   "weight": 0.0531,
+   "source": "Hasler & S\u00fcsstrunk 2003; Reinecke 2013 (inverted-U)"
+  },
+  {
+   "name": "congestion",
+   "kind": "bell",
+   "centre": 0.0169,
+   "width": 0.022087499999999996,
+   "lo": null,
+   "hi": null,
+   "weight": 0.0254,
+   "source": "Rosenholtz 2007 feature congestion"
+  },
+  {
+   "name": "contour",
+   "kind": "bell",
+   "centre": 0.6461,
+   "width": 0.10275000000000001,
+   "lo": null,
+   "hi": null,
+   "weight": 0.0925,
+   "source": "Miniukovich 2014 contour congestion"
+  },
+  {
+   "name": "orientation",
+   "kind": "bell",
+   "centre": 0.899,
+   "width": 0.134851,
+   "lo": null,
+   "hi": null,
+   "weight": 0.0531,
+   "source": "Redies edge-orientation entropy"
+  },
+  {
+   "name": "anisotropy",
+   "kind": "bell",
+   "centre": 0.80985,
+   "width": 0.6116625000000002,
+   "lo": null,
+   "hi": null,
+   "weight": 0.0531,
+   "source": "Redies anisotropy"
+  },
+  {
+   "name": "hierarchy",
+   "kind": "ramp",
+   "centre": null,
+   "width": null,
+   "lo": 0.36113887941430645,
+   "hi": 0.7202247286576132,
+   "weight": 0.0853,
+   "source": "coarse-structure share (this repo; visual hierarchy cue)"
+  },
+  {
+   "name": "margin",
+   "kind": "ramp",
+   "centre": null,
+   "width": null,
+   "lo": 0.0,
+   "hi": 1.0,
+   "weight": 0.0704,
+   "source": "quiet side margins (edge_contact; this repo)"
+  }
+ ],
+ "spread": "1 + 99 / (1 + exp(-8 (sum - 0.55)))",
+ "cv": {
+  "auc": 0.7185,
+  "pair": 0.74,
+  "rho": 0.1438,
+  "auc_ship": 0.5902,
+  "pair_ship": 0.63,
+  "auc_web": 0.611,
+  "pair_web": 0.37
+ },
+ "rho_rating_all": 0.189,
+ "rho_pairwise_ordinary": -0.1921,
+ "curated_pairs_respected": "18/21",
+ "floors": {
+  "composition": 0.15
+ },
+ "caps": {
+  "orientation": 0.06,
+  "anisotropy": 0.06,
+  "edge_density": 0.08,
+  "jpeg_bpp": 0.08,
+  "colours": 0.08,
+  "whitespace": 0.08,
+  "colorfulness": 0.06,
+  "hierarchy": 0.1,
+  "margin": 0.08
+ }
+}

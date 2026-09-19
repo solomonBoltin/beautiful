@@ -58,18 +58,36 @@ WEIGHTS = {
 }
 
 
-MODES = list(WEIGHTS) + ["web"]
+MODES = ["ui", "art", "logo", "web", "classic"]
 
 
 def beauty(image, mode: str = "ui") -> dict:
+    """mode: ui (fitted to acclaimed design, degraded twins and human ratings — the default),
+    art, logo, web (crowd-appeal model), classic (the literature-weighted ui formula)."""
+    if mode == "ui":
+        # the fitted formula (beautiful/model.py, research/fit_ui.py) consumes the classic
+        # measurements, so compute those first and replace the number, factors and hints
+        r = beauty(image, "classic")
+        from .model import fitted_ui, model
+        if model() is None:
+            r["mode"] = "ui"
+            return r
+        f = fitted_ui(r["raw"])
+        keep = [h for h in r["hints"] if h.startswith("clipping?")]
+        r.update({"score": max(1, f["score"] - sum(r.get("penalties", {}).values())), "mode": "ui",
+                  "factors": f["factors"], "weights": f["weights"], "weighted_sum": f["weighted_sum"],
+                  "hints": keep + f["hints"], "classic": {"score": r["score"], "factors": r["factors"]}, "model": f["model"]})
+        return r
     if mode == "web":
         # the model calibrated on human ratings of websites (beautiful/web.py) — it consumes the
         # ui measurements, so compute those first and then replace the number and the hints
-        r = beauty(image, "ui")
+        r = beauty(image, "classic")
         w = W.web_score(r["factors"], r["raw"])
         r.update({"score": w["score"], "mode": "web", "weights": None, "weighted_sum": None,
                   "hints": w["hints"] or ["nothing stands out against rated-high pages"], "web": w})
         return r
+    if mode == "classic":
+        mode = "ui"  # the literature-weighted formula, computed below under its old name
     if mode not in WEIGHTS:
         raise ValueError(f"mode must be one of {MODES}")
     rgb = F.to_rgb(image, 768)
@@ -172,6 +190,7 @@ def beauty(image, mode: str = "ui") -> dict:
     return {
         "score": score,
         "penalties": penalties,
+        "mode_note": "classic",
         "mode": mode,
         "weighted_sum": round(float(total), 4),
         "factors": {k: round(float(v), 3) for k, v in g.items()},

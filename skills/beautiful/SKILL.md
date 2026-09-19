@@ -35,12 +35,19 @@ claude mcp add beautiful -- beautiful-mcp
    clock — so the score is exactly what a screenshot at that viewport would get.)
    If you already have a PNG (a logo, an export, an existing screenshot), score it directly:
    ```bash
-   beautiful --mode=ui shot.png        # ui | art | logo | web
+   beautiful --mode=ui shot.png        # ui | art | logo | web | classic
    ```
-   Rendered pages also get the **DOM rules** (WCAG contrast, font sizes, touch targets, line
-   length and height, stretched images, clipped text, viewport meta, heading order, alt text)
-   and the **overflow check**. Those are defects, not taste: fix every `error` before you look
-   at the beauty number at all.
+   `ui` is the formula fitted to acclaimed design (research/FIT.md): composition, alignment,
+   contrast, harmony, the amount-of-content bells, clutter, hierarchy and margins. `classic` is
+   the pure literature-weighted formula (also returned inside every `ui` report as `classic`);
+   `web` is the model calibrated on crowd ratings. Use `ui` unless you have a reason.
+   Rendered pages also get the **44 DOM rules** (WCAG contrast, font sizes, touch targets and
+   spacing, line length and height, clipped and overlapping text, stretched or broken images,
+   viewport meta, heading order, empty and generic links, focus rings, motion, consent
+   asymmetry, placeholder residue, spacing scale, the AI-look tells…) and the **overflow
+   check**. Each finding has `source`, `why` and `fix`. Levels: `error` = a defect nobody
+   defends (fix all of them before looking at the beauty number), `warning` = a rule most
+   guidelines share, `note` = a tell, never a penalty.
 2. **Read the number per viewport.** A page that is 90 on desktop and 55 on mobile has a
    mobile layout problem, and the mobile hints say which factor.
    You get the number, every factor in 0–1, and hints ordered by how much each one costs.

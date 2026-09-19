@@ -105,7 +105,7 @@ def main():
         if chromium:
             chromium.close()
     rows.sort(key=lambda x: -x["ui"])
-    keys = ["composition", "alignment", "simplicity", "whitespace", "harmony", "colorfulness", "contrast"]
+    keys = ["composition", "alignment", "contrast", "harmony", "whitespace", "congestion", "contour", "hierarchy", "margin"]
     md = [f"Rendered {date.today().isoformat()} with headless Chromium at 1280×800 (`beautiful.render`), "
           f"{len(rows)} of {len(CANDIDATES)} candidates loaded. Sorted by the `ui` formula; `web` is the calibrated model.\n",
           "| ui | web | site | " + " | ".join(keys) + " |", "|---:|---:|---|" + "---:|" * len(keys)]

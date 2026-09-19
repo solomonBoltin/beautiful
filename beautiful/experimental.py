@@ -141,6 +141,20 @@ def anisotropy(rgb: np.ndarray) -> float:
     return float(p.std() / (1 / 16))
 
 
+def hierarchy(rgb: np.ndarray) -> float:
+    """Coarse-structure share: how much of the page's luminance variation survives a blur of
+    ~4% of the width. A designed page has structure at the scale of blocks — a hero, a coloured
+    section, a card grid, a large heading — so a good part of its contrast is coarse; a page that
+    is only running text (a plain link list, an unstyled document) is uniform grey at that scale
+    and the share is low. Std of the blurred luminance over std of the original, in [0, 1].
+    Not a beauty measure on its own (a lopsided page has coarse structure too); one of the
+    hierarchy cues in the fitted `ui` formula. See research/FIT.md."""
+    g = luminance(rgb)
+    fine = float(g.std()) + EPS
+    coarse = float(gaussian_filter(g, sigma=max(1.0, g.shape[1] / 25.0)).std())
+    return float(min(1.0, coarse / fine))
+
+
 def edge_contact(rgb: np.ndarray, band: int = 3, thresh: float = 0.12) -> dict:
     """How much content touches each edge of the viewport.
 
@@ -176,4 +190,5 @@ def all_measurements(rgb: np.ndarray) -> dict:
         "edge_orientation_entropy": round(edge_orientation_entropy(rgb), 4),
         "anisotropy": round(anisotropy(rgb), 4),
         "sequence": round(sequence(rgb), 4),
+        "hierarchy": round(hierarchy(rgb), 4),
     }

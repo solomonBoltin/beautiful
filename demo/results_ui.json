@@ -1,325 +1,438 @@
 [
  {
-  "file": "pinkas_documents.png",
-  "label": "Pinkas — documents (built with beautiful)",
-  "score": 91,
+  "file": "pypi_home.png",
+  "label": "PyPI — home (live)",
+  "score": 94,
+  "classic": 77,
   "factors": {
-   "composition": 0.83,
-   "local": 0.634,
-   "alignment": 0.631,
-   "simplicity": 0.853,
-   "whitespace": 0.856,
-   "colorfulness": 0.929,
-   "contrast": 1.0,
-   "harmony": 1.0
+   "composition": 0.954,
+   "local": 0.621,
+   "alignment": 0.627,
+   "contrast": 0.844,
+   "harmony": 0.89,
+   "edge_density": 0.975,
+   "jpeg_bpp": 0.988,
+   "colours": 0.961,
+   "whitespace": 0.997,
+   "colorfulness": 0.599,
+   "congestion": 0.999,
+   "contour": 0.893,
+   "orientation": 0.89,
+   "anisotropy": 0.756,
+   "hierarchy": 1.0,
+   "margin": 0.975
   },
   "hints": [
-   "left/right symmetry is fine but top/bottom halves differ",
-   "alignment (0.63): snap element edges to a shared column/row grid",
-   "composition (0.83): centre the main block; mirror controls at both ends of a row"
-  ]
- },
- {
-  "file": "crates_io_search_q_http.png",
-  "label": "crates.io — search results (live)",
-  "score": 89,
-  "factors": {
-   "composition": 0.81,
-   "local": 0.903,
-   "alignment": 0.685,
-   "simplicity": 0.67,
-   "whitespace": 0.749,
-   "colorfulness": 0.933,
-   "contrast": 1.0,
-   "harmony": 0.916
-  },
-  "hints": [
-   "visual weight sits toward the top; shift or counterweight it",
-   "left/right symmetry is fine but top/bottom halves differ",
-   "composition (0.81): centre the main block; mirror controls at both ends of a row",
-   "alignment (0.68): snap element edges to a shared column/row grid",
-   "simplicity (0.67): reduce edge count, borders and the number of distinct colours"
-  ]
- },
- {
-  "file": "crates_io_crates_serde.png",
-  "label": "crates.io — crate page (live)",
-  "score": 87,
-  "factors": {
-   "composition": 0.8,
-   "local": 0.89,
-   "alignment": 0.52,
-   "simplicity": 0.582,
-   "whitespace": 1.0,
-   "colorfulness": 0.949,
-   "contrast": 1.0,
-   "harmony": 0.866
-  },
-  "hints": [
-   "visual weight sits toward the top; shift or counterweight it",
-   "left/right symmetry is fine but top/bottom halves differ",
-   "alignment (0.52): snap element edges to a shared column/row grid",
-   "simplicity (0.58): reduce edge count, borders and the number of distinct colours",
-   "composition (0.80): centre the main block; mirror controls at both ends of a row"
-  ]
- },
- {
-  "file": "pinkas_dashboard.png",
-  "label": "Pinkas — dashboard",
-  "score": 87,
-  "factors": {
-   "composition": 0.89,
-   "local": 0.564,
-   "alignment": 0.26,
-   "simplicity": 0.758,
-   "whitespace": 1.0,
-   "colorfulness": 0.975,
-   "contrast": 1.0,
-   "harmony": 1.0
-  },
-  "hints": [
-   "left/right symmetry is fine but top/bottom halves differ",
-   "alignment (0.26): snap element edges to a shared column/row grid",
-   "simplicity (0.76): reduce edge count, borders and the number of distinct colours",
-   "composition (0.89): centre the main block; mirror controls at both ends of a row"
-  ]
- },
- {
-  "file": "pinkas_dialog.png",
-  "label": "Pinkas — new-document dialog",
-  "score": 87,
-  "factors": {
-   "composition": 0.98,
-   "local": 0.895,
-   "alignment": 0.317,
-   "simplicity": 0.748,
-   "whitespace": 0.559,
-   "colorfulness": 0.912,
-   "contrast": 0.954,
-   "harmony": 0.944
-  },
-  "hints": [
-   "alignment (0.32): snap element edges to a shared column/row grid",
-   "whitespace (0.56): adjust padding so ~60% of the canvas is background",
-   "simplicity (0.75): reduce edge count, borders and the number of distinct colours"
-  ]
- },
- {
-  "file": "digital_office_rebalanced.png",
-  "label": "Digital Office — rebalanced mock",
-  "score": 85,
-  "factors": {
-   "composition": 0.98,
-   "local": 0.904,
-   "alignment": 0.318,
-   "simplicity": 0.766,
-   "whitespace": 0.456,
-   "colorfulness": 0.959,
-   "contrast": 0.762,
-   "harmony": 0.964
-  },
-  "hints": [
-   "alignment (0.32): snap element edges to a shared column/row grid",
-   "whitespace (0.46): adjust padding so ~60% of the canvas is background",
-   "simplicity (0.77): reduce edge count, borders and the number of distinct colours"
-  ]
- },
- {
-  "file": "npm_home_unstyled.png",
-  "label": "npmjs.com — CSS blocked (unstyled)",
-  "score": 85,
-  "factors": {
-   "composition": 0.77,
-   "local": 0.685,
-   "alignment": 0.226,
-   "simplicity": 0.865,
-   "whitespace": 1.0,
-   "colorfulness": 0.895,
-   "contrast": 1.0,
-   "harmony": 1.0
-  },
-  "hints": [
-   "clipping? content touches the left edge in 6 places over 67% of the height — looks cut off; check horizontal overflow (render the page with `beautiful page.html` to know for certain)",
-   "alignment (0.23): snap element edges to a shared column/row grid",
-   "composition (0.77): centre the main block; mirror controls at both ends of a row"
-  ]
- },
- {
-  "file": "pypi_org_search__q_http.png",
-  "label": "PyPI — search results (live)",
-  "score": 84,
-  "factors": {
-   "composition": 0.94,
-   "local": 0.77,
-   "alignment": 0.398,
-   "simplicity": 0.754,
-   "whitespace": 1.0,
-   "colorfulness": 0.994,
-   "contrast": 0.367,
-   "harmony": 0.793
-  },
-  "hints": [
-   "left/right symmetry is fine but top/bottom halves differ",
-   "alignment (0.40): snap element edges to a shared column/row grid",
-   "contrast (0.37): raise figure–ground luminance contrast for text and controls",
-   "simplicity (0.75): reduce edge count, borders and the number of distinct colours"
+   "local (0.62): make individual components internally symmetric",
+   "colorfulness (0.60): colour variety is above acclaimed pages; simplify"
   ]
  },
  {
   "file": "cratesio_home.png",
   "label": "crates.io — home (live)",
-  "score": 80,
+  "score": 92,
+  "classic": 80,
   "factors": {
-   "composition": 0.74,
-   "local": 0.572,
-   "alignment": 0.264,
-   "simplicity": 0.613,
+   "composition": 0.897,
+   "local": 0.479,
+   "alignment": 0.94,
+   "contrast": 0.703,
+   "harmony": 0.546,
+   "edge_density": 0.99,
+   "jpeg_bpp": 0.982,
+   "colours": 0.982,
    "whitespace": 1.0,
    "colorfulness": 1.0,
-   "contrast": 1.0,
-   "harmony": 0.915
+   "congestion": 0.971,
+   "contour": 0.817,
+   "orientation": 0.64,
+   "anisotropy": 0.401,
+   "hierarchy": 1.0,
+   "margin": 0.979
   },
   "hints": [
-   "visual weight sits toward the top; shift or counterweight it",
-   "left/right symmetry is fine but top/bottom halves differ",
-   "alignment (0.26): snap element edges to a shared column/row grid",
-   "composition (0.74): centre the main block; mirror controls at both ends of a row",
-   "simplicity (0.61): reduce edge count, borders and the number of distinct colours"
-  ]
- },
- {
-  "file": "pypi_home.png",
-  "label": "PyPI — home (live)",
-  "score": 77,
-  "factors": {
-   "composition": 0.78,
-   "local": 0.617,
-   "alignment": 0.22,
-   "simplicity": 0.668,
-   "whitespace": 1.0,
-   "colorfulness": 0.234,
-   "contrast": 1.0,
-   "harmony": 0.979
-  },
-  "hints": [
-   "visual weight sits toward the bottom; shift or counterweight it",
-   "left/right symmetry is fine but top/bottom halves differ",
-   "alignment (0.22): snap element edges to a shared column/row grid",
-   "composition (0.78): centre the main block; mirror controls at both ends of a row",
-   "simplicity (0.67): reduce edge count, borders and the number of distinct colours"
+   "anisotropy (0.40): one edge direction dominates above acclaimed pages; simplify",
+   "local (0.48): make individual components internally symmetric"
   ]
  },
  {
   "file": "pypi_org_project_numpy.png",
   "label": "PyPI — project page (live)",
-  "score": 67,
+  "score": 90,
+  "classic": 67,
   "factors": {
-   "composition": 0.57,
-   "local": 0.754,
-   "alignment": 0.29,
-   "simplicity": 0.641,
-   "whitespace": 0.844,
-   "colorfulness": 0.249,
-   "contrast": 1.0,
-   "harmony": 0.972
+   "composition": 0.655,
+   "local": 1.0,
+   "alignment": 1.0,
+   "contrast": 0.517,
+   "harmony": 0.849,
+   "edge_density": 0.989,
+   "jpeg_bpp": 0.992,
+   "colours": 0.961,
+   "whitespace": 0.961,
+   "colorfulness": 0.612,
+   "congestion": 0.991,
+   "contour": 0.817,
+   "orientation": 0.449,
+   "anisotropy": 0.297,
+   "hierarchy": 1.0,
+   "margin": 0.975
   },
   "hints": [
-   "visual weight sits toward the top; shift or counterweight it",
-   "left/right symmetry is fine but top/bottom halves differ",
-   "composition (0.57): centre the main block; mirror controls at both ends of a row",
-   "alignment (0.29): snap element edges to a shared column/row grid",
-   "simplicity (0.64): reduce edge count, borders and the number of distinct colours"
+   "composition (0.66): centre the main block, or balance it: equal visual weight on both sides",
+   "anisotropy (0.30): one edge direction dominates above acclaimed pages; simplify",
+   "orientation (0.45): edge orientations are below acclaimed pages (they mix directions, images and type); add substance: imagery, contrast, a real hero"
   ]
  },
  {
-  "file": "sample_asymmetric_ui.png",
-  "label": "Synthetic asymmetric UI sample",
-  "score": 64,
+  "file": "crates_io_crates_serde.png",
+  "label": "crates.io — crate page (live)",
+  "score": 89,
+  "classic": 87,
   "factors": {
-   "composition": 0.1,
-   "local": 0.901,
-   "alignment": 0.607,
-   "simplicity": 0.865,
-   "whitespace": 0.658,
-   "colorfulness": 1.0,
-   "contrast": 1.0,
-   "harmony": 0.935
+   "composition": 0.982,
+   "local": 1.0,
+   "alignment": 1.0,
+   "contrast": 0.529,
+   "harmony": 0.283,
+   "edge_density": 0.994,
+   "jpeg_bpp": 0.997,
+   "colours": 0.982,
+   "whitespace": 0.884,
+   "colorfulness": 0.98,
+   "congestion": 0.95,
+   "contour": 0.667,
+   "orientation": 0.304,
+   "anisotropy": 0.153,
+   "hierarchy": 0.71,
+   "margin": 0.983
   },
   "hints": [
-   "visual weight sits toward the left; shift or counterweight it",
-   "neither symmetric nor balanced; centre the main block, or counterweight it on the other side",
-   "composition (0.10): centre the main block; mirror controls at both ends of a row",
-   "alignment (0.61): snap element edges to a shared column/row grid",
-   "whitespace (0.66): adjust padding so ~60% of the canvas is background"
+   "anisotropy (0.15): one edge direction dominates above acclaimed pages; simplify",
+   "orientation (0.30): edge orientations are below acclaimed pages (they mix directions, images and type); add substance: imagery, contrast, a real hero",
+   "contour (0.67): contours crowd each other more than on acclaimed pages"
+  ]
+ },
+ {
+  "file": "pinkas_dialog.png",
+  "label": "Pinkas — new-document dialog",
+  "score": 86,
+  "classic": 87,
+  "factors": {
+   "composition": 1.0,
+   "local": 1.0,
+   "alignment": 1.0,
+   "contrast": 0.12,
+   "harmony": 0.701,
+   "edge_density": 0.928,
+   "jpeg_bpp": 0.867,
+   "colours": 0.982,
+   "whitespace": 0.886,
+   "colorfulness": 0.966,
+   "congestion": 0.752,
+   "contour": 0.019,
+   "orientation": 0.225,
+   "anisotropy": 0.335,
+   "hierarchy": 1.0,
+   "margin": 1.0
+  },
+  "hints": [
+   "contour (0.02): contours crowd each other more than on acclaimed pages",
+   "orientation (0.23): edge orientations are below acclaimed pages (they mix directions, images and type); add substance: imagery, contrast, a real hero",
+   "anisotropy (0.34): one edge direction dominates above acclaimed pages; simplify"
+  ]
+ },
+ {
+  "file": "digital_office_rebalanced.png",
+  "label": "Digital Office — rebalanced mock",
+  "score": 84,
+  "classic": 85,
+  "factors": {
+   "composition": 1.0,
+   "local": 1.0,
+   "alignment": 1.0,
+   "contrast": 0.054,
+   "harmony": 0.808,
+   "edge_density": 0.924,
+   "jpeg_bpp": 0.825,
+   "colours": 0.982,
+   "whitespace": 0.851,
+   "colorfulness": 0.984,
+   "congestion": 0.748,
+   "contour": 0.005,
+   "orientation": 0.046,
+   "anisotropy": 0.227,
+   "hierarchy": 1.0,
+   "margin": 1.0
+  },
+  "hints": [
+   "contour (0.01): contours crowd each other more than on acclaimed pages",
+   "orientation (0.05): edge orientations are below acclaimed pages (they mix directions, images and type); add substance: imagery, contrast, a real hero",
+   "anisotropy (0.23): one edge direction dominates above acclaimed pages; simplify"
+  ]
+ },
+ {
+  "file": "crates_io_search_q_http.png",
+  "label": "crates.io — search results (live)",
+  "score": 83,
+  "classic": 89,
+  "factors": {
+   "composition": 0.996,
+   "local": 1.0,
+   "alignment": 1.0,
+   "contrast": 0.341,
+   "harmony": 0.549,
+   "edge_density": 0.958,
+   "jpeg_bpp": 0.902,
+   "colours": 0.996,
+   "whitespace": 0.94,
+   "colorfulness": 0.974,
+   "congestion": 0.927,
+   "contour": 0.095,
+   "orientation": 0.052,
+   "anisotropy": 0.021,
+   "hierarchy": 0.861,
+   "margin": 0.983
+  },
+  "hints": [
+   "contour (0.10): contours crowd each other more than on acclaimed pages",
+   "anisotropy (0.02): one edge direction dominates above acclaimed pages; simplify",
+   "orientation (0.05): edge orientations are below acclaimed pages (they mix directions, images and type); add substance: imagery, contrast, a real hero"
+  ]
+ },
+ {
+  "file": "pypi_org_search__q_http.png",
+  "label": "PyPI — search results (live)",
+  "score": 81,
+  "classic": 84,
+  "factors": {
+   "composition": 1.0,
+   "local": 1.0,
+   "alignment": 1.0,
+   "contrast": 0.0,
+   "harmony": 0.0,
+   "edge_density": 0.921,
+   "jpeg_bpp": 0.765,
+   "colours": 0.996,
+   "whitespace": 0.878,
+   "colorfulness": 0.998,
+   "congestion": 0.961,
+   "contour": 0.474,
+   "orientation": 0.493,
+   "anisotropy": 0.288,
+   "hierarchy": 0.246,
+   "margin": 1.0
+  },
+  "hints": [
+   "hierarchy (0.25): little structure at block scale: give the page a hero, sections or a clear heading scale",
+   "contour (0.47): contours crowd each other more than on acclaimed pages",
+   "harmony (0.00): pull hues toward one harmonic template"
+  ]
+ },
+ {
+  "file": "pinkas_dashboard.png",
+  "label": "Pinkas — dashboard",
+  "score": 80,
+  "classic": 87,
+  "factors": {
+   "composition": 1.0,
+   "local": 0.452,
+   "alignment": 0.911,
+   "contrast": 0.188,
+   "harmony": 1.0,
+   "edge_density": 0.952,
+   "jpeg_bpp": 0.876,
+   "colours": 0.961,
+   "whitespace": 0.993,
+   "colorfulness": 0.99,
+   "congestion": 0.868,
+   "contour": 0.014,
+   "orientation": 0.671,
+   "anisotropy": 0.752,
+   "hierarchy": 0.0,
+   "margin": 0.992
+  },
+  "hints": [
+   "contour (0.01): contours crowd each other more than on acclaimed pages",
+   "hierarchy (0.00): little structure at block scale: give the page a hero, sections or a clear heading scale",
+   "local (0.45): make individual components internally symmetric"
   ]
  },
  {
   "file": "medium_home.png",
   "label": "medium.com — home (live, rendered with beautiful.render)",
-  "score": 62,
+  "score": 79,
+  "classic": 62,
   "factors": {
-   "composition": 0.41,
-   "local": 0.321,
-   "alignment": 0.28,
-   "simplicity": 0.572,
-   "whitespace": 1.0,
-   "colorfulness": 0.962,
-   "contrast": 1.0,
-   "harmony": 0.925
+   "composition": 0.428,
+   "local": 0.0,
+   "alignment": 1.0,
+   "contrast": 0.908,
+   "harmony": 0.599,
+   "edge_density": 0.985,
+   "jpeg_bpp": 0.995,
+   "colours": 0.996,
+   "whitespace": 0.905,
+   "colorfulness": 0.987,
+   "congestion": 0.971,
+   "contour": 0.83,
+   "orientation": 0.993,
+   "anisotropy": 0.988,
+   "hierarchy": 0.081,
+   "margin": 0.796
   },
   "hints": [
    "clipping? content touches the right edge in 9 places over 20% of the height — looks cut off; check horizontal overflow (render the page with `beautiful page.html` to know for certain)",
-   "neither symmetric nor balanced; centre the main block, or counterweight it on the other side",
-   "individual components are themselves asymmetric; tidy internal alignment",
-   "composition (0.41): centre the main block; mirror controls at both ends of a row",
-   "alignment (0.28): snap element edges to a shared column/row grid",
-   "simplicity (0.57): reduce edge count, borders and the number of distinct colours"
+   "composition (0.43): centre the main block, or balance it: equal visual weight on both sides",
+   "hierarchy (0.08): little structure at block scale: give the page a hero, sections or a clear heading scale",
+   "local (0.00): make individual components internally symmetric"
+  ]
+ },
+ {
+  "file": "npm_home_unstyled.png",
+  "label": "npmjs.com — CSS blocked (unstyled)",
+  "score": 79,
+  "classic": 85,
+  "factors": {
+   "composition": 0.94,
+   "local": 0.835,
+   "alignment": 0.67,
+   "contrast": 0.945,
+   "harmony": 1.0,
+   "edge_density": 0.88,
+   "jpeg_bpp": 0.838,
+   "colours": 0.931,
+   "whitespace": 0.992,
+   "colorfulness": 0.959,
+   "congestion": 0.899,
+   "contour": 0.335,
+   "orientation": 0.01,
+   "anisotropy": 0.153,
+   "hierarchy": 0.74,
+   "margin": 0.325
+  },
+  "hints": [
+   "clipping? content touches the left edge in 6 places over 67% of the height — looks cut off; check horizontal overflow (render the page with `beautiful page.html` to know for certain)",
+   "contour (0.34): contours crowd each other more than on acclaimed pages",
+   "orientation (0.01): edge orientations are below acclaimed pages (they mix directions, images and type); add substance: imagery, contrast, a real hero",
+   "margin (0.33): content runs into the left/right edge: give the page side margins (or fix the overflow)"
   ]
  },
  {
   "file": "digital_office_original.png",
   "label": "Digital Office — original screenshot",
-  "score": 61,
+  "score": 77,
+  "classic": 61,
   "factors": {
-   "composition": 0.34,
-   "local": 0.917,
-   "alignment": 0.388,
-   "simplicity": 0.561,
-   "whitespace": 0.661,
-   "colorfulness": 0.975,
-   "contrast": 1.0,
-   "harmony": 0.898
+   "composition": 0.328,
+   "local": 1.0,
+   "alignment": 1.0,
+   "contrast": 0.239,
+   "harmony": 0.451,
+   "edge_density": 0.985,
+   "jpeg_bpp": 0.971,
+   "colours": 1.0,
+   "whitespace": 0.917,
+   "colorfulness": 0.99,
+   "congestion": 0.85,
+   "contour": 0.082,
+   "orientation": 0.493,
+   "anisotropy": 0.536,
+   "hierarchy": 1.0,
+   "margin": 0.799
   },
   "hints": [
    "clipping? content touches the left edge in 17 places over 20% of the height — looks cut off; check horizontal overflow (render the page with `beautiful page.html` to know for certain)",
-   "visual weight sits toward the right; shift or counterweight it",
-   "neither symmetric nor balanced; centre the main block, or counterweight it on the other side",
-   "composition (0.34): centre the main block; mirror controls at both ends of a row",
-   "alignment (0.39): snap element edges to a shared column/row grid",
-   "simplicity (0.56): reduce edge count, borders and the number of distinct colours"
+   "composition (0.33): centre the main block, or balance it: equal visual weight on both sides",
+   "contour (0.08): contours crowd each other more than on acclaimed pages",
+   "orientation (0.49): edge orientations are below acclaimed pages (they mix directions, images and type); add substance: imagery, contrast, a real hero"
+  ]
+ },
+ {
+  "file": "pinkas_documents.png",
+  "label": "Pinkas — documents (built with beautiful)",
+  "score": 76,
+  "classic": 91,
+  "factors": {
+   "composition": 1.0,
+   "local": 0.674,
+   "alignment": 1.0,
+   "contrast": 0.181,
+   "harmony": 1.0,
+   "edge_density": 0.908,
+   "jpeg_bpp": 0.819,
+   "colours": 0.931,
+   "whitespace": 0.963,
+   "colorfulness": 0.973,
+   "congestion": 0.791,
+   "contour": 0.053,
+   "orientation": 0.492,
+   "anisotropy": 0.292,
+   "hierarchy": 0.011,
+   "margin": 0.992
+  },
+  "hints": [
+   "contour (0.05): contours crowd each other more than on acclaimed pages",
+   "hierarchy (0.01): little structure at block scale: give the page a hero, sections or a clear heading scale",
+   "anisotropy (0.29): one edge direction dominates above acclaimed pages; simplify"
+  ]
+ },
+ {
+  "file": "sample_asymmetric_ui.png",
+  "label": "Synthetic asymmetric UI sample",
+  "score": 60,
+  "classic": 64,
+  "factors": {
+   "composition": 0.0,
+   "local": 1.0,
+   "alignment": 1.0,
+   "contrast": 0.789,
+   "harmony": 0.651,
+   "edge_density": 0.755,
+   "jpeg_bpp": 0.699,
+   "colours": 0.996,
+   "whitespace": 0.916,
+   "colorfulness": 1.0,
+   "congestion": 0.684,
+   "contour": 0.12,
+   "orientation": 0.0,
+   "anisotropy": 0.0,
+   "hierarchy": 1.0,
+   "margin": 1.0
+  },
+  "hints": [
+   "composition (0.00): centre the main block, or balance it: equal visual weight on both sides",
+   "contour (0.12): contours crowd each other more than on acclaimed pages",
+   "orientation (0.00): edge orientations are below acclaimed pages (they mix directions, images and type); add substance: imagery, contrast, a real hero"
   ]
  },
  {
   "file": "github_login_unstyled.png",
   "label": "github.com/login — CSS blocked (unstyled)",
-  "score": 41,
+  "score": 55,
+  "classic": 41,
   "factors": {
-   "composition": 0.11,
-   "local": 0.334,
-   "alignment": 0.307,
-   "simplicity": 1.0,
-   "whitespace": 0.094,
-   "colorfulness": 0.88,
-   "contrast": 1.0,
-   "harmony": 1.0
+   "composition": 0.001,
+   "local": 0.0,
+   "alignment": 1.0,
+   "contrast": 0.912,
+   "harmony": 1.0,
+   "edge_density": 0.705,
+   "jpeg_bpp": 0.596,
+   "colours": 0.895,
+   "whitespace": 0.766,
+   "colorfulness": 0.953,
+   "congestion": 0.748,
+   "contour": 0.668,
+   "orientation": 0.917,
+   "anisotropy": 0.808,
+   "hierarchy": 0.078,
+   "margin": 0.779
   },
   "hints": [
-   "visual weight sits toward the left; shift or counterweight it",
-   "neither symmetric nor balanced; centre the main block, or counterweight it on the other side",
-   "individual components are themselves asymmetric; tidy internal alignment",
-   "composition (0.11): centre the main block; mirror controls at both ends of a row",
-   "alignment (0.31): snap element edges to a shared column/row grid",
-   "whitespace (0.09): adjust padding so ~60% of the canvas is background"
+   "composition (0.00): centre the main block, or balance it: equal visual weight on both sides",
+   "hierarchy (0.08): little structure at block scale: give the page a hero, sections or a clear heading scale",
+   "local (0.00): make individual components internally symmetric"
   ]
  }
 ]

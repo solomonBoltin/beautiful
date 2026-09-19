@@ -11,3 +11,8 @@ demo/node_modules/
 demo/famous/
 demo/hall/
 research/top100/
+research/degraded/
+research/broken/
+research/bench_*.json
+research/fit_cache.json
+research/degraded_pairs.json

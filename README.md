@@ -250,27 +250,30 @@ Four captures came back blank or blocked and were dropped. Full table with every
 ![Famous sites scored](demo/famous_sites.png)
 
 <!-- table:famous -->
-| `ui` | `web` | site | what the `ui` formula sees |
+| `ui` | `web` | site | weakest term |
 |---:|---:|---|---|
-| **85** | 83 | apple.com | one centred object, symmetric, calm palette, lots of air |
-| **81** | 94 | notion.com | centred hero; balance carries it |
-| **80** | 69 | github.com | left-weighted hero, low grid quality — but the masses balance |
-| **77** | 60 | craigslist.org | balanced and airy; the densest edge map in the set |
-| **72** | 30 | google.com | perfectly simple; the logo/search box sit high, so the mass is off-centre |
-| **65** | 1 | news.ycombinator.com | the best **alignment** in the set (one column grid), but no composition to speak of |
-| **40** | 88 | tailwindcss.com | strong left anchoring, nothing on the right to counterweight it |
-| **40** | 45 | amazon.com | maximum edge density, 10 % background, 0.07 colour restraint |
-| **32** | 76 | vercel.com | a near-empty viewport with one text block bottom-left |
-| **28** | 76 | stripe.com | the diagonal gradient piles the mass on the right and wipes out symmetry |
+| **92** | 64 | nytimes.com | alignment (0.43) |
+| **90** | 83 | apple.com | alignment (0.24) |
+| **90** | 91 | figma.com | alignment (0.25) |
+| **90** | 69 | wikipedia.org | local (0.47) |
+| **90** | 69 | github.com | alignment (0.40) |
+| **86** | 60 | craigslist.org | harmony (0.26) |
+| **85** | 94 | notion.com | alignment (0.02) |
+| **84** | 16 | berkshirehathaway.com | local (0.43) |
+| **81** | 88 | tailwindcss.com | alignment (0.10) |
+| **78** | 76 | stripe.com | colorfulness (0.54) |
 <!-- /table:famous -->
 
-The `ui` column is not a ranking of good websites. It is a ranking of *form in a single viewport*:
-Apple's splash wins because the formula measures composition, not conversion; Craigslist beats
-Stripe because Craigslist is balanced and Stripe's hero piles its mass on one side. The `web` column is what a
-model fitted to human ratings says (Notion 94, Figma 91, Tailwindcss 88, Hacker News 1): raters
-prefer rich, image-led, varied pages, and punish text-only ones. The two columns disagreeing is
-the point — one is a readable rule, the other is the crowd, and the gap between them is where the
-missing factors are (see below).
+The `ui` column is not a ranking of good websites. It is a ranking of *form in a single viewport*,
+by a formula fitted to what acclaimed pages measure: Apple, Figma and GitHub sit at 90 because
+they are composed, quiet at the edges and structured at block scale; Stripe loses on its
+off-centre gradient hero, Amazon (51) on clutter. The formula's known blind spot is right there
+in the table too: **Craigslist (86) and Berkshire Hathaway (84)** are well-set plain pages, and
+pixels alone cannot tell a well-set plain page from a designed one — that is what the DOM rules
+are for (the lint flags both for line length, type noise and missing hierarchy). The `web`
+column is the crowd model (Notion 94, Figma 91, Berkshire 16): raters prefer rich, image-led
+pages and punish text-only ones. The columns disagreeing is the point — one is a readable rule,
+the other is the crowd, and the gap between them is where the missing factors are.
 
 ## Hall of fame — what a high score looks like on the real web
 
@@ -284,24 +287,67 @@ frozen and scored. Bot walls and consent dialogs were dropped by hand (they are 
 <!-- table:hall -->
 | `ui` | `web` | site |
 |---:|---:|---|
+| **96** | 90 | 1password.com |
+| **95** | 16 | huggingface.co |
+| **95** | 49 | mozilla.org |
+| **94** | 86 | clerk.com |
+| **94** | 69 | ghost.org |
+| **93** | 84 | apple.com |
+| **93** | 19 | mailchimp.com |
+| **93** | 83 | rust-lang.org |
+| **93** | 72 | go.dev |
+| **92** | 96 | arc.net |
+| **92** | 61 | hey.com |
 | **92** | 10 | ia.net |
-| **89** | 81 | culturedcode.com/things |
-| **85** | 93 | kagi.com |
-| **84** | 16 | huggingface.co |
-| **84** | 90 | duckduckgo.com |
-| **83** | 87 | resend.com |
-| **83** | 89 | notion.com |
-| **82** | 72 | railway.com |
-| **82** | 78 | readwise.io |
-| **82** | 90 | swift.org |
-| **81** | 84 | apple.com |
-| **81** | 86 | clerk.com |
 <!-- /table:hall -->
 
-What the top of the table has in common: **one centred object, a calm palette, and air** — iA
-Writer, Things, the Apple hero, Swift. The `ui` formula rewards exactly that, and it is blind to
-what the `web` column (the crowd model) sees in Hugging Face or iA: it does not know that a
-text-led page can be loved. Neither column is a verdict on the sites; both are a lens.
+What the top of the table has in common: **one composed hero, quiet margins, structure at block
+scale, and a palette that fits a template** — 1Password, Hugging Face, Clerk, Ghost, the Apple
+hero, Rust. This is the set the `ui` formula was fitted on (cross-validated, so every page was
+scored by a fit that had not seen it); the full 100 with every factor are in
+[`research/results_top100.md`](research/results_top100.md) and the section below.
+
+## The 100 most acclaimed pages — and the bench the formula had to pass
+
+![The 100 most acclaimed home pages, scored](research/top100_gallery.png)
+
+100 home pages that designers point to (Awwwards and Siteinspire honourees, brand and type
+showcases, the developer-tool pages everyone copies), rendered with the tool's own frozen
+Chromium at 1280×800 on 2026-09-19 and scored. Median `ui` 84; 61 of the 100 score 80 or
+more; the bottom five are pages whose hero is a full-bleed photograph or a near-empty dark
+viewport, which the pixel measures read as clutter or as nothing. Reproduce with
+`python research/top100.py` (the candidate list and the 44 dropped captures are in the file).
+
+They are one third of a **bench** (`research/benchmark.py`, `research/degrade.py`,
+`research/fit_ui.py`):
+
+| set | what it is | what a score must do |
+|---|---|---|
+| 100 acclaimed | the pages above | outscore the ordinary set (AUC) |
+| 100 ordinary | random Alexa-top-5000 pages, with human pairwise ranks | — |
+| 100 degraded twins | each acclaimed page with one injected defect: a block shifted off its grid, content clipped at the viewport, an overlapping duplicate, a stretched region, a contrast wash, clutter, a lopsided crop, a colour cast | lose to its original |
+| 398 crowd-rated | Reinecke & Gajos 2014 screenshots with mean appeal ratings | not correlate negatively |
+| 21 curated orderings | the repo's own test pairs: rebalanced > original, composed screens > unstyled, designed pages > plain text | hold, by a margin |
+
+| cross-validated | `classic` (literature weights) | `web` (crowd model) | **`ui` (fitted)** |
+|---|---:|---:|---:|
+| AUC acclaimed > ordinary | 0.59 | 0.61 | **0.72** |
+| original beats its degraded twin | 63 % | 37 % | **74 %** |
+| ρ vs crowd rating | −0.08 | +0.60 | **+0.14** |
+| curated orderings respected | — | — | **18 / 21** |
+
+The fitted formula is the same explicit shape as the literature one — a weighted sum of
+documented curves over pixel measurements — with two differences you can read in
+[`beautiful/ui_model.json`](beautiful/ui_model.json): each curve is centred on what the
+acclaimed pages measure (their medians are the most useful numbers in
+[`research/FIT.md`](research/FIT.md)), and the weights were chosen against the bench, under
+priors that keep it a *UI* score (composition at least 15 % of the weight; the photographic
+texture and amount-of-content terms capped, because without the caps the fit learned
+"marketing page with a photo"). The three curated orderings it still misses all say the same
+thing: a well-set plain page can outscore a designed one on pixels alone. The defects it catches
+best are clutter and shifted blocks (100 %), a lopsided crop (83 %), clipping and overlap (77 %);
+worst is a colour cast (50 %), because the palette terms are the weakest in the formula — a
+factor proposal that fixes that has a bench to prove it on ([FACTORS.md](FACTORS.md)).
 
 ## Use it from your editor, agent or CI
 
@@ -356,36 +402,40 @@ back to centre). [`demo/capture_and_score.py`](demo/capture_and_score.py) is a m
 ![UI gallery](demo/ui_gallery.png)
 
 <!-- table:ui -->
-| beauty | screen | composition | alignment | simplicity | whitespace | harmony | colour | contrast |
-|---:|---|---:|---:|---:|---:|---:|---:|---:|
-| **91** | Pinkas — documents (built with beautiful) | 0.83 | 0.63 | 0.85 | 0.86 | 1.00 | 0.93 | 1.00 |
-| **89** | crates.io — search results (live) | 0.81 | 0.69 | 0.67 | 0.75 | 0.92 | 0.93 | 1.00 |
-| **87** | crates.io — crate page (live) | 0.80 | 0.52 | 0.58 | 1.00 | 0.87 | 0.95 | 1.00 |
-| **87** | Pinkas — dashboard | 0.89 | 0.26 | 0.76 | 1.00 | 1.00 | 0.97 | 1.00 |
-| **87** | Pinkas — new-document dialog | 0.98 | 0.32 | 0.75 | 0.56 | 0.94 | 0.91 | 0.95 |
-| **85** | Digital Office — rebalanced mock | 0.98 | 0.32 | 0.77 | 0.46 | 0.96 | 0.96 | 0.76 |
-| **85** | npmjs.com — CSS blocked (unstyled) | 0.77 | 0.23 | 0.86 | 1.00 | 1.00 | 0.90 | 1.00 |
-| **84** | PyPI — search results (live) | 0.94 | 0.40 | 0.75 | 1.00 | 0.79 | 0.99 | 0.37 |
-| **80** | crates.io — home (live) | 0.74 | 0.26 | 0.61 | 1.00 | 0.92 | 1.00 | 1.00 |
-| **77** | PyPI — home (live) | 0.78 | 0.22 | 0.67 | 1.00 | 0.98 | 0.23 | 1.00 |
-| **67** | PyPI — project page (live) | 0.57 | 0.29 | 0.64 | 0.84 | 0.97 | 0.25 | 1.00 |
-| **64** | Synthetic asymmetric UI sample | 0.10 | 0.61 | 0.86 | 0.66 | 0.94 | 1.00 | 1.00 |
-| **62** | medium.com — home (live, rendered with beautiful.render) | 0.41 | 0.28 | 0.57 | 1.00 | 0.93 | 0.96 | 1.00 |
-| **61** | Digital Office — original screenshot | 0.34 | 0.39 | 0.56 | 0.66 | 0.90 | 0.97 | 1.00 |
-| **41** | github.com/login — CSS blocked (unstyled) | 0.11 | 0.31 | 1.00 | 0.09 | 1.00 | 0.88 | 1.00 |
+| `ui` | `classic` | screen | composition | alignment | contrast | harmony | whitespace | congestion | contour | hierarchy | margin |
+|---:|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| **94** | 77 | PyPI — home (live) | 0.95 | 0.63 | 0.84 | 0.89 | 1.00 | 1.00 | 0.89 | 1.00 | 0.97 |
+| **92** | 80 | crates.io — home (live) | 0.90 | 0.94 | 0.70 | 0.55 | 1.00 | 0.97 | 0.82 | 1.00 | 0.98 |
+| **90** | 67 | PyPI — project page (live) | 0.66 | 1.00 | 0.52 | 0.85 | 0.96 | 0.99 | 0.82 | 1.00 | 0.97 |
+| **89** | 87 | crates.io — crate page (live) | 0.98 | 1.00 | 0.53 | 0.28 | 0.88 | 0.95 | 0.67 | 0.71 | 0.98 |
+| **86** | 87 | Pinkas — new-document dialog | 1.00 | 1.00 | 0.12 | 0.70 | 0.89 | 0.75 | 0.02 | 1.00 | 1.00 |
+| **84** | 85 | Digital Office — rebalanced mock | 1.00 | 1.00 | 0.05 | 0.81 | 0.85 | 0.75 | 0.01 | 1.00 | 1.00 |
+| **83** | 89 | crates.io — search results (live) | 1.00 | 1.00 | 0.34 | 0.55 | 0.94 | 0.93 | 0.10 | 0.86 | 0.98 |
+| **81** | 84 | PyPI — search results (live) | 1.00 | 1.00 | 0.00 | 0.00 | 0.88 | 0.96 | 0.47 | 0.25 | 1.00 |
+| **80** | 87 | Pinkas — dashboard | 1.00 | 0.91 | 0.19 | 1.00 | 0.99 | 0.87 | 0.01 | 0.00 | 0.99 |
+| **79** | 62 | medium.com — home (live, rendered with beautiful.render) | 0.43 | 1.00 | 0.91 | 0.60 | 0.91 | 0.97 | 0.83 | 0.08 | 0.80 |
+| **79** | 85 | npmjs.com — CSS blocked (unstyled) | 0.94 | 0.67 | 0.94 | 1.00 | 0.99 | 0.90 | 0.34 | 0.74 | 0.33 |
+| **77** | 61 | Digital Office — original screenshot | 0.33 | 1.00 | 0.24 | 0.45 | 0.92 | 0.85 | 0.08 | 1.00 | 0.80 |
+| **76** | 91 | Pinkas — documents (built with beautiful) | 1.00 | 1.00 | 0.18 | 1.00 | 0.96 | 0.79 | 0.05 | 0.01 | 0.99 |
+| **60** | 64 | Synthetic asymmetric UI sample | 0.00 | 1.00 | 0.79 | 0.65 | 0.92 | 0.68 | 0.12 | 1.00 | 1.00 |
+| **55** | 41 | github.com/login — CSS blocked (unstyled) | 0.00 | 1.00 | 0.91 | 1.00 | 0.77 | 0.75 | 0.67 | 0.08 | 0.78 |
 <!-- /table:ui -->
 
 What the numbers say, and where they are honest about their limits:
 
-- The same product, re-composed (Digital Office 51 → 82), moves mostly on **composition** — the
-  sidebar and docked modal put all the visual weight on one side.
-- Production pages land at 68–85. Their weak factor is usually **alignment**: real pages have many
-  container edges at many x-positions, and the metric rewards layouts that a few grid lines explain.
-- The unstyled GitHub login (38) is caught by empty **whitespace** and left-anchored **composition**.
-  The unstyled npm page (82) is *not* caught: a giant wordmark centred on white is, pixel-wise, a
-  minimalist splash page. The function measures form, not intent.
-- **contrast** saturates at 1.0 for most screens because modern UIs already meet it; it only bites
-  on low-contrast designs (PyPI search results: 0.37).
+- The same product, re-composed (Digital Office 77 → 84 on `ui`, 61 → 85 on `classic`), moves on
+  **composition** — the sidebar and docked modal put all the visual weight on one side. The
+  fitted formula moves less than the literature one here because it also credits the original's
+  block-scale structure and margins; the ordering is a test the fit had to pass.
+- Production pages land at 80–94. Their weak factor is usually **alignment**: real pages have
+  many container edges at many x-positions, and the metric rewards layouts a few grid lines explain.
+- The unstyled GitHub login (55) is caught by composition, hierarchy and margins. The unstyled
+  npm page (79) is *not* caught: a giant wordmark on white is, pixel-wise, a minimalist splash
+  page. The function measures form, not intent — run it on the HTML and the DOM rules catch what
+  the pixels miss (edge margins, type noise, line length).
+- The `classic` column is the literature formula unchanged; it puts Pinkas at 91 and Medium at
+  62, the fitted one reverses that — the crowd-rated and acclaimed sets both say Medium's kind of
+  page is the better-liked one.
 
 ### Art / logo modes
 
