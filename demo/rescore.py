@@ -1,7 +1,7 @@
 """Re-score every demo artefact with the current formula, so the numbers in the repo are the
 numbers the code produces.
 
-    python demo/rescore.py            # results_ui.json/md, results_art.md, ui_gallery.png, loop.gif,
+    python demo/rescore.py            # results_ui.json/md, results_art.md, ui_gallery.png,
                                       # famous (cached captures), hall of fame (cached captures)
 """
 from __future__ import annotations

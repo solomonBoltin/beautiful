@@ -363,13 +363,13 @@ the tool's own frozen Chromium and scored by the lint (pixel formula plus the 44
 the number and the hint on each frame are what `beautiful page.html` prints. Rebuild with
 `python demo/make_scene_gifs.py`.
 
-| scene | viewport | from → to | score |
+| scene | viewport | from → to | lint score (rule errors) |
 |---|---|---|---:|
-| [signin](demo/gifs/signin.gif) | desktop | Sign-in split screen: off-axis card, clashing accent, floating labels → one axis, one accent, 48 px targets | 83 → **82** |
-| [dashboard](demo/gifs/dashboard.gif) | desktop | Analytics dashboard: cards off the grid, four accents, washed text → 8 px grid, one accent, crisp contrast | 60 → **64** |
-| [pricing](demo/gifs/pricing.gif) | desktop | Pricing tiers: the highlighted tier lifted and shifted, three CTA colours, centred paragraph → equal cards, one primary | 86 → **91** |
-| [product](demo/gifs/product.gif) | desktop | Product page: six badges, a stretched hero, three price sizes → one image, one price, one action | 73 → **74** |
-| [onboarding](demo/gifs/onboarding.gif) | mobile | Phone onboarding: illustration bleeding off the edge, 12 px text, 32 px buttons → margins, 16 px body, 48 px targets | 88 → **91** |
+| [signin](demo/gifs/signin.gif) | desktop | Sign-in split screen: off-axis card, clashing accent, floating labels → one axis, one accent, 48 px targets | 70 (1 error) → **82** (0) |
+| [dashboard](demo/gifs/dashboard.gif) | desktop | Analytics dashboard: cards off the grid, four accents, washed text → 8 px grid, one accent, crisp contrast | 57 (1 error) → **64** (0) |
+| [pricing](demo/gifs/pricing.gif) | desktop | Pricing tiers: the highlighted tier lifted and shifted, three CTA colours, centred paragraph → equal cards, one primary | 83 (1 error) → **91** (0) |
+| [product](demo/gifs/product.gif) | desktop | Product page: six badges, a stretched hero, three price sizes → one image, one price, one action | 70 (1 error) → **74** (0) |
+| [onboarding](demo/gifs/onboarding.gif) | mobile | Phone onboarding: illustration bleeding off the edge, 12 px text, 32 px buttons → margins, 16 px body, 48 px targets | 75 (1 error) → **91** (0) |
 
 <p align="center"><img src="demo/gifs/dashboard.gif" width="720" alt="Analytics dashboard: cards off the grid, four accents, washed text → 8 px grid, one accent, crisp contrast"></p>
 <p align="center"><img src="demo/gifs/pricing.gif" width="720" alt="Pricing tiers: the highlighted tier lifted and shifted, three CTA colours, centred paragraph → equal cards, one primary"></p>

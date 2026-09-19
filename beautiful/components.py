@@ -36,7 +36,8 @@ DISCOVER_JS = r"""
     if (el.id) return k + '#' + el.id;
     const t = el.getAttribute('data-testid') || el.getAttribute('data-component');
     if (t) return k + '[' + t + ']';
-    const cls = [...el.classList].filter(c => !/^(is-|has-|js-|active|open|hover|focus)/.test(c) && !/\d{3,}|__[a-z0-9]{6,}$/i.test(c)).slice(0, 2);
+    const hashy = (c) => /\d{3,}/.test(c) || /(?=[a-z0-9]*\d)(?=[a-z0-9]*[a-z])[a-z0-9]{5,}$/i.test(c.split(/[-_]+/).pop());  // css-module / build hashes
+    const cls = [...el.classList].filter(c => !/^(is-|has-|js-|active|open|hover|focus)/.test(c) && !hashy(c)).slice(0, 2);
     if (cls.length) k += '.' + cls.join('.');
     else if (el.getAttribute('role')) k += '[role=' + el.getAttribute('role') + ']';
     return k;
