@@ -1,0 +1,12 @@
+{
+  "name": "beautiful",
+  "owner": { "name": "solomonBoltin", "url": "https://github.com/solomonBoltin" },
+  "plugins": [
+    {
+      "name": "beautiful",
+      "source": { "source": "github", "repo": "solomonBoltin/beautiful" },
+      "description": "Beauty lint: score screenshots, HTML and URLs 1-100 with explicit formulas, get the fix, gate CI. Skill + MCP server.",
+      "version": "0.4.0"
+    }
+  ]
+}

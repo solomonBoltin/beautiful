@@ -65,3 +65,23 @@ jobs:
           INPUT_MIN: "50"
         run: python .github/scripts/score.py
         shell: bash
+
+  render:
+    name: render + lint the demo page (playwright)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --upgrade pip && python -m pip install ".[render]" && python -m playwright install --with-deps chromium
+      - name: The demo page must stay beautiful at every viewport
+        run: beautiful docs/index.html --min 60 --save-renders renders/
+      - name: HTML string and MCP render tool
+        run: |
+          printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"beauty_render","arguments":{"source":"<html><body style=\"margin:0;display:grid;place-items:center;height:100vh;background:#fff\"><div style=\"width:240px;height:120px;background:#002e5f;border-radius:12px\"></div></body></html>","viewports":["desktop","mobile"]}}}' | beautiful-mcp > mcp.out
+          python -c "import json; r=json.loads(open('mcp.out').readline()); d=json.loads(r['result']['content'][0]['text']); assert d['desktop']['score']>=80 and d['mobile']['score']>=80, d; print('render ok', d['desktop']['score'], d['mobile']['score'])"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: demo-renders
+          path: renders/

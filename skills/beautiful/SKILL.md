@@ -23,13 +23,22 @@ claude mcp add beautiful -- beautiful-mcp
 
 ## The loop
 
-1. **Render** the thing you changed to a PNG at the size a user sees it (a 1280×800 viewport
-   for pages; the natural size for a logo). Use the project's screenshot tool (Playwright,
-   Puppeteer, the browser tool, `demo/screenshot_url.js` in the repo).
-2. **Score** it:
+1. **Render and score in one step** whenever the thing you changed is a page, a component
+   story or a running dev server — no manual screenshot:
    ```bash
-   beautiful --mode=ui shot.png        # ui | art | logo
+   beautiful index.html                      # desktop, tablet and mobile, each scored
+   beautiful http://localhost:3000/pricing --viewports mobile
+   beautiful http://localhost:6006/iframe.html?id=button--primary   # a Storybook story
    ```
+   (`pip install "beautiful-score[render]" && playwright install chromium` once. It is the same
+   headless Chromium a screenshot would use, frozen — animations off, fonts awaited, fixed
+   clock — so the score is exactly what a screenshot at that viewport would get.)
+   If you already have a PNG (a logo, an export, an existing screenshot), score it directly:
+   ```bash
+   beautiful --mode=ui shot.png        # ui | art | logo | web
+   ```
+2. **Read the number per viewport.** A page that is 90 on desktop and 55 on mobile has a
+   mobile layout problem, and the mobile hints say which factor.
    You get the number, every factor in 0–1, and hints ordered by how much each one costs.
 3. **Read the hints, not just the number.** Each names the weakest factor and the edit that
    raises it: "composition: centre the main block", "alignment: snap element edges to a shared

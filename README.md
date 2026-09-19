@@ -1,7 +1,7 @@
 <h1 align="center">beautiful</h1>
 
-<p align="center"><strong>A mathematical beauty score, 1–100, for any screenshot, logo or artwork — and a lint for the design it shows.</strong><br>
-Explicit, inspectable formulas from 90 years of aesthetics research; measured against human ratings; every number comes with its reasons.</p>
+<p align="center"><strong>A mathematical beauty score, 1–100, for any screenshot, logo, artwork — or the HTML behind it.</strong><br>
+A beauty lint: explicit formulas from 90 years of aesthetics research, measured against human ratings, every number with its reasons, every page scored at desktop, tablet and mobile.</p>
 
 <p align="center">
   <a href="https://solomonboltin.github.io/beautiful/"><img alt="try it in your browser" src="https://img.shields.io/badge/try%20it-in%20your%20browser-7c8cff"></a>
@@ -73,6 +73,37 @@ or a numpy array.
 
 ## Beauty lint
 
+Lint the **code**, not a screenshot you took by hand. HTML strings, files and URLs are rendered
+with headless Chromium at the three viewports a designer checks and scored one by one:
+
+```bash
+pip install "beautiful-score[render]" && playwright install chromium     # once; no Node needed
+
+beautiful index.html                                # desktop 1280×800, tablet 768×1024, mobile 375×812
+beautiful http://localhost:3000/pricing --viewports mobile
+beautiful "http://localhost:6006/iframe.html?id=button--primary"        # a Storybook story = a component
+beautiful src/pages/ --save-renders renders/        # every .html in a tree, keeping the PNGs
+```
+
+```
+ 92  docs/index.html@desktop
+ 84  docs/index.html@tablet
+ 78  docs/index.html@mobile
+  mobile  composition 0.66  alignment 0.41  simplicity 0.52  whitespace 0.83  …
+           ->  alignment (0.41): snap element edges to a shared column/row grid
+```
+
+The render is frozen — animations and transitions off, fonts awaited, network idle, fixed clock,
+device-pixel-ratio 1 — so the same HTML + CSS + fonts give the same pixels and **the same score a
+screenshot at that viewport would get**. Chromium is the reference; a static no-browser backend
+(`pip install "beautiful-score[html]"`, WeasyPrint) exists for plain HTML/CSS and e-mail
+templates, and its score is close, not identical, because it lays out with its own engine and
+fonts. React/Vue/Svelte components are scored through whatever renders them: a Storybook or
+Ladle story URL, or the dev server. (This demo page lints itself in CI at all three viewports,
+and was redesigned with the tool from 67 / 61 / 49 to 92 / 84 / 78.)
+
+Then the same lint on any image:
+
 ```bash
 beautiful shots/                                   # every image in a folder (recursive), worst obvious at a glance
 beautiful --min 70 shots/                          # exit 1 below 70
@@ -87,7 +118,7 @@ As a **pre-commit** hook:
 ```yaml
 repos:
   - repo: https://github.com/solomonBoltin/beautiful
-    rev: v0.3.0
+    rev: v0.4.0
     hooks:
       - id: beautiful
         args: ["--min", "60"]
@@ -127,8 +158,17 @@ missing factors are (see below).
 
 ## Use it from your editor, agent or CI
 
-**MCP server** — three tools, `beauty_score`, `beauty_compare` and `beauty_lint`, for Claude Code,
-Cursor, Windsurf and any MCP client. Zero extra dependencies.
+**Claude Code plugin** — the skill and the MCP server in two commands:
+
+```
+/plugin marketplace add solomonBoltin/beautiful
+/plugin install beautiful@beautiful
+```
+
+**MCP server** — four tools for Claude Code, Cursor, Windsurf and any MCP client, zero extra
+dependencies: `beauty_score` (an image), `beauty_compare` (before/after), `beauty_lint` (a folder,
+worst first), `beauty_render` (HTML string / file / URL at desktop, tablet and mobile — the agent
+never takes a screenshot).
 
 ```bash
 claude mcp add beautiful -- beautiful-mcp
@@ -137,14 +177,15 @@ claude mcp add beautiful -- beautiful-mcp
 { "mcpServers": { "beautiful": { "command": "beautiful-mcp" } } }
 ```
 
-**Claude Code skill** — copy [`skills/beautiful/`](skills/beautiful/) into `.claude/skills/`. It
-runs the render → score → read hints → edit loop after any UI change.
+**Claude Code skill only** — copy [`skills/beautiful/`](skills/beautiful/) into `.claude/skills/`
+(or `~/.claude/skills/`). It runs the render → score → read hints → edit loop after any UI change,
+per viewport.
 
 **GitHub Action** — score the screenshots your E2E suite already produces and get the table as a
 PR comment:
 
 ```yaml
-- uses: solomonBoltin/beautiful@v0.3.0
+- uses: solomonBoltin/beautiful@v0.4.0
   with:
     images: "e2e/screens/*.png"
     min: 60          # optional: fail the job below this
@@ -362,15 +403,17 @@ beautiful/
   symmetry.py      composition: mirror / rotational / local symmetry, balance (ui + generic modes)
   experimental.py  feature congestion, contour congestion, edge-orientation entropy, anisotropy, sequence (measured, unweighted)
   web.py           mode="web": the model calibrated on human ratings; web_model.json is written by research/calibrate.py
+  render.py        HTML / URL -> pixels at desktop, tablet, mobile (headless Chromium; static WeasyPrint fallback)
   __main__.py      the `beautiful` CLI / lint (dirs, globs, --format github|sarif, baselines)
   mcp_server.py    the `beautiful-mcp` MCP server (beauty_score, beauty_compare, beauty_lint; dependency-free)
-action.yml         the GitHub Action (+ .github/scripts/); .pre-commit-hooks.yaml
+action.yml         the GitHub Action (+ .github/scripts/); .pre-commit-hooks.yaml; .claude-plugin/ (Claude Code plugin)
 research/          SURVEY.md (the evidence), calibrate.py + CALIBRATION.md (the measurement)
 docs/index.html    the browser demo (Pyodide)
 skills/beautiful/  a drop-in skill for Claude Code and similar agents
 FACTORS.md         the factor wishlist — start here to contribute; CHANGELOG.md
 demo/
   screens/  art/   the samples scored above          famous.py  results_famous.md  famous_sites.png
+  hall_of_fame.py  results_hall_of_fame.md  hall_of_fame.png   (design-led sites rendered with Chromium and ranked)
   results_ui.md    results_art.md   results_ui.json  ui_gallery.png  make_gallery.py  make_loop_gif.py
   screenshot_url.js  screenshot_file.js  capture_and_score.py  package.json
 tests.py
@@ -384,6 +427,8 @@ tests.py
 - [ ] A JavaScript/TypeScript port for the browser and Playwright (no Pyodide)
 - [ ] More factors — see [FACTORS.md](FACTORS.md)
 - [x] Beauty lint: directories, GitHub annotations, SARIF, baselines, pre-commit
+- [x] Lint HTML and URLs directly at three viewports (Chromium); static no-browser backend
+- [x] Claude Code plugin (skill + MCP server)
 - [x] MCP server · GitHub Action · Browser demo · PyPI
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Counterexamples and factor ideas are the most useful things

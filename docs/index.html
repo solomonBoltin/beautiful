@@ -15,91 +15,104 @@
     --good: #3ddc84; --mid: #f5b942; --bad: #ff5c5c; --accent: #7c8cff; --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; }
-  main { max-width: 1040px; margin: 0 auto; padding: 40px 20px 80px; }
-  header { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
-  h1 { margin: 0; font-size: 34px; letter-spacing: -0.02em; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 20px 64px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; justify-items: center; text-align: center; }
+  main > * { max-width: 100%; }
+  header { display: grid; gap: 8px; justify-items: center; }
+  h1 { margin: 0; font-size: 40px; letter-spacing: -0.02em; line-height: 1; }
   h1 span { color: var(--accent); }
-  .sub { color: var(--muted); margin: 0 0 28px; max-width: 720px; }
+  .sub { color: var(--muted); margin: 0; max-width: 560px; }
+  nav { color: var(--muted); font-size: 15px; }
   a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
-  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
-  .drop { border: 2px dashed var(--line); border-radius: 16px; background: var(--panel); min-height: 340px; display: grid; place-items: center; text-align: center; padding: 20px; cursor: pointer; transition: border-color .15s, background .15s; position: relative; overflow: hidden; }
+  .drop { width: 100%; border: 2px dashed var(--line); border-radius: 16px; background: var(--panel); min-height: 260px; display: grid; place-items: center; padding: 20px; cursor: pointer; transition: border-color .15s, background .15s; overflow: hidden; }
   .drop.over { border-color: var(--accent); background: #1b1f2c; }
-  .drop img { max-width: 100%; max-height: 420px; border-radius: 8px; box-shadow: 0 8px 30px rgba(0,0,0,.5); }
-  .drop p { margin: 6px 0; color: var(--muted); }
+  .drop img { max-width: 100%; max-height: 380px; border-radius: 8px; box-shadow: 0 8px 30px rgba(0,0,0,.5); }
+  .drop p { margin: 4px 0; color: var(--muted); }
   .drop strong { color: var(--text); font-size: 18px; }
-  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
-  .score { display: flex; align-items: baseline; gap: 14px; }
+  .controls { display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap; }
+  .controls label { display: inline-flex; gap: 8px; align-items: center; }
+  select { max-width: 100%; }
+  select, button { background: #1c1f28; color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font: inherit; cursor: pointer; }
+  button:hover, select:hover { border-color: var(--accent); }
+  .samples { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .samples span { color: var(--muted); font-size: 13px; align-self: center; width: 100%; }
+  .samples button { font-size: 13px; padding: 6px 10px; }
+  .panel { width: 100%; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 26px 22px; display: grid; gap: 10px; justify-items: center; }
+  .score { display: flex; align-items: baseline; justify-content: center; gap: 12px; }
   .score .n { font-size: 84px; font-weight: 700; line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
   .score .of { color: var(--muted); }
   .n.good { color: var(--good); } .n.mid { color: var(--mid); } .n.bad { color: var(--bad); } .n.none { color: var(--line); }
-  .row { display: grid; grid-template-columns: 120px 1fr 44px; align-items: center; gap: 10px; margin: 8px 0; font-size: 14px; }
-  .row .k { color: var(--muted); text-transform: lowercase; }
+  #modeLabel { color: var(--muted); font-size: 13px; }
+  #factors { width: 100%; max-width: 520px; }
+  .row { display: grid; grid-template-columns: 120px 1fr 44px; align-items: center; gap: 10px; margin: 7px 0; font-size: 14px; }
+  .row .k { color: var(--muted); text-align: right; }
   .bar { height: 8px; background: #22262f; border-radius: 4px; overflow: hidden; }
   .bar i { display: block; height: 100%; background: var(--accent); border-radius: 4px; transition: width .35s; }
-  .row .v { text-align: right; font-family: var(--mono); color: var(--muted); }
-  .hints { margin: 18px 0 0; padding: 0; list-style: none; }
-  .hints li { padding: 8px 12px; border-left: 3px solid var(--mid); background: #1c1f28; border-radius: 0 8px 8px 0; margin: 6px 0; font-size: 14px; }
-  .controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 14px 0 0; }
-  select, button { background: #1c1f28; color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font: inherit; cursor: pointer; }
-  button:hover, select:hover { border-color: var(--accent); }
-  .status { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-top: 14px; min-height: 20px; }
+  .row .v { text-align: left; font-family: var(--mono); color: var(--muted); }
+  .hints { margin: 6px 0 0; padding: 0; list-style: none; width: 100%; max-width: 520px; }
+  .hints li { padding: 8px 12px; border-left: 3px solid var(--mid); border-right: 3px solid var(--mid); background: #1c1f28; border-radius: 8px; margin: 6px 0; font-size: 14px; }
+  .status { font-family: var(--mono); font-size: 12px; color: var(--muted); min-height: 18px; }
   .status.err { color: var(--bad); }
-  .samples { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
-  .samples button { font-size: 13px; padding: 6px 10px; }
-  .privacy { color: var(--muted); font-size: 13px; margin-top: 30px; border-top: 1px solid var(--line); padding-top: 16px; }
+  progress { width: 100%; max-width: 520px; height: 6px; accent-color: var(--accent); }
+  .privacy { color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); padding-top: 16px; max-width: 640px; }
   code { font-family: var(--mono); font-size: 13px; background: #1c1f28; padding: 2px 6px; border-radius: 4px; }
-  progress { width: 100%; height: 6px; accent-color: var(--accent); }
+  @media (max-width: 480px) {
+    h1 { font-size: 34px; } .score .n { font-size: 64px; } .row { grid-template-columns: 96px 1fr 40px; }
+    .controls { display: grid; grid-template-columns: 1fr; width: 100%; }
+    .controls label { display: grid; grid-template-columns: auto 1fr; }
+    .controls button { width: 100%; }
+    .samples { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
+    .samples span { grid-column: 1 / -1; }
+    .samples button { width: 100%; }
+  }
 </style>
 </head>
 <body>
 <main>
   <header>
     <h1><span>◈</span> beautiful</h1>
+    <p class="sub">A mathematical beauty score, 1–100, for any screenshot, logo or artwork. Composition, alignment, white space, colour harmony, contrast, complexity — each an explicit formula. Runs in your browser; nothing is uploaded.</p>
     <nav><a href="https://github.com/solomonBoltin/beautiful">GitHub</a> &nbsp;·&nbsp; <a href="https://github.com/solomonBoltin/beautiful/blob/main/FACTORS.md">propose a factor</a> &nbsp;·&nbsp; <a href="https://github.com/solomonBoltin/beautiful#the-formula">the formula</a></nav>
   </header>
-  <p class="sub">A mathematical beauty score, 1–100, for any screenshot, logo or artwork — composition, alignment, white space, colour harmony, contrast and complexity, each an explicit formula. This page runs the real Python package in your browser; nothing is uploaded.</p>
 
-  <div class="grid">
-    <div>
-      <div class="drop" id="drop">
-        <div id="dropInner">
-          <p><strong>Drop an image here</strong></p>
-          <p>or click to choose · PNG, JPEG, WebP</p>
-          <p>screens, pages, logos, paintings, photos</p>
-        </div>
-        <input type="file" id="file" accept="image/*" hidden>
-      </div>
-      <div class="controls">
-        <label>mode <select id="mode"><option value="ui">ui — screens &amp; pages</option><option value="art">art — paintings, photos, posters</option><option value="logo">logo — marks &amp; icons</option><option value="web">web — calibrated on human ratings (advisory)</option></select></label>
-        <button id="rescore" disabled>re-score</button>
-      </div>
-      <div class="samples" id="samples">
-        <span style="color:var(--muted);font-size:13px;align-self:center">try a sample:</span>
-        <button data-s="screens/pinkas_documents.png" data-m="ui">a composed screen</button>
-        <button data-s="screens/digital_office_original.png" data-m="ui">a lopsided screen</button>
-        <button data-s="screens/github_login_unstyled.png" data-m="ui">unstyled html</button>
-        <button data-s="art/mandala_radial.png" data-m="art">mandala (art)</button>
-        <button data-s="art/random_noise.png" data-m="art">noise (art)</button>
-        <button data-s="art/shield_logo.png" data-m="logo">shield (logo)</button>
-      </div>
+  <div class="drop" id="drop">
+    <div id="dropInner">
+      <p><strong>Drop an image here</strong></p>
+      <p>or click to choose · PNG, JPEG, WebP</p>
+      <p>screens, pages, logos, paintings, photos</p>
     </div>
-    <div class="panel">
-      <div class="score"><div class="n none" id="num">—</div><div class="of">/ 100 &nbsp;<span id="modeLabel"></span></div></div>
-      <div id="factors"></div>
-      <ul class="hints" id="hints"></ul>
-      <div class="status" id="status">loading python runtime…</div>
-      <progress id="prog" max="100" value="0"></progress>
-    </div>
+    <input type="file" id="file" accept="image/*" hidden>
   </div>
 
-  <p class="privacy">The score is <code>Σ wₖ·goodnessₖ</code> spread over 1–100. Every factor descends from a paper (Birkhoff 1933, Ngo 2003, Reinecke &amp; Gajos 2013, Miniukovich &amp; De Angeli 2015, Cohen-Or 2006, Hasler &amp; Süsstrunk 2003…). No model weights, no dataset, no network call for the image. First load fetches numpy, scipy and pillow (~25 MB) via <a href="https://pyodide.org">Pyodide</a>; it is cached afterwards. Same numbers as <code>pip install beautiful-score</code>.</p>
+  <div class="controls">
+    <label>mode <select id="mode"><option value="ui">ui — screens &amp; pages</option><option value="art">art — paintings, photos, posters</option><option value="logo">logo — marks &amp; icons</option><option value="web">web — calibrated on human ratings (advisory)</option></select></label>
+    <button id="rescore" disabled>re-score</button>
+  </div>
+  <div class="samples" id="samples">
+    <span>try a sample</span>
+    <button data-s="screens/pinkas_documents.png" data-m="ui">a composed screen</button>
+    <button data-s="screens/digital_office_original.png" data-m="ui">a lopsided screen</button>
+    <button data-s="screens/github_login_unstyled.png" data-m="ui">unstyled html</button>
+    <button data-s="art/mandala_radial.png" data-m="art">mandala (art)</button>
+    <button data-s="art/random_noise.png" data-m="art">noise (art)</button>
+    <button data-s="art/shield_logo.png" data-m="logo">shield (logo)</button>
+  </div>
+
+  <div class="panel">
+    <div class="score"><div class="n none" id="num">—</div><div class="of">/ 100</div></div>
+    <div id="modeLabel"></div>
+    <div id="factors"></div>
+    <ul class="hints" id="hints"></ul>
+    <div class="status" id="status">loading python runtime…</div>
+    <progress id="prog" max="100" value="0"></progress>
+  </div>
+
+  <p class="privacy">The score is <code>Σ wₖ·goodnessₖ</code> spread over 1–100. Every factor descends from a paper (Birkhoff 1933, Ngo 2003, Reinecke &amp; Gajos 2013, Miniukovich &amp; De Angeli 2015, Cohen-Or 2006, Hasler &amp; Süsstrunk 2003…). No model weights, no dataset, no network call for the image. First load fetches numpy, scipy and pillow (~25 MB) via <a href="https://pyodide.org">Pyodide</a>; cached afterwards. Same numbers as <code>pip install beautiful-score</code>.</p>
 </main>
 
 <script src="https://cdn.jsdelivr.net/pyodide/v314.0.7/full/pyodide.js"></script>
 <script>
-const RAW = "https://cdn.jsdelivr.net/gh/solomonBoltin/beautiful@v0.3.0/";  // pinned to a release so the modules are always consistent
+const RAW = "https://cdn.jsdelivr.net/gh/solomonBoltin/beautiful@v0.4.0/";  // pinned to a release so the modules are always consistent
 const MODULES = ["__init__.py", "core.py", "features.py", "symmetry.py", "experimental.py", "web.py", "web_model.json"];
 const $ = (id) => document.getElementById(id);
 const status = (t, err = false) => { $("status").textContent = t; $("status").className = "status" + (err ? " err" : ""); };
@@ -113,7 +126,7 @@ async function boot() {
     py = await loadPyodide();
     status("loading numpy, scipy, pillow (first time only)…"); prog(30);
     await py.loadPackage(["numpy", "scipy", "pillow"]);
-    status("fetching beautiful from GitHub…"); prog(80);
+    status("fetching beautiful…"); prog(80);
     py.FS.mkdirTree("/pkg/beautiful");
     for (const m of MODULES) {
       const src = await (await fetch(RAW + "beautiful/" + m, { cache: "no-cache" })).text();
@@ -142,16 +155,14 @@ async function score(bytes, name) {
 function render(r) {
   const n = $("num"); n.textContent = r.score;
   n.className = "n " + (r.score >= 80 ? "good" : r.score >= 60 ? "mid" : "bad");
-  $("modeLabel").textContent = r.mode === "web" ? "web · percentile vs 398 human-rated sites (advisory)" : r.mode;
+  $("modeLabel").textContent = r.mode === "web" ? "web · percentile vs 398 human-rated sites (advisory)" : r.mode + " mode";
   const w = r.weights || {}, f = r.factors;
   const keys = Object.keys(f).sort((a, b) => (w[b] || 0) - (w[a] || 0));
   $("factors").innerHTML = keys.map(k => `<div class="row"><span class="k" title="weight ${w[k] ?? "n/a"}">${k}</span><div class="bar"><i style="width:${Math.round(f[k] * 100)}%"></i></div><span class="v">${f[k].toFixed(2)}</span></div>`).join("");
   $("hints").innerHTML = r.hints.map(h => `<li>${h.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]))}</li>`).join("");
 }
 
-function showPreview(url) {
-  $("dropInner").innerHTML = `<img src="${url}" alt="">`;
-}
+function showPreview(url) { $("dropInner").innerHTML = `<img src="${url}" alt="">`; }
 
 async function handleFile(file) {
   if (!file || !file.type.startsWith("image/")) { status("that is not an image", true); return; }

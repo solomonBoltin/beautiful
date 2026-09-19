@@ -1,0 +1,12 @@
+{
+  "name": "beautiful",
+  "description": "Beauty lint for UI, art and logos: a 1-100 score with the factor that costs the most and how to fix it. Scores images, HTML and URLs at desktop/tablet/mobile.",
+  "version": "0.4.0",
+  "author": { "name": "solomonBoltin", "url": "https://github.com/solomonBoltin" },
+  "homepage": "https://github.com/solomonBoltin/beautiful",
+  "repository": "https://github.com/solomonBoltin/beautiful",
+  "license": "MIT",
+  "mcpServers": {
+    "beautiful": { "command": "beautiful-mcp" }
+  }
+}

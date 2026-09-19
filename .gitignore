@@ -9,3 +9,4 @@ venv/
 demo/node_modules/
 .DS_Store
 demo/famous/
+demo/hall/

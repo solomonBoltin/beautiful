@@ -1,7 +1,9 @@
 """beautiful — the beauty lint.
 
     beautiful screen.png                       one image: score, factors, hints
-    beautiful shots/ --mode=ui                 every PNG/JPEG/WebP in a directory
+    beautiful index.html                       render at desktop, tablet and mobile, score each
+    beautiful https://example.com --viewports mobile
+    beautiful shots/ --mode=ui                 every PNG/JPEG/WebP/HTML in a directory
     beautiful --min 70 shots/*.png             exit 1 below 70 (a gate)
     beautiful --format json|github|sarif ...   machine-readable, CI annotations, code scanning
     beautiful --save-baseline b.json shots/    remember today's scores
@@ -19,19 +21,26 @@ from . import __version__
 from .core import MODES, beauty
 
 IMAGE_EXT = (".png", ".jpg", ".jpeg", ".webp", ".bmp", ".gif", ".tif", ".tiff")
+HTML_EXT = (".html", ".htm")
 
 ADVICE_URL = "https://github.com/solomonBoltin/beautiful#the-formula"
 
 
+def is_renderable(p):
+    return p.lower().startswith(("http://", "https://")) or p.lower().endswith(HTML_EXT)
+
+
 def expand(paths):
-    """Files, directories (recursive) and globs -> a sorted list of image files."""
+    """Files, directories (recursive), globs and URLs -> a sorted list of images, HTML files and URLs."""
     out = []
     for p in paths:
-        if os.path.isdir(p):
+        if p.lower().startswith(("http://", "https://")):
+            out.append(p)
+        elif os.path.isdir(p):
             for root, _, files in os.walk(p):
-                out += [os.path.join(root, f) for f in files if f.lower().endswith(IMAGE_EXT)]
+                out += [os.path.join(root, f) for f in files if f.lower().endswith(IMAGE_EXT + HTML_EXT)]
         elif any(ch in p for ch in "*?["):
-            out += [g for g in glob.glob(p, recursive=True) if g.lower().endswith(IMAGE_EXT)]
+            out += [g for g in glob.glob(p, recursive=True) if g.lower().endswith(IMAGE_EXT + HTML_EXT)]
         else:
             out.append(p)
     return sorted(dict.fromkeys(out))
@@ -66,7 +75,7 @@ def to_sarif(results, min_score):
             sarif_results.append({
                 "ruleId": rid, "level": f["level"],
                 "message": {"text": f["message"]},
-                "locations": [{"physicalLocation": {"artifactLocation": {"uri": path.replace(os.sep, "/")}}}],
+                "locations": [{"physicalLocation": {"artifactLocation": {"uri": path.split("@")[0].replace(os.sep, "/")}}}],
                 "properties": {"score": r["score"], "mode": r["mode"], "factors": r["factors"]},
             })
     return {
@@ -93,6 +102,11 @@ def main(argv=None) -> int:
     p.add_argument("--baseline", metavar="FILE", help="JSON of previous scores; exit 1 on a regression")
     p.add_argument("--save-baseline", metavar="FILE", help="write the scores of this run as a baseline")
     p.add_argument("--tolerance", type=int, default=3, help="points a score may drop before it is a regression (default 3)")
+    p.add_argument("--viewports", default="desktop,tablet,mobile",
+                   help="for HTML files and URLs: comma-separated viewports to render (desktop,tablet,mobile)")
+    p.add_argument("--save-renders", metavar="DIR", help="for HTML files and URLs: keep the rendered PNGs here")
+    p.add_argument("--backend", choices=["playwright", "weasyprint"], default=None,
+                   help="renderer for HTML/URLs (default: playwright if installed, else weasyprint)")
     p.add_argument("--version", action="version", version=f"beautiful {__version__}")
     a = p.parse_args(argv)
     fmt = "json" if a.json else a.format
@@ -107,16 +121,31 @@ def main(argv=None) -> int:
         return 2
 
     results, failures = {}, []
-    for path in files:
-        try:
-            r = beauty(path, a.mode)
-        except Exception as e:  # keep linting the rest
-            failures.append(f"{path}: {type(e).__name__}: {e}")
-            continue
+    viewports = [v.strip() for v in a.viewports.split(",") if v.strip()]
+
+    def scored():
+        """yield (key, report) — images directly, HTML/URLs rendered per viewport."""
+        for path in files:
+            if is_renderable(path):
+                try:
+                    from .render import score_html
+                    reps = score_html(path, viewports, a.mode, backend=a.backend, save_dir=a.save_renders)
+                except Exception as e:
+                    failures.append(f"{path}: {type(e).__name__}: {e}")
+                    continue
+                for vp, r in reps.items():
+                    yield f"{path}@{vp}", r
+            else:
+                try:
+                    yield path, beauty(path, a.mode)
+                except Exception as e:  # keep linting the rest
+                    failures.append(f"{path}: {type(e).__name__}: {e}")
+
+    for path, r in scored():
         results[path] = r
         if fmt == "text":
             print(f"{r['score']:3d}  {path}")
-            if len(files) == 1:
+            if len(files) == 1 and len(results) == 1 and not is_renderable(files[0]):
                 for k, v in r["factors"].items():
                     print(f"      {k:<14}{v:.2f}")
                 for h in r["hints"]:
@@ -126,6 +155,11 @@ def main(argv=None) -> int:
                 lvl = {"error": "error", "warning": "warning", "note": "notice"}[f["level"]]
                 print(f"::{lvl} file={path},title=beautiful {r['score']} · {f['rule']}::{f['message']}")
 
+    if fmt == "text" and len(files) == 1 and is_renderable(files[0]):
+        for key, r in results.items():
+            print(f"  {key.rsplit('@', 1)[-1]:<8}" + "  ".join(f"{k} {v:.2f}" for k, v in r["factors"].items()))
+            for h in r["hints"][:2]:
+                print(f"           ->  {h}")
     if fmt == "json":
         out = results[files[0]] if len(files) == 1 and files[0] in results else results
         print(json.dumps(out, indent=2, ensure_ascii=False))

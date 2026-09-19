@@ -15,6 +15,7 @@ Tools
     beauty_score   image path (+ mode) -> the 1-100 number, factors, hints
     beauty_compare two image paths     -> which is more beautiful and by how much, factor by factor
     beauty_lint    files / dirs / globs -> every image scored, worst first, with lint findings
+    beauty_render  HTML string / file / URL -> rendered at desktop, tablet, mobile and scored (no screenshot needed)
 
 The protocol subset implemented here (initialize, ping, tools/list, tools/call, notifications)
 is the whole of what a tool-only server needs, so the package keeps its "numpy, pillow, scipy
@@ -86,6 +87,26 @@ TOOLS = [
             "required": ["paths"],
         },
     },
+    {
+        "name": "beauty_render",
+        "description": (
+            "Render HTML (a string, a file path, or a URL such as a dev server or a Storybook story) at the "
+            "desktop, tablet and mobile viewports with headless Chromium and score each — the same pixels a "
+            "screenshot would give, so the lint works on code without a manual screenshot. Returns per-viewport "
+            "score, factors and hints; optionally saves the renders."
+        ),
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "source": {"type": "string", "description": "HTML string, path to an .html file, or http(s) URL"},
+                "viewports": {"type": "array", "items": {"type": "string", "enum": ["desktop", "tablet", "mobile"]},
+                              "default": ["desktop", "tablet", "mobile"]},
+                "mode": {"type": "string", "enum": MODES, "default": "ui"},
+                "save_dir": {"type": "string", "description": "Directory to keep the rendered PNGs (optional)"},
+            },
+            "required": ["source"],
+        },
+    },
 ]
 
 
@@ -123,7 +144,15 @@ def _lint(args: dict) -> dict:
             "below_min": [x["path"] for x in rows if x["below_min"]], "images": rows}
 
 
-HANDLERS = {"beauty_score": _score, "beauty_compare": _compare, "beauty_lint": _lint}
+def _render(args: dict) -> dict:
+    from .render import score_html
+    reps = score_html(args["source"], args.get("viewports") or ("desktop", "tablet", "mobile"),
+                      args.get("mode", "ui"), save_dir=args.get("save_dir"))
+    return {vp: {"score": r["score"], "factors": r["factors"], "hints": r["hints"], "backend": r["backend"],
+                 **({"image": r["image"]} if "image" in r else {})} for vp, r in reps.items()}
+
+
+HANDLERS = {"beauty_score": _score, "beauty_compare": _compare, "beauty_lint": _lint, "beauty_render": _render}
 
 
 def _handle(msg: dict):

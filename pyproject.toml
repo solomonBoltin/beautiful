@@ -1,6 +1,6 @@
 [project]
 name = "beautiful-score"
-version = "0.3.0"
+version = "0.4.0"
 description = "A mathematical beauty score, 1-100, for any screenshot, logo or artwork - computed from pixels with explicit, inspectable formulas."
 readme = "README.md"
 license = { text = "MIT" }
@@ -26,6 +26,10 @@ classifiers = [
   "Topic :: Scientific/Engineering :: Image Processing",
 ]
 dependencies = ["numpy>=1.21", "pillow>=9.0", "scipy>=1.7"]
+
+[project.optional-dependencies]
+render = ["playwright>=1.40"]      # exact: headless Chromium, then `playwright install chromium`
+html = ["weasyprint<53"]           # static, no browser: pure-Python CSS layout with PNG output
 
 [project.urls]
 Homepage = "https://github.com/solomonBoltin/beautiful"

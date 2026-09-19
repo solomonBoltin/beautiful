@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.4.0 — 2026-09-19
+
+- **Lint code, not just screenshots.** `beautiful index.html`, `beautiful https://…` and the
+  `beauty_render` MCP tool render HTML strings, files and URLs with headless Chromium
+  (`pip install "beautiful-score[render]" && playwright install chromium`) at desktop 1280×800,
+  tablet 768×1024 and mobile 375×812 — deterministic (animations off, fonts awaited, fixed
+  clock, DPR 1), so the pixels and the score equal a screenshot's. A static no-browser backend
+  (`[html]`, WeasyPrint) for plain HTML/CSS. `--viewports`, `--save-renders`, `--backend`.
+- **Claude Code plugin.** `.claude-plugin/plugin.json` + `marketplace.json`: the skill and the
+  MCP server install with `/plugin marketplace add solomonBoltin/beautiful` then
+  `/plugin install beautiful@beautiful`.
+- **Hall of fame.** `demo/hall_of_fame.py` renders ~80 design-led sites with the same engine and
+  ranks them; the top scorers are in the README.
+- **The demo page lints itself** in CI at all three viewports (`--min 60`), and was redesigned
+  with the tool: desktop 67 → 92, tablet 61 → 84, mobile 49 → 78.
+
 ## 0.3.0 — 2026-09-19
 
 - **Beauty lint.** The CLI takes files, directories and globs; `--format github` emits workflow
